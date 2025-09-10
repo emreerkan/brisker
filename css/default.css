@@ -1,0 +1,135 @@
+@font-face {
+  font-family: 'PT Sans Narrow';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/PTSansNarrow-Regular.ttf') format('truetype'), url('../fonts/PTSansNarrow-Regular.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'bezik';
+  src:  url('../fonts/bezik.eot?l2pi5k');
+  src:  url('../fonts/bezik.eot?l2pi5k#iefix') format('embedded-opentype'),
+    url('../fonts/bezik.ttf?l2pi5k') format('truetype'),
+    url('../fonts/bezik.woff?l2pi5k') format('woff'),
+    url('../fonts/bezik.svg?l2pi5k#bezik') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+[class^="bi-"], [class*=" bi-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'bezik' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.bi-undo:before {
+  content: "\e900";
+}
+.bi-add:before {
+  content: "\e901";
+}
+.bi-reset:before {
+  content: "\e902";
+}
+
+::placeholder {
+  color: #333333;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  gap: 1px 1px;
+  grid-template-areas: "total total undo last" ". . . ." ". . . ." ". . . ." ". . . ." "brisk brisk add reset";
+  justify-items: stretch;
+  align-items: stretch;
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+.total {
+  grid-area: total;
+}
+
+.last {
+  grid-area: last;
+  background: #e76f51;
+}
+
+.last span, .last em {
+  display: block;
+  font-size: 18px;
+  line-height: 20px;
+  font-style: normal;
+}
+
+.last strong {
+  display: block;
+  line-height: 32px;
+  font-style: normal;
+}
+
+.undo {
+  grid-area: undo;
+  background: #d92027;
+  color: #ffffff;
+}
+
+.brisk {
+  grid-area: brisk;
+}
+
+.add {
+  grid-area: add;
+  background: #2a9d8f;
+  color: #ffffff;
+}
+
+.reset {
+  grid-area: reset;
+  background: #264653;
+  color: #ffffff;
+}
+
+button {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  color: #000000;
+  background: #FFBE0B;
+  font-size: 32px;
+  font-weight: bold;
+  padding: 0;
+  font-family: 'PT Sans Narrow', sans-serif;
+  outline: none;
+}
+
+input {
+  font-size: 64px;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #FFE499;
+  width: 100%;
+  font-family: 'PT Sans Narrow', sans-serif;
+  border: 0 none;
+  outline: none;
+}
+
+@media (orientation: landscape) {
+  input {
+    font-size: 32px;
+  }
+}
