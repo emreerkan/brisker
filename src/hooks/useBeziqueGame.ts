@@ -1,17 +1,6 @@
 import { useState, useCallback } from 'react';
-
-export interface ScoreEntry {
-  id: string;
-  points: number;
-  timestamp: Date;
-}
-
-export interface GameState {
-  total: number;
-  brisk: number;
-  history: ScoreEntry[];
-  lastThreeScores: number[];
-}
+import type { ScoreEntry, GameState } from '../types/game';
+import { WIN_THRESHOLD } from '../utils/constants';
 
 export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?: () => void) => {
   const [gameState, setGameState] = useState<GameState>({
@@ -82,7 +71,7 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
         const newLastThree = [...prev.lastThreeScores, points].slice(-3);
         
         // Check if we've reached 10000 points and trigger congratulations
-        if (prev.total < 10000 && newTotal >= 10000 && onCongratulations) {
+        if (prev.total < WIN_THRESHOLD && newTotal >= WIN_THRESHOLD && onCongratulations) {
           setTimeout(() => onCongratulations(), 100);
         }
         
