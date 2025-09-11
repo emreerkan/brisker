@@ -51,6 +51,54 @@ export interface Translation {
   youWin: string;
   congratulationsMessage: string;
   newGame: string;
+  // Multiplayer
+  playerID: string;
+  playerName: string;
+  copyPlayerID: string;
+  sharePlayerID: string;
+  searchPlayers: string;
+  findNearbyPlayers: string;
+  editName: string;
+  saveName: string;
+  enterPlayerName: string;
+  searchPlayersTitle: string;
+  enterPlayerID: string;
+  enterPlayerIDOrName: string;
+  searchingPlayers: string;
+  foundPlayers: string;
+  foundPlayer: string;
+  noPlayersFound: string;
+  playButton: string;
+  findNearbyPlayersTitle: string;
+  findPlayersNearLocation: string;
+  thisWillRequestLocation: string;
+  searchNearbyPlayersButton: string;
+  gettingLocationAndSearching: string;
+  locationAccessDenied: string;
+  locationUnavailable: string;
+  locationTimeout: string;
+  locationError: string;
+  searchNearbyError: string;
+  nearbyPlayersFound: string;
+  noNearbyPlayersFound: string;
+  kmAway: string;
+  tryAgain: string;
+  searchAgain: string;
+  startingGameWith: string;
+  playerIDSection: string;
+  copyTooltip: string;
+  shareTooltip: string;
+  searchTooltip: string;
+  locationTooltip: string;
+  editTooltip: string;
+  saveTooltip: string;
+  shareTitle: string;
+  shareText: string;
+  // Opponent display
+  opponent: string;
+  ahead: string;
+  behind: string;
+  tied: string;
 }
 
 export const translations: Record<string, Translation> = {
@@ -105,8 +153,56 @@ export const translations: Record<string, Translation> = {
     // Congratulations
     congratulations: 'Tebrikler!',
     youWin: 'Kazandın!',
-    congratulationsMessage: '10.000 puanı geçtiniz! Muhteşem bir oyun çıkardınız!',
-    newGame: 'Yeni Oyun'
+    congratulationsMessage: '10.000 puana ulaştınız! Muhteşem bir oyun çıkardınız!',
+    newGame: 'Yeni Oyun',
+    // Multiplayer
+    playerID: 'Oyuncu ID',
+    playerName: 'Oyuncu Adı',
+    copyPlayerID: 'Oyuncu ID\'sini Kopyala',
+    sharePlayerID: 'Oyuncu ID\'sini Paylaş',
+    searchPlayers: 'Oyuncu Ara',
+    findNearbyPlayers: 'Yakındaki Oyuncular',
+    editName: 'Adı Düzenle',
+    saveName: 'Adı Kaydet',
+    enterPlayerName: 'Oyuncu adınızı girin',
+    searchPlayersTitle: 'Oyuncu Ara',
+    enterPlayerID: 'Oyuncu ID girin',
+    enterPlayerIDOrName: 'Oyuncu ID veya Ad girin...',
+    searchingPlayers: 'Oyuncular aranıyor...',
+    foundPlayers: 'oyuncu bulundu',
+    foundPlayer: 'oyuncu bulundu',
+    noPlayersFound: 'için oyuncu bulunamadı',
+    playButton: 'Oyna',
+    findNearbyPlayersTitle: 'Yakındaki Oyuncuları Bul',
+    findPlayersNearLocation: 'Konumunuza yakın oyuncuları bulun',
+    thisWillRequestLocation: 'Bu işlem yakındaki oyuncuları bulmak için konum erişimi isteyecek',
+    searchNearbyPlayersButton: 'Yakındaki Oyuncuları Ara',
+    gettingLocationAndSearching: 'Konumunuz alınıyor ve yakındaki oyuncular aranıyor...',
+    locationAccessDenied: 'Konum erişimi reddedildi. Lütfen konum servislerini etkinleştirin ve tekrar deneyin.',
+    locationUnavailable: 'Konum bilgisi kullanılamıyor. Lütfen tekrar deneyin.',
+    locationTimeout: 'Konum isteği zaman aşımına uğradı. Lütfen tekrar deneyin.',
+    locationError: 'Konumunuz alınamadı. Lütfen tekrar deneyin.',
+    searchNearbyError: 'Yakındaki oyuncular aranırken hata oluştu. Lütfen tekrar deneyin.',
+    nearbyPlayersFound: 'yakındaki oyuncu bulundu',
+    noNearbyPlayersFound: 'Yakında oyuncu bulunamadı',
+    kmAway: 'km uzaklıkta',
+    tryAgain: 'Tekrar Dene',
+    searchAgain: 'Tekrar Ara',
+    startingGameWith: 'ile oyuna başlıyor',
+    playerIDSection: 'Oyuncu ID',
+    copyTooltip: 'Oyuncu ID\'sini Kopyala',
+    shareTooltip: 'Oyuncu ID\'sini Paylaş',
+    searchTooltip: 'Oyuncu Ara',
+    locationTooltip: 'Yakındaki Oyuncuları Bul',
+    editTooltip: 'Adı Düzenle',
+    saveTooltip: 'Adı Kaydet',
+    shareTitle: 'Benimle Bezik oyna!',
+    shareText: 'Hadi beraber Bezik oynayalım! Benim Oyuncu ID\'m:',
+    // Opponent display
+    opponent: 'Rakip',
+    ahead: 'önde',
+    behind: 'geride',
+    tied: 'berabere'
   },
   en: {
     // Main UI
@@ -159,8 +255,56 @@ export const translations: Record<string, Translation> = {
     // Congratulations
     congratulations: 'Congratulations!',
     youWin: 'You Win!',
-    congratulationsMessage: 'You\'ve reached over 10,000 points! Fantastic game!',
-    newGame: 'New Game'
+    congratulationsMessage: 'You\'ve reached to 10,000 points! Fantastic game!',
+    newGame: 'New Game',
+    // Multiplayer
+    playerID: 'Player ID',
+    playerName: 'Player Name',
+    copyPlayerID: 'Copy Player ID',
+    sharePlayerID: 'Share Player ID',
+    searchPlayers: 'Search Players',
+    findNearbyPlayers: 'Find Nearby Players',
+    editName: 'Edit Name',
+    saveName: 'Save Name',
+    enterPlayerName: 'Enter your player name',
+    searchPlayersTitle: 'Search Players',
+    enterPlayerID: 'Enter Player ID',
+    enterPlayerIDOrName: 'Enter Player ID or Name...',
+    searchingPlayers: 'Searching players...',
+    foundPlayers: 'players found',
+    foundPlayer: 'player found',
+    noPlayersFound: 'No players found for',
+    playButton: 'Play',
+    findNearbyPlayersTitle: 'Find Nearby Players',
+    findPlayersNearLocation: 'Find players near your location',
+    thisWillRequestLocation: 'This will request access to your location to find nearby players',
+    searchNearbyPlayersButton: 'Search Nearby Players',
+    gettingLocationAndSearching: 'Getting your location and searching for nearby players...',
+    locationAccessDenied: 'Location access denied. Please enable location services and try again.',
+    locationUnavailable: 'Location information unavailable. Please try again.',
+    locationTimeout: 'Location request timed out. Please try again.',
+    locationError: 'Failed to get your location. Please try again.',
+    searchNearbyError: 'Failed to search for nearby players. Please try again.',
+    nearbyPlayersFound: 'nearby players found',
+    noNearbyPlayersFound: 'No nearby players found',
+    kmAway: 'km away',
+    tryAgain: 'Try Again',
+    searchAgain: 'Search Again',
+    startingGameWith: 'Starting game with',
+    playerIDSection: 'Player ID',
+    copyTooltip: 'Copy Player ID',
+    shareTooltip: 'Share Player ID',
+    searchTooltip: 'Search Players',
+    locationTooltip: 'Find Nearby Players',
+    editTooltip: 'Edit Name',
+    saveTooltip: 'Save Name',
+    shareTitle: 'Join me in Bezique!',
+    shareText: 'Let\'s play Bezique together! My Player ID is:',
+    // Opponent display
+    opponent: 'Opponent',
+    ahead: 'ahead',
+    behind: 'behind',
+    tied: 'tied'
   }
 };
 

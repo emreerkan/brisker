@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useBeziqueGame } from '../hooks/useBeziqueGame';
 import { useWindowSize } from '../hooks/useWindowSize';
+import { useLanguage } from '../i18n/LanguageContext';
 import { BRISK_MULTIPLIER } from '../utils/constants';
 
 // UI Components
@@ -13,15 +14,24 @@ import {
   SettingsModal,
   InfoModal,
   ResetConfirmDialog,
-  CongratulationsModal
+  CongratulationsModal,
+  PlayerSearchModal,
+  GeolocationSearchModal
 } from './modals';
 
+import { getPlayerSettings } from '../utils/localStorage';
+import type { Player } from '../types/game';
 import styles from './BeziqueScoreKeeper.module.css';
 
 export const BeziqueScoreKeeper: React.FC = () => {
+  // Initialize sound settings from localStorage
+  const [soundEnabled, setSoundEnabled] = useState(() => getPlayerSettings().soundEnabled);
+  
+  // Language hook
+  const { t, formatNumber } = useLanguage();
+  
   // UI State
   const [selectedPoint, setSelectedPoint] = useState<number | null>(null);
-  const [soundEnabled, setSoundEnabled] = useState(true);
   
   // Modal States
   const [showBriskSelector, setShowBriskSelector] = useState(false);
@@ -30,6 +40,8 @@ export const BeziqueScoreKeeper: React.FC = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   const [showCongratulations, setShowCongratulations] = useState(false);
+  const [showPlayerSearch, setShowPlayerSearch] = useState(false);
+  const [showGeolocationSearch, setShowGeolocationSearch] = useState(false);
   
   // Hooks
   const windowSize = useWindowSize();
@@ -39,10 +51,9 @@ export const BeziqueScoreKeeper: React.FC = () => {
     isProcessing,
     addPoints,
     undo,
-    reset
-  } = useBeziqueGame(soundEnabled, () => setShowCongratulations(true));
-
-  // Development keyboard shortcut for testing
+    reset,
+    setCurrentOpponent
+  } = useBeziqueGame(soundEnabled, () => setShowCongratulations(true));  // Development keyboard shortcut for testing
   useEffect(() => {
     const handleTriggerCongratulations = () => {
       addPoints(10000);
@@ -75,9 +86,70 @@ export const BeziqueScoreKeeper: React.FC = () => {
     setShowCongratulations(false);
   };
 
+  const handlePlayerSearchOpen = () => {
+    setShowSettings(false);
+    setShowPlayerSearch(true);
+  };
+
+  const handleGeolocationSearchOpen = () => {
+    setShowSettings(false);
+    setShowGeolocationSearch(true);
+  };
+
+  const handlePlayerSearchClose = () => {
+    setShowPlayerSearch(false);
+    setShowSettings(true);
+  };
+
+  const handleGeolocationSearchClose = () => {
+    setShowGeolocationSearch(false);
+    setShowSettings(true);
+  };
+
+  const handlePlayWith = (player: Player) => {
+    // Set the current opponent with initial score of 0
+    setCurrentOpponent({ ...player, score: 0 });
+    
+    // Close all modals and return to main screen
+    setShowPlayerSearch(false);
+    setShowGeolocationSearch(false);
+    setShowSettings(false);
+    
+    console.log('Playing with:', player);
+    alert(`${t.startingGameWith} ${player.name} (ID: ${player.playerID})`);
+  };
+
+  // Calculate point difference for opponent display
+  const getOpponentStatusText = () => {
+    if (!gameState.currentOpponent) return '';
+    
+    const playerScore = gameState.total;
+    const opponentScore = gameState.currentOpponent.score || 0;
+    const difference = playerScore - opponentScore;
+    
+    if (difference > 0) {
+      return `${formatNumber(difference)} ${t.ahead}`;
+    } else if (difference < 0) {
+      return `${formatNumber(Math.abs(difference))} ${t.behind}`;
+    } else {
+      return t.tied;
+    }
+  };
+
   return (
     <div className={styles.container}>
-      <div className={`${styles.gridContainer} ${isProcessing ? styles.disabled : ''}`}>
+      <div className={`${styles.gridContainer} ${gameState.currentOpponent ? styles.withOpponent : ''} ${isProcessing ? styles.disabled : ''}`}>
+        {gameState.currentOpponent && (
+          <div className={styles.opponentBar}>
+            <div className={styles.opponentName}>
+              {t.opponent}: {gameState.currentOpponent.name}
+            </div>
+            <div className={styles.opponentStatus}>
+              {getOpponentStatusText()}
+            </div>
+          </div>
+        )}
+        
         <ScoreDisplay
           gameState={gameState}
           isProcessing={isProcessing}
@@ -120,6 +192,21 @@ export const BeziqueScoreKeeper: React.FC = () => {
         onClose={() => setShowSettings(false)}
         soundEnabled={soundEnabled}
         onSoundEnabledChange={setSoundEnabled}
+        onPlayerSearchOpen={handlePlayerSearchOpen}
+        onGeolocationSearchOpen={handleGeolocationSearchOpen}
+        onPlayWith={handlePlayWith}
+      />
+      
+      <PlayerSearchModal
+        isOpen={showPlayerSearch}
+        onClose={handlePlayerSearchClose}
+        onPlayWith={handlePlayWith}
+      />
+      
+      <GeolocationSearchModal
+        isOpen={showGeolocationSearch}
+        onClose={handleGeolocationSearchClose}
+        onPlayWith={handlePlayWith}
       />
       
       <InfoModal

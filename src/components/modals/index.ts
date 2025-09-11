@@ -4,3 +4,5 @@ export { SettingsModal } from './SettingsModal';
 export { InfoModal } from './InfoModal';
 export { ResetConfirmDialog } from './ResetConfirmDialog';
 export { CongratulationsModal } from './CongratulationsModal';
+export { PlayerSearchModal } from './PlayerSearchModal';
+export { GeolocationSearchModal } from './GeolocationSearchModal';

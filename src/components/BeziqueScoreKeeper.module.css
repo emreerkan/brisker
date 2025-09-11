@@ -13,7 +13,7 @@
   font-family: 'PT Sans Narrow', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   background: #f5f5f5;
   width: 100vw;
-  height: 100vh;
+  height: var(--app-height, 100dvh);
   padding: 0;
   user-select: none;
   -webkit-user-select: none;
@@ -29,10 +29,14 @@
   grid-template-rows: repeat(6, 1fr);
   gap: 1px;
   width: 100%;
-  height: 100vh;
+  height: var(--app-height, 100dvh);
   padding: 0;
   background: #fff;
   box-sizing: border-box;
+}
+
+.gridContainer.withOpponent {
+  grid-template-rows: 0.3fr repeat(6, 1fr);
 }
 
 .total {
@@ -87,6 +91,7 @@
   justify-content: center;
   line-height: 1.1;
   gap: 2px;
+  position: relative;
 }
 
 .last:hover {
@@ -94,16 +99,20 @@
 }
 
 .lastTotalCount {
-  font-size: 22px;
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  font-size: 24px;
   font-weight: bold;
   margin-bottom: 3px;
   color: #000;
 }
 
 .lastScoresContainer {
+  padding-top: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
   gap: 1px;
   width: 100%;
 }
@@ -370,6 +379,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 /* Modal Footer */
@@ -444,10 +454,11 @@
 
 /* History Modal */
 .historyList {
-  flex-grow: 1;
+  flex: 1 1 0;
   overflow-y: auto;
   margin-bottom: 0;
   padding-bottom: 20px;
+  min-height: 0;
 }
 
 .historyItem {
@@ -986,4 +997,359 @@
   .congratulationsContent {
     padding: 40px 20px;
   }
+}
+
+/* Multiplayer Settings Styles */
+.playerIDSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.playerIDDisplay {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 12px;
+  font-family: monospace;
+  font-size: 14px;
+  word-break: break-all;
+  color: #495057;
+}
+
+.playerIDActions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.playerActionButton {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+}
+
+.playerActionButton:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.playerActionButton:active {
+  transform: translateY(0);
+}
+
+.playerNameSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.playerNameDisplay {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.playerNameInput {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.playerNameInput:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.playerNameEditButton {
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+}
+
+.playerNameEditButton:hover {
+  background: #218838;
+  transform: translateY(-1px);
+}
+
+/* Player Search Styles */
+.playerSearchContent {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.searchInputContainer {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.searchInput {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.searchInput:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.searchButton {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchButton:hover {
+  background: #0056b3;
+}
+
+.searchButton:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.searchingIndicator {
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+  padding: 20px;
+}
+
+.searchResults {
+  margin-top: 20px;
+}
+
+.searchResultsTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+}
+
+.playerList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.playerItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.playerItem:hover {
+  background: #e9ecef;
+  border-color: #007bff;
+}
+
+.playerInfo {
+  flex: 1;
+}
+
+.playerName {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.playerID {
+  font-size: 12px;
+  color: #6c757d;
+  font-family: monospace;
+}
+
+.playerDistance {
+  font-size: 12px;
+  color: #28a745;
+  margin-top: 4px;
+}
+
+.playButton {
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.playButton:hover {
+  background: #218838;
+  transform: translateY(-1px);
+}
+
+.noResults {
+  text-align: center;
+  color: #6c757d;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Geolocation Search Styles */
+.geolocationSearchContent {
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.geolocationPrompt {
+  text-align: center;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.geolocationIcon {
+  color: #007bff;
+  margin-bottom: 8px;
+}
+
+.geolocationNote {
+  font-size: 14px;
+  color: #6c757d;
+  max-width: 300px;
+  line-height: 1.4;
+}
+
+.locationSearchButton {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.locationSearchButton:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.searchingIcon {
+  color: #007bff;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.errorMessage {
+  background: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+  border-radius: 8px;
+  padding: 16px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.retryButton {
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 8px;
+  transition: all 0.2s ease;
+}
+
+.retryButton:hover {
+  background: #0056b3;
+}
+
+/* Opponent Bar */
+.opponentBar {
+  grid-column: 1 / 5;
+  background: #2660A4;
+  color: #ffffff;
+  border: none;
+  border-radius: 0;
+  padding: 8px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 40px;
+  box-sizing: border-box;
+}
+
+.opponentName {
+  flex-shrink: 0;
+}
+
+.opponentStatus {
+  flex-shrink: 0;
+  text-align: right;
 }

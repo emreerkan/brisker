@@ -12,9 +12,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  max-height: var(--app-height, 100dvh);
+  padding: 0;
+  display: block;
 }
 
 #root {
   width: 100%;
-  min-height: 100vh;
+  height: var(--app-height, 100dvh);
 }
