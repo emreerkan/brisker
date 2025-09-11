@@ -39,7 +39,13 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
       setHasSearched(true);
     } catch (error) {
       console.error('Geolocation search failed:', error);
-      if (error instanceof GeolocationPositionError) {
+      
+      // Check if it's our enhanced error with iOS-specific instructions
+      if (error instanceof Error && error.message.includes('iOS PWA apps')) {
+        // Use the detailed iOS instructions from our enhanced geolocation error
+        setError(error.message);
+      } else if (error instanceof GeolocationPositionError) {
+        // Handle standard geolocation errors
         switch (error.code) {
           case GeolocationPositionError.PERMISSION_DENIED:
             setError(t.locationAccessDenied);
@@ -53,6 +59,9 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
           default:
             setError(t.locationError);
         }
+      } else if (error instanceof Error) {
+        // Handle our enhanced error messages
+        setError(error.message);
       } else {
         setError(t.searchNearbyError);
       }
@@ -108,6 +117,7 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
           {isSearching && (
             <div className={styles.searchingIndicator}>
               <MapPin size={24} className={styles.searchingIcon} />
+			  <br />
               {t.gettingLocationAndSearching}
             </div>
           )}
@@ -115,13 +125,17 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
           {error && (
             <div className={styles.errorMessage}>
               <AlertCircle size={20} />
-              {error}
-              <button
-                className={styles.retryButton}
-                onClick={handleLocationSearch}
-              >
-                {t.tryAgain}
-              </button>
+              <div>
+                <div style={{ marginBottom: '10px' }}>
+                  {error}
+                </div>
+                <button
+                  className={styles.retryButton}
+                  onClick={handleLocationSearch}
+                >
+                  {t.tryAgain}
+                </button>
+              </div>
             </div>
           )}
           

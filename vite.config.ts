@@ -1,11 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { VitePWA } from 'vite-plugin-pwa'
+import basicSsl from '@vitejs/plugin-basic-ssl'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
+    basicSsl(), // Enable HTTPS with self-signed certificate
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
@@ -73,4 +75,9 @@ export default defineConfig({
       }
     })
   ],
+  server: {
+    https: true, // Enable HTTPS
+    host: true, // Allow external access
+    port: 5173 // Default Vite port
+  },
 })
