@@ -4,21 +4,24 @@ import { VitePWA } from 'vite-plugin-pwa'
 import basicSsl from '@vitejs/plugin-basic-ssl'
 
 // https://vite.dev/config/
-export default defineConfig({
-  resolve: {
-    alias: {
-      '@': '/src',
-      '@/components': '/src/components',
-      '@/hooks': '/src/hooks',
-      '@/services': '/src/services',
-      '@/types': '/src/types',
-      '@/utils': '/src/utils',
-      '@/i18n': '/src/i18n',
+export default defineConfig(() => {
+  const useHttps = process.env.VITE_USE_HTTPS === 'true'
+  
+  return {
+    resolve: {
+      alias: {
+        '@': '/src',
+        '@/components': '/src/components',
+        '@/hooks': '/src/hooks',
+        '@/services': '/src/services',
+        '@/types': '/src/types',
+        '@/utils': '/src/utils',
+        '@/i18n': '/src/i18n',
+      },
     },
-  },
-  plugins: [
-    react(),
-    basicSsl(),
+    plugins: [
+      react(),
+      ...(useHttps ? [basicSsl()] : []),
     VitePWA({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
@@ -87,8 +90,8 @@ export default defineConfig({
     })
   ],
   server: {
-    https: true, // Enable HTTPS
     host: true, // Allow external access
     port: 5173 // Default Vite port
-  },
+  }
+  }
 })

@@ -1,8 +1,22 @@
 import type { Player, GeolocationData } from '@/types';
 import { updatePlayerIDFromServer } from '@/utils/localStorage';
 
-// WebSocket server URL - simplified architecture  
-const WEBSOCKET_URL = window.location.protocol === 'https:' ? 'wss://localhost:3000' : 'ws://localhost:3000';
+// WebSocket server URL - hardcoded for network testing
+const getWebSocketURL = () => {
+  const host = '192.168.68.102:3000'; // Network IP for testing
+  
+  // Force ws:// for IP addresses since SSL certificates don't work with IPs
+  // Use wss:// only for localhost where we have a valid certificate
+  if (host.includes('localhost')) {
+    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+    return `${protocol}//${host}`;
+  } else {
+    // For IP addresses, always use ws:// (non-secure WebSocket)
+    return `ws://${host}`;
+  }
+};
+
+const WEBSOCKET_URL = getWebSocketURL();
 
 // Player discovery and game state types
 export interface ConnectedPlayer {
@@ -193,20 +207,28 @@ export class GameServerAPI {
       
       this.ws.onclose = () => {
         console.log('WebSocket disconnected from game server');
-        // Let any listeners know we're offline (provide previous playerID if available)
+        
+        // Store previous ID before clearing it
         const prevID = this.currentPlayerID;
-        const offlineHandlers = this.eventHandlers.get('player:offline') || [];
-        offlineHandlers.forEach(h => {
-          try { h({ playerID: prevID }); } catch (e) { console.error('player:offline handler error', e); }
-        });
+        
+        // Clear connection state
         this.ws = null;
         this.currentPlayerID = null;
         
-        // Start a short reconnect loop so clients try to re-establish quickly
-        // Guarded by connectingPromise to avoid parallel reconnect storms
+        // Notify listeners about going offline
+        const offlineHandlers = this.eventHandlers.get('player:offline') || [];
+        offlineHandlers.forEach(h => {
+          try { 
+            h({ playerID: prevID }); 
+          } catch (e) { 
+            console.error('player:offline handler error', e); 
+          }
+        });
+        
+        // Start reconnection attempts (only if not already trying)
         if (!this.connectingPromise) {
           this.startReconnectLoop(250, 12).catch(e => {
-            console.warn('Reconnection failed, working in offline mode:', e);
+            console.warn('All reconnection attempts failed, working in offline mode:', e.message);
             // Game will continue in offline mode
           });
         }
@@ -277,76 +299,83 @@ export class GameServerAPI {
 
   // Try to connect with short backoff for immediate user actions
   private static async ensureConnectedShort(): Promise<void> {
-    if (this.ws && this.ws.readyState === WebSocket.OPEN) return;
+    // If already connected, return immediately
+    if (this.ws && this.ws.readyState === WebSocket.OPEN) {
+      return;
+    }
     
-    // If a connect attempt is already in-flight, wait for it instead of starting another
+    // If a reconnection attempt is already in progress, wait for it
     if (this.connectingPromise) {
       try {
         await this.connectingPromise;
         return;
       } catch (e) {
-        // Previous attempt failed; rethrow to let caller handle offline mode
+        // Reconnection attempt failed, server appears offline
         throw new Error('Connection attempt failed, server appears offline');
       }
     }
 
-    // Start a single short reconnect attempt and store the promise so parallel callers wait on it
-    this.connectingPromise = this.connectWithRetry(500, 3); // Reduced attempts for user actions
+    // Start a quick reconnection attempt (3 attempts, 500ms delay)
     try {
-      await this.connectingPromise;
+      await this.startReconnectLoop(500, 3);
     } catch (e) {
       throw new Error('Unable to connect to server for user action');
-    } finally {
-      // Clear the guard regardless of success or failure so future attempts can proceed
-      this.connectingPromise = null;
     }
   }
 
   // Start a short reconnect loop with intervalMs and maxAttempts.
   // This is intended for automatic quick recovery after disconnection (e.g., reloads).
   private static async startReconnectLoop(intervalMs: number = 250, maxAttempts: number = 12): Promise<string> {
+    // If already connected, return immediately
     if (this.ws && this.ws.readyState === WebSocket.OPEN && this.currentPlayerID) {
-      return Promise.resolve(this.currentPlayerID);
+      return this.currentPlayerID;
     }
     
-    // Prevent parallel reconnect loops
+    // If already trying to connect, wait for that attempt
     if (this.connectingPromise) {
       try {
         return await this.connectingPromise;
       } catch (e) {
-        // Previous attempt failed, continue to start a new one
+        // Previous attempt failed, we'll start a new one below
       }
     }
 
-    // Store the promise so concurrent callers wait on the same attempt
-    this.connectingPromise = (async () => {
-      console.log(`Starting reconnection attempts (${maxAttempts} attempts with ${intervalMs}ms delay)`);
-      
-      for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-        try {
-          console.log(`Reconnection attempt ${attempt}/${maxAttempts}`);
-          const id = await this.connectWebSocket();
-          console.log(`Successfully reconnected on attempt ${attempt}, player ID: ${id}`);
-          return id;
-        } catch (e) {
-          console.warn(`Reconnection attempt ${attempt}/${maxAttempts} failed:`, e);
-          
-          // Don't wait after the last attempt
-          if (attempt < maxAttempts) {
-            await new Promise(res => setTimeout(res, intervalMs));
-          }
-        }
-      }
-      
-      throw new Error(`Failed to reconnect after ${maxAttempts} attempts. Server appears to be offline.`);
-    })();
-
+    // Create the reconnection attempt promise
+    this.connectingPromise = this.performReconnectionAttempts(intervalMs, maxAttempts);
+    
     try {
       const result = await this.connectingPromise;
       return result;
     } finally {
+      // Always clear the promise when done (success or failure)
       this.connectingPromise = null;
     }
+  }
+
+  // Perform the actual reconnection attempts
+  private static async performReconnectionAttempts(intervalMs: number, maxAttempts: number): Promise<string> {
+    console.log(`Starting reconnection attempts (${maxAttempts} attempts with ${intervalMs}ms delay)`);
+    
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        console.log(`Reconnection attempt ${attempt}/${maxAttempts}`);
+        const id = await this.connectWebSocket();
+        console.log(`Successfully reconnected on attempt ${attempt}, player ID: ${id}`);
+        return id;
+      } catch (e) {
+        console.warn(`Reconnection attempt ${attempt}/${maxAttempts} failed:`, e);
+        
+        // Wait between attempts (except after the last one)
+        if (attempt < maxAttempts) {
+          await new Promise(resolve => setTimeout(resolve, intervalMs));
+        }
+      }
+    }
+    
+    // All attempts failed
+    const error = new Error(`Failed to reconnect after ${maxAttempts} attempts. Server appears to be offline.`);
+    console.error(error.message);
+    throw error;
   }
   
   static addEventListener(eventType: WebSocketEventType, handler: (payload: any) => void): void {
@@ -540,5 +569,14 @@ export class GameServerAPI {
   // Check if we're currently in offline mode
   static isOffline(): boolean {
     return !this.isConnected();
+  }
+
+  // Network testing utilities
+  static getCurrentServerURL(): string {
+    return getWebSocketURL();
+  }
+
+  static getConfiguredServerHost(): string {
+    return '192.168.68.102:3000';
   }
 }
