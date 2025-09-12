@@ -404,6 +404,8 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
 
   // Apply points locally without notifying server (used when server instructs the client to apply points)
   const addPointsLocal = useCallback((points: number, meta?: Partial<ScoreEntry>) => {
+    let newTotalForSend: number | undefined;
+    let opponentToNotify: string | undefined;
     setGameState(prev => {
       const newEntry: ScoreEntry = {
         id: `${Date.now()}-${Math.random()}`,
@@ -415,6 +417,10 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
       const newHistory = [...prev.history, newEntry];
       const newLastThree = [...prev.lastThreeScores, points].slice(-3);
 
+      // Capture values to send after state is applied
+      newTotalForSend = newTotal;
+      opponentToNotify = prev.currentOpponent?.playerID;
+
       // Play sound for remote-driven scoring
       playSound();
 
@@ -425,9 +431,16 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
         lastThreeScores: newLastThree
       };
     });
+
+    // Notify opponent of our new total
+    if (opponentToNotify && typeof newTotalForSend === 'number') {
+      setTimeout(() => GameServerAPI.sendScoreUpdate(opponentToNotify!, newTotalForSend!), 0);
+    }
   }, [playSound]);
 
   const undo = useCallback(() => {
+    let newTotalForSend: number | undefined;
+    let opponentToNotify: string | undefined;
     setGameState(prev => {
       if (prev.history.length === 0) return prev;
 
@@ -449,6 +462,10 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
       const newTotal = newHistory.reduce((sum, entry) => sum + entry.points, 0);
       const newLastThree = newHistory.slice(-3).map(entry => entry.points);
 
+      // capture values to notify opponent after state update
+      newTotalForSend = newTotal;
+      opponentToNotify = prev.currentOpponent?.playerID;
+
       playUndoSound();
 
       return {
@@ -458,10 +475,16 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
         lastThreeScores: newLastThree
       };
     });
+
+    if (opponentToNotify && typeof newTotalForSend === 'number') {
+      setTimeout(() => GameServerAPI.sendScoreUpdate(opponentToNotify!, newTotalForSend!), 0);
+    }
   }, [playUndoSound]);
 
   // Undo locally without notifying the opponent (used when opponent requested undo)
   const undoLocal = useCallback(() => {
+    let newTotalForSend: number | undefined;
+    let opponentToNotify: string | undefined;
     setGameState(prev => {
       if (prev.history.length === 0) return prev;
 
@@ -469,6 +492,9 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
       const newTotal = newHistory.reduce((sum, entry) => sum + entry.points, 0);
       const newLastThree = newHistory.slice(-3).map(entry => entry.points);
 
+      newTotalForSend = newTotal;
+      opponentToNotify = prev.currentOpponent?.playerID;
+
       playUndoSound();
 
       return {
@@ -478,6 +504,50 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
         lastThreeScores: newLastThree
       };
     });
+
+    if (opponentToNotify && typeof newTotalForSend === 'number') {
+      setTimeout(() => GameServerAPI.sendScoreUpdate(opponentToNotify!, newTotalForSend!), 0);
+    }
+  }, [playUndoSound]);
+
+  // Undo locally but only if the last entry matches the opponent's undo payload
+  const undoLocalMatching = useCallback((payload?: { points?: number; briskValue?: number }) => {
+    let newTotalForSend: number | undefined;
+    let opponentToNotify: string | undefined;
+    setGameState(prev => {
+      if (prev.history.length === 0) return prev;
+
+      const lastEntry = prev.history[prev.history.length - 1];
+
+      if (payload && typeof payload.briskValue === 'number') {
+        const lastBrisk = (lastEntry as any).briskValue;
+        const lastIsBrisk = !!lastEntry.isBrisk || typeof lastBrisk === 'number';
+        if (!lastIsBrisk) {
+          console.log('Ignoring opponent brisk undo: last entry is not brisk-like', { lastEntry, payload });
+          return prev;
+        }
+      }
+
+      const newHistory = prev.history.slice(0, -1);
+      const newTotal = newHistory.reduce((sum, entry) => sum + entry.points, 0);
+      const newLastThree = newHistory.slice(-3).map(entry => entry.points);
+
+      newTotalForSend = newTotal;
+      opponentToNotify = prev.currentOpponent?.playerID;
+
+      playUndoSound();
+
+      return {
+        ...prev,
+        total: newTotal,
+        history: newHistory,
+        lastThreeScores: newLastThree
+      };
+    });
+
+    if (opponentToNotify && typeof newTotalForSend === 'number') {
+      setTimeout(() => GameServerAPI.sendScoreUpdate(opponentToNotify!, newTotalForSend!), 0);
+    }
   }, [playUndoSound]);
 
   const reset = useCallback((skipConfirm: boolean = false) => {
@@ -499,21 +569,30 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
 
   // Reset local score/history only (no server notifications)
   const resetLocal = useCallback(() => {
-    setGameState(prev => ({
-      ...prev,
-      total: 0,
-      brisk: 0,
-      history: [],
-      lastThreeScores: [],
-      // Also clear the opponent's displayed score so ahead/behind recalculates to 0
-      currentOpponent: prev.currentOpponent ? { ...prev.currentOpponent, score: 0 } : prev.currentOpponent
-    }));
+    let opponentToNotify: string | undefined;
+    setGameState(prev => {
+      opponentToNotify = prev.currentOpponent?.playerID;
+      return {
+        ...prev,
+        total: 0,
+        brisk: 0,
+        history: [],
+        lastThreeScores: [],
+        // Also clear the opponent's displayed score so ahead/behind recalculates to 0
+        currentOpponent: prev.currentOpponent ? { ...prev.currentOpponent, score: 0 } : prev.currentOpponent
+      };
+    });
+
     // Clear any saved snapshot so a reload doesn't restore old scores
     try {
       clearGameSnapshot();
     } catch (e) {
       // ignore
     }
+
+    // Notify opponent our total is 0
+    if (opponentToNotify) setTimeout(() => GameServerAPI.sendScoreUpdate(opponentToNotify!, 0), 0);
+
     playResetSound();
   }, [playResetSound]);
 
@@ -541,6 +620,7 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
     addPointsWithMeta,
     undo,
     undoLocal,
+    undoLocalMatching,
     reset,
     resetLocal,
     addPointsLocal,

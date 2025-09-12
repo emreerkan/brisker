@@ -58,6 +58,7 @@ export const BeziqueScoreKeeper: React.FC = () => {
     addPointsLocal,
     undo,
     undoLocal,
+    undoLocalMatching,
     reset,
     resetLocal,
     setCurrentOpponent,
@@ -146,11 +147,13 @@ export const BeziqueScoreKeeper: React.FC = () => {
 
     const onOpponentUndo = (payload: any) => {
       console.log('Opponent requested undo:', payload);
-      // If payload indicates a brisk undo (contains briskValue or points), perform a local undo
-      // We'll simply undo the last entry if it matches the points or is marked as brisk.
-      // Find last history entry and check for brisk signature
-      // Note: use the exposed undo to keep behavior consistent
-      undoLocal();
+      // Attempt guarded undo that only removes the last entry if it matches the opponent's undo payload
+      try {
+        undoLocalMatching(payload);
+      } catch (e) {
+        console.warn('Guarded undo failed, falling back to local undo', e);
+        undoLocal();
+      }
     };
 
     const onRemoteReset = (payload: any) => {
