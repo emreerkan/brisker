@@ -27,25 +27,31 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
   const [isProcessing, setIsProcessing] = useState(false);
   const [opponent, setOpponent] = useState<Player | undefined>();
 
-  const addPoints = useCallback((points: number) => {
-    if (isProcessing) return;
+  // Check if player is online (has an opponent)
+  const isOnline = useCallback(() => {
+    return opponent !== undefined && opponent.playerID !== undefined;
+  }, [opponent]);
+
+  const addPoints = useCallback((points: number, type: ScoreEntryType = ScoreEntryType.POINT, isRemote: boolean = false) => {
+    if (isProcessing && !isRemote) return;
     
-    setIsProcessing(true);
+    if (!isRemote) setIsProcessing(true);
     
     setTimeout(() => {
       setGameState(prev => {
         const newEntry: ScoreEntry = {
           value: points,
-          type: ScoreEntryType.POINT,
+          type: type,
           timestamp: new Date()
         };
         
         const newHistory = [...prev.history, newEntry];
         const newTotal = calculateTotalScore(newHistory);
         
-        // Send score update to opponent if we have one
-        if (opponent?.playerID) {
-          GameServerAPI.sendScoreUpdate(opponent.playerID, newTotal);
+        // Send score update to opponent if we're online
+        // Always notify opponent of our score changes, even for remote updates
+        if (isOnline()) {
+          GameServerAPI.sendScoreUpdate(opponent!.playerID, newTotal);
         }
         
         // Check if we've reached 10000 points and trigger congratulations with ta-da sound
@@ -54,8 +60,12 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
           playSound(SoundType.TADA, soundEnabled);
           setTimeout(() => onCongratulations(), 100);
         } else {
-          // Play regular sound for normal scoring
-          playSound(SoundType.SCORE, soundEnabled);
+          // Play appropriate sound
+          if (isRemote) {
+            playSound(SoundType.SCORE, soundEnabled);
+          } else {
+            playSound(SoundType.SCORE, soundEnabled);
+          }
         }
         
         return {
@@ -65,49 +75,9 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
         };
       });
       
-      setIsProcessing(false);
-    }, 300);
-  }, [isProcessing, soundEnabled, onCongratulations]);
-
-  // Add brisk points (equivalent to regular points but marked as brisk type)
-  const addPointsWithMeta = useCallback((points: number) => {
-    if (isProcessing) return;
-    setIsProcessing(true);
-
-    setTimeout(() => {
-      setGameState(prev => {
-        const newEntry: ScoreEntry = {
-          value: points,
-          type: ScoreEntryType.BRISK,
-          timestamp: new Date()
-        };
-
-        const newHistory = [...prev.history, newEntry];
-        const newTotal = calculateTotalScore(newHistory);
-
-        // Send score update to opponent if we have one
-        if (opponent?.playerID) {
-          GameServerAPI.sendScoreUpdate(opponent.playerID, newTotal);
-        }
-
-        // Play sounds accordingly
-        if (prev.score < WIN_THRESHOLD && newTotal >= WIN_THRESHOLD && onCongratulations) {
-          playSound(SoundType.TADA, soundEnabled);
-          setTimeout(() => onCongratulations(), 100);
-        } else {
-          playSound(SoundType.SCORE, soundEnabled);
-        }
-
-        return {
-          ...prev,
-          score: newTotal,
-          history: newHistory
-        };
-      });
-
-      setIsProcessing(false);
-    }, 300);
-  }, [isProcessing, soundEnabled, onCongratulations]);
+      if (!isRemote) setIsProcessing(false);
+    }, isRemote ? 0 : 300);
+  }, [isProcessing, soundEnabled, onCongratulations, isOnline, opponent]);
 
   // On mount, ensure websocket connection (with retry) and sync state
   useEffect(() => {
@@ -176,26 +146,28 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
   // Whenever important state changes, notify server (debounced)
   useEffect(() => {
     const timer = setTimeout(() => {
-      try {
-        GameServerAPI.updatePlayerState({
-          playerID: (localStorage.getItem('bezique_player_id') || undefined),
-          name: JSON.parse(localStorage.getItem('bezique_player_settings') || '{}').name,
-          history: gameState.history,
-          total: gameState.score,
-          opponentID: opponent?.playerID,
-        });
-        // Save a local snapshot for quick resume
+      if (isOnline()) {
         try {
-          const historySnapshot = gameState.history.map(h => ({ value: h.value, type: h.type, timestamp: h.timestamp.toISOString() })) as any;
-          saveGameSnapshot({
-            history: historySnapshot,
+          GameServerAPI.updatePlayerState({
+            playerID: (localStorage.getItem('bezique_player_id') || undefined),
+            name: JSON.parse(localStorage.getItem('bezique_player_settings') || '{}').name,
+            history: gameState.history,
             total: gameState.score,
-            opponent: opponent || null,
-            lastEvent: new Date().toISOString()
+            opponentID: opponent?.playerID,
           });
         } catch (e) {
           // ignore
         }
+      }
+      // Save a local snapshot regardless of online status
+      try {
+        const historySnapshot = gameState.history.map(h => ({ value: h.value, type: h.type, timestamp: h.timestamp.toISOString() })) as any;
+        saveGameSnapshot({
+          history: historySnapshot,
+          total: gameState.score,
+          opponent: opponent || null,
+          lastEvent: new Date().toISOString()
+        });
       } catch (e) {
         // ignore
       }
@@ -204,116 +176,16 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
     return () => clearTimeout(timer);
   }, [gameState.history, gameState.score, opponent]);
 
-  // Apply points locally without notifying server (used when server instructs the client to apply points)
-  const addPointsLocal = useCallback((points: number, isBrisk: boolean = false) => {
+  const undo = useCallback((payload?: { points?: number; briskValue?: number }, isRemote: boolean = false) => {
     let newTotalForSend: number | undefined;
     let opponentToNotify: string | undefined;
-    setGameState(prev => {
-      const newEntry: ScoreEntry = {
-        value: points,
-        type: isBrisk ? ScoreEntryType.BRISK : ScoreEntryType.POINT,
-        timestamp: new Date()
-      };
-      const newHistory = [...prev.history, newEntry];
-      const newScore = calculateTotalScore(newHistory);
-
-      // Capture values to send after state is applied
-      newTotalForSend = newScore;
-      opponentToNotify = opponent?.playerID;
-
-      // Play sound for remote-driven scoring
-      playSound(SoundType.SCORE, soundEnabled);
-
-      return {
-        ...prev,
-        score: newScore,
-        history: newHistory
-      };
-    });
-
-    // Notify opponent of our new total
-    if (opponentToNotify && typeof newTotalForSend === 'number') {
-      setTimeout(() => GameServerAPI.sendScoreUpdate(opponentToNotify!, newTotalForSend!), 0);
-    }
-  }, [soundEnabled]);
-
-  const undo = useCallback(() => {
-    let newTotalForSend: number | undefined;
-    let opponentToNotify: string | undefined;
+    
     setGameState(prev => {
       if (prev.history.length === 0) return prev;
 
       const lastEntry = prev.history[prev.history.length - 1];
 
-      // If the last entry is a brisk and we have an opponent, request opponent to undo as well
-      const isBrisk = lastEntry.type === ScoreEntryType.BRISK;
-      if (isBrisk && opponent?.playerID) {
-        console.log('↩️ undo() detected brisk entry, requesting opponent undo', { lastEntry, opponent: opponent.playerID });
-        // Ask server to forward an undo request to opponent for the same brisk value
-        try {
-          GameServerAPI.requestUndoOpponent(opponent.playerID, { points: lastEntry.value, briskValue: lastEntry.value });
-        } catch (e) {
-          console.warn('Failed to request opponent undo:', e);
-        }
-      }
-
-      const newHistory = prev.history.slice(0, -1);
-      const newScore = calculateTotalScore(newHistory);
-
-      // capture values to notify opponent after state update
-      newTotalForSend = newScore;
-      opponentToNotify = opponent?.playerID;
-
-      playSound(SoundType.UNDO, soundEnabled);
-
-      return {
-        ...prev,
-        score: newScore,
-        history: newHistory
-      };
-    });
-
-    if (opponentToNotify && typeof newTotalForSend === 'number') {
-      setTimeout(() => GameServerAPI.sendScoreUpdate(opponentToNotify!, newTotalForSend!), 0);
-    }
-  }, [soundEnabled, opponent]);
-
-  // Undo locally without notifying the opponent (used when opponent requested undo)
-  const undoLocal = useCallback(() => {
-    let newTotalForSend: number | undefined;
-    let opponentToNotify: string | undefined;
-    setGameState(prev => {
-      if (prev.history.length === 0) return prev;
-
-      const newHistory = prev.history.slice(0, -1);
-      const newScore = calculateTotalScore(newHistory);
-
-      newTotalForSend = newScore;
-      opponentToNotify = opponent?.playerID;
-
-      playSound(SoundType.UNDO, soundEnabled);
-
-      return {
-        ...prev,
-        score: newScore,
-        history: newHistory
-      };
-    });
-
-    if (opponentToNotify && typeof newTotalForSend === 'number') {
-      setTimeout(() => GameServerAPI.sendScoreUpdate(opponentToNotify!, newTotalForSend!), 0);
-    }
-  }, [soundEnabled, opponent]);
-
-  // Undo locally but only if the last entry matches the opponent's undo payload
-  const undoLocalMatching = useCallback((payload?: { points?: number; briskValue?: number }) => {
-    let newTotalForSend: number | undefined;
-    let opponentToNotify: string | undefined;
-    setGameState(prev => {
-      if (prev.history.length === 0) return prev;
-
-      const lastEntry = prev.history[prev.history.length - 1];
-
+      // If payload is provided (remote undo), validate it matches the last entry
       if (payload && typeof payload.briskValue === 'number') {
         const lastIsBrisk = lastEntry.type === ScoreEntryType.BRISK;
         if (!lastIsBrisk) {
@@ -322,11 +194,26 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
         }
       }
 
+      // If this is a user-initiated undo (not remote) and the last entry is a brisk and we're online,
+      // request opponent to undo as well
+      const isBrisk = lastEntry.type === ScoreEntryType.BRISK;
+      if (!isRemote && isBrisk && isOnline()) {
+        console.log('↩️ undo() detected brisk entry, requesting opponent undo', { lastEntry, opponent: opponent!.playerID });
+        try {
+          GameServerAPI.requestUndoOpponent(opponent!.playerID, { points: lastEntry.value, briskValue: lastEntry.value });
+        } catch (e) {
+          console.warn('Failed to request opponent undo:', e);
+        }
+      }
+
       const newHistory = prev.history.slice(0, -1);
       const newScore = calculateTotalScore(newHistory);
 
-      newTotalForSend = newScore;
-      opponentToNotify = opponent?.playerID;
+      // Only send score update if this is user-initiated and we're online
+      if (!isRemote && isOnline()) {
+        newTotalForSend = newScore;
+        opponentToNotify = opponent?.playerID;
+      }
 
       playSound(SoundType.UNDO, soundEnabled);
 
@@ -337,30 +224,17 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
       };
     });
 
-    if (opponentToNotify && typeof newTotalForSend === 'number') {
+    // Send score update to opponent if needed
+    if (!isRemote && isOnline() && opponentToNotify && typeof newTotalForSend === 'number') {
       setTimeout(() => GameServerAPI.sendScoreUpdate(opponentToNotify!, newTotalForSend!), 0);
     }
-  }, [soundEnabled]);
+  }, [soundEnabled, opponent, isOnline]);
 
-  const reset = useCallback((skipConfirm: boolean = false) => {
-    if (skipConfirm || window.confirm('Are you sure you want to reset the score?')) {
-      // Reset only scores/history and keep opponent/connection intact
-      resetLocal();
-
-      // If we're connected to an opponent, ask server to forward a reset instruction
-      try {
-        const opponentID = opponent?.playerID;
-        if (opponentID) {
-          GameServerAPI.sendMessage({ type: 'game:reset', payload: { opponentID } });
-        }
-      } catch (e) {
-        // ignore
-      }
+  const reset = useCallback((skipConfirm: boolean = false, isRemote: boolean = false) => {
+    if (!isRemote && !skipConfirm && !window.confirm('Are you sure you want to reset the score?')) {
+      return;
     }
-  }, [soundEnabled, opponent?.playerID]);
 
-  // Reset local score/history only (no server notifications)
-  const resetLocal = useCallback(() => {
     let opponentToNotify: string | undefined;
     setGameState(prev => {
       opponentToNotify = opponent?.playerID;
@@ -379,11 +253,22 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
       // ignore
     }
 
-    // Notify opponent our total is 0
-    if (opponentToNotify) setTimeout(() => GameServerAPI.sendScoreUpdate(opponentToNotify!, 0), 0);
+    // If this is user-initiated and we're online, ask server to forward a reset instruction
+    if (!isRemote && isOnline()) {
+      try {
+        GameServerAPI.sendMessage({ type: 'game:reset', payload: { opponentID: opponent!.playerID } });
+      } catch (e) {
+        // ignore
+      }
+    }
+
+    // Notify opponent our total is 0 if we're online and this isn't remote
+    if (!isRemote && isOnline() && opponentToNotify) {
+      setTimeout(() => GameServerAPI.sendScoreUpdate(opponentToNotify!, 0), 0);
+    }
 
     playSound(SoundType.RESET, soundEnabled);
-  }, [soundEnabled]);
+  }, [soundEnabled, isOnline, opponent]);
 
   const setCurrentOpponent = useCallback((newOpponent: Player | undefined) => {
     setOpponent(newOpponent);
@@ -399,25 +284,21 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
   const setBrisk = useCallback((_briskValue: number) => {
     // setBrisk is deprecated with the new GameState structure
     // Brisk points are now just entries in history with type BRISK
-    console.warn('setBrisk is deprecated. Use addPointsWithMeta with type BRISK instead.');
+    console.warn('setBrisk is deprecated. Use addPoints with ScoreEntryType.BRISK instead.');
   }, []);
 
   return {
     gameState,
     isProcessing,
     addPoints,
-    addPointsWithMeta,
     undo,
-    undoLocal,
-    undoLocalMatching,
     reset,
-    resetLocal,
-    addPointsLocal,
     setBrisk,
     setCurrentOpponent,
     updateOpponentScore,
     // Utility functions for derived values
     getLastThreeScores: () => getLastThreeScores(gameState.history),
-    opponent
+    opponent,
+    isOnline
   };
 };

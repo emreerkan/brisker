@@ -90,7 +90,7 @@ export const PlayerSearchModal: React.FC<PlayerSearchModalProps> = ({
           <div className={styles.searchInputContainer}>
             <input
               type="text"
-              placeholder={t.enterPlayerID}
+              placeholder={t.enterPlayerIDOrName}
               value={searchTerm}
               ref={inputRef}
               onChange={(e) => setSearchTerm(e.target.value)}

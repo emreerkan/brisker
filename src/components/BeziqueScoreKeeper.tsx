@@ -22,6 +22,7 @@ import {
 import { getPlayerSettings, clearGameSnapshot } from '@/utils/localStorage';
 import { GameServerAPI } from '@/services/gameServer';
 import type { Player } from '@/types';
+import { ScoreEntryType } from '@/types';
 import styles from './BeziqueScoreKeeper.module.css';
 
 export const BeziqueScoreKeeper: React.FC = () => {
@@ -54,13 +55,8 @@ export const BeziqueScoreKeeper: React.FC = () => {
     gameState,
     isProcessing,
     addPoints,
-    addPointsWithMeta,
-    addPointsLocal,
     undo,
-    undoLocal,
-    undoLocalMatching,
     reset,
-    resetLocal,
     setCurrentOpponent,
     updateOpponentScore,
     getLastThreeScores,
@@ -139,25 +135,29 @@ export const BeziqueScoreKeeper: React.FC = () => {
       // Apply the points locally (do not re-broadcast)
       // Determine if this is a brisk entry based on briskValue presence
       const isBrisk = typeof payload.briskValue === 'number';
-      addPointsLocal(payload.points, isBrisk);
+      const type = isBrisk ? ScoreEntryType.BRISK : ScoreEntryType.POINT;
+      addPoints(payload.points, type, true); // isRemote = true
+    };
+
+    const onApplyBrisks = (payload: any) => {
+      console.log('Apply brisks instruction received:', payload);
+      // payload: { briskCount }
+      // Calculate points and add as brisk type
+      const points = payload.briskCount * BRISK_MULTIPLIER;
+      addPoints(points, ScoreEntryType.BRISK, true); // isRemote = true
     };
 
     const onOpponentUndo = (payload: any) => {
       console.log('Opponent requested undo:', payload);
-      // Attempt guarded undo that only removes the last entry if it matches the opponent's undo payload
-      try {
-        undoLocalMatching(payload);
-      } catch (e) {
-        console.warn('Guarded undo failed, falling back to local undo', e);
-        undoLocal();
-      }
+      // Use consolidated undo with payload and isRemote flag
+      undo(payload, true); // isRemote = true
     };
 
     const onRemoteReset = (payload: any) => {
       console.log('Received remote reset instruction:', payload);
       // Clear local snapshot so reload won't restore previous scores
       try { clearGameSnapshot(); } catch (e) { /* ignore */ }
-      resetLocal();
+      reset(true, true); // skipConfirm = true, isRemote = true
     };
 
     const onPlayerNameChanged = (payload: any) => {
@@ -194,6 +194,7 @@ export const BeziqueScoreKeeper: React.FC = () => {
     GameServerAPI.addEventListener('game:auto_joined', onAutoJoined);
     GameServerAPI.addEventListener('game:opponent_scored', onOpponentScored);
     GameServerAPI.addEventListener('game:apply_points', onApplyPoints);
+    GameServerAPI.addEventListener('game:apply_brisks', onApplyBrisks);
     GameServerAPI.addEventListener('game:opponent_undo', onOpponentUndo);
     GameServerAPI.addEventListener('game:reset', onRemoteReset);
     GameServerAPI.addEventListener('game:resume', onResume);
@@ -207,6 +208,7 @@ export const BeziqueScoreKeeper: React.FC = () => {
       GameServerAPI.removeEventListener('game:auto_joined', onAutoJoined);
       GameServerAPI.removeEventListener('game:opponent_scored', onOpponentScored);
       GameServerAPI.removeEventListener('game:apply_points', onApplyPoints);
+      GameServerAPI.removeEventListener('game:apply_brisks', onApplyBrisks);
       GameServerAPI.removeEventListener('game:opponent_undo', onOpponentUndo);
       GameServerAPI.removeEventListener('game:reset', onRemoteReset);
       GameServerAPI.removeEventListener('game:resume', onResume);
@@ -230,14 +232,13 @@ export const BeziqueScoreKeeper: React.FC = () => {
     setShowBriskSelector(false);
     const pointsForPlayer = brisk * BRISK_MULTIPLIER;
     // Mark this entry as brisk so undo can be coordinated
-    addPointsWithMeta(pointsForPlayer);
+    addPoints(pointsForPlayer, ScoreEntryType.BRISK);
 
     // If playing with an opponent, automatically add the remaining brisk to them
     if (opponent && opponent.playerID) {
       const remainingBrisk = Math.max(0, (32 - brisk));
-      const pointsForOpponent = remainingBrisk * BRISK_MULTIPLIER;
-      // Send apply_points instruction to opponent so their client updates locally
-      GameServerAPI.applyPointsToOpponent(opponent.playerID, pointsForOpponent, { isBrisk: true, briskValue: remainingBrisk });
+      // Send apply_brisks instruction to opponent so their client adds brisk locally
+      GameServerAPI.applyBrisksToOpponent(opponent.playerID, remainingBrisk);
     }
   };
 

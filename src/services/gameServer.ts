@@ -22,6 +22,7 @@ export type WebSocketEventType =
   | 'game:auto_joined' 
   | 'game:joined'
   | 'game:apply_points'
+  | 'game:apply_brisks'
   | 'game:reset'
   | 'game:resume'
   | 'game:opponent_undo'
@@ -35,7 +36,8 @@ export type WebSocketEventType =
   | 'player:reconnected'
   | 'player:invalid_id'
   | 'player:name_changed'
-  | 'players:list';
+  | 'players:list'
+  | 'players:search_results';
 
 export interface WebSocketEvent {
   type: WebSocketEventType;
@@ -96,11 +98,13 @@ export class GameServerAPI {
                 }
               });
             } else {
-              // Request new player ID
+              // Request new player ID with current player name
               console.log('Requesting new player ID');
               this.sendMessage({
                 type: 'player:request_id',
-                payload: {}
+                payload: { 
+                  name: playerSettings.name || ''
+                }
               });
             }
             // Notify any registered handlers that a low-level connection has been established
@@ -349,24 +353,40 @@ export class GameServerAPI {
 
   // Search for players by player ID
   static searchPlayersByID(searchTerm: string): Promise<Player[]> {
-    return new Promise((resolve) => {
-      const results: Player[] = [];
-      
-      this.connectedPlayers.forEach((player) => {
-        // Exclude ourselves from search results
-        if (player.playerID === this.currentPlayerID) return;
+    return new Promise((resolve, reject) => {
+      if (!this.ws || this.ws.readyState !== WebSocket.OPEN) {
+        reject(new Error('WebSocket not connected'));
+        return;
+      }
 
-        if (player.playerID.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            player.name.toLowerCase().includes(searchTerm.toLowerCase())) {
-          results.push({
-            playerID: player.playerID,
-            name: player.name,
-            isOnline: player.isOnline
-          });
-        }
+      // Set up one-time listener for search results
+      const handleSearchResults = (payload: any) => {
+        const players = payload.players || [];
+        const results: Player[] = players.map((player: any) => ({
+          playerID: player.playerID,
+          name: player.name,
+          isOnline: player.isOnline
+        }));
+        
+        // Remove the listener after getting results
+        this.removeEventListener('players:search_results', handleSearchResults);
+        resolve(results);
+      };
+
+      // Add temporary listener for search results
+      this.addEventListener('players:search_results', handleSearchResults);
+
+      // Send search request to server
+      this.sendMessage({
+        type: 'players:search',
+        payload: { searchTerm }
       });
-      
-      resolve(results.slice(0, 5));
+
+      // Set timeout to avoid hanging indefinitely
+      setTimeout(() => {
+        this.removeEventListener('players:search_results', handleSearchResults);
+        reject(new Error('Search request timed out'));
+      }, 5000);
     });
   }
 
@@ -437,11 +457,10 @@ export class GameServerAPI {
     });
   }
 
-  // Instruct opponent to apply points to their own total (used for brisk complement)
-  static applyPointsToOpponent(opponentID: string, points: number, meta: Record<string, any> | null = null): void {
-    const payload: any = { opponentID, points };
-    if (meta) payload.meta = meta;
-    this.sendMessage({ type: 'game:apply_points', payload });
+  // Instruct opponent to add remaining brisk points (used for brisk complement)
+  static applyBrisksToOpponent(opponentID: string, briskCount: number): void {
+    const payload = { opponentID, briskCount };
+    this.sendMessage({ type: 'game:apply_brisks', payload });
   }
 
   // Send current player state to server for in-memory storage and resume handling
