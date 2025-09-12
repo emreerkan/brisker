@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 import type { ModalProps } from '@/types';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { ICON_SIZE } from '@/utils/constants';
-import styles from '../BeziqueScoreKeeper.module.css';
+import styles from '@/components/Brisker.module.css';
 
 export const InfoModal: React.FC<ModalProps> = ({
   isOpen,

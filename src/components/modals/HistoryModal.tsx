@@ -4,7 +4,7 @@ import type { ModalProps, GameState } from '@/types';
 import { ScoreEntryType } from '@/types';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { ICON_SIZE } from '@/utils/constants';
-import styles from '@/components/BeziqueScoreKeeper.module.css';
+import styles from '@/components/Brisker.module.css';
 
 interface HistoryModalProps extends ModalProps {
   gameState: GameState;

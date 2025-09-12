@@ -26,7 +26,7 @@ export default defineConfig(() => {
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
-        name: 'Bezique Score Keeper',
+        name: 'Brisker',
         short_name: 'Bezique',
         description: 'Score keeping application for the Bezique card game',
         theme_color: '#ffffff',

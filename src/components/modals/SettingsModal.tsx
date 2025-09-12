@@ -7,7 +7,7 @@ import { ICON_SIZE } from '@/utils/constants';
 import { getPlayerSettings, updatePlayerSetting } from '@/utils/localStorage';
 import { GameServerAPI } from '@/services/gameServer';
 import { copyToClipboard, shareContent } from '@/utils/deviceUtils';
-import styles from '../BeziqueScoreKeeper.module.css';
+import styles from '@/components/Brisker.module.css';
 
 interface SettingsModalProps extends ModalProps {
   soundEnabled: boolean;

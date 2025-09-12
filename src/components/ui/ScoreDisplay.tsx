@@ -3,7 +3,7 @@ import { Undo2 } from 'lucide-react';
 import type { GameState } from '@/types';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { ICON_SIZE } from '@/utils/constants';
-import styles from '../BeziqueScoreKeeper.module.css';
+import styles from '@/components/Brisker.module.css';
 
 interface ScoreDisplayProps {
   gameState: GameState;

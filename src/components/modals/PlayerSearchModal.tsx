@@ -3,7 +3,7 @@ import { Search, X, Users } from 'lucide-react';
 import type { ModalProps, Player } from '@/types';
 import { GameServerAPI } from '@/services/gameServer';
 import { useLanguage } from '@/i18n/LanguageContext';
-import styles from '../BeziqueScoreKeeper.module.css';
+import styles from '@/components/Brisker.module.css';
 
 interface PlayerSearchModalProps extends ModalProps {
   onPlayWith: (player: Player) => void;

@@ -2,7 +2,7 @@ import React from 'react';
 import { RotateCcw, Settings, Info } from 'lucide-react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { ICON_SIZE } from '@/utils/constants';
-import styles from '../BeziqueScoreKeeper.module.css';
+import styles from '@/components/Brisker.module.css';
 
 interface ActionButtonsProps {
   isProcessing: boolean;

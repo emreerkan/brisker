@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ModalProps } from '@/types';
 import { useLanguage } from '@/i18n/LanguageContext';
-import styles from '../BeziqueScoreKeeper.module.css';
+import styles from '@/components/Brisker.module.css';
 
 interface ResetConfirmDialogProps extends ModalProps {
   onConfirm: () => void;

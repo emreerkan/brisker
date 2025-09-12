@@ -124,7 +124,7 @@ export const translations: Record<string, Translation> = {
     resetConfirmation: 'Skoru Sıfırla',
     resetWarning: 'Bu işlem tüm skorları siler ve geri alınamaz.',
     // Info modal
-    appName: 'Bezik Skor Takipçisi',
+    appName: 'Brisker',
     version: 'Sürüm',
     description: 'Bezik kart oyunu için skor takip uygulaması',
     features: 'Özellikler',
@@ -229,7 +229,7 @@ export const translations: Record<string, Translation> = {
     resetConfirmation: 'Reset Score',
     resetWarning: 'This will delete all scores and cannot be undone.',
     // Info modal
-    appName: 'Bezique Score Keeper',
+    appName: 'Brisker',
     version: 'Version',
     description: 'Score keeping application for the Bezique card game',
     features: 'Features',

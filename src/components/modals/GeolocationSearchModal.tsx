@@ -4,7 +4,7 @@ import type { ModalProps, Player } from '@/types';
 import { GameServerAPI } from '@/services/gameServer';
 import { getGeolocation } from '@/utils/deviceUtils';
 import { useLanguage } from '@/i18n/LanguageContext';
-import styles from '../BeziqueScoreKeeper.module.css';
+import styles from '@/components/Brisker.module.css';
 
 interface GeolocationSearchModalProps extends ModalProps {
   onPlayWith: (player: Player) => void;

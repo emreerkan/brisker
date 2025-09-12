@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { POINT_VALUES } from '@/utils/constants';
-import styles from '../BeziqueScoreKeeper.module.css';
+import styles from '@/components/Brisker.module.css';
 
 interface PointButtonsProps {
   selectedPoint: number | null;

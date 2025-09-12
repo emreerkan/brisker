@@ -23,9 +23,9 @@ import { getPlayerSettings, clearGameSnapshot } from '@/utils/localStorage';
 import { GameServerAPI } from '@/services/gameServer';
 import type { Player } from '@/types';
 import { ScoreEntryType } from '@/types';
-import styles from './BeziqueScoreKeeper.module.css';
+import styles from './Brisker.module.css';
 
-export const BeziqueScoreKeeper: React.FC = () => {
+export const Brisker: React.FC = () => {
   // Initialize sound settings from localStorage
   const [soundEnabled, setSoundEnabled] = useState(() => getPlayerSettings().soundEnabled);
   
@@ -411,4 +411,4 @@ export const BeziqueScoreKeeper: React.FC = () => {
   );
 };
 
-export default BeziqueScoreKeeper;
+export default Brisker;

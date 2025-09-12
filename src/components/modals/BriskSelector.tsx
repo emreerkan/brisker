@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 import type { ModalProps } from '@/types';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { ICON_SIZE, MAX_BRISK_VALUE } from '@/utils/constants';
-import styles from '../BeziqueScoreKeeper.module.css';
+import styles from '@/components/Brisker.module.css';
 
 interface BriskSelectorProps extends ModalProps {
   onBriskSelect: (brisk: number) => void;
