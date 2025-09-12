@@ -4,6 +4,8 @@ export interface GameState {
   score: number;
   opponentScore: number;
   history: ScoreEntry[];
+  isDealer?: boolean;
+  opponentIsDealer?: boolean;
 }
 
 export interface GameActions {

@@ -15,6 +15,8 @@ export interface GameSnapshot {
   total: number;
   opponent?: Player | null;
   lastEvent: string; // ISO
+  isDealer?: boolean;
+  opponentIsDealer?: boolean;
 }
 
 const GAME_SNAPSHOT_KEY = 'bezique_game_snapshot';

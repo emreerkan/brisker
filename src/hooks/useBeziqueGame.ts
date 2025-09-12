@@ -21,7 +21,9 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
   const [gameState, setGameState] = useState<GameState>({
     score: 0,
     opponentScore: 0,
-    history: []
+    history: [],
+    isDealer: false,
+    opponentIsDealer: false
   });
   
   const [isProcessing, setIsProcessing] = useState(false);
@@ -68,10 +70,28 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
           }
         }
         
+        // Handle dealer switching when a brisk is entered
+        let newIsDealer = prev.isDealer;
+        let newOpponentIsDealer = prev.opponentIsDealer;
+        
+        if (type === ScoreEntryType.BRISK) {
+          if (isRemote) {
+            // When opponent enters brisk (remote), they're indicating we were the dealer
+            newIsDealer = true;
+            newOpponentIsDealer = false;
+          } else {
+            // When player enters brisk locally, they're indicating opponent was the dealer
+            newIsDealer = false;
+            newOpponentIsDealer = true;
+          }
+        }
+        
         return {
           ...prev,
           score: newTotal,
-          history: newHistory
+          history: newHistory,
+          isDealer: newIsDealer,
+          opponentIsDealer: newOpponentIsDealer
         };
       });
       
@@ -115,14 +135,12 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
             timestamp: new Date(h.timestamp)
           })) as ScoreEntry[];
 
-          const restoredLastThree = mappedHistory.slice(-3).map(entry => entry.value);
-
           setGameState(prev => ({
             ...prev,
             history: mappedHistory,
-            total: snap.total,
-            lastThreeScores: restoredLastThree,
-            currentOpponent: snap.opponent || undefined
+            score: snap.total,
+            isDealer: snap.isDealer || false,
+            opponentIsDealer: snap.opponentIsDealer || false
           }));
 
           // Wait for websocket to be connected before syncing snapshot to server
@@ -166,7 +184,9 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
           history: historySnapshot,
           total: gameState.score,
           opponent: opponent || null,
-          lastEvent: new Date().toISOString()
+          lastEvent: new Date().toISOString(),
+          isDealer: gameState.isDealer,
+          opponentIsDealer: gameState.opponentIsDealer
         });
       } catch (e) {
         // ignore
@@ -217,10 +237,32 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
 
       playSound(SoundType.UNDO, soundEnabled);
 
+      // Handle dealer status when undoing a brisk
+      let newIsDealer = prev.isDealer;
+      let newOpponentIsDealer = prev.opponentIsDealer;
+      
+      if (isBrisk) {
+        // Check if there are any previous brisk entries to determine dealer status
+        const previousBriskEntries = newHistory.filter(entry => entry.type === ScoreEntryType.BRISK);
+        if (previousBriskEntries.length === 0) {
+          // No more brisk entries, reset dealer status
+          newIsDealer = false;
+          newOpponentIsDealer = false;
+        } else {
+          // When undoing a brisk, we reset dealer status since determining the previous dealer
+          // would require tracking who entered each brisk entry (player vs opponent)
+          // For simplicity, we reset to no dealer after undo
+          newIsDealer = false;
+          newOpponentIsDealer = false;
+        }
+      }
+
       return {
         ...prev,
         score: newScore,
-        history: newHistory
+        history: newHistory,
+        isDealer: newIsDealer,
+        opponentIsDealer: newOpponentIsDealer
       };
     });
 
@@ -242,7 +284,9 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
         ...prev,
         score: 0,
         opponentScore: 0,
-        history: []
+        history: [],
+        isDealer: false,
+        opponentIsDealer: false
       };
     });
 

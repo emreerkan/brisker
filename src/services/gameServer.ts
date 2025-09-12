@@ -21,7 +21,6 @@ export type WebSocketEventType =
   | 'game:created'
   | 'game:auto_joined' 
   | 'game:joined'
-  | 'game:apply_points'
   | 'game:apply_brisks'
   | 'game:reset'
   | 'game:resume'
@@ -202,15 +201,15 @@ export class GameServerAPI {
         });
         this.ws = null;
         this.currentPlayerID = null;
+        
         // Start a short reconnect loop so clients try to re-establish quickly
         // Guarded by connectingPromise to avoid parallel reconnect storms
-        (async () => {
-          try {
-            await this.startReconnectLoop(250, 12);
-          } catch (e) {
-            console.warn('Short reconnect attempts exhausted or failed:', e);
-          }
-        })();
+        if (!this.connectingPromise) {
+          this.startReconnectLoop(250, 12).catch(e => {
+            console.warn('Reconnection failed, working in offline mode:', e);
+            // Game will continue in offline mode
+          });
+        }
       };
       
       this.ws.onerror = (error) => {
@@ -218,12 +217,12 @@ export class GameServerAPI {
         reject(error);
       };
       
-      // Timeout after 10 seconds (increased for the new handshake)
+      // Timeout after 5 seconds for individual connection attempts
       setTimeout(() => {
         if (!this.currentPlayerID) {
           reject(new Error('WebSocket connection timeout'));
         }
-      }, 10000);
+      }, 5000);
     });
   }
 
@@ -258,7 +257,7 @@ export class GameServerAPI {
         try {
           await this.ensureConnectedShort();
         } catch (e) {
-          console.warn('WebSocket not connected and reconnect failed, cannot send message:', message.type || '[unknown]');
+          console.warn('WebSocket not connected and reconnect failed, working in offline mode. Cannot send message:', message.type || '[unknown]');
           return;
         }
       }
@@ -268,8 +267,10 @@ export class GameServerAPI {
           this.ws.send(JSON.stringify(message));
           console.log('⬆️ Sent WS message:', message.type || '[unknown]');
         } catch (e) {
-          console.warn('Failed to send WS message:', e, message);
+          console.warn('Failed to send WS message, falling back to offline mode:', e, message);
         }
+      } else {
+        console.warn('WebSocket not available, working in offline mode. Message not sent:', message.type || '[unknown]');
       }
     })();
   }
@@ -277,20 +278,24 @@ export class GameServerAPI {
   // Try to connect with short backoff for immediate user actions
   private static async ensureConnectedShort(): Promise<void> {
     if (this.ws && this.ws.readyState === WebSocket.OPEN) return;
+    
     // If a connect attempt is already in-flight, wait for it instead of starting another
     if (this.connectingPromise) {
       try {
         await this.connectingPromise;
         return;
       } catch (e) {
-        // previous attempt failed; fall through to start a new one
+        // Previous attempt failed; rethrow to let caller handle offline mode
+        throw new Error('Connection attempt failed, server appears offline');
       }
     }
 
     // Start a single short reconnect attempt and store the promise so parallel callers wait on it
-    this.connectingPromise = this.connectWithRetry(500, 6);
+    this.connectingPromise = this.connectWithRetry(500, 3); // Reduced attempts for user actions
     try {
       await this.connectingPromise;
+    } catch (e) {
+      throw new Error('Unable to connect to server for user action');
     } finally {
       // Clear the guard regardless of success or failure so future attempts can proceed
       this.connectingPromise = null;
@@ -300,30 +305,40 @@ export class GameServerAPI {
   // Start a short reconnect loop with intervalMs and maxAttempts.
   // This is intended for automatic quick recovery after disconnection (e.g., reloads).
   private static async startReconnectLoop(intervalMs: number = 250, maxAttempts: number = 12): Promise<string> {
-    if (this.ws && this.ws.readyState === WebSocket.OPEN) return Promise.resolve(this.currentPlayerID || '');
+    if (this.ws && this.ws.readyState === WebSocket.OPEN && this.currentPlayerID) {
+      return Promise.resolve(this.currentPlayerID);
+    }
+    
     // Prevent parallel reconnect loops
     if (this.connectingPromise) {
       try {
         return await this.connectingPromise;
       } catch (e) {
-        // fallthrough to start a new loop
+        // Previous attempt failed, continue to start a new one
       }
     }
 
-    let attempts = 0;
-    // store the promise so concurrent callers wait on the same attempt
+    // Store the promise so concurrent callers wait on the same attempt
     this.connectingPromise = (async () => {
-      while (attempts < maxAttempts) {
+      console.log(`Starting reconnection attempts (${maxAttempts} attempts with ${intervalMs}ms delay)`);
+      
+      for (let attempt = 1; attempt <= maxAttempts; attempt++) {
         try {
-          const id = await this.connectWithRetry(intervalMs, 1);
+          console.log(`Reconnection attempt ${attempt}/${maxAttempts}`);
+          const id = await this.connectWebSocket();
+          console.log(`Successfully reconnected on attempt ${attempt}, player ID: ${id}`);
           return id;
         } catch (e) {
-          attempts++;
-          // small delay between attempts
-          await new Promise(res => setTimeout(res, intervalMs));
+          console.warn(`Reconnection attempt ${attempt}/${maxAttempts} failed:`, e);
+          
+          // Don't wait after the last attempt
+          if (attempt < maxAttempts) {
+            await new Promise(res => setTimeout(res, intervalMs));
+          }
         }
       }
-      throw new Error('startReconnectLoop: exhausted attempts');
+      
+      throw new Error(`Failed to reconnect after ${maxAttempts} attempts. Server appears to be offline.`);
     })();
 
     try {
@@ -515,5 +530,15 @@ export class GameServerAPI {
   // Get current player ID
   static getCurrentPlayerID(): string | null {
     return this.currentPlayerID;
+  }
+
+  // Check if we're currently connected to the server
+  static isConnected(): boolean {
+    return this.ws !== null && this.ws.readyState === WebSocket.OPEN && this.currentPlayerID !== null;
+  }
+
+  // Check if we're currently in offline mode
+  static isOffline(): boolean {
+    return !this.isConnected();
   }
 }

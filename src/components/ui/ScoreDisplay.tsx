@@ -28,6 +28,9 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
       {/* Row 1: Score (2fr) + Undo (1fr) + History (1fr) */}
       <div className={styles.total}>
         {formatNumber(gameState.score)}
+        {gameState.isDealer && (
+          <span className={styles.dealerIndicator}>D</span>
+        )}
       </div>
       
       <button

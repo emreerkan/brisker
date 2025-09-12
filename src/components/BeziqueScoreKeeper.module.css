@@ -53,6 +53,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.dealerIndicator {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: #d92027;
+  color: #fff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .undo {
@@ -1350,6 +1368,25 @@
 .opponentStatus {
   flex-shrink: 0;
   text-align: right;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.opponentDealerIndicator {
+  background: #d92027;
+  color: #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* Connection indicator: fixed top-left. When opponent bar is visible (gridContainer.withOpponent), push it down by the opponent bar height */

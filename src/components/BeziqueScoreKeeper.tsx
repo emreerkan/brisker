@@ -129,16 +129,6 @@ export const BeziqueScoreKeeper: React.FC = () => {
       updateOpponentScore(payload.score);
     };
 
-    const onApplyPoints = (payload: any) => {
-      console.log('Apply points instruction received:', payload);
-      // payload: { points, from, briskValue }
-      // Apply the points locally (do not re-broadcast)
-      // Determine if this is a brisk entry based on briskValue presence
-      const isBrisk = typeof payload.briskValue === 'number';
-      const type = isBrisk ? ScoreEntryType.BRISK : ScoreEntryType.POINT;
-      addPoints(payload.points, type, true); // isRemote = true
-    };
-
     const onApplyBrisks = (payload: any) => {
       console.log('Apply brisks instruction received:', payload);
       // payload: { briskCount }
@@ -193,7 +183,6 @@ export const BeziqueScoreKeeper: React.FC = () => {
 
     GameServerAPI.addEventListener('game:auto_joined', onAutoJoined);
     GameServerAPI.addEventListener('game:opponent_scored', onOpponentScored);
-    GameServerAPI.addEventListener('game:apply_points', onApplyPoints);
     GameServerAPI.addEventListener('game:apply_brisks', onApplyBrisks);
     GameServerAPI.addEventListener('game:opponent_undo', onOpponentUndo);
     GameServerAPI.addEventListener('game:reset', onRemoteReset);
@@ -207,7 +196,6 @@ export const BeziqueScoreKeeper: React.FC = () => {
     return () => {
       GameServerAPI.removeEventListener('game:auto_joined', onAutoJoined);
       GameServerAPI.removeEventListener('game:opponent_scored', onOpponentScored);
-      GameServerAPI.removeEventListener('game:apply_points', onApplyPoints);
       GameServerAPI.removeEventListener('game:apply_brisks', onApplyBrisks);
       GameServerAPI.removeEventListener('game:opponent_undo', onOpponentUndo);
       GameServerAPI.removeEventListener('game:reset', onRemoteReset);
@@ -334,6 +322,9 @@ export const BeziqueScoreKeeper: React.FC = () => {
             </div>
             <div className={styles.opponentStatus}>
               {getOpponentStatusText()}
+              {gameState.opponentIsDealer && (
+                <span className={styles.opponentDealerIndicator}>D</span>
+              )}
             </div>
           </div>
         )}
