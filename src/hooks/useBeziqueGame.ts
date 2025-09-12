@@ -495,7 +495,7 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
         // ignore
       }
     }
-  }, [playResetSound]);
+  }, [playResetSound, gameState.currentOpponent?.playerID]);
 
   // Reset local score/history only (no server notifications)
   const resetLocal = useCallback(() => {
@@ -504,7 +504,9 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
       total: 0,
       brisk: 0,
       history: [],
-      lastThreeScores: []
+      lastThreeScores: [],
+      // Also clear the opponent's displayed score so ahead/behind recalculates to 0
+      currentOpponent: prev.currentOpponent ? { ...prev.currentOpponent, score: 0 } : prev.currentOpponent
     }));
     // Clear any saved snapshot so a reload doesn't restore old scores
     try {

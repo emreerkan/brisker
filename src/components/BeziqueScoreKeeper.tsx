@@ -19,7 +19,7 @@ import {
   GeolocationSearchModal
 } from './modals';
 
-import { getPlayerSettings } from '../utils/localStorage';
+import { getPlayerSettings, clearGameSnapshot } from '../utils/localStorage';
 import { GameServerAPI } from '../services/gameServer';
 import type { Player } from '../types/game';
 import styles from './BeziqueScoreKeeper.module.css';
@@ -155,6 +155,8 @@ export const BeziqueScoreKeeper: React.FC = () => {
 
     const onRemoteReset = (payload: any) => {
       console.log('Received remote reset instruction:', payload);
+      // Clear local snapshot so reload won't restore previous scores
+      try { clearGameSnapshot(); } catch (e) { /* ignore */ }
       resetLocal();
     };
 
