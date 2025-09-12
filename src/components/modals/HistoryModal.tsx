@@ -1,6 +1,7 @@
 import React from 'react';
 import { X } from 'lucide-react';
 import type { ModalProps, GameState } from '../../types/game';
+import { ScoreEntryType } from '../../types/game';
 import { useLanguage } from '../../i18n/LanguageContext';
 import { ICON_SIZE } from '../../utils/constants';
 import styles from '../BeziqueScoreKeeper.module.css';
@@ -40,14 +41,20 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
               gameState.history
                 .slice()
                 .reverse()
-                .map((entry) => (
-                  <div key={entry.id} className={styles.historyItem}>
-                    <div className={styles.historyPoints}>{formatNumber(entry.points)}</div>
-                    <div className={styles.historyTime}>
-                      {formatTime(entry.timestamp)}
+                .map((entry, index) => {
+                  const displayText = entry.type === ScoreEntryType.BRISK 
+                    ? `${formatNumber(entry.value)} (${entry.value / 20} Brisk)`
+                    : formatNumber(entry.value);
+                  
+                  return (
+                    <div key={`${entry.timestamp.getTime()}-${index}`} className={styles.historyItem}>
+                      <div className={styles.historyPoints}>{displayText}</div>
+                      <div className={styles.historyTime}>
+                        {formatTime(entry.timestamp)}
+                      </div>
                     </div>
-                  </div>
-                ))
+                  );
+                })
             )}
           </div>
         </div>

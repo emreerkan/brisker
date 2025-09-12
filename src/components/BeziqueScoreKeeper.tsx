@@ -133,16 +133,11 @@ export const BeziqueScoreKeeper: React.FC = () => {
 
     const onApplyPoints = (payload: any) => {
       console.log('Apply points instruction received:', payload);
-      // payload: { points, from }
+      // payload: { points, from, briskValue }
       // Apply the points locally (do not re-broadcast)
-      // If server forwarded metadata, include it when creating the local entry
-      const meta = payload.meta || {};
-      // Mark remote entries as source: 'remote' and include the origin
-      meta.source = 'remote';
-      meta.from = payload.from;
-      if (meta.isBrisk === undefined && typeof meta.briskValue === 'number') meta.isBrisk = true;
-      // Use the meta-aware local adder
-      addPointsLocal(payload.points, meta);
+      // Determine if this is a brisk entry based on briskValue presence
+      const isBrisk = typeof payload.briskValue === 'number';
+      addPointsLocal(payload.points, isBrisk);
     };
 
     const onOpponentUndo = (payload: any) => {
@@ -233,7 +228,7 @@ export const BeziqueScoreKeeper: React.FC = () => {
     setShowBriskSelector(false);
     const pointsForPlayer = brisk * BRISK_MULTIPLIER;
     // Mark this entry as brisk so undo can be coordinated
-    addPointsWithMeta(pointsForPlayer, { isBrisk: true, briskValue: brisk, source: 'local' });
+    addPointsWithMeta(pointsForPlayer);
 
     // If playing with an opponent, automatically add the remaining brisk to them
     if (gameState.currentOpponent && gameState.currentOpponent.playerID) {

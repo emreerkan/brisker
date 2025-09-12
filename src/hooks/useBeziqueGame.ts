@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import type { ScoreEntry, GameState, Player } from '../types/game';
+import { ScoreEntryType } from '../types/game';
 import { WIN_THRESHOLD } from '../utils/constants';
 import { GameServerAPI } from '../services/gameServer';
 import { saveGameSnapshot, getGameSnapshot, clearGameSnapshot } from '../utils/localStorage';
@@ -32,8 +33,8 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
     setTimeout(() => {
       setGameState(prev => {
         const newEntry: ScoreEntry = {
-          id: `${Date.now()}-${Math.random()}`,
-          points,
+          value: points,
+          type: ScoreEntryType.POINT,
           timestamp: new Date()
         };
         
@@ -68,19 +69,18 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
     }, 300);
   }, [isProcessing, soundEnabled, onCongratulations]);
 
-  // Add points with metadata (used for brisk entries where we want to mark them)
-  const addPointsWithMeta = useCallback((points: number, meta: Partial<ScoreEntry> = {}) => {
+  // Add brisk points (equivalent to regular points but marked as brisk type)
+  const addPointsWithMeta = useCallback((points: number) => {
     if (isProcessing) return;
     setIsProcessing(true);
 
     setTimeout(() => {
       setGameState(prev => {
         const newEntry: ScoreEntry = {
-          id: `${Date.now()}-${Math.random()}`,
-          points,
-          timestamp: new Date(),
-          ...meta
-        } as ScoreEntry;
+          value: points,
+          type: ScoreEntryType.BRISK,
+          timestamp: new Date()
+        };
 
         const newTotal = prev.total + points;
         const newHistory = [...prev.history, newEntry];
@@ -142,16 +142,12 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
         if (diffMs <= tenMinutesMs) {
           // Build mapped history entries and last three scores for UI
           const mappedHistory = snap.history.map((h: any) => ({
-            id: h.id || `${Date.now()}-${Math.random()}`,
-            points: (h.points as number) || 0,
-            timestamp: new Date(h.timestamp),
-            isBrisk: h.isBrisk,
-            briskValue: h.briskValue,
-            source: h.source,
-            from: h.from
+            value: (h.value || h.points) as number || 0,
+            type: h.type || (h.isBrisk ? ScoreEntryType.BRISK : ScoreEntryType.POINT),
+            timestamp: new Date(h.timestamp)
           })) as ScoreEntry[];
 
-          const restoredLastThree = mappedHistory.slice(-3).map(entry => entry.points);
+          const restoredLastThree = mappedHistory.slice(-3).map(entry => entry.value);
 
           setGameState(prev => ({
             ...prev,
@@ -192,7 +188,7 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
         });
         // Save a local snapshot for quick resume
         try {
-          const historySnapshot = gameState.history.map(h => ({ id: h.id, points: h.points, timestamp: h.timestamp.toISOString(), isBrisk: h.isBrisk, briskValue: h.briskValue, source: h.source, from: h.from })) as any;
+          const historySnapshot = gameState.history.map(h => ({ value: h.value, type: h.type, timestamp: h.timestamp.toISOString() })) as any;
           saveGameSnapshot({
             history: historySnapshot,
             total: gameState.total,
@@ -211,16 +207,15 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
   }, [gameState.history, gameState.total, gameState.currentOpponent]);
 
   // Apply points locally without notifying server (used when server instructs the client to apply points)
-  const addPointsLocal = useCallback((points: number, meta?: Partial<ScoreEntry>) => {
+  const addPointsLocal = useCallback((points: number, isBrisk: boolean = false) => {
     let newTotalForSend: number | undefined;
     let opponentToNotify: string | undefined;
     setGameState(prev => {
       const newEntry: ScoreEntry = {
-        id: `${Date.now()}-${Math.random()}`,
-        points,
-        timestamp: new Date(),
-        ...(meta || {})
-      } as ScoreEntry;
+        value: points,
+        type: isBrisk ? ScoreEntryType.BRISK : ScoreEntryType.POINT,
+        timestamp: new Date()
+      };
       const newTotal = prev.total + points;
       const newHistory = [...prev.history, newEntry];
       const newLastThree = [...prev.lastThreeScores, points].slice(-3);
@@ -254,21 +249,21 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
 
       const lastEntry = prev.history[prev.history.length - 1];
 
-      // If the last entry is a brisk (or a remote-applied brisk) and we have an opponent, request opponent to undo as well
-      const isBriskLike = !!lastEntry.isBrisk || (lastEntry.source === 'remote' && typeof lastEntry.briskValue === 'number');
-      if (isBriskLike && prev.currentOpponent?.playerID) {
-        console.log('↩️ undo() detected brisk-like entry, requesting opponent undo', { lastEntry, opponent: prev.currentOpponent.playerID });
+      // If the last entry is a brisk and we have an opponent, request opponent to undo as well
+      const isBrisk = lastEntry.type === ScoreEntryType.BRISK;
+      if (isBrisk && prev.currentOpponent?.playerID) {
+        console.log('↩️ undo() detected brisk entry, requesting opponent undo', { lastEntry, opponent: prev.currentOpponent.playerID });
         // Ask server to forward an undo request to opponent for the same brisk value
         try {
-          GameServerAPI.requestUndoOpponent(prev.currentOpponent.playerID, { points: lastEntry.points, briskValue: lastEntry.briskValue });
+          GameServerAPI.requestUndoOpponent(prev.currentOpponent.playerID, { points: lastEntry.value, briskValue: lastEntry.value });
         } catch (e) {
           console.warn('Failed to request opponent undo:', e);
         }
       }
 
       const newHistory = prev.history.slice(0, -1);
-      const newTotal = newHistory.reduce((sum, entry) => sum + entry.points, 0);
-      const newLastThree = newHistory.slice(-3).map(entry => entry.points);
+      const newTotal = newHistory.reduce((sum, entry) => sum + entry.value, 0);
+      const newLastThree = newHistory.slice(-3).map(entry => entry.value);
 
       // capture values to notify opponent after state update
       newTotalForSend = newTotal;
@@ -297,8 +292,8 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
       if (prev.history.length === 0) return prev;
 
       const newHistory = prev.history.slice(0, -1);
-      const newTotal = newHistory.reduce((sum, entry) => sum + entry.points, 0);
-      const newLastThree = newHistory.slice(-3).map(entry => entry.points);
+      const newTotal = newHistory.reduce((sum, entry) => sum + entry.value, 0);
+      const newLastThree = newHistory.slice(-3).map(entry => entry.value);
 
       newTotalForSend = newTotal;
       opponentToNotify = prev.currentOpponent?.playerID;
@@ -328,17 +323,16 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
       const lastEntry = prev.history[prev.history.length - 1];
 
       if (payload && typeof payload.briskValue === 'number') {
-        const lastBrisk = (lastEntry as any).briskValue;
-        const lastIsBrisk = !!lastEntry.isBrisk || typeof lastBrisk === 'number';
+        const lastIsBrisk = lastEntry.type === ScoreEntryType.BRISK;
         if (!lastIsBrisk) {
-          console.log('Ignoring opponent brisk undo: last entry is not brisk-like', { lastEntry, payload });
+          console.log('Ignoring opponent brisk undo: last entry is not brisk', { lastEntry, payload });
           return prev;
         }
       }
 
       const newHistory = prev.history.slice(0, -1);
-      const newTotal = newHistory.reduce((sum, entry) => sum + entry.points, 0);
-      const newLastThree = newHistory.slice(-3).map(entry => entry.points);
+      const newTotal = newHistory.reduce((sum, entry) => sum + entry.value, 0);
+      const newLastThree = newHistory.slice(-3).map(entry => entry.value);
 
       newTotalForSend = newTotal;
       opponentToNotify = prev.currentOpponent?.playerID;

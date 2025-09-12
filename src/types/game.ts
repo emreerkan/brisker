@@ -1,12 +1,14 @@
+export const ScoreEntryType = {
+  POINT: 'point',
+  BRISK: 'brisk'
+} as const;
+
+export type ScoreEntryType = typeof ScoreEntryType[keyof typeof ScoreEntryType];
+
 export interface ScoreEntry {
-  id: string;
-  points: number;
+  value: number;
+  type: ScoreEntryType;
   timestamp: Date;
-  // Optional metadata to mark special entries (brisk, remote-applied, origin info)
-  isBrisk?: boolean;
-  briskValue?: number; // original brisk selection (0-32)
-  source?: 'local' | 'remote';
-  from?: string; // playerID of origin when remote
 }
 
 export interface GameState {
