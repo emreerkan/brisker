@@ -1,12 +1,9 @@
 import type { ScoreEntry } from './score';
-import type { Player } from './player';
 
 export interface GameState {
-  total: number;
-  brisk: number;
+  score: number;
+  opponentScore: number;
   history: ScoreEntry[];
-  lastThreeScores: number[];
-  currentOpponent?: Player;
 }
 
 export interface GameActions {

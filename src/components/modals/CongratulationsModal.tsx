@@ -32,7 +32,7 @@ export const CongratulationsModal: React.FC<CongratulationsModalProps> = ({
             {t.congratulationsMessage}
           </div>
           <div className={styles.congratulationsScore}>
-            {formatNumber(gameState.total)}
+            {formatNumber(gameState.score)}
           </div>
           <div className={styles.congratulationsButtons}>
             <button 

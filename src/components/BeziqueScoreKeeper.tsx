@@ -62,7 +62,9 @@ export const BeziqueScoreKeeper: React.FC = () => {
     reset,
     resetLocal,
     setCurrentOpponent,
-    updateOpponentScore
+    updateOpponentScore,
+    getLastThreeScores,
+    opponent
   } = useBeziqueGame(soundEnabled, () => setShowCongratulations(true));  // Development keyboard shortcut for testing
   useEffect(() => {
     const handleTriggerCongratulations = () => {
@@ -164,8 +166,8 @@ export const BeziqueScoreKeeper: React.FC = () => {
       const name = payload && payload.name;
       if (!pid) return;
       // If the changed player is our current opponent, update the opponent bar
-      if (gameState.currentOpponent && pid === gameState.currentOpponent.playerID) {
-        setCurrentOpponent({ playerID: pid, name: name || gameState.currentOpponent.name || '', isOnline: true, score: gameState.currentOpponent.score });
+      if (opponent && pid === opponent.playerID) {
+        setCurrentOpponent({ playerID: pid, name: name || opponent.name || '', isOnline: true, score: opponent.score });
         return;
       }
       // If we don't yet have a currentOpponent, ignore; when we need players we'll request the list explicitly.
@@ -214,7 +216,7 @@ export const BeziqueScoreKeeper: React.FC = () => {
       GameServerAPI.removeEventListener('player:reconnected', onPlayerReconnected);
       GameServerAPI.removeEventListener('player:offline', onPlayerOffline);
     };
-  }, [setCurrentOpponent, updateOpponentScore, gameState.currentOpponent?.playerID]);
+  }, [setCurrentOpponent, updateOpponentScore, opponent?.playerID]);
 
   // Event Handlers
   const handlePointClick = (points: number) => {
@@ -231,11 +233,11 @@ export const BeziqueScoreKeeper: React.FC = () => {
     addPointsWithMeta(pointsForPlayer);
 
     // If playing with an opponent, automatically add the remaining brisk to them
-    if (gameState.currentOpponent && gameState.currentOpponent.playerID) {
+    if (opponent && opponent.playerID) {
       const remainingBrisk = Math.max(0, (32 - brisk));
       const pointsForOpponent = remainingBrisk * BRISK_MULTIPLIER;
       // Send apply_points instruction to opponent so their client updates locally
-      GameServerAPI.applyPointsToOpponent(gameState.currentOpponent.playerID, pointsForOpponent, { isBrisk: true, briskValue: remainingBrisk });
+      GameServerAPI.applyPointsToOpponent(opponent.playerID, pointsForOpponent, { isBrisk: true, briskValue: remainingBrisk });
     }
   };
 
@@ -300,10 +302,10 @@ export const BeziqueScoreKeeper: React.FC = () => {
 
   // Calculate point difference for opponent display
   const getOpponentStatusText = () => {
-    if (!gameState.currentOpponent) return '';
+    if (!opponent) return '';
     
-    const playerScore = gameState.total;
-    const opponentScore = gameState.currentOpponent.score || 0;
+    const playerScore = gameState.score;
+    const opponentScore = gameState.opponentScore || 0;
     const difference = playerScore - opponentScore;
     
     if (difference > 0) {
@@ -317,17 +319,17 @@ export const BeziqueScoreKeeper: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <div className={`${styles.gridContainer} ${gameState.currentOpponent ? styles.withOpponent : ''} ${isProcessing ? styles.disabled : ''}`}>
+      <div className={`${styles.gridContainer} ${opponent ? styles.withOpponent : ''} ${isProcessing ? styles.disabled : ''}`}>
         {/* Connection Status - Simple circle indicator */}
         <div
           className={styles.connectionIndicator}
           style={{ backgroundColor: connectionStatus === 'connected' ? '#4CAF50' : '#F44336' }}
         />
         
-        {gameState.currentOpponent && (
+        {opponent && (
           <div className={styles.opponentBar}>
             <div className={styles.opponentName}>
-              {t.opponent}: {gameState.currentOpponent.name}
+              {t.opponent}: {opponent.name}
             </div>
             <div className={styles.opponentStatus}>
               {getOpponentStatusText()}
@@ -340,6 +342,7 @@ export const BeziqueScoreKeeper: React.FC = () => {
           isProcessing={isProcessing}
           onUndo={undo}
           onHistoryClick={() => setShowHistory(true)}
+          getLastThreeScores={getLastThreeScores}
         />
         
         <PointButtons

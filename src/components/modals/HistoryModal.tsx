@@ -31,7 +31,7 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
         
         <div className={styles.historyContent}>
           <div className={styles.historyTotal}>
-            {t.totalScore}: {formatNumber(gameState.total)}
+            {t.totalScore}: {formatNumber(gameState.score)}
           </div>
           
           <div className={styles.historyList}>

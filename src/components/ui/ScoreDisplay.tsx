@@ -10,21 +10,24 @@ interface ScoreDisplayProps {
   isProcessing: boolean;
   onUndo: () => void;
   onHistoryClick: () => void;
+  getLastThreeScores: () => number[];
 }
 
 export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
   gameState,
   isProcessing,
   onUndo,
-  onHistoryClick
+  onHistoryClick,
+  getLastThreeScores
 }) => {
   const { t, formatNumber } = useLanguage();
+  const lastThreeScores = getLastThreeScores();
 
   return (
     <>
       {/* Row 1: Score (2fr) + Undo (1fr) + History (1fr) */}
       <div className={styles.total}>
-        {formatNumber(gameState.total)}
+        {formatNumber(gameState.score)}
       </div>
       
       <button
@@ -46,13 +49,13 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
           {gameState.history.length}
         </div>
         <div className={styles.lastScoresContainer}>
-          {gameState.lastThreeScores.length === 0 ? (
+          {lastThreeScores.length === 0 ? (
             <div className={styles.lastScoreEmpty}>0</div>
           ) : (
-            gameState.lastThreeScores.map((score, index) => (
+            lastThreeScores.map((score: number, index: number) => (
               <div 
                 key={index} 
-                className={`${styles.lastScoreItem} ${index === gameState.lastThreeScores.length - 1 ? styles.lastScoreLatest : ''}`}
+                className={`${styles.lastScoreItem} ${index === lastThreeScores.length - 1 ? styles.lastScoreLatest : ''}`}
               >
                 {formatNumber(score)}
               </div>
