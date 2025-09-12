@@ -1,5 +1,5 @@
-import type { Player, GeolocationData } from '../types/game';
-import { updatePlayerIDFromServer } from '../utils/localStorage';
+import type { Player, GeolocationData } from '@/types';
+import { updatePlayerIDFromServer } from '@/utils/localStorage';
 
 // WebSocket server URL - simplified architecture  
 const WEBSOCKET_URL = window.location.protocol === 'https:' ? 'wss://localhost:3000' : 'ws://localhost:3000';

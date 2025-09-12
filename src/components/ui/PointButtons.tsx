@@ -1,6 +1,6 @@
 import React from 'react';
-import { useLanguage } from '../../i18n/LanguageContext';
-import { POINT_VALUES } from '../../utils/constants';
+import { useLanguage } from '@/i18n/LanguageContext';
+import { POINT_VALUES } from '@/utils/constants';
 import styles from '../BeziqueScoreKeeper.module.css';
 
 interface PointButtonsProps {

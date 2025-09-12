@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, X, Users } from 'lucide-react';
-import type { ModalProps, Player } from '../../types/game';
-import { GameServerAPI } from '../../services/gameServer';
-import { useLanguage } from '../../i18n/LanguageContext';
+import type { ModalProps, Player } from '@/types';
+import { GameServerAPI } from '@/services/gameServer';
+import { useLanguage } from '@/i18n/LanguageContext';
 import styles from '../BeziqueScoreKeeper.module.css';
 
 interface PlayerSearchModalProps extends ModalProps {

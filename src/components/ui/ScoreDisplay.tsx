@@ -1,8 +1,8 @@
 import React from 'react';
 import { Undo2 } from 'lucide-react';
-import type { GameState } from '../../types/game';
-import { useLanguage } from '../../i18n/LanguageContext';
-import { ICON_SIZE } from '../../utils/constants';
+import type { GameState } from '@/types';
+import { useLanguage } from '@/i18n/LanguageContext';
+import { ICON_SIZE } from '@/utils/constants';
 import styles from '../BeziqueScoreKeeper.module.css';
 
 interface ScoreDisplayProps {

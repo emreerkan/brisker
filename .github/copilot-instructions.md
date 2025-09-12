@@ -1,26 +1,36 @@
-<!-- Use this file to provide workspace-specific custom instructions to Copilot. For more details, visit https://code.visualstudio.com/docs/copilot/copilot-customization#_use-a-githubcopilotinstructionsmd-file -->
-- [x] Verify that the copilot-instructions.md file in the .github directory is created.
+# GitHub Copilot instructions
 
-- [x] Clarify Project Requirements
-	<!-- React TypeScript Vite project for Bezique card game score keeping PWA application -->
+Purpose
+- Help authors write code that fits this repository's conventions.
+- Prefer clear, minimal, well-tested changes.
 
-- [x] Scaffold the Project
-	<!-- Successfully created React TypeScript Vite project -->
+General guidelines
+- Use English.
+- Follow existing project patterns and file structure.
+- Keep changes small and focused; prefer separate suggestions per concern.
+- Do not introduce new runtime dependencies without justification.
+- Do not add secrets, credentials, or environment values.
+- Preserve existing formatting and lint rules; prefer TypeScript/strict types if present.
+- Add or update tests for new functionality; keep tests deterministic and fast.
+- Include concise docstrings/comments for non-obvious code.
+- In chat, keep summaries short and concise.
 
-- [x] Customize the Project
-	<!-- Created BeziqueScoreKeeper component with game logic, hooks, and styling to replicate original PHP app functionality -->
+Code style
+- Favor readability and explicitness over cleverness.
+- Use descriptive names for functions, variables, and types.
+- Return early to reduce nesting.
+- Handle errors explicitly; prefer typed errors or Result-style returns if used in repo.
+- Avoid large inline data blobs; load from fixtures or sample files.
 
-- [x] Install Required Extensions
-	<!-- No additional extensions needed -->
+Commit messages
+- Use one-line prefix formats: feat:, fix:, docs:, test:, refactor:, chore:
+- Start with prefix then short description, e.g. "feat: add user email validation".
+- Keep body brief and explain rationale when necessary.
 
-- [x] Compile the Project
-	<!-- Project compiles successfully without errors -->
+Assistant behavior
+- When asked to generate code, include runnable examples and minimal tests.
+- When unsure about repository conventions, ask a clarifying question.
+- Do not modify CI or release workflows without explicit instruction.
 
-- [x] Create and Run Task
-	<!-- Development server running at http://localhost:5173/ -->
-
-- [x] Launch the Project
-	<!-- Project is running and accessible at http://localhost:5173/ -->
-
-- [x] Ensure Documentation is Complete
-	<!-- README.md updated with project information and copilot-instructions.md exists -->
+If uncertain
+- Ask for the preferred language, style guide, or an example file to match.

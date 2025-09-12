@@ -1,6 +1,4 @@
-import type { PlayerSettings } from '../types/game';
-
-import type { Player, ScoreEntry } from '../types/game';
+import type { PlayerSettings, Player, ScoreEntry } from '@/types';
 
 const STORAGE_KEYS = {
   PLAYER_SETTINGS: 'bezique_player_settings'

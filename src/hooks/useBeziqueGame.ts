@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react';
-import type { ScoreEntry, GameState, Player } from '../types/game';
-import { ScoreEntryType } from '../types/game';
-import { WIN_THRESHOLD } from '../utils/constants';
-import { GameServerAPI } from '../services/gameServer';
-import { saveGameSnapshot, getGameSnapshot, clearGameSnapshot } from '../utils/localStorage';
-import { playSound, SoundType } from '../utils/soundManager';
+import type { ScoreEntry, GameState, Player } from '@/types';
+import { ScoreEntryType } from '@/types';
+import { WIN_THRESHOLD } from '@/utils/constants';
+import { GameServerAPI } from '@/services/gameServer';
+import { saveGameSnapshot, getGameSnapshot, clearGameSnapshot } from '@/utils/localStorage';
+import { playSound, SoundType } from '@/utils/soundManager';
 import { useEffect } from 'react';
 
 export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?: () => void) => {

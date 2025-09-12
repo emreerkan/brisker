@@ -1,7 +1,7 @@
 import React from 'react';
 import { RotateCcw, Settings, Info } from 'lucide-react';
-import { useLanguage } from '../../i18n/LanguageContext';
-import { ICON_SIZE } from '../../utils/constants';
+import { useLanguage } from '@/i18n/LanguageContext';
+import { ICON_SIZE } from '@/utils/constants';
 import styles from '../BeziqueScoreKeeper.module.css';
 
 interface ActionButtonsProps {

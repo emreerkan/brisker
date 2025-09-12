@@ -1,6 +1,6 @@
 import React from 'react';
-import type { ModalProps } from '../../types/game';
-import { useLanguage } from '../../i18n/LanguageContext';
+import type { ModalProps } from '@/types';
+import { useLanguage } from '@/i18n/LanguageContext';
 import styles from '../BeziqueScoreKeeper.module.css';
 
 interface ResetConfirmDialogProps extends ModalProps {

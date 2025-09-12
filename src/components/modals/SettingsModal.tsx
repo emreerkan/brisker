@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { X, Copy, Share, Search, MapPin, Edit, Save, Check } from 'lucide-react';
-import type { ModalProps, Player } from '../../types/game';
-import { useLanguage } from '../../i18n/LanguageContext';
-import { availableLanguages } from '../../i18n/languages';
-import { ICON_SIZE } from '../../utils/constants';
-import { getPlayerSettings, updatePlayerSetting } from '../../utils/localStorage';
-import { GameServerAPI } from '../../services/gameServer';
-import { copyToClipboard, shareContent } from '../../utils/deviceUtils';
+import type { ModalProps, Player } from '@/types';
+import { useLanguage } from '@/i18n/LanguageContext';
+import { availableLanguages } from '@/i18n/languages';
+import { ICON_SIZE } from '@/utils/constants';
+import { getPlayerSettings, updatePlayerSetting } from '@/utils/localStorage';
+import { GameServerAPI } from '@/services/gameServer';
+import { copyToClipboard, shareContent } from '@/utils/deviceUtils';
 import styles from '../BeziqueScoreKeeper.module.css';
 
 interface SettingsModalProps extends ModalProps {

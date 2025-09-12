@@ -1,8 +1,8 @@
 import React from 'react';
 import { X } from 'lucide-react';
-import type { ModalProps } from '../../types/game';
-import { useLanguage } from '../../i18n/LanguageContext';
-import { ICON_SIZE } from '../../utils/constants';
+import type { ModalProps } from '@/types';
+import { useLanguage } from '@/i18n/LanguageContext';
+import { ICON_SIZE } from '@/utils/constants';
 import styles from '../BeziqueScoreKeeper.module.css';
 
 export const InfoModal: React.FC<ModalProps> = ({

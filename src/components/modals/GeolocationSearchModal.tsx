@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { MapPin, X, Users, AlertCircle } from 'lucide-react';
-import type { ModalProps, Player } from '../../types/game';
-import { GameServerAPI } from '../../services/gameServer';
-import { getGeolocation } from '../../utils/deviceUtils';
-import { useLanguage } from '../../i18n/LanguageContext';
+import type { ModalProps, Player } from '@/types';
+import { GameServerAPI } from '@/services/gameServer';
+import { getGeolocation } from '@/utils/deviceUtils';
+import { useLanguage } from '@/i18n/LanguageContext';
 import styles from '../BeziqueScoreKeeper.module.css';
 
 interface GeolocationSearchModalProps extends ModalProps {

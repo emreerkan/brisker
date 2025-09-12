@@ -5,6 +5,17 @@ import basicSsl from '@vitejs/plugin-basic-ssl'
 
 // https://vite.dev/config/
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': '/src',
+      '@/components': '/src/components',
+      '@/hooks': '/src/hooks',
+      '@/services': '/src/services',
+      '@/types': '/src/types',
+      '@/utils': '/src/utils',
+      '@/i18n': '/src/i18n',
+    },
+  },
   plugins: [
     react(),
     basicSsl(),

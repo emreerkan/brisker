@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useBeziqueGame } from '../hooks/useBeziqueGame';
-import { useWindowSize } from '../hooks/useWindowSize';
-import { useLanguage } from '../i18n/LanguageContext';
-import { BRISK_MULTIPLIER } from '../utils/constants';
+import { useBeziqueGame } from '@/hooks/useBeziqueGame';
+import { useWindowSize } from '@/hooks/useWindowSize';
+import { useLanguage } from '@/i18n/LanguageContext';
+import { BRISK_MULTIPLIER } from '@/utils/constants';
 
 // UI Components
 import { ScoreDisplay, PointButtons, ActionButtons } from './ui';
@@ -19,9 +19,9 @@ import {
   GeolocationSearchModal
 } from './modals';
 
-import { getPlayerSettings, clearGameSnapshot } from '../utils/localStorage';
-import { GameServerAPI } from '../services/gameServer';
-import type { Player } from '../types/game';
+import { getPlayerSettings, clearGameSnapshot } from '@/utils/localStorage';
+import { GameServerAPI } from '@/services/gameServer';
+import type { Player } from '@/types';
 import styles from './BeziqueScoreKeeper.module.css';
 
 export const BeziqueScoreKeeper: React.FC = () => {

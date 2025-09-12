@@ -1,10 +1,10 @@
 import React from 'react';
 import { X } from 'lucide-react';
-import type { ModalProps, GameState } from '../../types/game';
-import { ScoreEntryType } from '../../types/game';
-import { useLanguage } from '../../i18n/LanguageContext';
-import { ICON_SIZE } from '../../utils/constants';
-import styles from '../BeziqueScoreKeeper.module.css';
+import type { ModalProps, GameState } from '@/types';
+import { ScoreEntryType } from '@/types';
+import { useLanguage } from '@/i18n/LanguageContext';
+import { ICON_SIZE } from '@/utils/constants';
+import styles from '@/components/BeziqueScoreKeeper.module.css';
 
 interface HistoryModalProps extends ModalProps {
   gameState: GameState;
