@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Search, X, Users } from 'lucide-react';
 import type { ModalProps, Player } from '../../types/game';
 import { GameServerAPI } from '../../services/gameServer';
@@ -19,6 +19,25 @@ export const PlayerSearchModal: React.FC<PlayerSearchModalProps> = ({
   const [searchResults, setSearchResults] = useState<Player[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (isOpen) {
+      // Wait for the input to be mounted, then focus & select for quick typing
+      const id = window.setTimeout(() => {
+        if (inputRef.current) {
+          try {
+            inputRef.current.focus();
+            inputRef.current.select();
+          } catch (e) {
+            // ignore if focus/select isn't supported in environment
+          }
+        }
+      }, 0);
+      return () => window.clearTimeout(id);
+    }
+    return;
+  }, [isOpen]);
 
   const handleSearch = async () => {
     if (!searchTerm.trim()) return;
@@ -73,6 +92,7 @@ export const PlayerSearchModal: React.FC<PlayerSearchModalProps> = ({
               type="text"
               placeholder={t.enterPlayerID}
               value={searchTerm}
+              ref={inputRef}
               onChange={(e) => setSearchTerm(e.target.value)}
               onKeyPress={handleKeyPress}
               className={styles.searchInput}

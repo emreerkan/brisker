@@ -54,6 +54,10 @@ export interface Translation {
   // Multiplayer
   playerID: string;
   playerName: string;
+  // Labels for Settings modal
+  playerIDSectionLabel?: string;
+  yourPlayerIDLabel?: string;
+  nameLabel?: string;
   copyPlayerID: string;
   sharePlayerID: string;
   searchPlayers: string;
@@ -189,7 +193,10 @@ export const translations: Record<string, Translation> = {
     tryAgain: 'Tekrar Dene',
     searchAgain: 'Tekrar Ara',
     startingGameWith: 'ile oyuna başlıyor',
-    playerIDSection: 'Oyuncu ID',
+  playerIDSection: 'Oyuncu ID',
+  playerIDSectionLabel: 'Oyuncu ID',
+  yourPlayerIDLabel: 'Oyuncu IDniz',
+  nameLabel: 'İsim',
     copyTooltip: 'Oyuncu ID\'sini Kopyala',
     shareTooltip: 'Oyuncu ID\'sini Paylaş',
     searchTooltip: 'Oyuncu Ara',
@@ -291,7 +298,10 @@ export const translations: Record<string, Translation> = {
     tryAgain: 'Try Again',
     searchAgain: 'Search Again',
     startingGameWith: 'Starting game with',
-    playerIDSection: 'Player ID',
+  playerIDSection: 'Player ID',
+  playerIDSectionLabel: 'Player ID',
+  yourPlayerIDLabel: 'Your Player ID',
+  nameLabel: 'Name',
     copyTooltip: 'Copy Player ID',
     shareTooltip: 'Share Player ID',
     searchTooltip: 'Search Players',

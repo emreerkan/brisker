@@ -5,6 +5,7 @@ import { useLanguage } from '../../i18n/LanguageContext';
 import { availableLanguages } from '../../i18n/languages';
 import { ICON_SIZE } from '../../utils/constants';
 import { getPlayerSettings, updatePlayerSetting } from '../../utils/localStorage';
+import { GameServerAPI } from '../../services/gameServer';
 import { copyToClipboard, shareContent } from '../../utils/deviceUtils';
 import styles from '../BeziqueScoreKeeper.module.css';
 
@@ -83,6 +84,12 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       if (tempName.trim() && tempName.trim() !== playerSettings.name) {
         updatePlayerSetting('name', tempName.trim());
         setPlayerSettings(prev => ({ ...prev, name: tempName.trim() }));
+          // Notify the server so it can notify opponent(s)
+          try {
+            GameServerAPI.updatePlayerName(tempName.trim());
+          } catch (e) {
+            console.warn('Failed to notify server of name change', e);
+          }
       } else {
         // Reset if empty or unchanged
         setTempName(playerSettings.name);
@@ -118,9 +125,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         <div className={styles.settingsContent}>
           {/* Player ID Section */}
           <div className={styles.settingsSection}>
-            <h4 className={styles.settingsTitle}>{t.playerIDSection}</h4>
+            <h4 className={styles.settingsTitle}>{t.playerIDSectionLabel || t.playerIDSection}</h4>
             <div className={styles.playerIDSection}>
-              <div className={styles.playerIDDisplay}>
+              <div className={`${styles.playerIDDisplay} ${styles.playerIDCentered}`} aria-label={t.yourPlayerIDLabel || 'Your Player ID'}>
                 <span className={styles.playerIDText}>{playerSettings.playerID}</span>
               </div>
               
@@ -162,7 +169,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
           {/* Player Name Section */}
           <div className={styles.settingsSection}>
-            <h4 className={styles.settingsTitle}>{t.playerName}</h4>
+            <h4 className={styles.settingsTitle}>{t.nameLabel || t.playerName}</h4>
             <div className={styles.playerNameSection}>
               {isEditingName ? (
                 <input

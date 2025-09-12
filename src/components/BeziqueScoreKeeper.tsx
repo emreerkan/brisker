@@ -20,6 +20,7 @@ import {
 } from './modals';
 
 import { getPlayerSettings } from '../utils/localStorage';
+import { GameServerAPI } from '../services/gameServer';
 import type { Player } from '../types/game';
 import styles from './BeziqueScoreKeeper.module.css';
 
@@ -43,6 +44,9 @@ export const BeziqueScoreKeeper: React.FC = () => {
   const [showPlayerSearch, setShowPlayerSearch] = useState(false);
   const [showGeolocationSearch, setShowGeolocationSearch] = useState(false);
   
+  // WebSocket connection status
+  const [connectionStatus, setConnectionStatus] = useState<'disconnected' | 'connecting' | 'connected'>('disconnected');
+  
   // Hooks
   const windowSize = useWindowSize();
   
@@ -50,9 +54,14 @@ export const BeziqueScoreKeeper: React.FC = () => {
     gameState,
     isProcessing,
     addPoints,
+    addPointsWithMeta,
+    addPointsLocal,
     undo,
+    undoLocal,
     reset,
-    setCurrentOpponent
+    resetLocal,
+    setCurrentOpponent,
+    updateOpponentScore
   } = useBeziqueGame(soundEnabled, () => setShowCongratulations(true));  // Development keyboard shortcut for testing
   useEffect(() => {
     const handleTriggerCongratulations = () => {
@@ -62,6 +71,150 @@ export const BeziqueScoreKeeper: React.FC = () => {
     window.addEventListener('triggerCongratulations', handleTriggerCongratulations);
     return () => window.removeEventListener('triggerCongratulations', handleTriggerCongratulations);
   }, [addPoints]);
+
+  // Test WebSocket connection on component mount
+  useEffect(() => {
+    const testWebSocket = async () => {
+      try {
+        console.log('🚀 Testing WebSocket connection...');
+        setConnectionStatus('connecting');
+        
+        const playerID = await GameServerAPI.connectWebSocket();
+        console.log('✅ WebSocket connected! Player ID:', playerID);
+        
+        setConnectionStatus('connected');
+        
+        // Test requesting all players
+        GameServerAPI.requestAllPlayers();
+        console.log('📡 Requested all players from server');
+      } catch (error) {
+        console.error('❌ WebSocket connection failed:', error);
+        setConnectionStatus('disconnected');
+      }
+    };
+
+    testWebSocket();
+  }, []);
+
+  // Register game-related WebSocket event handlers once on mount so both
+  // the player who initiates the game and the opponent receive notifications.
+  useEffect(() => {
+    const onAutoJoined = (payload: any) => {
+      console.log('Game auto-joined (global handler):', payload);
+      // Update opponent in game state; UI changes are sufficient feedback
+      setCurrentOpponent({
+        playerID: payload.opponentID,
+        name: payload.opponentName,
+        isOnline: true
+      });
+    };
+
+    const onResume = (payload: any) => {
+      console.log('Game resume requested:', payload);
+      // payload: { opponentID, opponentName, gameState }
+      // If server provided a gameState, prefer using its data for opponent score so ahead/behind recalculates
+      if (payload.gameState && typeof payload.gameState.total === 'number') {
+        // payload.gameState is likely the opponent's snapshot (their total and history)
+        setCurrentOpponent({ playerID: payload.opponentID, name: payload.opponentName, isOnline: true, score: payload.gameState.total });
+        updateOpponentScore(payload.gameState.total);
+      } else {
+        setCurrentOpponent({ playerID: payload.opponentID, name: payload.opponentName, isOnline: true });
+      }
+      if (payload.gameState) {
+        console.log('Restored game state from server (not merged automatically):', payload.gameState);
+      }
+    };
+
+    const onOpponentScored = (payload: any) => {
+      console.log('Opponent scored (global handler):', payload);
+      updateOpponentScore(payload.score);
+    };
+
+    const onApplyPoints = (payload: any) => {
+      console.log('Apply points instruction received:', payload);
+      // payload: { points, from }
+      // Apply the points locally (do not re-broadcast)
+      // If server forwarded metadata, include it when creating the local entry
+      const meta = payload.meta || {};
+      // Mark remote entries as source: 'remote' and include the origin
+      meta.source = 'remote';
+      meta.from = payload.from;
+      if (meta.isBrisk === undefined && typeof meta.briskValue === 'number') meta.isBrisk = true;
+      // Use the meta-aware local adder
+      addPointsLocal(payload.points, meta);
+    };
+
+    const onOpponentUndo = (payload: any) => {
+      console.log('Opponent requested undo:', payload);
+      // If payload indicates a brisk undo (contains briskValue or points), perform a local undo
+      // We'll simply undo the last entry if it matches the points or is marked as brisk.
+      // Find last history entry and check for brisk signature
+      // Note: use the exposed undo to keep behavior consistent
+      undoLocal();
+    };
+
+    const onRemoteReset = (payload: any) => {
+      console.log('Received remote reset instruction:', payload);
+      resetLocal();
+    };
+
+    const onPlayerNameChanged = (payload: any) => {
+      console.log('Player name changed event received:', payload);
+      const pid = payload && payload.playerID;
+      const name = payload && payload.name;
+      if (!pid) return;
+      // If the changed player is our current opponent, update the opponent bar
+      if (gameState.currentOpponent && pid === gameState.currentOpponent.playerID) {
+        setCurrentOpponent({ playerID: pid, name: name || gameState.currentOpponent.name || '', isOnline: true, score: gameState.currentOpponent.score });
+        return;
+      }
+      // If we don't yet have a currentOpponent, ignore; when we need players we'll request the list explicitly.
+    };
+
+    // Connection lifecycle handlers to keep UI indicator accurate
+    const onConnectionEstablished = () => {
+      setConnectionStatus('connecting');
+    };
+
+    const onPlayerIdAssigned = () => {
+      // We have an ID and are effectively connected
+      setConnectionStatus('connected');
+    };
+
+    const onPlayerReconnected = () => {
+      setConnectionStatus('connected');
+    };
+
+    const onPlayerOffline = () => {
+      setConnectionStatus('disconnected');
+    };
+
+    GameServerAPI.addEventListener('game:auto_joined', onAutoJoined);
+    GameServerAPI.addEventListener('game:opponent_scored', onOpponentScored);
+    GameServerAPI.addEventListener('game:apply_points', onApplyPoints);
+    GameServerAPI.addEventListener('game:opponent_undo', onOpponentUndo);
+    GameServerAPI.addEventListener('game:reset', onRemoteReset);
+    GameServerAPI.addEventListener('game:resume', onResume);
+    GameServerAPI.addEventListener('player:name_changed', onPlayerNameChanged);
+    GameServerAPI.addEventListener('connection:established', onConnectionEstablished);
+    GameServerAPI.addEventListener('player:id_assigned', onPlayerIdAssigned);
+    GameServerAPI.addEventListener('player:reconnected', onPlayerReconnected);
+    GameServerAPI.addEventListener('player:offline', onPlayerOffline);
+
+    return () => {
+      GameServerAPI.removeEventListener('game:auto_joined', onAutoJoined);
+      GameServerAPI.removeEventListener('game:opponent_scored', onOpponentScored);
+      GameServerAPI.removeEventListener('game:apply_points', onApplyPoints);
+      GameServerAPI.removeEventListener('game:opponent_undo', onOpponentUndo);
+      GameServerAPI.removeEventListener('game:reset', onRemoteReset);
+      GameServerAPI.removeEventListener('game:resume', onResume);
+      GameServerAPI.removeEventListener('player:name_changed', onPlayerNameChanged);
+      GameServerAPI.removeEventListener('connection:established', onConnectionEstablished);
+      GameServerAPI.removeEventListener('player:id_assigned', onPlayerIdAssigned);
+      GameServerAPI.removeEventListener('player:reconnected', onPlayerReconnected);
+      GameServerAPI.removeEventListener('player:offline', onPlayerOffline);
+    };
+  }, [setCurrentOpponent, updateOpponentScore, gameState.currentOpponent?.playerID]);
 
   // Event Handlers
   const handlePointClick = (points: number) => {
@@ -73,7 +226,17 @@ export const BeziqueScoreKeeper: React.FC = () => {
 
   const handleBriskSelect = (brisk: number) => {
     setShowBriskSelector(false);
-    addPoints(brisk * BRISK_MULTIPLIER);
+    const pointsForPlayer = brisk * BRISK_MULTIPLIER;
+    // Mark this entry as brisk so undo can be coordinated
+    addPointsWithMeta(pointsForPlayer, { isBrisk: true, briskValue: brisk, source: 'local' });
+
+    // If playing with an opponent, automatically add the remaining brisk to them
+    if (gameState.currentOpponent && gameState.currentOpponent.playerID) {
+      const remainingBrisk = Math.max(0, (32 - brisk));
+      const pointsForOpponent = remainingBrisk * BRISK_MULTIPLIER;
+      // Send apply_points instruction to opponent so their client updates locally
+      GameServerAPI.applyPointsToOpponent(gameState.currentOpponent.playerID, pointsForOpponent, { isBrisk: true, briskValue: remainingBrisk });
+    }
   };
 
   const handleResetConfirm = () => {
@@ -106,17 +269,33 @@ export const BeziqueScoreKeeper: React.FC = () => {
     setShowSettings(true);
   };
 
-  const handlePlayWith = (player: Player) => {
-    // Set the current opponent with initial score of 0
-    setCurrentOpponent({ ...player, score: 0 });
-    
-    // Close all modals and return to main screen
-    setShowPlayerSearch(false);
-    setShowGeolocationSearch(false);
-    setShowSettings(false);
-    
-    console.log('Playing with:', player);
-    alert(`${t.startingGameWith} ${player.name} (ID: ${player.playerID})`);
+  const handlePlayWith = async (player: Player) => {
+    try {
+      // Get current player settings
+      const currentPlayerSettings = getPlayerSettings();
+      
+      // Connect to WebSocket and get assigned playerID
+      await GameServerAPI.connectWebSocket();
+      
+      // Update player name with server
+      GameServerAPI.updatePlayerName(currentPlayerSettings.name);
+      
+      // Event listeners for game events are registered globally on mount
+      
+      // Start game with selected opponent
+      GameServerAPI.startGameWith(player.playerID);
+      
+      // Close all modals and return to main screen
+      setShowPlayerSearch(false);
+      setShowGeolocationSearch(false);
+      setShowSettings(false);
+      
+      console.log('Game request sent to:', player.name);
+      
+    } catch (error) {
+  console.error('Failed to start game with player:', error);
+  // Keep errors in console; UI state changes already communicate failures
+    }
   };
 
   // Calculate point difference for opponent display
@@ -139,6 +318,12 @@ export const BeziqueScoreKeeper: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={`${styles.gridContainer} ${gameState.currentOpponent ? styles.withOpponent : ''} ${isProcessing ? styles.disabled : ''}`}>
+        {/* Connection Status - Simple circle indicator */}
+        <div
+          className={styles.connectionIndicator}
+          style={{ backgroundColor: connectionStatus === 'connected' ? '#4CAF50' : '#F44336' }}
+        />
+        
         {gameState.currentOpponent && (
           <div className={styles.opponentBar}>
             <div className={styles.opponentName}>

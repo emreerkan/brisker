@@ -2,6 +2,11 @@ export interface ScoreEntry {
   id: string;
   points: number;
   timestamp: Date;
+  // Optional metadata to mark special entries (brisk, remote-applied, origin info)
+  isBrisk?: boolean;
+  briskValue?: number; // original brisk selection (0-32)
+  source?: 'local' | 'remote';
+  from?: string; // playerID of origin when remote
 }
 
 export interface GameState {
@@ -34,6 +39,7 @@ export interface Player {
   name: string;
   score?: number; // for tracking opponent score
   distance?: number; // for geolocation search
+  isOnline?: boolean; // for WebSocket connection status
 }
 
 export interface PlayerSettings {

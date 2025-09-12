@@ -33,6 +33,14 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
         longitude: position.coords.longitude
       };
 
+      // Update current player's location on server
+      try {
+        GameServerAPI.updatePlayerLocation(location);
+      } catch (locationError) {
+        console.warn('Failed to update player location on server:', locationError);
+        // Continue with search even if location update fails
+      }
+
       // Search for nearby players
       const results = await GameServerAPI.searchPlayersByLocation(location);
       setNearbyPlayers(results);
