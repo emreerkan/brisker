@@ -319,12 +319,12 @@ export const BeziqueScoreKeeper: React.FC = () => {
           <div className={styles.opponentBar}>
             <div className={styles.opponentName}>
               {t.opponent}: {opponent.name}
-            </div>
-            <div className={styles.opponentStatus}>
-              {getOpponentStatusText()}
               {gameState.opponentIsDealer && (
                 <span className={styles.opponentDealerIndicator}>D</span>
               )}
+            </div>
+            <div className={styles.opponentStatus}>
+              {getOpponentStatusText()}
             </div>
           </div>
         )}
