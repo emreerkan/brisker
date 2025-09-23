@@ -27,7 +27,7 @@ export default defineConfig(() => {
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
         name: 'Brisker',
-        short_name: 'Bezique',
+        short_name: 'Brisker',
         description: 'Score keeping application for the Bezique card game',
         theme_color: '#ffffff',
         background_color: '#ffffff',

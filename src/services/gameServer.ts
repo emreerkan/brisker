@@ -2,22 +2,24 @@ import type { Player, GeolocationData } from '@/types';
 import { updatePlayerIDFromServer } from '@/utils/localStorage';
 import { getGeolocation } from '@/utils/deviceUtils';
 
-// WebSocket server URL - hardcoded for network testing
-const getWebSocketURL = () => {
-  const host = '192.168.68.102:3000'; // Network IP for testing
-  
-  // Force ws:// for IP addresses since SSL certificates don't work with IPs
-  // Use wss:// only for localhost where we have a valid certificate
-  if (host.includes('localhost')) {
-    const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-    return `${protocol}//${host}`;
-  } else {
-    // For IP addresses, always use ws:// (non-secure WebSocket)
-    return `ws://${host}`;
+// Resolve WebSocket endpoint from environment
+const resolveWebSocketURL = (): string => {
+  const isDev = import.meta.env.DEV;
+  const key = isDev ? 'VITE_WS_DEV_URL' : 'VITE_WS_PROD_URL';
+  const raw = (import.meta.env[key as keyof ImportMetaEnv] as string | undefined)?.trim();
+
+  if (!raw) {
+    throw new Error(`Missing required environment variable ${key}. Define it in your Vite environment configuration.`);
   }
+
+  if (!/^wss?:\/\//i.test(raw)) {
+    throw new Error(`${key} must include the protocol (ws:// or wss://). Received: ${raw}`);
+  }
+
+  return raw;
 };
 
-const WEBSOCKET_URL = getWebSocketURL();
+const WEBSOCKET_URL = resolveWebSocketURL();
 
 // Player discovery and game state types
 export interface ConnectedPlayer {
@@ -663,15 +665,6 @@ export class GameServerAPI {
   // Check if we're currently in offline mode
   static isOffline(): boolean {
     return !this.isConnected();
-  }
-
-  // Network testing utilities
-  static getCurrentServerURL(): string {
-    return getWebSocketURL();
-  }
-
-  static getConfiguredServerHost(): string {
-    return '192.168.68.102:3000';
   }
 
   private static async syncLocationWithServer(force: boolean = false): Promise<void> {
