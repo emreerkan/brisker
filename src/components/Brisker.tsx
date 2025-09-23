@@ -71,30 +71,6 @@ export const Brisker: React.FC = () => {
     return () => window.removeEventListener('triggerCongratulations', handleTriggerCongratulations);
   }, [addPoints]);
 
-  // Test WebSocket connection on component mount
-  useEffect(() => {
-    const testWebSocket = async () => {
-      try {
-        console.log('🚀 Testing WebSocket connection...');
-        setConnectionStatus('connecting');
-        
-        const playerID = await GameServerAPI.connectWebSocket();
-        console.log('✅ WebSocket connected! Player ID:', playerID);
-        
-        setConnectionStatus('connected');
-        
-        // Test requesting all players
-        GameServerAPI.requestAllPlayers();
-        console.log('📡 Requested all players from server');
-      } catch (error) {
-        console.error('❌ WebSocket connection failed:', error);
-        setConnectionStatus('disconnected');
-      }
-    };
-
-    testWebSocket();
-  }, []);
-
   // Register game-related WebSocket event handlers once on mount so both
   // the player who initiates the game and the opponent receive notifications.
   useEffect(() => {
