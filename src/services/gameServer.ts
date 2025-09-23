@@ -1,5 +1,6 @@
 import type { Player, GeolocationData } from '@/types';
 import { updatePlayerIDFromServer } from '@/utils/localStorage';
+import { getGeolocation } from '@/utils/deviceUtils';
 
 // WebSocket server URL - hardcoded for network testing
 const getWebSocketURL = () => {
@@ -50,7 +51,8 @@ export type WebSocketEventType =
   | 'player:invalid_id'
   | 'player:name_changed'
   | 'players:list'
-  | 'players:search_results';
+  | 'players:search_results'
+  | 'players:nearby_results';
 
 export interface WebSocketEvent {
   type: WebSocketEventType;
@@ -64,6 +66,15 @@ export class GameServerAPI {
   private static currentPlayerID: string | null = null;
   // Guard against parallel connect attempts which can spam the server
   private static connectingPromise: Promise<string> | null = null;
+  // Track the active WebSocket handshake so multiple callers share the same promise
+  private static activeConnectPromise: Promise<string> | null = null;
+  // Prevent duplicate handshake messages on the same socket
+  private static handshakeInitiated = false;
+  private static handshakeResolved = false;
+  private static lastKnownLocation: GeolocationData | null = null;
+  private static locationSyncInFlight: Promise<void> | null = null;
+  private static lastLocationSyncMs = 0;
+  private static readonly LOCATION_REFRESH_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
   
   // Get stored player ID from localStorage
   private static getStoredPlayerID(): string | null {
@@ -77,35 +88,91 @@ export class GameServerAPI {
 
   // WebSocket connection management
   static async connectWebSocket(): Promise<string> {
-    return new Promise((resolve, reject) => {
-      if (this.ws && this.ws.readyState === WebSocket.OPEN && this.currentPlayerID) {
-        resolve(this.currentPlayerID);
+    if (this.ws && this.ws.readyState === WebSocket.OPEN && this.currentPlayerID) {
+      return this.currentPlayerID;
+    }
+
+    if (this.activeConnectPromise) {
+      return this.activeConnectPromise;
+    }
+
+    this.activeConnectPromise = new Promise((resolve, reject) => {
+      let settled = false;
+      let handshakeTimeout: ReturnType<typeof setTimeout> | undefined;
+
+      const clearHandshakeTimeout = () => {
+        if (handshakeTimeout !== undefined) {
+          clearTimeout(handshakeTimeout);
+          handshakeTimeout = undefined;
+        }
+      };
+
+      const resolveOnce = (playerID: string) => {
+        if (settled) return;
+        settled = true;
+        clearHandshakeTimeout();
+        this.handshakeResolved = true;
+        this.activeConnectPromise = null;
+        resolve(playerID);
+      };
+
+      const rejectOnce = (error: Error) => {
+        if (settled) return;
+        settled = true;
+        clearHandshakeTimeout();
+        this.activeConnectPromise = null;
+        reject(error);
+      };
+
+      // Always start with a fresh socket for a new handshake attempt
+      if (this.ws) {
+        const previousSocket = this.ws;
+        this.ws = null;
+        previousSocket.onclose = null;
+        previousSocket.onmessage = null;
+        previousSocket.onerror = null;
+        previousSocket.onopen = null;
+        try { previousSocket.close(); } catch (err) { /* ignore */ }
+      }
+
+      try {
+        this.ws = new WebSocket(WEBSOCKET_URL);
+      } catch (err) {
+        rejectOnce(err instanceof Error ? err : new Error('Failed to initialize WebSocket connection'));
         return;
       }
-      
-      this.ws = new WebSocket(WEBSOCKET_URL);
-      
-      this.ws.onopen = () => {
+
+      const socket = this.ws!;
+      this.handshakeInitiated = false;
+      this.handshakeResolved = false;
+
+      socket.onopen = () => {
         console.log('WebSocket connected to game server');
         // Server will send connection:established message
       };
-      
-      this.ws.onmessage = (event) => {
+
+      socket.onmessage = (event) => {
         try {
           const message: WebSocketEvent = JSON.parse(event.data);
           console.log('WebSocket message received:', message);
-          
+
           // Handle connection established - decide if we need new ID or reconnect
           if (message.type === 'connection:established') {
+            if (this.handshakeInitiated) {
+              console.log('Ignoring duplicate connection:established message');
+              return;
+            }
+
+            this.handshakeInitiated = true;
             const storedPlayerID = this.getStoredPlayerID();
             const playerSettings = JSON.parse(localStorage.getItem('bezique_player_settings') || '{}');
-            
+
             if (storedPlayerID && /^\d{4}$/.test(storedPlayerID)) {
               // Reconnect with existing player ID
               console.log('Reconnecting with existing player ID:', storedPlayerID);
               this.sendMessage({
                 type: 'player:reconnect',
-                payload: { 
+                payload: {
                   playerID: storedPlayerID,
                   name: playerSettings.name || `Player ${storedPlayerID}`
                 }
@@ -115,7 +182,7 @@ export class GameServerAPI {
               console.log('Requesting new player ID');
               this.sendMessage({
                 type: 'player:request_id',
-                payload: { 
+                payload: {
                   name: playerSettings.name || ''
                 }
               });
@@ -127,42 +194,49 @@ export class GameServerAPI {
             });
             return;
           }
-          
+
           // Handle new player ID assignment
           if (message.type === 'player:id_assigned') {
             this.currentPlayerID = message.payload.playerID;
             this.storePlayerID(message.payload.playerID);
-            
+
             // Update player settings with new ID
             updatePlayerIDFromServer(message.payload.playerID);
-            
+
             console.log('New player ID assigned:', message.payload.playerID);
-            
+
             // Do not automatically request the full players list here; use explicit search when the user needs it.
             // Call any listeners for id assignment
             const idHandlers = this.eventHandlers.get('player:id_assigned') || [];
             idHandlers.forEach(h => {
               try { h(message.payload); } catch (e) { console.error('player:id_assigned handler error', e); }
             });
-            resolve(message.payload.playerID);
+            void this.syncLocationWithServer(true);
+            resolveOnce(message.payload.playerID);
             return;
           }
-          
+
           // Handle successful reconnection
           if (message.type === 'player:reconnected') {
+            if (this.handshakeResolved && this.currentPlayerID === message.payload.playerID) {
+              console.log('Ignoring duplicate player:reconnected message');
+              return;
+            }
+
             this.currentPlayerID = message.payload.playerID;
             console.log('Successfully reconnected with player ID:', message.payload.playerID);
-            
+
             // Do not automatically request the full players list on reconnect; rely on explicit user search.
             // Notify listeners about successful reconnection
             const rcHandlers = this.eventHandlers.get('player:reconnected') || [];
             rcHandlers.forEach(h => {
               try { h(message.payload); } catch (e) { console.error('player:reconnected handler error', e); }
             });
-            resolve(message.payload.playerID);
+            void this.syncLocationWithServer(true);
+            resolveOnce(message.payload.playerID);
             return;
           }
-          
+
           // Handle invalid player ID
           if (message.type === 'player:invalid_id') {
             console.warn('Invalid player ID, requesting new one');
@@ -174,7 +248,7 @@ export class GameServerAPI {
             });
             return;
           }
-          
+
           // Handle players list update
           if (message.type === 'players:list') {
             this.updateConnectedPlayers(message.payload.players.map((p: any) => ({
@@ -196,7 +270,7 @@ export class GameServerAPI {
               }
             }
           }
-          
+
           // Handle other events
           const handlers = this.eventHandlers.get(message.type) || [];
           handlers.forEach(handler => handler(message.payload));
@@ -204,27 +278,34 @@ export class GameServerAPI {
           console.error('Error parsing WebSocket message:', error);
         }
       };
-      
-      this.ws.onclose = () => {
+
+      socket.onclose = () => {
+        clearHandshakeTimeout();
         console.log('WebSocket disconnected from game server');
-        
+
         // Store previous ID before clearing it
         const prevID = this.currentPlayerID;
-        
+
         // Clear connection state
         this.ws = null;
         this.currentPlayerID = null;
-        
+        this.handshakeInitiated = false;
+        this.handshakeResolved = false;
+
         // Notify listeners about going offline
         const offlineHandlers = this.eventHandlers.get('player:offline') || [];
         offlineHandlers.forEach(h => {
-          try { 
-            h({ playerID: prevID }); 
-          } catch (e) { 
-            console.error('player:offline handler error', e); 
+          try {
+            h({ playerID: prevID });
+          } catch (e) {
+            console.error('player:offline handler error', e);
           }
         });
-        
+
+        if (!settled) {
+          rejectOnce(new Error('WebSocket closed before handshake completed'));
+        }
+
         // Start reconnection attempts (only if not already trying)
         if (!this.connectingPromise) {
           this.startReconnectLoop(250, 12).catch(e => {
@@ -233,19 +314,24 @@ export class GameServerAPI {
           });
         }
       };
-      
-      this.ws.onerror = (error) => {
+
+      socket.onerror = (error) => {
         console.error('WebSocket error:', error);
-        reject(error);
+        const err = error instanceof Error ? error : new Error('WebSocket error');
+        rejectOnce(err);
+        try { socket.close(); } catch (closeErr) { /* ignore */ }
       };
-      
+
       // Timeout after 5 seconds for individual connection attempts
-      setTimeout(() => {
-        if (!this.currentPlayerID) {
-          reject(new Error('WebSocket connection timeout'));
+      handshakeTimeout = setTimeout(() => {
+        if (!this.handshakeResolved) {
+          rejectOnce(new Error('WebSocket connection timeout'));
+          try { socket.close(); } catch (err) { /* ignore */ }
         }
       }, 5000);
     });
+
+    return this.activeConnectPromise;
   }
 
   // Try to connect to server with polling until successful
@@ -435,34 +521,49 @@ export class GameServerAPI {
   }
 
   // Search for nearby players by geolocation
-  static searchPlayersByLocation(location: GeolocationData): Promise<Player[]> {
-    return new Promise((resolve) => {
-      const results: Player[] = [];
-      
-      this.connectedPlayers.forEach((player) => {
-        // Exclude ourselves from nearby results
-        if (player.playerID === this.currentPlayerID) return;
-        if (player.location) {
-          // Calculate distance (simple approximation)
-          const distance = this.calculateDistance(
-            location.latitude, location.longitude,
-            player.location.latitude, player.location.longitude
-          );
-          
-          if (distance <= 5) { // Within 5km
-            results.push({
-              playerID: player.playerID,
-              name: player.name,
-              distance: parseFloat(distance.toFixed(1)),
-              isOnline: player.isOnline
-            });
-          }
-        }
+  static searchPlayersByLocation(location: GeolocationData, radiusKm: number = 5): Promise<Player[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await this.ensureConnectedShort();
+      } catch (error) {
+        reject(new Error('WebSocket not connected'));
+        return;
+      }
+
+      let timeoutId: ReturnType<typeof setTimeout>;
+
+      const cleanup = () => {
+        this.removeEventListener('players:nearby_results', handleNearbyResults);
+        if (timeoutId) clearTimeout(timeoutId);
+      };
+
+      const handleNearbyResults = (payload: any) => {
+        const players = Array.isArray(payload?.players) ? payload.players : [];
+        const mapped: Player[] = players.map((player: any) => ({
+          playerID: player.playerID,
+          name: player.name,
+          distance: typeof player.distance === 'number' ? player.distance : undefined,
+          isOnline: player.isOnline,
+        }));
+        cleanup();
+        resolve(mapped);
+      };
+
+      timeoutId = setTimeout(() => {
+        cleanup();
+        reject(new Error('Nearby search timed out'));
+      }, 7000);
+
+      this.addEventListener('players:nearby_results', handleNearbyResults);
+
+      this.sendMessage({
+        type: 'players:nearby',
+        payload: {
+          latitude: location.latitude,
+          longitude: location.longitude,
+          radiusKm,
+        },
       });
-      
-      // Sort by distance
-      results.sort((a, b) => (a.distance || 0) - (b.distance || 0));
-      resolve(results.slice(0, 20));
     });
   }
 
@@ -476,6 +577,7 @@ export class GameServerAPI {
 
   // Update player location
   static updatePlayerLocation(location: GeolocationData): void {
+    this.lastKnownLocation = location;
     this.sendMessage({
       type: 'player:update_location',
       payload: location
@@ -509,7 +611,11 @@ export class GameServerAPI {
 
   // Send current player state to server for in-memory storage and resume handling
   static updatePlayerState(state: { playerID?: string; name?: string; history?: any[]; total?: number; opponentID?: string; location?: { latitude: number; longitude: number } }) {
-    this.sendMessage({ type: 'player:state_update', payload: state });
+    const payload: typeof state = { ...state };
+    if (!payload.location && this.lastKnownLocation) {
+      payload.location = this.lastKnownLocation;
+    }
+    this.sendMessage({ type: 'player:state_update', payload });
   }
 
   // Request opponent to undo last entry (used for brisk undo coordination)
@@ -526,18 +632,6 @@ export class GameServerAPI {
     }
 
     this.sendMessage({ type: 'game:opponent_undo', payload: { opponentID, ...payload } });
-  }
-
-  // Utility: Calculate distance between two coordinates
-  private static calculateDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
-    const R = 6371; // Earth's radius in km
-    const dLat = (lat2 - lat1) * (Math.PI / 180);
-    const dLon = (lon2 - lon1) * (Math.PI / 180);
-    const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-              Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
-              Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
   }
 
   // Request all players from server
@@ -578,5 +672,39 @@ export class GameServerAPI {
 
   static getConfiguredServerHost(): string {
     return '192.168.68.102:3000';
+  }
+
+  private static async syncLocationWithServer(force: boolean = false): Promise<void> {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const now = Date.now();
+    if (!force && now - this.lastLocationSyncMs < this.LOCATION_REFRESH_INTERVAL_MS) {
+      return;
+    }
+
+    if (this.locationSyncInFlight) {
+      return this.locationSyncInFlight;
+    }
+
+    this.locationSyncInFlight = (async () => {
+      try {
+        const position = await getGeolocation();
+        const location = {
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        };
+        this.lastKnownLocation = location;
+        this.lastLocationSyncMs = Date.now();
+        this.updatePlayerLocation(location);
+      } catch (error) {
+        console.warn('Unable to obtain geolocation for server sync:', error);
+      } finally {
+        this.locationSyncInFlight = null;
+      }
+    })();
+
+    return this.locationSyncInFlight;
   }
 }
