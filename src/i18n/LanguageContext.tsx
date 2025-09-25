@@ -1,7 +1,13 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
 import type { ReactNode } from 'react';
 import { translations } from './languages';
-import type { Translation } from './languages';
+import type { Translation } from './types';
+
+const DEFAULT_LANGUAGE = 'en';
+const SUPPORTED_LANGUAGES = new Set(Object.keys(translations));
+const FALLBACK_LANGUAGE = translations[DEFAULT_LANGUAGE]
+  ? DEFAULT_LANGUAGE
+  : Object.keys(translations)[0] || DEFAULT_LANGUAGE;
 
 interface LanguageContextType {
   language: string;
@@ -18,22 +24,41 @@ interface LanguageProviderProps {
 }
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguageState] = useState<string>('tr'); // Default to Turkish
+  const [language, setLanguageState] = useState<string>(FALLBACK_LANGUAGE);
 
   const setLanguage = useCallback((lang: string) => {
-    setLanguageState(lang);
-    localStorage.setItem('bezique-language', lang);
+    const nextLanguage = SUPPORTED_LANGUAGES.has(lang) ? lang : FALLBACK_LANGUAGE;
+    setLanguageState(nextLanguage);
+    localStorage.setItem('bezique-language', nextLanguage);
   }, []);
 
   // Initialize language from localStorage
   React.useEffect(() => {
     const savedLanguage = localStorage.getItem('bezique-language');
-    if (savedLanguage && translations[savedLanguage]) {
+    if (savedLanguage && SUPPORTED_LANGUAGES.has(savedLanguage)) {
       setLanguageState(savedLanguage);
+      return;
     }
+
+    // Fall back to browser preference when no saved language exists
+    if (typeof window !== 'undefined') {
+      const browserLanguages = window.navigator.languages && window.navigator.languages.length > 0
+        ? window.navigator.languages
+        : [window.navigator.language];
+
+      for (const lang of browserLanguages) {
+        const baseLang = lang?.split('-')[0]?.toLowerCase();
+        if (baseLang && SUPPORTED_LANGUAGES.has(baseLang)) {
+          setLanguageState(baseLang);
+          return;
+        }
+      }
+    }
+
+    setLanguageState(FALLBACK_LANGUAGE);
   }, []);
 
-  const t = translations[language] || translations.tr;
+  const t = translations[language] || translations[FALLBACK_LANGUAGE];
 
   // Update document title and lang attribute when language changes
   React.useEffect(() => {
