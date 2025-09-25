@@ -16,6 +16,7 @@ const translation: Translation = {
   // Settings
   soundEffects: 'Ses Efektleri',
   language: 'Dil',
+  winThreshold: 'Hedef Skor',
   // History
   totalScore: 'Toplam Skor',
   noScoresRecorded: 'Henüz skor kaydedilmedi',
@@ -56,7 +57,7 @@ const translation: Translation = {
   // Congratulations
   congratulations: 'Tebrikler!',
   youWin: 'Kazandın!',
-  congratulationsMessage: '10.000 puana ulaştınız! Muhteşem bir oyun çıkardınız!',
+  congratulationsMessage: 'Hedef puana ulaştınız! Muhteşem bir oyun çıkardınız!',
   newGame: 'Yeni Oyun',
   // Multiplayer
   playerID: 'Oyuncu ID',
@@ -103,7 +104,6 @@ const translation: Translation = {
   editTooltip: 'Adı Düzenle',
   saveTooltip: 'Adı Kaydet',
   shareTitle: 'Benimle Bezik oyna!',
-  shareText: 'Hadi beraber Bezik oynayalım! Benim Oyuncu ID\'m:',
   // Opponent display
   opponent: 'Rakip',
   ahead: 'önde',

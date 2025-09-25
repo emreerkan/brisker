@@ -15,6 +15,8 @@ interface SettingsModalProps extends ModalProps {
   onPlayerSearchOpen: () => void;
   onGeolocationSearchOpen: () => void;
   onPlayWith: (player: Player) => void;
+  winThreshold: number;
+  onWinThresholdChange: (threshold: number) => void;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -23,14 +25,21 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   soundEnabled,
   onSoundEnabledChange,
   onPlayerSearchOpen,
-  onGeolocationSearchOpen
+  onGeolocationSearchOpen,
+  winThreshold,
+  onWinThresholdChange
 }) => {
-  const { language, setLanguage, t } = useLanguage();
+  const { language, setLanguage, t, formatNumber } = useLanguage();
   const [playerSettings, setPlayerSettings] = useState(getPlayerSettings());
   const [isEditingName, setIsEditingName] = useState(false);
   const [tempName, setTempName] = useState(playerSettings.name);
   const [copySuccess, setCopySuccess] = useState(false);
   const [shareSuccess, setShareSuccess] = useState(false);
+  const [winThresholdInput, setWinThresholdInput] = useState(() => playerSettings.winThreshold.toString());
+  const [isEditingWinThreshold, setIsEditingWinThreshold] = useState(false);
+
+  const MIN_WIN_THRESHOLD = 100;
+  const MAX_WIN_THRESHOLD = 100000;
 
   // Update player settings when modal opens
   useEffect(() => {
@@ -38,6 +47,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       const settings = getPlayerSettings();
       setPlayerSettings(settings);
       setTempName(settings.name);
+      setWinThresholdInput(settings.winThreshold.toString());
       
       // Update sound setting if it differs from stored setting
       if (settings.soundEnabled !== soundEnabled) {
@@ -45,6 +55,41 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       }
     }
   }, [isOpen, soundEnabled, onSoundEnabledChange]);
+
+  useEffect(() => {
+    setWinThresholdInput(winThreshold.toString());
+  }, [winThreshold]);
+
+  const buildShareUrl = (playerID: string): string => {
+    const { origin, pathname } = window.location;
+    const basePath = `${origin}${pathname}`;
+    return `${basePath}?pid=${playerID}`;
+  };
+
+  const resolveShareablePlayerID = async (): Promise<string | null> => {
+    try {
+      const currentID = GameServerAPI.getCurrentPlayerID();
+      if (currentID && /^\d{4,12}$/.test(currentID)) {
+        if (playerSettings.playerID !== currentID) {
+          setPlayerSettings(prev => ({ ...prev, playerID: currentID }));
+        }
+        return currentID;
+      }
+      const fallback = playerSettings.playerID;
+      if (fallback && /^\d{4,12}$/.test(fallback)) {
+        return fallback;
+      }
+      const reconnected = await GameServerAPI.connectWithRetry();
+      if (/^\d{4,12}$/.test(reconnected)) {
+        setPlayerSettings(prev => ({ ...prev, playerID: reconnected }));
+        return reconnected;
+      }
+      return null;
+    } catch (error) {
+      console.warn('Unable to resolve player ID for sharing:', error);
+      return null;
+    }
+  };
 
   // Handle sound setting change
   const handleSoundChange = (enabled: boolean) => {
@@ -55,7 +100,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
   // Handle copy player ID to clipboard
   const handleCopyPlayerID = async () => {
-    const success = await copyToClipboard(playerSettings.playerID);
+    const id = await resolveShareablePlayerID();
+    if (!id) return;
+    const success = await copyToClipboard(buildShareUrl(id));
     if (success) {
       setCopySuccess(true);
       setTimeout(() => setCopySuccess(false), 2000);
@@ -64,10 +111,12 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
   // Handle share player ID
   const handleSharePlayerID = async () => {
+    const id = await resolveShareablePlayerID();
+    if (!id) return;
+    const shareUrl = buildShareUrl(id);
     const shareData = {
       title: t.shareTitle,
-      text: `${t.shareText} ${playerSettings.playerID}`,
-      url: window.location.href
+      url: shareUrl
     };
     
     const success = await shareContent(shareData);
@@ -107,6 +156,48 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     } else if (e.key === 'Escape') {
       setTempName(playerSettings.name);
       setIsEditingName(false);
+    }
+  };
+
+  const handleWinThresholdInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setWinThresholdInput(event.target.value);
+  };
+
+  const commitWinThreshold = () => {
+    const parsed = Number(winThresholdInput);
+    if (!Number.isFinite(parsed)) {
+      setWinThresholdInput(playerSettings.winThreshold.toString());
+      setIsEditingWinThreshold(false);
+      return;
+    }
+
+    const sanitized = Math.max(MIN_WIN_THRESHOLD, Math.min(MAX_WIN_THRESHOLD, Math.round(parsed)));
+    if (sanitized !== playerSettings.winThreshold) {
+      updatePlayerSetting('winThreshold', sanitized);
+      setPlayerSettings(prev => ({ ...prev, winThreshold: sanitized }));
+      onWinThresholdChange(sanitized);
+    }
+    setWinThresholdInput(sanitized.toString());
+    setIsEditingWinThreshold(false);
+  };
+
+  const handleWinThresholdKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      commitWinThreshold();
+    }
+    if (event.key === 'Escape') {
+      setWinThresholdInput(playerSettings.winThreshold.toString());
+      setIsEditingWinThreshold(false);
+    }
+  };
+
+  const toggleWinThresholdEdit = () => {
+    if (isEditingWinThreshold) {
+      commitWinThreshold();
+    } else {
+      setIsEditingWinThreshold(true);
+      setWinThresholdInput(playerSettings.winThreshold.toString());
     }
   };
 
@@ -212,6 +303,37 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                   </option>
                 ))}
               </select>
+            </div>
+          </div>
+
+          {/* Win Threshold Section */}
+          <div className={styles.settingsSection}>
+            <h4 className={styles.settingsTitle}>{t.winThreshold}</h4>
+            <div className={styles.winThresholdSection}>
+              {isEditingWinThreshold ? (
+                <input
+                  type="number"
+                  min={MIN_WIN_THRESHOLD}
+                  max={MAX_WIN_THRESHOLD}
+                  step={10}
+                  value={winThresholdInput}
+                  onChange={handleWinThresholdInputChange}
+                  onKeyDown={handleWinThresholdKeyDown}
+                  className={styles.winThresholdInput}
+                  inputMode="numeric"
+                  autoFocus
+                />
+              ) : (
+                <span className={styles.winThresholdDisplay}>{formatNumber(playerSettings.winThreshold)}</span>
+              )}
+
+              <button
+                className={styles.playerNameEditButton}
+                onClick={toggleWinThresholdEdit}
+                title={isEditingWinThreshold ? t.saveTooltip : t.editTooltip}
+              >
+                {isEditingWinThreshold ? <Save size={18} /> : <Edit size={18} />}
+              </button>
             </div>
           </div>
           

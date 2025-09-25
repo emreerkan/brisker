@@ -9,6 +9,7 @@ export interface Translation {
   // Settings
   soundEffects: string;
   language: string;
+  winThreshold: string;
   // History
   totalScore: string;
   noScoresRecorded: string;
@@ -97,7 +98,6 @@ export interface Translation {
   editTooltip: string;
   saveTooltip: string;
   shareTitle: string;
-  shareText: string;
   // Opponent display
   opponent: string;
   ahead: string;

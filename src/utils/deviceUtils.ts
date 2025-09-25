@@ -32,7 +32,7 @@ export const shareContent = async (data: ShareData): Promise<boolean> => {
       return true;
     } else {
       // Fallback: try to copy to clipboard
-      const shareText = `${data.title}\n${data.text}\n${data.url || ''}`.trim();
+      const shareText = `${data.title}\n${data.url || ''}`.trim();
       return await copyToClipboard(shareText);
     }
   } catch (error) {

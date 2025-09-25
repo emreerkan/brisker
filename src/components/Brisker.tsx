@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useBeziqueGame } from '@/hooks/useBeziqueGame';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { useLanguage } from '@/i18n/LanguageContext';
-import { BRISK_MULTIPLIER } from '@/utils/constants';
+import { BRISK_MULTIPLIER, DEFAULT_WIN_THRESHOLD } from '@/utils/constants';
 
 // UI Components
 import { ScoreDisplay, PointButtons, ActionButtons } from './ui';
@@ -26,8 +26,13 @@ import { ScoreEntryType } from '@/types';
 import styles from './Brisker.module.css';
 
 export const Brisker: React.FC = () => {
-  // Initialize sound settings from localStorage
-  const [soundEnabled, setSoundEnabled] = useState(() => getPlayerSettings().soundEnabled);
+  // Initialize sound settings and win threshold preferences from localStorage
+  const initialSettingsRef = useRef(getPlayerSettings());
+  const [soundEnabled, setSoundEnabled] = useState(initialSettingsRef.current.soundEnabled);
+  const [winThresholdSetting, setWinThresholdSetting] = useState(
+    initialSettingsRef.current.winThreshold ?? DEFAULT_WIN_THRESHOLD
+  );
+  const inviteLinkHandled = useRef(false);
   
   // Language hook
   const { t, formatNumber } = useLanguage();
@@ -44,6 +49,17 @@ export const Brisker: React.FC = () => {
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [showPlayerSearch, setShowPlayerSearch] = useState(false);
   const [showGeolocationSearch, setShowGeolocationSearch] = useState(false);
+
+  const closeAllModals = useCallback(() => {
+    setShowBriskSelector(false);
+    setShowHistory(false);
+    setShowSettings(false);
+    setShowInfo(false);
+    setShowResetConfirm(false);
+    setShowCongratulations(false);
+    setShowPlayerSearch(false);
+    setShowGeolocationSearch(false);
+  }, []);
   
   // WebSocket connection status
   const [connectionStatus, setConnectionStatus] = useState<'disconnected' | 'connecting' | 'connected'>('disconnected');
@@ -60,16 +76,60 @@ export const Brisker: React.FC = () => {
     setCurrentOpponent,
     updateOpponentScore,
     getLastThreeScores,
-    opponent
-  } = useBeziqueGame(soundEnabled, () => setShowCongratulations(true));  // Development keyboard shortcut for testing
+    opponent,
+    winThreshold: sessionWinThreshold,
+    setWinThreshold: setSessionWinThreshold
+  } = useBeziqueGame(soundEnabled, () => setShowCongratulations(true), winThresholdSetting);
   useEffect(() => {
     const handleTriggerCongratulations = () => {
-      addPoints(10000);
+      const remaining = Math.max(sessionWinThreshold - gameState.score, 0);
+      if (remaining > 0) {
+        addPoints(remaining);
+      }
     };
 
     window.addEventListener('triggerCongratulations', handleTriggerCongratulations);
     return () => window.removeEventListener('triggerCongratulations', handleTriggerCongratulations);
-  }, [addPoints]);
+  }, [addPoints, gameState.score, sessionWinThreshold]);
+
+  useEffect(() => {
+    if (!opponent) {
+      setSessionWinThreshold(winThresholdSetting);
+    }
+  }, [opponent, setSessionWinThreshold, winThresholdSetting]);
+
+  useEffect(() => {
+    if (inviteLinkHandled.current) return;
+    const params = new URLSearchParams(window.location.search);
+    const pidParam = params.get('pid');
+    if (!pidParam || !/^\d{4,12}$/.test(pidParam)) {
+      return;
+    }
+
+    inviteLinkHandled.current = true;
+
+    (async () => {
+      try {
+        const currentID = await GameServerAPI.connectWithRetry();
+        if (pidParam === currentID) {
+          return;
+        }
+        GameServerAPI.requestGameWithHost(pidParam);
+      } catch (error) {
+        console.warn('Failed to process invite link:', error);
+      } finally {
+        try {
+          const url = new URL(window.location.href);
+          url.searchParams.delete('pid');
+          const queryString = url.searchParams.toString();
+          const newUrl = `${url.pathname}${queryString ? `?${queryString}` : ''}${url.hash}`;
+          window.history.replaceState({}, document.title, newUrl);
+        } catch (e) {
+          // ignore history errors
+        }
+      }
+    })();
+  }, []);
 
   // Register game-related WebSocket event handlers once on mount so both
   // the player who initiates the game and the opponent receive notifications.
@@ -82,6 +142,9 @@ export const Brisker: React.FC = () => {
         name: payload.opponentName,
         isOnline: true
       });
+      if (typeof payload.winThreshold === 'number' && Number.isFinite(payload.winThreshold)) {
+        setSessionWinThreshold(Math.max(100, Math.round(payload.winThreshold)));
+      }
     };
 
     const onResume = (payload: any) => {
@@ -94,6 +157,10 @@ export const Brisker: React.FC = () => {
         updateOpponentScore(payload.gameState.total);
       } else {
         setCurrentOpponent({ playerID: payload.opponentID, name: payload.opponentName, isOnline: true });
+      }
+      const resumeThreshold = payload?.gameState?.winThreshold ?? payload?.winThreshold;
+      if (typeof resumeThreshold === 'number' && Number.isFinite(resumeThreshold)) {
+        setSessionWinThreshold(Math.max(100, Math.round(resumeThreshold)));
       }
       if (payload.gameState) {
         console.log('Restored game state from server (not merged automatically):', payload.gameState);
@@ -123,6 +190,7 @@ export const Brisker: React.FC = () => {
       console.log('Received remote reset instruction:', payload);
       // Clear local snapshot so reload won't restore previous scores
       try { clearGameSnapshot(); } catch (e) { /* ignore */ }
+      closeAllModals();
       reset(true, true); // skipConfirm = true, isRemote = true
     };
 
@@ -182,7 +250,7 @@ export const Brisker: React.FC = () => {
       GameServerAPI.removeEventListener('player:reconnected', onPlayerReconnected);
       GameServerAPI.removeEventListener('player:offline', onPlayerOffline);
     };
-  }, [setCurrentOpponent, updateOpponentScore, opponent?.playerID]);
+  }, [setCurrentOpponent, updateOpponentScore, opponent?.playerID, setSessionWinThreshold, closeAllModals]);
 
   // Event Handlers
   const handlePointClick = (points: number) => {
@@ -250,7 +318,9 @@ export const Brisker: React.FC = () => {
       // Event listeners for game events are registered globally on mount
       
       // Start game with selected opponent
-      GameServerAPI.startGameWith(player.playerID);
+      const targetScore = currentPlayerSettings.winThreshold ?? winThresholdSetting ?? DEFAULT_WIN_THRESHOLD;
+      setSessionWinThreshold(targetScore);
+      GameServerAPI.startGameWith(player.playerID, targetScore);
       
       // Close all modals and return to main screen
       setShowPlayerSearch(false);
@@ -351,6 +421,13 @@ export const Brisker: React.FC = () => {
         onPlayerSearchOpen={handlePlayerSearchOpen}
         onGeolocationSearchOpen={handleGeolocationSearchOpen}
         onPlayWith={handlePlayWith}
+        winThreshold={winThresholdSetting}
+        onWinThresholdChange={(threshold) => {
+          setWinThresholdSetting(threshold);
+          if (!opponent) {
+            setSessionWinThreshold(threshold);
+          }
+        }}
       />
       
       <PlayerSearchModal

@@ -10,6 +10,7 @@ export interface PlayerSettings {
   playerID: string;
   name: string;
   soundEnabled: boolean;
+  winThreshold: number;
 }
 
 export interface GeolocationData {

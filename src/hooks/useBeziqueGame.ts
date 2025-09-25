@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import type { ScoreEntry, GameState, Player } from '@/types';
 import { ScoreEntryType } from '@/types';
-import { WIN_THRESHOLD } from '@/utils/constants';
+import { DEFAULT_WIN_THRESHOLD } from '@/utils/constants';
 import { GameServerAPI } from '@/services/gameServer';
 import { saveGameSnapshot, getGameSnapshot, clearGameSnapshot } from '@/utils/localStorage';
 import { playSound, SoundType } from '@/utils/soundManager';
@@ -17,7 +17,11 @@ const calculateTotalScore = (history: ScoreEntry[]): number => {
   return history.reduce((sum, entry) => sum + entry.value, 0);
 };
 
-export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?: () => void) => {
+export const useBeziqueGame = (
+  soundEnabled: boolean = true,
+  onCongratulations?: () => void,
+  initialWinThreshold: number = DEFAULT_WIN_THRESHOLD
+) => {
   const [gameState, setGameState] = useState<GameState>({
     score: 0,
     opponentScore: 0,
@@ -28,6 +32,24 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
   
   const [isProcessing, setIsProcessing] = useState(false);
   const [opponent, setOpponent] = useState<Player | undefined>();
+  const [winThreshold, setWinThresholdState] = useState<number>(
+    initialWinThreshold > 0 ? initialWinThreshold : DEFAULT_WIN_THRESHOLD
+  );
+
+  const applyWinThreshold = useCallback((value: number) => {
+    const numeric = Number(value);
+    if (!Number.isFinite(numeric) || numeric <= 0) {
+      return;
+    }
+    const sanitized = Math.max(100, Math.min(100000, Math.round(numeric)));
+    setWinThresholdState(prev => (prev === sanitized ? prev : sanitized));
+  }, []);
+
+  useEffect(() => {
+    if (typeof initialWinThreshold === 'number' && Number.isFinite(initialWinThreshold) && initialWinThreshold > 0) {
+      applyWinThreshold(initialWinThreshold);
+    }
+  }, [initialWinThreshold, applyWinThreshold]);
 
   // Check if player is online (has an opponent)
   const isOnline = useCallback(() => {
@@ -57,7 +79,7 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
         }
         
         // Check if we've reached 10000 points and trigger congratulations with ta-da sound
-        if (prev.score < WIN_THRESHOLD && newTotal >= WIN_THRESHOLD && onCongratulations) {
+        if (prev.score < winThreshold && newTotal >= winThreshold && onCongratulations) {
           // Play ta-da sound for reaching 10000 points
           playSound(SoundType.TADA, soundEnabled);
           setTimeout(() => onCongratulations(), 100);
@@ -108,7 +130,11 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
         if (cancelled) return;
         // push local stored player settings (name) as needed
         const settings = JSON.parse(localStorage.getItem('bezique_player_settings') || '{}');
-        GameServerAPI.updatePlayerState({ playerID: id, name: settings.name || `Player ${id}` });
+          GameServerAPI.updatePlayerState({
+            playerID: id,
+            name: settings.name || `Player ${id}`,
+            winThreshold
+          });
       } catch (e) {
         console.warn('Could not connect to server on mount:', e);
       }
@@ -142,12 +168,22 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
             isDealer: snap.isDealer || false,
             opponentIsDealer: snap.opponentIsDealer || false
           }));
+          if (typeof snap.winThreshold === 'number' && Number.isFinite(snap.winThreshold) && snap.winThreshold > 0) {
+            applyWinThreshold(snap.winThreshold);
+          }
 
           // Wait for websocket to be connected before syncing snapshot to server
           try {
             const id = await GameServerAPI.connectWithRetry();
             const playerID = localStorage.getItem('bezique_player_id') || id || undefined;
-            GameServerAPI.updatePlayerState({ playerID, name: JSON.parse(localStorage.getItem('bezique_player_settings') || '{}').name, history: snap.history, total: snap.total, opponentID: snap.opponent?.playerID });
+            GameServerAPI.updatePlayerState({
+              playerID,
+              name: JSON.parse(localStorage.getItem('bezique_player_settings') || '{}').name,
+              history: snap.history,
+              total: snap.total,
+              opponentID: snap.opponent?.playerID,
+              winThreshold: snap.winThreshold ?? winThreshold
+            });
           } catch (e) {
             // ignore
           }
@@ -172,6 +208,7 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
             history: gameState.history,
             total: gameState.score,
             opponentID: opponent?.playerID,
+            winThreshold
           });
         } catch (e) {
           // ignore
@@ -186,7 +223,8 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
           opponent: opponent || null,
           lastEvent: new Date().toISOString(),
           isDealer: gameState.isDealer,
-          opponentIsDealer: gameState.opponentIsDealer
+          opponentIsDealer: gameState.opponentIsDealer,
+          winThreshold
         });
       } catch (e) {
         // ignore
@@ -194,7 +232,7 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
     }, 300);
 
     return () => clearTimeout(timer);
-  }, [gameState.history, gameState.score, opponent]);
+  }, [gameState.history, gameState.score, opponent, winThreshold]);
 
   const undo = useCallback((payload?: { points?: number; briskValue?: number }, isRemote: boolean = false) => {
     let newTotalForSend: number | undefined;
@@ -343,6 +381,8 @@ export const useBeziqueGame = (soundEnabled: boolean = true, onCongratulations?:
     // Utility functions for derived values
     getLastThreeScores: () => getLastThreeScores(gameState.history),
     opponent,
-    isOnline
+    isOnline,
+    winThreshold,
+    setWinThreshold: applyWinThreshold
   };
 };

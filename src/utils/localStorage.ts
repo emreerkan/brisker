@@ -1,4 +1,5 @@
 import type { PlayerSettings, Player, ScoreEntry } from '@/types';
+import { DEFAULT_WIN_THRESHOLD } from '@/utils/constants';
 
 const STORAGE_KEYS = {
   PLAYER_SETTINGS: 'bezique_player_settings'
@@ -17,6 +18,7 @@ export interface GameSnapshot {
   lastEvent: string; // ISO
   isDealer?: boolean;
   opponentIsDealer?: boolean;
+  winThreshold?: number;
 }
 
 const GAME_SNAPSHOT_KEY = 'bezique_game_snapshot';
@@ -57,6 +59,9 @@ export const getPlayerSettings = (): PlayerSettings => {
       // Get player ID from server storage or use placeholder
       const serverPlayerID = getServerAssignedPlayerID();
       settings.playerID = serverPlayerID || settings.playerID || 'Offline';
+      if (typeof settings.winThreshold !== 'number' || !Number.isFinite(settings.winThreshold) || settings.winThreshold <= 0) {
+        settings.winThreshold = DEFAULT_WIN_THRESHOLD;
+      }
       return settings;
     }
   } catch (error) {
@@ -68,7 +73,8 @@ export const getPlayerSettings = (): PlayerSettings => {
   const defaultSettings: PlayerSettings = {
     playerID: serverPlayerID || 'Offline',
     name: 'Player',
-    soundEnabled: true
+    soundEnabled: true,
+    winThreshold: DEFAULT_WIN_THRESHOLD
   };
   
   savePlayerSettings(defaultSettings);

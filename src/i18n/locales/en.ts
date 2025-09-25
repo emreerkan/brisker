@@ -16,6 +16,7 @@ const translation: Translation = {
   // Settings
   soundEffects: 'Sound Effects',
   language: 'Language',
+  winThreshold: 'Target Score',
   // History
   totalScore: 'Total Score',
   noScoresRecorded: 'No scores recorded yet',
@@ -56,7 +57,7 @@ const translation: Translation = {
   // Congratulations
   congratulations: 'Congratulations!',
   youWin: 'You Win!',
-  congratulationsMessage: "You've reached to 10,000 points! Fantastic game!",
+  congratulationsMessage: "You've reached the target score! Fantastic game!",
   newGame: 'New Game',
   // Multiplayer
   playerID: 'Player ID',
@@ -103,7 +104,6 @@ const translation: Translation = {
   editTooltip: 'Edit Name',
   saveTooltip: 'Save Name',
   shareTitle: 'Join me in Bezique!',
-  shareText: "Let's play Bezique together! My Player ID is:",
   // Opponent display
   opponent: 'Opponent',
   ahead: 'ahead',

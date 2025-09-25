@@ -1,5 +1,6 @@
 import type { Player, GeolocationData } from '@/types';
 import { updatePlayerIDFromServer } from '@/utils/localStorage';
+import { DEFAULT_WIN_THRESHOLD } from '@/utils/constants';
 import { getGeolocation } from '@/utils/deviceUtils';
 
 // Resolve WebSocket endpoint from environment
@@ -37,6 +38,7 @@ export type WebSocketEventType =
   | 'connection:established'
   | 'game:created'
   | 'game:auto_joined' 
+  | 'game:invite'
   | 'game:joined'
   | 'game:apply_brisks'
   | 'game:reset'
@@ -46,6 +48,7 @@ export type WebSocketEventType =
   | 'game:opponent_scored'
   | 'game:opponent_undo'
   | 'game:completed'
+  | 'game:error'
   | 'player:online'
   | 'player:offline'
   | 'player:id_assigned'
@@ -169,7 +172,7 @@ export class GameServerAPI {
             const storedPlayerID = this.getStoredPlayerID();
             const playerSettings = JSON.parse(localStorage.getItem('bezique_player_settings') || '{}');
 
-            if (storedPlayerID && /^\d{4}$/.test(storedPlayerID)) {
+            if (this.isValidPlayerID(storedPlayerID)) {
               // Reconnect with existing player ID
               console.log('Reconnecting with existing player ID:', storedPlayerID);
               this.sendMessage({
@@ -271,6 +274,10 @@ export class GameServerAPI {
                 this.connectedPlayers.set(playerID, existing);
               }
             }
+          }
+
+          if (message.type === 'game:error') {
+            console.warn('Game server error:', message.payload?.message || message.payload);
           }
 
           // Handle other events
@@ -391,7 +398,7 @@ export class GameServerAPI {
     if (this.ws && this.ws.readyState === WebSocket.OPEN) {
       return;
     }
-    
+
     // If a reconnection attempt is already in progress, wait for it
     if (this.connectingPromise) {
       try {
@@ -409,6 +416,10 @@ export class GameServerAPI {
     } catch (e) {
       throw new Error('Unable to connect to server for user action');
     }
+  }
+
+  private static isValidPlayerID(id: string | null | undefined): id is string {
+    return typeof id === 'string' && /^\d{4,12}$/.test(id);
   }
 
   // Start a short reconnect loop with intervalMs and maxAttempts.
@@ -587,14 +598,34 @@ export class GameServerAPI {
   }
 
   // Start game with opponent
-  static startGameWith(opponentID: string): void {
+  static startGameWith(opponentID: string, winThreshold: number): void {
     // Prevent starting a game with ourselves
     if (!opponentID || opponentID === this.currentPlayerID) {
       console.warn('Ignoring attempt to start a game with self');
       return;
     }
 
-    this.sendMessage({ type: 'game:start', payload: { opponentID } });
+    const targetScore = Number.isFinite(winThreshold) && winThreshold > 0
+      ? Math.round(winThreshold)
+      : DEFAULT_WIN_THRESHOLD;
+
+    this.sendMessage({ type: 'game:start', payload: { opponentID, winThreshold: targetScore } });
+  }
+
+  static async requestGameWithHost(hostID: string): Promise<void> {
+    if (!hostID || !/^\d{4,12}$/.test(hostID)) return;
+
+    let currentID: string | null = null;
+    try {
+      currentID = await this.connectWithRetry();
+    } catch (error) {
+      console.warn('Unable to connect before sending invite request:', error);
+      return;
+    }
+
+    if (hostID === currentID) return;
+
+    this.sendMessage({ type: 'game:invite', payload: { hostID } });
   }
 
   // Send score update to opponent
@@ -612,7 +643,7 @@ export class GameServerAPI {
   }
 
   // Send current player state to server for in-memory storage and resume handling
-  static updatePlayerState(state: { playerID?: string; name?: string; history?: any[]; total?: number; opponentID?: string; location?: { latitude: number; longitude: number } }) {
+  static updatePlayerState(state: { playerID?: string; name?: string; history?: any[]; total?: number; opponentID?: string; location?: { latitude: number; longitude: number }; winThreshold?: number }) {
     const payload: typeof state = { ...state };
     if (!payload.location && this.lastKnownLocation) {
       payload.location = this.lastKnownLocation;
