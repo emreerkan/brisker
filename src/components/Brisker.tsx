@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { X } from 'lucide-react';
 import { useBeziqueGame } from '@/hooks/useBeziqueGame';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { useLanguage } from '@/i18n/LanguageContext';
@@ -194,6 +195,17 @@ export const Brisker: React.FC = () => {
       reset(true, true); // skipConfirm = true, isRemote = true
     };
 
+    const onRemoteDisconnect = (payload: any) => {
+      console.log('Received remote disconnect instruction:', payload);
+      closeAllModals();
+      setCurrentOpponent(undefined);
+      try {
+        GameServerAPI.disconnectWebSocket();
+      } catch (error) {
+        console.warn('Failed to disconnect websocket after remote disconnect:', error);
+      }
+    };
+
     const onPlayerNameChanged = (payload: any) => {
       console.log('Player name changed event received:', payload);
       const pid = payload && payload.playerID;
@@ -230,6 +242,7 @@ export const Brisker: React.FC = () => {
     GameServerAPI.addEventListener('game:apply_brisks', onApplyBrisks);
     GameServerAPI.addEventListener('game:opponent_undo', onOpponentUndo);
     GameServerAPI.addEventListener('game:reset', onRemoteReset);
+    GameServerAPI.addEventListener('game:disconnect', onRemoteDisconnect);
     GameServerAPI.addEventListener('game:resume', onResume);
     GameServerAPI.addEventListener('player:name_changed', onPlayerNameChanged);
     GameServerAPI.addEventListener('connection:established', onConnectionEstablished);
@@ -243,6 +256,7 @@ export const Brisker: React.FC = () => {
       GameServerAPI.removeEventListener('game:apply_brisks', onApplyBrisks);
       GameServerAPI.removeEventListener('game:opponent_undo', onOpponentUndo);
       GameServerAPI.removeEventListener('game:reset', onRemoteReset);
+      GameServerAPI.removeEventListener('game:disconnect', onRemoteDisconnect);
       GameServerAPI.removeEventListener('game:resume', onResume);
       GameServerAPI.removeEventListener('player:name_changed', onPlayerNameChanged);
       GameServerAPI.removeEventListener('connection:established', onConnectionEstablished);
@@ -250,7 +264,7 @@ export const Brisker: React.FC = () => {
       GameServerAPI.removeEventListener('player:reconnected', onPlayerReconnected);
       GameServerAPI.removeEventListener('player:offline', onPlayerOffline);
     };
-  }, [setCurrentOpponent, updateOpponentScore, opponent?.playerID, setSessionWinThreshold, closeAllModals]);
+  }, [setCurrentOpponent, updateOpponentScore, opponent?.playerID, setSessionWinThreshold, closeAllModals, reset]);
 
   // Event Handlers
   const handlePointClick = (points: number) => {
@@ -283,6 +297,27 @@ export const Brisker: React.FC = () => {
     reset(true);
     setShowCongratulations(false);
   };
+
+  const handleDisconnect = useCallback(async () => {
+    try {
+      if (opponent && opponent.playerID) {
+        GameServerAPI.disconnectGame(opponent.playerID);
+      } else {
+        GameServerAPI.disconnectGame();
+      }
+    } catch (error) {
+      console.warn('Failed to notify opponent about disconnect:', error);
+    }
+
+    try {
+      GameServerAPI.disconnectWebSocket();
+    } catch (error) {
+      console.warn('Failed to disconnect websocket:', error);
+    }
+
+    closeAllModals();
+    setCurrentOpponent(undefined);
+  }, [opponent, closeAllModals, setCurrentOpponent]);
 
   const handlePlayerSearchOpen = () => {
     setShowSettings(false);
@@ -364,6 +399,14 @@ export const Brisker: React.FC = () => {
         {opponent && (
           <div className={styles.opponentBar}>
             <div className={styles.opponentName}>
+              <button
+                type="button"
+                className={styles.disconnectButton}
+                onClick={handleDisconnect}
+                title={t.disconnectOpponent}
+              >
+                <X size={16} />
+              </button>
               {t.opponent}: {opponent.name}
               {gameState.opponentIsDealer && (
                 <span className={styles.opponentDealerIndicator}>D</span>

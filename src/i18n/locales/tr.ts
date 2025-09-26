@@ -104,6 +104,8 @@ const translation: Translation = {
   editTooltip: 'Adı Düzenle',
   saveTooltip: 'Adı Kaydet',
   shareTitle: 'Benimle Bezik oyna!',
+  shareText: 'Hadi birlikte Bezik oynayalım! Bu linkten katıl:',
+  disconnectOpponent: 'Bağlantıyı kes',
   // Opponent display
   opponent: 'Rakip',
   ahead: 'önde',

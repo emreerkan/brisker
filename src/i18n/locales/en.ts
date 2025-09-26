@@ -104,6 +104,8 @@ const translation: Translation = {
   editTooltip: 'Edit Name',
   saveTooltip: 'Save Name',
   shareTitle: 'Join me in Bezique!',
+  shareText: "Let's play Bezique together! Join me using this link:",
+  disconnectOpponent: 'Disconnect opponent',
   // Opponent display
   opponent: 'Opponent',
   ahead: 'ahead',

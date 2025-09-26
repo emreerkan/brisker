@@ -98,6 +98,8 @@ export interface Translation {
   editTooltip: string;
   saveTooltip: string;
   shareTitle: string;
+  shareText: string;
+  disconnectOpponent: string;
   // Opponent display
   opponent: string;
   ahead: string;

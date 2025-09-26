@@ -38,6 +38,7 @@ export type WebSocketEventType =
   | 'connection:established'
   | 'game:created'
   | 'game:auto_joined' 
+  | 'game:disconnect'
   | 'game:invite'
   | 'game:joined'
   | 'game:apply_brisks'
@@ -610,6 +611,12 @@ export class GameServerAPI {
       : DEFAULT_WIN_THRESHOLD;
 
     this.sendMessage({ type: 'game:start', payload: { opponentID, winThreshold: targetScore } });
+  }
+
+  static disconnectGame(opponentID?: string): void {
+    const payload: Record<string, unknown> = {};
+    if (opponentID) payload.opponentID = opponentID;
+    this.sendMessage({ type: 'game:disconnect', payload });
   }
 
   static async requestGameWithHost(hostID: string): Promise<void> {
