@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, X, Users } from 'lucide-react';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { ModalProps, Player } from '@/types';
 import { GameServerAPI } from '@/services/gameServer';
-import { useLanguage } from '@/i18n/LanguageContext';
 import styles from '@/components/Brisker.module.css';
 
 interface PlayerSearchModalProps extends ModalProps {
@@ -14,7 +14,7 @@ export const PlayerSearchModal: React.FC<PlayerSearchModalProps> = ({
   onClose,
   onPlayWith
 }) => {
-  const { t } = useLanguage();
+  const { t } = useLingui();
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState<Player[]>([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -80,7 +80,7 @@ export const PlayerSearchModal: React.FC<PlayerSearchModalProps> = ({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <h3 className={styles.modalTitle}>{t.searchPlayersTitle}</h3>
+          <h3 className={styles.modalTitle}><Trans>Search Players</Trans></h3>
           <button className={styles.modalClose} onClick={handleClose}>
             <X size={24} />
           </button>
@@ -90,7 +90,7 @@ export const PlayerSearchModal: React.FC<PlayerSearchModalProps> = ({
           <div className={styles.searchInputContainer}>
             <input
               type="text"
-              placeholder={t.enterPlayerIDOrName}
+              placeholder={t`Enter Player ID or Name...`}
               value={searchTerm}
               ref={inputRef}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -109,7 +109,7 @@ export const PlayerSearchModal: React.FC<PlayerSearchModalProps> = ({
           
           {isSearching && (
             <div className={styles.searchingIndicator}>
-              {t.searchingPlayers}
+              <Trans>Searching players...</Trans>
             </div>
           )}
           
@@ -119,7 +119,10 @@ export const PlayerSearchModal: React.FC<PlayerSearchModalProps> = ({
                 <>
                   <h4 className={styles.searchResultsTitle}>
                     <Users size={18} />
-                    {t.foundPlayers} ({searchResults.length}):
+                    {' '}
+                    {searchResults.length === 1
+                      ? t`player found`
+                      : t`players found`} ({searchResults.length}):
                   </h4>
                   <div className={styles.playerList}>
                     {searchResults.map((player) => (
@@ -132,7 +135,7 @@ export const PlayerSearchModal: React.FC<PlayerSearchModalProps> = ({
                           className={styles.playButton}
                           onClick={() => handlePlayWith(player)}
                         >
-                          {t.playButton}
+                          <Trans>Play</Trans>
                         </button>
                       </div>
                     ))}
@@ -140,7 +143,7 @@ export const PlayerSearchModal: React.FC<PlayerSearchModalProps> = ({
                 </>
               ) : (
                 <div className={styles.noResults}>
-                  {t.noPlayersFound}
+                  <Trans>No players found</Trans>
                 </div>
               )}
             </div>
@@ -152,7 +155,7 @@ export const PlayerSearchModal: React.FC<PlayerSearchModalProps> = ({
             className={`${styles.modalButton} ${styles.modalButtonCancel}`} 
             onClick={handleClose}
           >
-            {t.close}
+            <Trans>Close</Trans>
           </button>
         </div>
       </div>

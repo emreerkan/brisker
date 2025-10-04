@@ -1,5 +1,6 @@
 import React from 'react';
 import { X } from 'lucide-react';
+import { useLingui } from '@lingui/react/macro';
 import type { ModalProps, GameState } from '@/types';
 import { ScoreEntryType } from '@/types';
 import { useLanguage } from '@/i18n/LanguageContext';
@@ -15,7 +16,8 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
   onClose,
   gameState
 }) => {
-  const { t, formatNumber, formatTime } = useLanguage();
+  const { t } = useLingui();
+  const { formatNumber, formatTime } = useLanguage();
 
   if (!isOpen) return null;
 
@@ -23,7 +25,7 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <h3 className={styles.modalTitle}>{t.scoreHistory}</h3>
+          <h3 className={styles.modalTitle}>{t`Score History`}</h3>
           <button className={styles.modalClose} onClick={onClose}>
             <X size={ICON_SIZE} />
           </button>
@@ -31,12 +33,12 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
         
         <div className={styles.historyContent}>
           <div className={styles.historyTotal}>
-            {t.totalScore}: {formatNumber(gameState.score)}
+            {t`Total Score`}: {formatNumber(gameState.score)}
           </div>
           
           <div className={styles.historyList}>
             {gameState.history.length === 0 ? (
-              <div className={styles.historyEmpty}>{t.noScoresRecorded}</div>
+              <div className={styles.historyEmpty}>{t`No scores recorded yet`}</div>
             ) : (
               gameState.history
                 .slice()
@@ -61,7 +63,7 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
         
         <div className={styles.modalFooter}>
           <button className={`${styles.modalButton} ${styles.modalButtonCancel}`} onClick={onClose}>
-            {t.close}
+            {t`Close`}
           </button>
         </div>
       </div>

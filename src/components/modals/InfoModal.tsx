@@ -1,15 +1,16 @@
 import React from 'react';
 import { X } from 'lucide-react';
-import type { ModalProps } from '@/types';
-import { useLanguage } from '@/i18n/LanguageContext';
+import { useLingui } from '@lingui/react/macro';
 import { ICON_SIZE } from '@/utils/constants';
 import styles from '@/components/Brisker.module.css';
 
-export const InfoModal: React.FC<ModalProps> = ({
-  isOpen,
-  onClose
-}) => {
-  const { t } = useLanguage();
+interface InfoModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
+  const { t } = useLingui();
 
   if (!isOpen) return null;
 
@@ -17,7 +18,7 @@ export const InfoModal: React.FC<ModalProps> = ({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <h3 className={styles.modalTitle}>{t.appName}</h3>
+          <h3 className={styles.modalTitle}>{t`Brisker`}</h3>
           <button className={styles.modalClose} onClick={onClose}>
             <X size={ICON_SIZE} />
           </button>
@@ -25,21 +26,21 @@ export const InfoModal: React.FC<ModalProps> = ({
         
         <div className={styles.infoContent}>
           <div className={styles.appInfo}>
-            <div><strong>{t.appName}</strong></div>
-            <div>{t.version} 1.0.0</div>
-            <div>{t.description}</div>
-            <div>{t.developedBy}</div>
-            <div>{t.buildDate}</div>
+            <div><strong>{t`Brisker`}</strong></div>
+            <div>{t`Version`} 1.0.0</div>
+            <div>{t`Score keeping application for the Bezique card game`}</div>
+            <div>{t`Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot`}</div>
+            <div>{t`Build Date: September 2025`}</div>
             
             <div className={styles.featuresSection}>
-              <h4>{t.features}:</h4>
+              <h4>{t`Features`}:</h4>
               <ul className={styles.featuresList}>
-                <li>{t.featureList.scoreTracking}</li>
-                <li>{t.featureList.undoLastScore}</li>
-                <li>{t.featureList.viewHistory}</li>
-                <li>{t.featureList.briskCalculation}</li>
-                <li>{t.featureList.soundEffects}</li>
-                <li>{t.featureList.resetGame}</li>
+                <li>{t`Score tracking and addition`}</li>
+                <li>{t`Undo last score`}</li>
+                <li>{t`View score history`}</li>
+                <li>{t`Brisk calculation (brisk × 20)`}</li>
+                <li>{t`Sound effects`}</li>
+                <li>{t`Reset game`}</li>
               </ul>
             </div>
           </div>
@@ -47,7 +48,7 @@ export const InfoModal: React.FC<ModalProps> = ({
         
         <div className={styles.modalFooter}>
           <button className={`${styles.modalButton} ${styles.modalButtonCancel}`} onClick={onClose}>
-            {t.close}
+            {t`Close`}
           </button>
         </div>
       </div>

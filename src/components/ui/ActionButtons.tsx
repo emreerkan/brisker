@@ -1,6 +1,6 @@
 import React from 'react';
 import { RotateCcw, Settings, Info } from 'lucide-react';
-import { useLanguage } from '@/i18n/LanguageContext';
+import { useLingui } from '@lingui/react/macro';
 import { ICON_SIZE } from '@/utils/constants';
 import styles from '@/components/Brisker.module.css';
 
@@ -19,7 +19,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
   onSettingsClick,
   onInfoClick
 }) => {
-  const { t } = useLanguage();
+  const { t } = useLingui();
 
   return (
     <>
@@ -28,16 +28,16 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
         className={styles.brisk}
         onClick={onBriskClick}
         disabled={isProcessing}
-        title={t.briskDescription}
+        title={t`Select brisk number (adds brisk × 20 points)`}
       >
-        {t.brisk}
+        {t`Brisk`}
       </button>
       
       <button
         className={styles.reset}
         onClick={onResetClick}
         disabled={isProcessing}
-        title={t.resetScoreTooltip}
+        title={t`Reset score`}
       >
         <RotateCcw size={ICON_SIZE} />
       </button>
@@ -46,7 +46,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
         className={styles.settings}
         onClick={onSettingsClick}
         disabled={isProcessing}
-        title={t.settingsTooltip}
+        title={t`Settings`}
       >
         <Settings size={ICON_SIZE} />
       </button>
@@ -55,7 +55,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
         className={styles.info}
         onClick={onInfoClick}
         disabled={isProcessing}
-        title={t.appInformationTooltip}
+        title={t`App information`}
       >
         <Info size={ICON_SIZE} />
       </button>

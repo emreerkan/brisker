@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { X } from 'lucide-react';
+import { useLingui } from '@lingui/react/macro';
 import { useBeziqueGame } from '@/hooks/useBeziqueGame';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { useLanguage } from '@/i18n/LanguageContext';
@@ -27,6 +28,7 @@ import { ScoreEntryType } from '@/types';
 import styles from './Brisker.module.css';
 
 export const Brisker: React.FC = () => {
+  const { t } = useLingui();
   // Initialize sound settings and win threshold preferences from localStorage
   const initialSettingsRef = useRef(getPlayerSettings());
   const [soundEnabled, setSoundEnabled] = useState(initialSettingsRef.current.soundEnabled);
@@ -36,7 +38,7 @@ export const Brisker: React.FC = () => {
   const inviteLinkHandled = useRef(false);
   
   // Language hook
-  const { t, formatNumber } = useLanguage();
+  const { formatNumber, loading } = useLanguage();
   
   // UI State
   const [selectedPoint, setSelectedPoint] = useState<number | null>(null);
@@ -379,13 +381,18 @@ export const Brisker: React.FC = () => {
     const difference = playerScore - opponentScore;
     
     if (difference > 0) {
-      return `${formatNumber(difference)} ${t.ahead}`;
+      return `${formatNumber(difference)} ${t`ahead`}`;
     } else if (difference < 0) {
-      return `${formatNumber(Math.abs(difference))} ${t.behind}`;
+      return `${formatNumber(Math.abs(difference))} ${t`behind`}`;
     } else {
-      return t.tied;
+      return t`tied`;
     }
   };
+
+  // Show loading state while LinguiJS initializes
+  if (loading) {
+    return <div className={styles.container}>{t`Loading...`}</div>;
+  }
 
   return (
     <div className={styles.container}>
@@ -403,11 +410,11 @@ export const Brisker: React.FC = () => {
                 type="button"
                 className={styles.disconnectButton}
                 onClick={handleDisconnect}
-                title={t.disconnectOpponent}
+                title={t`Disconnect opponent`}
               >
                 <X size={16} />
               </button>
-              {t.opponent}: {opponent.name}
+              {t`Opponent`}: {opponent.name}
               {gameState.opponentIsDealer && (
                 <span className={styles.opponentDealerIndicator}>D</span>
               )}

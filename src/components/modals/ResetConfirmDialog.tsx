@@ -1,6 +1,6 @@
 import React from 'react';
+import { useLingui } from '@lingui/react/macro';
 import type { ModalProps } from '@/types';
-import { useLanguage } from '@/i18n/LanguageContext';
 import styles from '@/components/Brisker.module.css';
 
 interface ResetConfirmDialogProps extends ModalProps {
@@ -12,7 +12,7 @@ export const ResetConfirmDialog: React.FC<ResetConfirmDialogProps> = ({
   onClose,
   onConfirm
 }) => {
-  const { t } = useLanguage();
+  const { t } = useLingui();
 
   if (!isOpen) return null;
 
@@ -20,14 +20,14 @@ export const ResetConfirmDialog: React.FC<ResetConfirmDialogProps> = ({
     <div className={styles.confirmOverlay}>
       <div className={styles.confirmDialog}>
         <div className={styles.confirmMessage}>
-          {t.resetWarning}
+          {t`This will delete all scores and cannot be undone.`}
         </div>
         <div className={styles.confirmButtons}>
           <button className={`${styles.confirmButton} ${styles.confirmButtonReset}`} onClick={onConfirm}>
-            {t.reset}
+            {t`Reset`}
           </button>
           <button className={`${styles.confirmButton} ${styles.confirmButtonCancel}`} onClick={onClose}>
-            {t.cancel}
+            {t`Cancel`}
           </button>
         </div>
       </div>

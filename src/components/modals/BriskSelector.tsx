@@ -1,7 +1,7 @@
 import React from 'react';
 import { X } from 'lucide-react';
+import { useLingui } from '@lingui/react/macro';
 import type { ModalProps } from '@/types';
-import { useLanguage } from '@/i18n/LanguageContext';
 import { ICON_SIZE, MAX_BRISK_VALUE } from '@/utils/constants';
 import styles from '@/components/Brisker.module.css';
 
@@ -14,7 +14,7 @@ export const BriskSelector: React.FC<BriskSelectorProps> = ({
   onClose,
   onBriskSelect
 }) => {
-  const { t } = useLanguage();
+  const { t } = useLingui();
 
   if (!isOpen) return null;
 
@@ -22,7 +22,7 @@ export const BriskSelector: React.FC<BriskSelectorProps> = ({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <h3 className={styles.modalTitle}>{t.selectBrisk}</h3>
+          <h3 className={styles.modalTitle}>{t`Select Brisk`}</h3>
           <button className={styles.modalClose} onClick={onClose}>
             <X size={ICON_SIZE} />
           </button>

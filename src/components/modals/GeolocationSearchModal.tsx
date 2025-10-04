@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { MapPin, X, Users, AlertCircle } from 'lucide-react';
+import { useLingui } from '@lingui/react/macro';
 import type { ModalProps, Player } from '@/types';
 import { GameServerAPI } from '@/services/gameServer';
 import { getGeolocation } from '@/utils/deviceUtils';
-import { useLanguage } from '@/i18n/LanguageContext';
 import styles from '@/components/Brisker.module.css';
 
 interface GeolocationSearchModalProps extends ModalProps {
@@ -15,7 +15,7 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
   onClose,
   onPlayWith
 }) => {
-  const { t } = useLanguage();
+  const { t } = useLingui();
   const [nearbyPlayers, setNearbyPlayers] = useState<Player[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
@@ -56,22 +56,22 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
         // Handle standard geolocation errors
         switch (error.code) {
           case GeolocationPositionError.PERMISSION_DENIED:
-            setError(t.locationAccessDenied);
+            setError(t`Location access denied. Please enable location services and try again.`);
             break;
           case GeolocationPositionError.POSITION_UNAVAILABLE:
-            setError(t.locationUnavailable);
+            setError(t`Location information unavailable. Please try again.`);
             break;
           case GeolocationPositionError.TIMEOUT:
-            setError(t.locationTimeout);
+            setError(t`Location request timed out. Please try again.`);
             break;
           default:
-            setError(t.locationError);
+            setError(t`Failed to get your location. Please try again.`);
         }
       } else if (error instanceof Error) {
         // Handle our enhanced error messages
         setError(error.message);
       } else {
-        setError(t.searchNearbyError);
+        setError(t`Failed to search for nearby players. Please try again.`);
       }
       setNearbyPlayers([]);
       setHasSearched(true);
@@ -98,7 +98,7 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <h3 className={styles.modalTitle}>{t.findNearbyPlayersTitle}</h3>
+          <h3 className={styles.modalTitle}>{t`Find Nearby Players`}</h3>
           <button className={styles.modalClose} onClick={handleClose}>
             <X size={24} />
           </button>
@@ -108,16 +108,16 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
           {!hasSearched && !isSearching && (
             <div className={styles.geolocationPrompt}>
               <MapPin size={48} className={styles.geolocationIcon} />
-              <p>{t.findPlayersNearLocation}</p>
+              <p>{t`Find players near your location`}</p>
               <p className={styles.geolocationNote}>
-                {t.thisWillRequestLocation}
+                {t`This will request access to your location to find nearby players`}
               </p>
               <button
                 className={styles.locationSearchButton}
                 onClick={handleLocationSearch}
               >
                 <MapPin size={20} />
-                {t.searchNearbyPlayersButton}
+                {t`Search Nearby Players`}
               </button>
             </div>
           )}
@@ -126,7 +126,7 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
             <div className={styles.searchingIndicator}>
               <MapPin size={24} className={styles.searchingIcon} />
 			  <br />
-              {t.gettingLocationAndSearching}
+              {t`Getting your location and searching for nearby players...`}
             </div>
           )}
           
@@ -141,7 +141,7 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
                   className={styles.retryButton}
                   onClick={handleLocationSearch}
                 >
-                  {t.tryAgain}
+                  {t`Try Again`}
                 </button>
               </div>
             </div>
@@ -153,7 +153,7 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
                 <>
                   <h4 className={styles.searchResultsTitle}>
                     <Users size={18} />
-                    {t.nearbyPlayersFound} ({nearbyPlayers.length}):
+                    {t`nearby players found`} ({nearbyPlayers.length}):
                   </h4>
                   <div className={styles.playerList}>
                     {nearbyPlayers.map((player) => (
@@ -163,7 +163,7 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
                           <div className={styles.playerID}>ID: {player.playerID}</div>
                           {player.distance !== undefined && (
                             <div className={styles.playerDistance}>
-                              📍 {player.distance.toFixed(1)} {t.kmAway}
+                              📍 {player.distance.toFixed(1)} {t`km away`}
                             </div>
                           )}
                         </div>
@@ -171,7 +171,7 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
                           className={styles.playButton}
                           onClick={() => handlePlayWith(player)}
                         >
-                          {t.playButton}
+                          {t`Play`}
                         </button>
                       </div>
                     ))}
@@ -180,12 +180,12 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
               ) : (
                 <div className={styles.noResults}>
                   <MapPin size={24} />
-                  {t.noNearbyPlayersFound}
+                  {t`No nearby players found`}
                   <button
                     className={styles.retryButton}
                     onClick={handleLocationSearch}
                   >
-                    {t.searchAgain}
+                    {t`Search Again`}
                   </button>
                 </div>
               )}
@@ -198,7 +198,7 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
             className={`${styles.modalButton} ${styles.modalButtonCancel}`} 
             onClick={handleClose}
           >
-            {t.close}
+            {t`Close`}
           </button>
         </div>
       </div>

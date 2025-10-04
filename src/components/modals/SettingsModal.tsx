@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { X, Copy, Share, Search, MapPin, Edit, Save, Check } from 'lucide-react';
+import { Trans, useLingui } from '@lingui/react/macro';
 import type { ModalProps, Player } from '@/types';
 import { useLanguage } from '@/i18n/LanguageContext';
-import { availableLanguages } from '@/i18n/languages';
+import { availableLanguages } from '@/i18n/config';
 import { ICON_SIZE } from '@/utils/constants';
 import { getPlayerSettings, updatePlayerSetting } from '@/utils/localStorage';
 import { GameServerAPI } from '@/services/gameServer';
@@ -29,7 +30,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   winThreshold,
   onWinThresholdChange
 }) => {
-  const { language, setLanguage, t, formatNumber } = useLanguage();
+  const { t } = useLingui();
+  const { language, setLanguage, formatNumber } = useLanguage();
   const [playerSettings, setPlayerSettings] = useState(getPlayerSettings());
   const [isEditingName, setIsEditingName] = useState(false);
   const [tempName, setTempName] = useState(playerSettings.name);
@@ -115,7 +117,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     if (!id) return;
     const shareUrl = buildShareUrl(id);
     const shareData = {
-      title: t.shareTitle,
+      title: t`Join me in Bezique!`,
       url: shareUrl
     };
     
@@ -207,7 +209,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          <h3 className={styles.modalTitle}>{t.settings}</h3>
+          <h3 className={styles.modalTitle}><Trans>Settings</Trans></h3>
           <button className={styles.modalClose} onClick={onClose}>
             <X size={ICON_SIZE} />
           </button>
@@ -216,41 +218,44 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         <div className={styles.settingsContent}>
           {/* Player ID Section */}
           <div className={styles.settingsSection}>
-            <h4 className={styles.settingsTitle}>{t.playerIDSectionLabel || t.playerIDSection}</h4>
+            <h4 className={styles.settingsTitle}><Trans>Player ID</Trans></h4>
             <div className={styles.playerIDSection}>
-              <div className={`${styles.playerIDDisplay} ${styles.playerIDCentered}`} aria-label={t.yourPlayerIDLabel || 'Your Player ID'}>
+              <div
+                className={`${styles.playerIDDisplay} ${styles.playerIDCentered}`}
+                aria-label={t`Your Player ID`}
+              >
                 <span className={styles.playerIDText}>{playerSettings.playerID}</span>
               </div>
-              
+
               <div className={styles.playerIDActions}>
                 <button
                   className={styles.playerActionButton}
                   onClick={handleCopyPlayerID}
-                  title={t.copyTooltip}
+                  title={t`Copy Player ID`}
                 >
                   {copySuccess ? <Check size={18} /> : <Copy size={18} />}
                 </button>
-                
+
                 <button
                   className={styles.playerActionButton}
                   onClick={handleSharePlayerID}
-                  title={t.shareTooltip}
+                  title={t`Share Player ID`}
                 >
                   {shareSuccess ? <Check size={18} /> : <Share size={18} />}
                 </button>
-                
+
                 <button
                   className={styles.playerActionButton}
                   onClick={onPlayerSearchOpen}
-                  title={t.searchTooltip}
+                  title={t`Search Players`}
                 >
                   <Search size={18} />
                 </button>
-                
+
                 <button
                   className={styles.playerActionButton}
                   onClick={onGeolocationSearchOpen}
-                  title={t.locationTooltip}
+                  title={t`Find Nearby Players`}
                 >
                   <MapPin size={18} />
                 </button>
@@ -260,7 +265,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
           {/* Player Name Section */}
           <div className={styles.settingsSection}>
-            <h4 className={styles.settingsTitle}>{t.nameLabel || t.playerName}</h4>
+            <h4 className={styles.settingsTitle}><Trans>Player Name</Trans></h4>
             <div className={styles.playerNameSection}>
               {isEditingName ? (
                 <input
@@ -269,18 +274,18 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                   onChange={(e) => setTempName(e.target.value)}
                   onKeyDown={handleNameKeyPress}
                   className={styles.playerNameInput}
-                  placeholder={t.enterPlayerName}
+                  placeholder={t`Enter your player name`}
                   maxLength={20}
                   autoFocus
                 />
               ) : (
                 <span className={styles.playerNameDisplay}>{playerSettings.name}</span>
               )}
-              
+
               <button
                 className={styles.playerNameEditButton}
                 onClick={handleEditName}
-                title={isEditingName ? t.saveTooltip : t.editTooltip}
+                title={isEditingName ? t`Save Name` : t`Edit Name`}
               >
                 {isEditingName ? <Save size={18} /> : <Edit size={18} />}
               </button>
@@ -289,9 +294,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
           {/* Language Section */}
           <div className={styles.settingsSection}>
-            <h4 className={styles.settingsTitle}>{t.language}</h4>
+            <h4 className={styles.settingsTitle}><Trans>Language</Trans></h4>
             <div className={styles.settingsOption}>
-              <span className={styles.settingsLabel}>{t.language}</span>
+              <span className={styles.settingsLabel}><Trans>Language</Trans></span>
               <select
                 className={styles.languageSelect}
                 value={language}
@@ -308,7 +313,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
           {/* Win Threshold Section */}
           <div className={styles.settingsSection}>
-            <h4 className={styles.settingsTitle}>{t.winThreshold}</h4>
+            <h4 className={styles.settingsTitle}><Trans>Target Score</Trans></h4>
             <div className={styles.winThresholdSection}>
               {isEditingWinThreshold ? (
                 <input
@@ -330,18 +335,18 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               <button
                 className={styles.playerNameEditButton}
                 onClick={toggleWinThresholdEdit}
-                title={isEditingWinThreshold ? t.saveTooltip : t.editTooltip}
+                title={isEditingWinThreshold ? t`Save Name` : t`Edit Name`}
               >
                 {isEditingWinThreshold ? <Save size={18} /> : <Edit size={18} />}
               </button>
             </div>
           </div>
-          
+
           {/* Audio Section */}
           <div className={styles.settingsSection}>
-            <h4 className={styles.settingsTitle}>{t.audioSection}</h4>
+            <h4 className={styles.settingsTitle}><Trans>Audio</Trans></h4>
             <div className={styles.settingsOption}>
-              <span className={styles.settingsLabel}>{t.soundEffects}</span>
+              <span className={styles.settingsLabel}><Trans>Sound Effects</Trans></span>
               <label className={styles.switch}>
                 <input
                   type="checkbox"
@@ -353,10 +358,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             </div>
           </div>
         </div>
-        
+
         <div className={styles.modalFooter}>
           <button className={`${styles.modalButton} ${styles.modalButtonCancel}`} onClick={onClose}>
-            {t.close}
+            <Trans>Close</Trans>
           </button>
         </div>
       </div>

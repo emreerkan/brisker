@@ -1,111 +1,138 @@
-import React, { createContext, useContext, useState, useCallback } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
-import { translations } from './languages';
-import type { Translation } from './types';
-
-const DEFAULT_LANGUAGE = 'en';
-const SUPPORTED_LANGUAGES = new Set(Object.keys(translations));
-const FALLBACK_LANGUAGE = translations[DEFAULT_LANGUAGE]
-  ? DEFAULT_LANGUAGE
-  : Object.keys(translations)[0] || DEFAULT_LANGUAGE;
+import { i18n } from '@lingui/core';
+import { I18nProvider } from '@lingui/react';
+import { useLingui } from '@lingui/react/macro';
+import { availableLanguages, SUPPORTED_LANGUAGE_CODES, DEFAULT_LANGUAGE } from './config';
 
 interface LanguageContextType {
   language: string;
   setLanguage: (lang: string) => void;
-  t: Translation;
   formatNumber: (num: number) => string;
   formatTime: (date: Date) => string;
+  availableLanguages: typeof availableLanguages;
+  loading: boolean;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+
+const loadCatalog = async (locale: string) => {
+  const normalized = SUPPORTED_LANGUAGE_CODES.includes(locale) ? locale : DEFAULT_LANGUAGE;
+
+  if (i18n.locale === normalized && Object.keys(i18n.messages).length > 0) {
+    return normalized;
+  }
+
+  const catalog = await import(
+    /* @vite-ignore */ `../locales/${normalized}/messages.mjs`
+  );
+
+  i18n.load(normalized, catalog.messages);
+  i18n.activate(normalized);
+
+  return normalized;
+};
 
 interface LanguageProviderProps {
   children: ReactNode;
 }
 
 export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) => {
-  const [language, setLanguageState] = useState<string>(FALLBACK_LANGUAGE);
+  const [language, setLanguageState] = useState<string>(DEFAULT_LANGUAGE);
+  const [loading, setLoading] = useState<boolean>(true);
+  const isMountedRef = useRef(false);
 
-  const setLanguage = useCallback((lang: string) => {
-    const nextLanguage = SUPPORTED_LANGUAGES.has(lang) ? lang : FALLBACK_LANGUAGE;
-    setLanguageState(nextLanguage);
-    localStorage.setItem('bezique-language', nextLanguage);
+  const applyLanguage = useCallback(async (locale: string) => {
+    const resolved = await loadCatalog(locale);
+    setLanguageState(resolved);
+    setLoading(false);
+    return resolved;
   }, []);
 
-  // Initialize language from localStorage
-  React.useEffect(() => {
-    const savedLanguage = localStorage.getItem('bezique-language');
-    if (savedLanguage && SUPPORTED_LANGUAGES.has(savedLanguage)) {
-      setLanguageState(savedLanguage);
-      return;
-    }
+  // Initial language selection
+  useEffect(() => {
+    if (isMountedRef.current) return;
+    isMountedRef.current = true;
 
-    // Fall back to browser preference when no saved language exists
-    if (typeof window !== 'undefined') {
-      const browserLanguages = window.navigator.languages && window.navigator.languages.length > 0
-        ? window.navigator.languages
-        : [window.navigator.language];
+    const initialise = async () => {
+      const saved = typeof window !== 'undefined' ? localStorage.getItem('bezique-language') : null;
+      if (saved && SUPPORTED_LANGUAGE_CODES.includes(saved)) {
+        await applyLanguage(saved);
+        return;
+      }
 
-      for (const lang of browserLanguages) {
-        const baseLang = lang?.split('-')[0]?.toLowerCase();
-        if (baseLang && SUPPORTED_LANGUAGES.has(baseLang)) {
-          setLanguageState(baseLang);
-          return;
+      if (typeof window !== 'undefined') {
+        const browserLanguages = window.navigator.languages && window.navigator.languages.length > 0
+          ? window.navigator.languages
+          : [window.navigator.language];
+
+        for (const lang of browserLanguages) {
+          const baseLang = lang?.split('-')[0]?.toLowerCase();
+          if (baseLang && SUPPORTED_LANGUAGE_CODES.includes(baseLang)) {
+            await applyLanguage(baseLang);
+            return;
+          }
         }
       }
-    }
 
-    setLanguageState(FALLBACK_LANGUAGE);
-  }, []);
+      await applyLanguage(DEFAULT_LANGUAGE);
+    };
 
-  const t = translations[language] || translations[FALLBACK_LANGUAGE];
+    void initialise();
+  }, [applyLanguage]);
 
-  // Update document title and lang attribute when language changes
-  React.useEffect(() => {
-    document.title = t.appName;
+  const setLanguage = useCallback((locale: string) => {
+    const normalized = SUPPORTED_LANGUAGE_CODES.includes(locale) ? locale : DEFAULT_LANGUAGE;
+    localStorage.setItem('bezique-language', normalized);
+    void applyLanguage(normalized);
+  }, [applyLanguage]);
+
+  useEffect(() => {
+    if (loading) return;
     document.documentElement.lang = language;
-  }, [t.appName, language]);
+    document.title = i18n._(`Brisker`);
+  }, [language, loading]);
 
   const formatNumber = useCallback((num: number): string => {
-    if (language === 'tr') {
-      // Turkish uses dot as thousands separator
-      return num.toLocaleString('tr-TR');
-    } else {
-      // English uses comma as thousands separator
-      return num.toLocaleString('en-US');
-    }
+    const locale = language === 'tr' ? 'tr-TR' : 'en-US';
+    return num.toLocaleString(locale);
   }, [language]);
 
   const formatTime = useCallback((date: Date): string => {
     if (language === 'tr') {
-      // Turkish uses 24-hour format
-      return date.toLocaleTimeString('tr-TR', { 
-        hour: '2-digit', 
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false 
-      });
-    } else {
-      // English uses 12-hour format
-      return date.toLocaleTimeString('en-US', {
+      return date.toLocaleTimeString('tr-TR', {
         hour: '2-digit',
         minute: '2-digit',
-        hour12: true
+        second: '2-digit',
+        hour12: false,
       });
     }
+
+    return date.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true,
+    });
   }, [language]);
 
-  const value: LanguageContextType = {
+  const contextValue = useMemo<LanguageContextType>(() => ({
     language,
     setLanguage,
-    t,
     formatNumber,
-    formatTime
-  };
+    formatTime,
+    availableLanguages,
+    loading,
+  }), [language, setLanguage, formatNumber, formatTime, loading]);
+
+  if (loading && i18n.locale !== DEFAULT_LANGUAGE) {
+    // Wait until initial catalog is loaded
+    return null;
+  }
 
   return (
-    <LanguageContext.Provider value={value}>
-      {children}
+    <LanguageContext.Provider value={contextValue}>
+      <I18nProvider i18n={i18n}>{children}</I18nProvider>
     </LanguageContext.Provider>
   );
 };

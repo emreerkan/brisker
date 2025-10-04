@@ -1,5 +1,6 @@
 import React from 'react';
 import Confetti from 'react-confetti';
+import { useLingui } from '@lingui/react/macro';
 import type { ModalProps, GameState, WindowSize } from '@/types';
 import { useLanguage } from '@/i18n/LanguageContext';
 import styles from '@/components/Brisker.module.css';
@@ -17,7 +18,8 @@ export const CongratulationsModal: React.FC<CongratulationsModalProps> = ({
   windowSize,
   onNewGame
 }) => {
-  const { t, formatNumber } = useLanguage();
+  const { t } = useLingui();
+  const { formatNumber } = useLanguage();
 
   if (!isOpen) return null;
 
@@ -26,10 +28,10 @@ export const CongratulationsModal: React.FC<CongratulationsModalProps> = ({
       <div className={styles.congratulationsOverlay}>
         <div className={styles.congratulationsContent}>
           <div className={styles.congratulationsTitle}>
-            {t.congratulations}
+            {t`Congratulations!`}
           </div>
           <div className={styles.congratulationsMessage}>
-            {t.congratulationsMessage}
+            {t`You've reached the target score! Fantastic game!`}
           </div>
           <div className={styles.congratulationsScore}>
             {formatNumber(gameState.score)}
@@ -39,13 +41,13 @@ export const CongratulationsModal: React.FC<CongratulationsModalProps> = ({
               className={`${styles.congratulationsButton} ${styles.congratulationsButtonNewGame}`}
               onClick={onNewGame}
             >
-              {t.newGame}
+              {t`New Game`}
             </button>
             <button 
               className={styles.congratulationsButton}
               onClick={onClose}
             >
-              {t.close}
+              {t`Close`}
             </button>
           </div>
         </div>

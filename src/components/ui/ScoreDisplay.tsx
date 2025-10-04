@@ -1,5 +1,6 @@
 import React from 'react';
 import { Undo2 } from 'lucide-react';
+import { useLingui } from '@lingui/react/macro';
 import type { GameState } from '@/types';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { ICON_SIZE } from '@/utils/constants';
@@ -20,7 +21,8 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
   onHistoryClick,
   getLastThreeScores
 }) => {
-  const { t, formatNumber } = useLanguage();
+  const { t } = useLingui();
+  const { formatNumber } = useLanguage();
   const lastThreeScores = getLastThreeScores();
 
   return (
@@ -37,7 +39,7 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
         className={styles.undo}
         onClick={onUndo}
         disabled={isProcessing || gameState.history.length === 0}
-        title={t.undoLastScoreTooltip}
+        title={t`Undo last score`}
       >
         <Undo2 size={ICON_SIZE} />
       </button>
@@ -46,7 +48,7 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
         className={styles.last}
         onClick={onHistoryClick}
         disabled={isProcessing}
-        title={t.showScoreHistoryTooltip}
+        title={t`Show score history`}
       >
         <div className={styles.lastTotalCount}>
           {gameState.history.length}
