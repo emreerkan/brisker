@@ -2,6 +2,7 @@ import React from 'react';
 import { X } from 'lucide-react';
 import { useLingui } from '@lingui/react/macro';
 import { ICON_SIZE } from '@/utils/constants';
+import packageJson from '../../../package.json';
 import styles from '@/components/Brisker.module.css';
 
 interface InfoModalProps {
@@ -27,7 +28,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
         <div className={styles.infoContent}>
           <div className={styles.appInfo}>
             <div><strong>{t`Brisker`}</strong></div>
-            <div>{t`Version`} 1.0.0</div>
+            <div>{t`Version`} {packageJson.version}</div>
             <div>{t`Score keeping application for the Bezique card game`}</div>
             <div>{t`Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot`}</div>
             <div>{t`Build Date: September 2025`}</div>
@@ -35,12 +36,26 @@ export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
             <div className={styles.featuresSection}>
               <h4>{t`Features`}:</h4>
               <ul className={styles.featuresList}>
-                <li>{t`Score tracking and addition`}</li>
-                <li>{t`Undo last score`}</li>
-                <li>{t`View score history`}</li>
-                <li>{t`Brisk calculation (brisk x 20)`}</li>
+                <li>{t`Digital score tracking with intuitive touch interface`}</li>
+                <li>{t`Real-time multiplayer via WebSocket connection`}</li>
+                <li>{t`Offline mode for network-free play`}</li>
+                <li>{t`Score history and undo moves`}</li>
+                <li>{t`Dealer tracking with visual indicators`}</li>
+                <li>{t`Progressive Web App - install on any device`}</li>
+                <li>{t`Multilingual support`}</li>
+                <li>{t`Cross-platform compatibility`}</li>
+                <li>{t`Network discovery for nearby players`}</li>
+                <li>{t`Persistent storage with auto-save`}</li>
+                <li>{t`Brisque calculation`}</li>
                 <li>{t`Sound effects`}</li>
-                <li>{t`Reset game`}</li>
+              </ul>
+            </div>
+
+            <div className={styles.featuresSection}>
+              <h4>{t`Translators`}:</h4>
+              <ul className={styles.featuresList}>
+                <li>{t`English (EN), Turkish (TR)`} - Emre Erkan</li>
+                <li>{t`Dutch (NL)`} - Peter Smits</li>
               </ul>
             </div>
           </div>

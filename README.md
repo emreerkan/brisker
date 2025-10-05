@@ -104,6 +104,12 @@ For setup and usage instructions, refer to the server's README.
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
 
+## 🌍 Translations
+
+Special thanks to the following contributors for their translation work:
+
+- **Dutch (nl)** - Peter Smits
+
 ## 📄 License
 
 This project is licensed under the [MIT License](./LICENSE).

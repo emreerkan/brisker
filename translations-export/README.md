@@ -6,6 +6,7 @@ This directory contains PO files for translation.
 - `brisker.pot` - Translation template (use this for new languages)
 - `en.po` - EN translations
 - `tr.po` - TR translations
+- `nl.po` - NL translations
 
 ## How to translate:
 

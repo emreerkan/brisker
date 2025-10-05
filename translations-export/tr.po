@@ -33,16 +33,16 @@ msgstr "geride"
 msgid "Brisk"
 msgstr "Brisk"
 
-#: src/components/modals/InfoModal.tsx:41
-msgid "Brisk calculation (brisk x 20)"
-msgstr "Brisk hesaplama (brisk x 20)"
-
-#: src/components/modals/InfoModal.tsx:21
-#: src/components/modals/InfoModal.tsx:29
+#: src/components/modals/InfoModal.tsx:22
+#: src/components/modals/InfoModal.tsx:30
 msgid "Brisker"
 msgstr "Brisker"
 
-#: src/components/modals/InfoModal.tsx:33
+#: src/components/modals/InfoModal.tsx:49
+msgid "Brisque calculation"
+msgstr "Brisk hesaplama"
+
+#: src/components/modals/InfoModal.tsx:34
 msgid "Build Date: September 2025"
 msgstr "Yapım Tarihi: Eylül 2025"
 
@@ -57,7 +57,7 @@ msgstr "Klasik Bezik"
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
 #: src/components/modals/HistoryModal.tsx:69
-#: src/components/modals/InfoModal.tsx:51
+#: src/components/modals/InfoModal.tsx:66
 #: src/components/modals/PlayerSearchModal.tsx:158
 #: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
@@ -71,9 +71,21 @@ msgstr "Tebrikler!"
 msgid "Copy Player ID"
 msgstr "Oyuncu ID'sini Kopyala"
 
-#: src/components/modals/InfoModal.tsx:32
+#: src/components/modals/InfoModal.tsx:46
+msgid "Cross-platform compatibility"
+msgstr "Çapraz platform uyumluluğu"
+
+#: src/components/modals/InfoModal.tsx:43
+msgid "Dealer tracking with visual indicators"
+msgstr "Görsel göstergelerle dağıtıcı takibi"
+
+#: src/components/modals/InfoModal.tsx:33
 msgid "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
 msgstr "Emre Erkan tarafından Claude Sonnet 4 ve GitHub Copilot ile geliştirildi"
+
+#: src/components/modals/InfoModal.tsx:39
+msgid "Digital score tracking with intuitive touch interface"
+msgstr "Sezgisel dokunmatik arayüz ile dijital skor takibi"
 
 #: src/components/modals/SettingsModal.tsx:55
 msgid "Disabled while connected to an opponent"
@@ -83,10 +95,18 @@ msgstr "Bir rakibe bağlıyken devre dışı"
 msgid "Disconnect opponent"
 msgstr "Rakibi kes"
 
+#: src/components/modals/InfoModal.tsx:58
+msgid "Dutch (NL)"
+msgstr "Hollandaca (NL)"
+
 #: src/components/modals/SettingsModal.tsx:319
 #: src/components/modals/SettingsModal.tsx:393
 msgid "Edit Name"
 msgstr "Adı Düzenle"
+
+#: src/components/modals/InfoModal.tsx:57
+msgid "English (EN), Turkish (TR)"
+msgstr "İngilizce (EN), Türkçe (TR)"
 
 #: src/components/modals/PlayerSearchModal.tsx:93
 msgid "Enter Player ID or Name..."
@@ -104,7 +124,7 @@ msgstr "Konumunuz alınamadı. Lütfen tekrar deneyin."
 msgid "Failed to search for nearby players. Please try again."
 msgstr "Yakındaki oyuncular aranırken hata oluştu. Lütfen tekrar deneyin."
 
-#: src/components/modals/InfoModal.tsx:36
+#: src/components/modals/InfoModal.tsx:37
 msgid "Features"
 msgstr "Özellikler"
 
@@ -150,9 +170,17 @@ msgstr "Konum bilgisi kullanılamıyor. Lütfen tekrar deneyin."
 msgid "Location request timed out. Please try again."
 msgstr "Konum isteği zaman aşımına uğradı. Lütfen tekrar deneyin."
 
+#: src/components/modals/InfoModal.tsx:45
+msgid "Multilingual support"
+msgstr "Çok dil desteği"
+
 #: src/components/modals/GeolocationSearchModal.tsx:156
 msgid "nearby players found"
 msgstr "yakındaki oyuncu bulundu"
+
+#: src/components/modals/InfoModal.tsx:47
+msgid "Network discovery for nearby players"
+msgstr "Konum ile yakındaki oyuncuları arama"
 
 #: src/components/modals/CongratulationsModal.tsx:44
 msgid "New Game"
@@ -170,9 +198,17 @@ msgstr "Oyuncu bulunamadı"
 msgid "No scores recorded yet"
 msgstr "Henüz skor kaydedilmedi"
 
+#: src/components/modals/InfoModal.tsx:41
+msgid "Offline mode for network-free play"
+msgstr "Ağdan bağımsız oyun için çevrimdışı mod"
+
 #: src/components/Brisker.tsx:439
 msgid "Opponent"
 msgstr "Rakip"
+
+#: src/components/modals/InfoModal.tsx:48
+msgid "Persistent storage with auto-save"
+msgstr "Otomatik kaydetme ile kalıcı depolama"
 
 #: src/components/modals/GeolocationSearchModal.tsx:174
 #: src/components/modals/PlayerSearchModal.tsx:138
@@ -195,13 +231,17 @@ msgstr "Oyuncu Adı"
 msgid "players found"
 msgstr "oyuncu bulundu"
 
+#: src/components/modals/InfoModal.tsx:44
+msgid "Progressive Web App - install on any device"
+msgstr "Aşamalı Web Uygulaması - herhangi bir cihaza yükleyin"
+
+#: src/components/modals/InfoModal.tsx:40
+msgid "Real-time multiplayer via WebSocket connection"
+msgstr "WebSocket bağlantısı üzerinden gerçek zamanlı çok oyunculu"
+
 #: src/components/modals/ResetConfirmDialog.tsx:27
 msgid "Reset"
 msgstr "Sıfırla"
-
-#: src/components/modals/InfoModal.tsx:43
-msgid "Reset game"
-msgstr "Oyunu sıfırla"
 
 #: src/components/ui/ActionButtons.tsx:40
 msgid "Reset score"
@@ -216,13 +256,13 @@ msgstr "Adı Kaydet"
 msgid "Score History"
 msgstr "Skor Geçmişi"
 
-#: src/components/modals/InfoModal.tsx:31
+#: src/components/modals/InfoModal.tsx:42
+msgid "Score history and undo moves"
+msgstr "Skor geçmişi ve hareketleri geri alma"
+
+#: src/components/modals/InfoModal.tsx:32
 msgid "Score keeping application for the Bezique card game"
 msgstr "Bezik kart oyunu için skor tutma uygulaması"
-
-#: src/components/modals/InfoModal.tsx:38
-msgid "Score tracking and addition"
-msgstr "Skor takibi ve ekleme"
 
 #: src/components/modals/GeolocationSearchModal.tsx:188
 msgid "Search Again"
@@ -262,7 +302,7 @@ msgstr "Oyuncu ID'sini Paylaş"
 msgid "Show score history"
 msgstr "Skor geçmişini göster"
 
-#: src/components/modals/InfoModal.tsx:42
+#: src/components/modals/InfoModal.tsx:50
 msgid "Sound effects"
 msgstr "Ses efektleri"
 
@@ -290,6 +330,10 @@ msgstr "berabere"
 msgid "Total Score"
 msgstr "Toplam Skor"
 
+#: src/components/modals/InfoModal.tsx:55
+msgid "Translators"
+msgstr "Çevirmenler"
+
 #: src/components/modals/GeolocationSearchModal.tsx:144
 msgid "Try Again"
 msgstr "Tekrar Dene"
@@ -298,7 +342,6 @@ msgstr "Tekrar Dene"
 msgid "Turkish Bezique"
 msgstr "Türk Üsulü Bezik"
 
-#: src/components/modals/InfoModal.tsx:39
 #: src/components/ui/ScoreDisplay.tsx:48
 msgid "Undo last score"
 msgstr "Son skoru geri al"
@@ -308,13 +351,9 @@ msgstr "Son skoru geri al"
 msgid "Variant"
 msgstr "Varyant"
 
-#: src/components/modals/InfoModal.tsx:30
+#: src/components/modals/InfoModal.tsx:31
 msgid "Version"
 msgstr "Sürüm"
-
-#: src/components/modals/InfoModal.tsx:40
-msgid "View score history"
-msgstr "Skor geçmişini görüntüle"
 
 #: src/components/modals/CongratulationsModal.tsx:34
 msgid "You've reached the target score! Fantastic game!"

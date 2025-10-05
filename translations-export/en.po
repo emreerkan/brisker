@@ -33,16 +33,16 @@ msgstr "behind"
 msgid "Brisk"
 msgstr "Brisk"
 
-#: src/components/modals/InfoModal.tsx:41
-msgid "Brisk calculation (brisk x 20)"
-msgstr "Brisk calculation (brisk x 20)"
-
-#: src/components/modals/InfoModal.tsx:21
-#: src/components/modals/InfoModal.tsx:29
+#: src/components/modals/InfoModal.tsx:22
+#: src/components/modals/InfoModal.tsx:30
 msgid "Brisker"
 msgstr "Brisker"
 
-#: src/components/modals/InfoModal.tsx:33
+#: src/components/modals/InfoModal.tsx:49
+msgid "Brisque calculation"
+msgstr "Brisque calculation"
+
+#: src/components/modals/InfoModal.tsx:34
 msgid "Build Date: September 2025"
 msgstr "Build Date: September 2025"
 
@@ -57,7 +57,7 @@ msgstr "Classic Bezique"
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
 #: src/components/modals/HistoryModal.tsx:69
-#: src/components/modals/InfoModal.tsx:51
+#: src/components/modals/InfoModal.tsx:66
 #: src/components/modals/PlayerSearchModal.tsx:158
 #: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
@@ -71,9 +71,21 @@ msgstr "Congratulations!"
 msgid "Copy Player ID"
 msgstr "Copy Player ID"
 
-#: src/components/modals/InfoModal.tsx:32
+#: src/components/modals/InfoModal.tsx:46
+msgid "Cross-platform compatibility"
+msgstr "Cross-platform compatibility"
+
+#: src/components/modals/InfoModal.tsx:43
+msgid "Dealer tracking with visual indicators"
+msgstr "Dealer tracking with visual indicators"
+
+#: src/components/modals/InfoModal.tsx:33
 msgid "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
 msgstr "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
+
+#: src/components/modals/InfoModal.tsx:39
+msgid "Digital score tracking with intuitive touch interface"
+msgstr "Digital score tracking with intuitive touch interface"
 
 #: src/components/modals/SettingsModal.tsx:55
 msgid "Disabled while connected to an opponent"
@@ -83,10 +95,18 @@ msgstr "Disabled while connected to an opponent"
 msgid "Disconnect opponent"
 msgstr "Disconnect opponent"
 
+#: src/components/modals/InfoModal.tsx:58
+msgid "Dutch (NL)"
+msgstr "Dutch (NL)"
+
 #: src/components/modals/SettingsModal.tsx:319
 #: src/components/modals/SettingsModal.tsx:393
 msgid "Edit Name"
 msgstr "Edit Name"
+
+#: src/components/modals/InfoModal.tsx:57
+msgid "English (EN), Turkish (TR)"
+msgstr "English (EN), Turkish (TR)"
 
 #: src/components/modals/PlayerSearchModal.tsx:93
 msgid "Enter Player ID or Name..."
@@ -104,7 +124,7 @@ msgstr "Failed to get your location. Please try again."
 msgid "Failed to search for nearby players. Please try again."
 msgstr "Failed to search for nearby players. Please try again."
 
-#: src/components/modals/InfoModal.tsx:36
+#: src/components/modals/InfoModal.tsx:37
 msgid "Features"
 msgstr "Features"
 
@@ -150,9 +170,17 @@ msgstr "Location information unavailable. Please try again."
 msgid "Location request timed out. Please try again."
 msgstr "Location request timed out. Please try again."
 
+#: src/components/modals/InfoModal.tsx:45
+msgid "Multilingual support"
+msgstr "Multilingual support"
+
 #: src/components/modals/GeolocationSearchModal.tsx:156
 msgid "nearby players found"
 msgstr "nearby players found"
+
+#: src/components/modals/InfoModal.tsx:47
+msgid "Network discovery for nearby players"
+msgstr "Network discovery for nearby players"
 
 #: src/components/modals/CongratulationsModal.tsx:44
 msgid "New Game"
@@ -170,9 +198,17 @@ msgstr "No players found"
 msgid "No scores recorded yet"
 msgstr "No scores recorded yet"
 
+#: src/components/modals/InfoModal.tsx:41
+msgid "Offline mode for network-free play"
+msgstr "Offline mode for network-free play"
+
 #: src/components/Brisker.tsx:439
 msgid "Opponent"
 msgstr "Opponent"
+
+#: src/components/modals/InfoModal.tsx:48
+msgid "Persistent storage with auto-save"
+msgstr "Persistent storage with auto-save"
 
 #: src/components/modals/GeolocationSearchModal.tsx:174
 #: src/components/modals/PlayerSearchModal.tsx:138
@@ -195,13 +231,17 @@ msgstr "Player Name"
 msgid "players found"
 msgstr "players found"
 
+#: src/components/modals/InfoModal.tsx:44
+msgid "Progressive Web App - install on any device"
+msgstr "Progressive Web App - install on any device"
+
+#: src/components/modals/InfoModal.tsx:40
+msgid "Real-time multiplayer via WebSocket connection"
+msgstr "Real-time multiplayer via WebSocket connection"
+
 #: src/components/modals/ResetConfirmDialog.tsx:27
 msgid "Reset"
 msgstr "Reset"
-
-#: src/components/modals/InfoModal.tsx:43
-msgid "Reset game"
-msgstr "Reset game"
 
 #: src/components/ui/ActionButtons.tsx:40
 msgid "Reset score"
@@ -216,13 +256,13 @@ msgstr "Save Name"
 msgid "Score History"
 msgstr "Score History"
 
-#: src/components/modals/InfoModal.tsx:31
+#: src/components/modals/InfoModal.tsx:42
+msgid "Score history and undo moves"
+msgstr "Score history and undo moves"
+
+#: src/components/modals/InfoModal.tsx:32
 msgid "Score keeping application for the Bezique card game"
 msgstr "Score keeping application for the Bezique card game"
-
-#: src/components/modals/InfoModal.tsx:38
-msgid "Score tracking and addition"
-msgstr "Score tracking and addition"
 
 #: src/components/modals/GeolocationSearchModal.tsx:188
 msgid "Search Again"
@@ -262,7 +302,7 @@ msgstr "Share Player ID"
 msgid "Show score history"
 msgstr "Show score history"
 
-#: src/components/modals/InfoModal.tsx:42
+#: src/components/modals/InfoModal.tsx:50
 msgid "Sound effects"
 msgstr "Sound effects"
 
@@ -290,6 +330,10 @@ msgstr "tied"
 msgid "Total Score"
 msgstr "Total Score"
 
+#: src/components/modals/InfoModal.tsx:55
+msgid "Translators"
+msgstr "Translators"
+
 #: src/components/modals/GeolocationSearchModal.tsx:144
 msgid "Try Again"
 msgstr "Try Again"
@@ -298,7 +342,6 @@ msgstr "Try Again"
 msgid "Turkish Bezique"
 msgstr "Turkish Bezique"
 
-#: src/components/modals/InfoModal.tsx:39
 #: src/components/ui/ScoreDisplay.tsx:48
 msgid "Undo last score"
 msgstr "Undo last score"
@@ -308,13 +351,9 @@ msgstr "Undo last score"
 msgid "Variant"
 msgstr "Variant"
 
-#: src/components/modals/InfoModal.tsx:30
+#: src/components/modals/InfoModal.tsx:31
 msgid "Version"
 msgstr "Version"
-
-#: src/components/modals/InfoModal.tsx:40
-msgid "View score history"
-msgstr "View score history"
 
 #: src/components/modals/CongratulationsModal.tsx:34
 msgid "You've reached the target score! Fantastic game!"

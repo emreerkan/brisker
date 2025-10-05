@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2025-10-05
+
+### Added
+- Translations section in README.md acknowledging contributors
+- Translators section in InfoModal component
+- Dutch (NL) translation support (Many thanks to Peter Smits)
+
+### Changed
+- Updated InfoModal features section with comprehensive feature list
+
 ## [1.2.1] - 2025-10-05
 
 ### Added
