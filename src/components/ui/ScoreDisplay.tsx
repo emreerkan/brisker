@@ -12,6 +12,7 @@ interface ScoreDisplayProps {
   onUndo: () => void;
   onHistoryClick: () => void;
   getLastThreeScores: () => number[];
+  connectionStatus: 'disconnected' | 'connecting' | 'connected';
 }
 
 export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
@@ -19,7 +20,8 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
   isProcessing,
   onUndo,
   onHistoryClick,
-  getLastThreeScores
+  getLastThreeScores,
+  connectionStatus,
 }) => {
   const { t } = useLingui();
   const { formatNumber } = useLanguage();
@@ -33,6 +35,10 @@ export const ScoreDisplay: React.FC<ScoreDisplayProps> = ({
         {gameState.isDealer && (
           <span className={styles.dealerIndicator}>D</span>
         )}
+        <div
+          className={styles.connectionIndicator}
+          style={{ backgroundColor: connectionStatus === 'connected' ? '#4CAF50' : '#F44336' }}
+        />
       </div>
       
       <button

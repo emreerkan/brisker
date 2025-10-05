@@ -2,7 +2,6 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useR
 import type { ReactNode } from 'react';
 import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
-import { useLingui } from '@lingui/react/macro';
 import { availableLanguages, SUPPORTED_LANGUAGE_CODES, DEFAULT_LANGUAGE } from './config';
 
 interface LanguageContextType {
@@ -90,7 +89,6 @@ export const LanguageProvider: React.FC<LanguageProviderProps> = ({ children }) 
   useEffect(() => {
     if (loading) return;
     document.documentElement.lang = language;
-    document.title = i18n._(`Brisker`);
   }, [language, loading]);
 
   const formatNumber = useCallback((num: number): string => {

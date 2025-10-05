@@ -9,12 +9,14 @@ import styles from '@/components/Brisker.module.css';
 
 interface HistoryModalProps extends ModalProps {
   gameState: GameState;
+  briskPointValue: number;
 }
 
 export const HistoryModal: React.FC<HistoryModalProps> = ({
   isOpen,
   onClose,
-  gameState
+  gameState,
+  briskPointValue
 }) => {
   const { t } = useLingui();
   const { formatNumber, formatTime } = useLanguage();
@@ -44,8 +46,9 @@ export const HistoryModal: React.FC<HistoryModalProps> = ({
                 .slice()
                 .reverse()
                 .map((entry, index) => {
-                  const displayText = entry.type === ScoreEntryType.BRISK 
-                    ? `${formatNumber(entry.value)} (${entry.value / 20} Brisk)`
+                  const briskUnits = briskPointValue > 0 ? entry.value / briskPointValue : entry.value;
+                  const displayText = entry.type === ScoreEntryType.BRISK
+                    ? `${formatNumber(entry.value)} (${formatNumber(briskUnits)} Brisk)`
                     : formatNumber(entry.value);
                   
                   return (

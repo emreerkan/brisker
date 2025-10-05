@@ -9,7 +9,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "extract": "lingui extract",
+    "extract": "lingui extract --clean --overwrite",
     "compile": "lingui compile",
     "i18n:export": "node scripts/po-utils.js export",
     "i18n:import": "node scripts/po-utils.js import",

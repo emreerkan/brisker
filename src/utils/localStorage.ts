@@ -1,5 +1,6 @@
 import type { PlayerSettings, Player, ScoreEntry } from '@/types';
 import { DEFAULT_WIN_THRESHOLD } from '@/utils/constants';
+import { DEFAULT_VARIANT, isSupportedVariant } from '@/config/variants';
 
 const STORAGE_KEYS = {
   PLAYER_SETTINGS: 'bezique_player_settings'
@@ -56,11 +57,22 @@ export const getPlayerSettings = (): PlayerSettings => {
     const stored = localStorage.getItem(STORAGE_KEYS.PLAYER_SETTINGS);
     if (stored) {
       const settings = JSON.parse(stored) as PlayerSettings;
+      let requiresPersist = false;
       // Get player ID from server storage or use placeholder
       const serverPlayerID = getServerAssignedPlayerID();
       settings.playerID = serverPlayerID || settings.playerID || 'Offline';
       if (typeof settings.winThreshold !== 'number' || !Number.isFinite(settings.winThreshold) || settings.winThreshold <= 0) {
         settings.winThreshold = DEFAULT_WIN_THRESHOLD;
+        requiresPersist = true;
+      }
+
+      if (!isSupportedVariant(settings.variant)) {
+        settings.variant = DEFAULT_VARIANT;
+        requiresPersist = true;
+      }
+
+      if (requiresPersist) {
+        savePlayerSettings(settings);
       }
       return settings;
     }
@@ -74,7 +86,8 @@ export const getPlayerSettings = (): PlayerSettings => {
     playerID: serverPlayerID || 'Offline',
     name: 'Player',
     soundEnabled: true,
-    winThreshold: DEFAULT_WIN_THRESHOLD
+    winThreshold: DEFAULT_WIN_THRESHOLD,
+    variant: DEFAULT_VARIANT,
   };
   
   savePlayerSettings(defaultSettings);

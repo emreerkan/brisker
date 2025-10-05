@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { X } from 'lucide-react';
 import { useLingui } from '@lingui/react/macro';
 import { useBeziqueGame } from '@/hooks/useBeziqueGame';
 import { useWindowSize } from '@/hooks/useWindowSize';
 import { useLanguage } from '@/i18n/LanguageContext';
-import { BRISK_MULTIPLIER, DEFAULT_WIN_THRESHOLD } from '@/utils/constants';
+import { DEFAULT_WIN_THRESHOLD, MAX_BRISK_VALUE } from '@/utils/constants';
+import { DEFAULT_VARIANT, getVariantConfig, isSupportedVariant } from '@/config/variants';
 
 // UI Components
 import { ScoreDisplay, PointButtons, ActionButtons } from './ui';
@@ -21,9 +22,9 @@ import {
   GeolocationSearchModal
 } from './modals';
 
-import { getPlayerSettings, clearGameSnapshot } from '@/utils/localStorage';
+import { getPlayerSettings, clearGameSnapshot, updatePlayerSetting } from '@/utils/localStorage';
 import { GameServerAPI } from '@/services/gameServer';
-import type { Player } from '@/types';
+import type { Player, BeziqueVariantId } from '@/types';
 import { ScoreEntryType } from '@/types';
 import styles from './Brisker.module.css';
 
@@ -35,6 +36,10 @@ export const Brisker: React.FC = () => {
   const [winThresholdSetting, setWinThresholdSetting] = useState(
     initialSettingsRef.current.winThreshold ?? DEFAULT_WIN_THRESHOLD
   );
+  const [variant, setVariant] = useState<BeziqueVariantId>(
+    initialSettingsRef.current.variant ?? DEFAULT_VARIANT
+  );
+  const variantConfig = useMemo(() => getVariantConfig(variant), [variant]);
   const inviteLinkHandled = useRef(false);
   
   // Language hook
@@ -42,6 +47,9 @@ export const Brisker: React.FC = () => {
   
   // UI State
   const [selectedPoint, setSelectedPoint] = useState<number | null>(null);
+  useEffect(() => {
+    setSelectedPoint(null);
+  }, [variant]);
   
   // Modal States
   const [showBriskSelector, setShowBriskSelector] = useState(false);
@@ -82,7 +90,7 @@ export const Brisker: React.FC = () => {
     opponent,
     winThreshold: sessionWinThreshold,
     setWinThreshold: setSessionWinThreshold
-  } = useBeziqueGame(soundEnabled, () => setShowCongratulations(true), winThresholdSetting);
+  } = useBeziqueGame(soundEnabled, () => setShowCongratulations(true), winThresholdSetting, variant);
   useEffect(() => {
     const handleTriggerCongratulations = () => {
       const remaining = Math.max(sessionWinThreshold - gameState.score, 0);
@@ -148,6 +156,14 @@ export const Brisker: React.FC = () => {
       if (typeof payload.winThreshold === 'number' && Number.isFinite(payload.winThreshold)) {
         setSessionWinThreshold(Math.max(100, Math.round(payload.winThreshold)));
       }
+      if (isSupportedVariant(payload?.variant)) {
+        const nextVariant = payload.variant as BeziqueVariantId;
+        if (nextVariant !== variant) {
+          setVariant(nextVariant);
+          initialSettingsRef.current = { ...initialSettingsRef.current, variant: nextVariant };
+          updatePlayerSetting('variant', nextVariant);
+        }
+      }
     };
 
     const onResume = (payload: any) => {
@@ -168,6 +184,14 @@ export const Brisker: React.FC = () => {
       if (payload.gameState) {
         console.log('Restored game state from server (not merged automatically):', payload.gameState);
       }
+      if (isSupportedVariant(payload?.variant)) {
+        const nextVariant = payload.variant as BeziqueVariantId;
+        if (nextVariant !== variant) {
+          setVariant(nextVariant);
+          initialSettingsRef.current = { ...initialSettingsRef.current, variant: nextVariant };
+          updatePlayerSetting('variant', nextVariant);
+        }
+      }
     };
 
     const onOpponentScored = (payload: any) => {
@@ -177,9 +201,13 @@ export const Brisker: React.FC = () => {
 
     const onApplyBrisks = (payload: any) => {
       console.log('Apply brisks instruction received:', payload);
-      // payload: { briskCount }
-      // Calculate points and add as brisk type
-      const points = payload.briskCount * BRISK_MULTIPLIER;
+      // payload: { briskCount, briskPointValue? }
+      const briskCount = typeof payload?.briskCount === 'number' ? payload.briskCount : 0;
+      if (briskCount <= 0) return;
+      const briskPointValue = typeof payload?.briskPointValue === 'number'
+        ? payload.briskPointValue
+        : variantConfig.briskPointValue;
+      const points = briskCount * briskPointValue;
       addPoints(points, ScoreEntryType.BRISK, true); // isRemote = true
     };
 
@@ -266,7 +294,7 @@ export const Brisker: React.FC = () => {
       GameServerAPI.removeEventListener('player:reconnected', onPlayerReconnected);
       GameServerAPI.removeEventListener('player:offline', onPlayerOffline);
     };
-  }, [setCurrentOpponent, updateOpponentScore, opponent?.playerID, setSessionWinThreshold, closeAllModals, reset]);
+  }, [setCurrentOpponent, updateOpponentScore, opponent?.playerID, setSessionWinThreshold, closeAllModals, reset, variantConfig.briskPointValue, variant]);
 
   // Event Handlers
   const handlePointClick = (points: number) => {
@@ -278,15 +306,15 @@ export const Brisker: React.FC = () => {
 
   const handleBriskSelect = (brisk: number) => {
     setShowBriskSelector(false);
-    const pointsForPlayer = brisk * BRISK_MULTIPLIER;
+    const pointsForPlayer = brisk * variantConfig.briskPointValue;
     // Mark this entry as brisk so undo can be coordinated
     addPoints(pointsForPlayer, ScoreEntryType.BRISK);
 
     // If playing with an opponent, automatically add the remaining brisk to them
     if (opponent && opponent.playerID) {
-      const remainingBrisk = Math.max(0, (32 - brisk));
+      const remainingBrisk = Math.max(0, (MAX_BRISK_VALUE - brisk));
       // Send apply_brisks instruction to opponent so their client adds brisk locally
-      GameServerAPI.applyBrisksToOpponent(opponent.playerID, remainingBrisk);
+      GameServerAPI.applyBrisksToOpponent(opponent.playerID, remainingBrisk, variantConfig.briskPointValue);
     }
   };
 
@@ -357,7 +385,7 @@ export const Brisker: React.FC = () => {
       // Start game with selected opponent
       const targetScore = currentPlayerSettings.winThreshold ?? winThresholdSetting ?? DEFAULT_WIN_THRESHOLD;
       setSessionWinThreshold(targetScore);
-      GameServerAPI.startGameWith(player.playerID, targetScore);
+      GameServerAPI.startGameWith(player.playerID, targetScore, variant);
       
       // Close all modals and return to main screen
       setShowPlayerSearch(false);
@@ -397,12 +425,6 @@ export const Brisker: React.FC = () => {
   return (
     <div className={styles.container}>
       <div className={`${styles.gridContainer} ${opponent ? styles.withOpponent : ''} ${isProcessing ? styles.disabled : ''}`}>
-        {/* Connection Status - Simple circle indicator */}
-        <div
-          className={styles.connectionIndicator}
-          style={{ backgroundColor: connectionStatus === 'connected' ? '#4CAF50' : '#F44336' }}
-        />
-        
         {opponent && (
           <div className={styles.opponentBar}>
             <div className={styles.opponentName}>
@@ -431,12 +453,14 @@ export const Brisker: React.FC = () => {
           onUndo={undo}
           onHistoryClick={() => setShowHistory(true)}
           getLastThreeScores={getLastThreeScores}
+          connectionStatus={connectionStatus}
         />
         
         <PointButtons
           selectedPoint={selectedPoint}
           isProcessing={isProcessing}
           onPointClick={handlePointClick}
+          pointValues={variantConfig.pointValues}
         />
         
         <ActionButtons
@@ -461,6 +485,7 @@ export const Brisker: React.FC = () => {
         isOpen={showHistory}
         onClose={() => setShowHistory(false)}
         gameState={gameState}
+        briskPointValue={variantConfig.briskPointValue}
       />
       
       <SettingsModal
@@ -478,6 +503,11 @@ export const Brisker: React.FC = () => {
             setSessionWinThreshold(threshold);
           }
         }}
+        onVariantChange={(nextVariant) => {
+          initialSettingsRef.current = { ...initialSettingsRef.current, variant: nextVariant };
+          setVariant(nextVariant);
+        }}
+        isOpponentConnected={Boolean(opponent)}
       />
       
       <PlayerSearchModal

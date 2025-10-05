@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react';
-import type { ScoreEntry, GameState, Player } from '@/types';
+import type { ScoreEntry, GameState, Player, BeziqueVariantId } from '@/types';
 import { ScoreEntryType } from '@/types';
 import { DEFAULT_WIN_THRESHOLD } from '@/utils/constants';
 import { GameServerAPI } from '@/services/gameServer';
-import { saveGameSnapshot, getGameSnapshot, clearGameSnapshot } from '@/utils/localStorage';
+import { saveGameSnapshot, getGameSnapshot, clearGameSnapshot, getPlayerSettings } from '@/utils/localStorage';
 import { playSound, SoundType } from '@/utils/soundManager';
 import { useEffect } from 'react';
 
@@ -20,7 +20,8 @@ const calculateTotalScore = (history: ScoreEntry[]): number => {
 export const useBeziqueGame = (
   soundEnabled: boolean = true,
   onCongratulations?: () => void,
-  initialWinThreshold: number = DEFAULT_WIN_THRESHOLD
+  initialWinThreshold: number = DEFAULT_WIN_THRESHOLD,
+  currentVariant?: BeziqueVariantId
 ) => {
   const [gameState, setGameState] = useState<GameState>({
     score: 0,
@@ -129,12 +130,14 @@ export const useBeziqueGame = (
         const id = await GameServerAPI.connectWithRetry();
         if (cancelled) return;
         // push local stored player settings (name) as needed
-        const settings = JSON.parse(localStorage.getItem('bezique_player_settings') || '{}');
-          GameServerAPI.updatePlayerState({
-            playerID: id,
-            name: settings.name || `Player ${id}`,
-            winThreshold
-          });
+        const settings = getPlayerSettings();
+        const variantToReport = currentVariant ?? settings.variant;
+        GameServerAPI.updatePlayerState({
+          playerID: id,
+          name: settings.name || `Player ${id}`,
+          winThreshold,
+          variant: variantToReport,
+        });
       } catch (e) {
         console.warn('Could not connect to server on mount:', e);
       }
@@ -176,13 +179,16 @@ export const useBeziqueGame = (
           try {
             const id = await GameServerAPI.connectWithRetry();
             const playerID = localStorage.getItem('bezique_player_id') || id || undefined;
+            const settings = getPlayerSettings();
+            const variantToReport = currentVariant ?? settings.variant;
             GameServerAPI.updatePlayerState({
               playerID,
-              name: JSON.parse(localStorage.getItem('bezique_player_settings') || '{}').name,
+              name: settings.name,
               history: snap.history,
               total: snap.total,
               opponentID: snap.opponent?.playerID,
-              winThreshold: snap.winThreshold ?? winThreshold
+              winThreshold: snap.winThreshold ?? winThreshold,
+              variant: variantToReport,
             });
           } catch (e) {
             // ignore
@@ -202,13 +208,16 @@ export const useBeziqueGame = (
     const timer = setTimeout(() => {
       if (isOnline()) {
         try {
+          const settings = getPlayerSettings();
+          const variantToReport = currentVariant ?? settings.variant;
           GameServerAPI.updatePlayerState({
             playerID: (localStorage.getItem('bezique_player_id') || undefined),
-            name: JSON.parse(localStorage.getItem('bezique_player_settings') || '{}').name,
+            name: settings.name,
             history: gameState.history,
             total: gameState.score,
             opponentID: opponent?.playerID,
-            winThreshold
+            winThreshold,
+            variant: variantToReport,
           });
         } catch (e) {
           // ignore
@@ -232,7 +241,7 @@ export const useBeziqueGame = (
     }, 300);
 
     return () => clearTimeout(timer);
-  }, [gameState.history, gameState.score, opponent, winThreshold]);
+  }, [gameState.history, gameState.score, opponent, winThreshold, currentVariant]);
 
   const undo = useCallback((payload?: { points?: number; briskValue?: number }, isRemote: boolean = false) => {
     let newTotalForSend: number | undefined;

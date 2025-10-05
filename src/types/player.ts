@@ -1,3 +1,5 @@
+import type { BeziqueVariantId } from './variant';
+
 export interface Player {
   playerID: string;
   name: string;
@@ -11,6 +13,7 @@ export interface PlayerSettings {
   name: string;
   soundEnabled: boolean;
   winThreshold: number;
+  variant: BeziqueVariantId;
 }
 
 export interface GeolocationData {

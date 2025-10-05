@@ -1,19 +1,19 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-09-27 15:29+0300\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Emre Erkan <kara@karalamalar.net>\n"
+"Language-Team: \n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: @lingui/cli\n"
-"Language: tr\n"
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "Plural-Forms: \n"
+"X-Generator: Poedit 3.7\n"
 
-#: src/components/Brisker.tsx:384
+#: src/components/Brisker.tsx:412
 msgid "ahead"
 msgstr "önde"
 
@@ -21,11 +21,11 @@ msgstr "önde"
 msgid "App information"
 msgstr "Uygulama bilgileri"
 
-#: src/components/modals/SettingsModal.tsx:347
+#: src/components/modals/SettingsModal.tsx:404
 msgid "Audio"
 msgstr "Ses"
 
-#: src/components/Brisker.tsx:386
+#: src/components/Brisker.tsx:414
 msgid "behind"
 msgstr "geride"
 
@@ -34,8 +34,8 @@ msgid "Brisk"
 msgstr "Brisk"
 
 #: src/components/modals/InfoModal.tsx:41
-msgid "Brisk calculation (brisk × 20)"
-msgstr "Brisk hesaplama (brisk × 20)"
+msgid "Brisk calculation (brisk x 20)"
+msgstr "Brisk hesaplama (brisk x 20)"
 
 #: src/components/modals/InfoModal.tsx:21
 #: src/components/modals/InfoModal.tsx:29
@@ -50,12 +50,16 @@ msgstr "Yapım Tarihi: Eylül 2025"
 msgid "Cancel"
 msgstr "İptal"
 
+#: src/components/modals/SettingsModal.tsx:52
+msgid "Classic Bezique"
+msgstr "Klasik Bezik"
+
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
-#: src/components/modals/HistoryModal.tsx:66
+#: src/components/modals/HistoryModal.tsx:69
 #: src/components/modals/InfoModal.tsx:51
 #: src/components/modals/PlayerSearchModal.tsx:158
-#: src/components/modals/SettingsModal.tsx:364
+#: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
 msgstr "Kapat"
 
@@ -63,7 +67,7 @@ msgstr "Kapat"
 msgid "Congratulations!"
 msgstr "Tebrikler!"
 
-#: src/components/modals/SettingsModal.tsx:234
+#: src/components/modals/SettingsModal.tsx:265
 msgid "Copy Player ID"
 msgstr "Oyuncu ID'sini Kopyala"
 
@@ -71,12 +75,16 @@ msgstr "Oyuncu ID'sini Kopyala"
 msgid "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
 msgstr "Emre Erkan tarafından Claude Sonnet 4 ve GitHub Copilot ile geliştirildi"
 
-#: src/components/Brisker.tsx:413
+#: src/components/modals/SettingsModal.tsx:55
+msgid "Disabled while connected to an opponent"
+msgstr "Bir rakibe bağlıyken devre dışı"
+
+#: src/components/Brisker.tsx:435
 msgid "Disconnect opponent"
 msgstr "Rakibi kes"
 
-#: src/components/modals/SettingsModal.tsx:288
-#: src/components/modals/SettingsModal.tsx:338
+#: src/components/modals/SettingsModal.tsx:319
+#: src/components/modals/SettingsModal.tsx:393
 msgid "Edit Name"
 msgstr "Adı Düzenle"
 
@@ -84,7 +92,7 @@ msgstr "Adı Düzenle"
 msgid "Enter Player ID or Name..."
 msgstr "Oyuncu ID'si veya İsim girin..."
 
-#: src/components/modals/SettingsModal.tsx:277
+#: src/components/modals/SettingsModal.tsx:308
 msgid "Enter your player name"
 msgstr "Oyuncu adınızı girin"
 
@@ -101,7 +109,7 @@ msgid "Features"
 msgstr "Özellikler"
 
 #: src/components/modals/GeolocationSearchModal.tsx:101
-#: src/components/modals/SettingsModal.tsx:258
+#: src/components/modals/SettingsModal.tsx:289
 msgid "Find Nearby Players"
 msgstr "Yakındaki Oyuncuları Bul"
 
@@ -113,7 +121,7 @@ msgstr "Konumunuza yakın oyuncuları bulun"
 msgid "Getting your location and searching for nearby players..."
 msgstr "Konumunuz alınıyor ve yakındaki oyuncular aranıyor..."
 
-#: src/components/modals/SettingsModal.tsx:120
+#: src/components/modals/SettingsModal.tsx:131
 msgid "Join me in Bezique!"
 msgstr "Benimle Bezik oyna!"
 
@@ -121,12 +129,12 @@ msgstr "Benimle Bezik oyna!"
 msgid "km away"
 msgstr "km uzaklıkta"
 
-#: src/components/modals/SettingsModal.tsx:297
-#: src/components/modals/SettingsModal.tsx:299
+#: src/components/modals/SettingsModal.tsx:328
+#: src/components/modals/SettingsModal.tsx:330
 msgid "Language"
 msgstr "Dil"
 
-#: src/components/Brisker.tsx:394
+#: src/components/Brisker.tsx:422
 msgid "Loading..."
 msgstr "Yükleniyor..."
 
@@ -158,11 +166,11 @@ msgstr "Yakında oyuncu bulunamadı"
 msgid "No players found"
 msgstr "Oyuncu bulunamadı"
 
-#: src/components/modals/HistoryModal.tsx:41
+#: src/components/modals/HistoryModal.tsx:43
 msgid "No scores recorded yet"
 msgstr "Henüz skor kaydedilmedi"
 
-#: src/components/Brisker.tsx:417
+#: src/components/Brisker.tsx:439
 msgid "Opponent"
 msgstr "Rakip"
 
@@ -175,11 +183,11 @@ msgstr "Oyna"
 msgid "player found"
 msgstr "oyuncu bulundu"
 
-#: src/components/modals/SettingsModal.tsx:221
+#: src/components/modals/SettingsModal.tsx:252
 msgid "Player ID"
 msgstr "Oyuncu ID"
 
-#: src/components/modals/SettingsModal.tsx:268
+#: src/components/modals/SettingsModal.tsx:299
 msgid "Player Name"
 msgstr "Oyuncu Adı"
 
@@ -199,12 +207,12 @@ msgstr "Oyunu sıfırla"
 msgid "Reset score"
 msgstr "Skoru sıfırla"
 
-#: src/components/modals/SettingsModal.tsx:288
-#: src/components/modals/SettingsModal.tsx:338
+#: src/components/modals/SettingsModal.tsx:319
+#: src/components/modals/SettingsModal.tsx:393
 msgid "Save Name"
 msgstr "Adı Kaydet"
 
-#: src/components/modals/HistoryModal.tsx:28
+#: src/components/modals/HistoryModal.tsx:30
 msgid "Score History"
 msgstr "Skor Geçmişi"
 
@@ -225,7 +233,7 @@ msgid "Search Nearby Players"
 msgstr "Yakındaki Oyuncuları Ara"
 
 #: src/components/modals/PlayerSearchModal.tsx:83
-#: src/components/modals/SettingsModal.tsx:250
+#: src/components/modals/SettingsModal.tsx:281
 msgid "Search Players"
 msgstr "Oyuncu Ara"
 
@@ -238,19 +246,19 @@ msgid "Select Brisk"
 msgstr "Brisk Seç"
 
 #: src/components/ui/ActionButtons.tsx:31
-msgid "Select brisk number (adds brisk × 20 points)"
-msgstr "Brisk numarası seç (brisk × 20 puan ekler)"
+msgid "Select brisk number (adds brisk x 20 points)"
+msgstr "Brisk numarası seç (brisk x 20 puan ekler)"
 
-#: src/components/modals/SettingsModal.tsx:212
+#: src/components/modals/SettingsModal.tsx:243
 #: src/components/ui/ActionButtons.tsx:49
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: src/components/modals/SettingsModal.tsx:242
+#: src/components/modals/SettingsModal.tsx:273
 msgid "Share Player ID"
 msgstr "Oyuncu ID'sini Paylaş"
 
-#: src/components/ui/ScoreDisplay.tsx:51
+#: src/components/ui/ScoreDisplay.tsx:57
 msgid "Show score history"
 msgstr "Skor geçmişini göster"
 
@@ -258,11 +266,11 @@ msgstr "Skor geçmişini göster"
 msgid "Sound effects"
 msgstr "Ses efektleri"
 
-#: src/components/modals/SettingsModal.tsx:349
+#: src/components/modals/SettingsModal.tsx:406
 msgid "Sound Effects"
 msgstr "Ses Efektleri"
 
-#: src/components/modals/SettingsModal.tsx:316
+#: src/components/modals/SettingsModal.tsx:368
 msgid "Target Score"
 msgstr "Hedef Skor"
 
@@ -274,11 +282,11 @@ msgstr "Bu tüm skorları siler ve geri alınamaz."
 msgid "This will request access to your location to find nearby players"
 msgstr "Bu yakındaki oyuncuları bulmak için konum erişimi isteyecek"
 
-#: src/components/Brisker.tsx:388
+#: src/components/Brisker.tsx:416
 msgid "tied"
 msgstr "berabere"
 
-#: src/components/modals/HistoryModal.tsx:36
+#: src/components/modals/HistoryModal.tsx:38
 msgid "Total Score"
 msgstr "Toplam Skor"
 
@@ -286,10 +294,19 @@ msgstr "Toplam Skor"
 msgid "Try Again"
 msgstr "Tekrar Dene"
 
+#: src/components/modals/SettingsModal.tsx:53
+msgid "Turkish Bezique"
+msgstr "Türk Üsulü Bezik"
+
 #: src/components/modals/InfoModal.tsx:39
-#: src/components/ui/ScoreDisplay.tsx:42
+#: src/components/ui/ScoreDisplay.tsx:48
 msgid "Undo last score"
 msgstr "Son skoru geri al"
+
+#: src/components/modals/SettingsModal.tsx:347
+#: src/components/modals/SettingsModal.tsx:349
+msgid "Variant"
+msgstr "Varyant"
 
 #: src/components/modals/InfoModal.tsx:30
 msgid "Version"
@@ -303,6 +320,6 @@ msgstr "Skor geçmişini görüntüle"
 msgid "You've reached the target score! Fantastic game!"
 msgstr "Hedef skora ulaştınız! Harika oyun!"
 
-#: src/components/modals/SettingsModal.tsx:225
+#: src/components/modals/SettingsModal.tsx:256
 msgid "Your Player ID"
 msgstr "Oyuncu ID'niz"

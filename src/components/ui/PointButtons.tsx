@@ -1,25 +1,26 @@
 import React from 'react';
 import { useLanguage } from '@/i18n/LanguageContext';
-import { POINT_VALUES } from '@/utils/constants';
 import styles from '@/components/Brisker.module.css';
 
 interface PointButtonsProps {
   selectedPoint: number | null;
   isProcessing: boolean;
   onPointClick: (points: number) => void;
+  pointValues: number[];
 }
 
 export const PointButtons: React.FC<PointButtonsProps> = ({
   selectedPoint,
   isProcessing,
-  onPointClick
+  onPointClick,
+  pointValues
 }) => {
   const { formatNumber } = useLanguage();
 
   return (
     <>
       {/* Row 2-5: Point buttons (4 rows of 4 buttons each) */}
-      {POINT_VALUES.map(value => (
+      {pointValues.map(value => (
         <button
           key={value}
           className={`${styles.point} ${selectedPoint === value ? styles.selected : ''}`}

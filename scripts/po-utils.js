@@ -46,21 +46,46 @@ function exportPOFiles() {
     }
   });
 
+  // Generate POT template file from English PO file
+  const enPoFile = path.join(exportDir, 'en.po');
+  const potFile = path.join(exportDir, 'brisker.pot');
+  
+  if (fs.existsSync(enPoFile)) {
+    try {
+      execSync(`msgfilter -i "${enPoFile}" -o "${potFile}" true --keep-header`, {
+        stdio: 'pipe',
+        cwd: exportDir
+      });
+      console.log('✅ Generated brisker.pot template file');
+    } catch (error) {
+      console.log('⚠️  Warning: Failed to generate POT file. Install gettext tools with: brew install gettext');
+      console.log('   Alternatively, you can use en.po as a template for new languages.');
+    }
+  }
+
   // Create README for translators
   const readmeContent = `# Translation Files
 
 This directory contains PO files for translation.
 
+## Files:
+- \`brisker.pot\` - Translation template (use this for new languages)
+${SUPPORTED_LOCALES.map(locale => `- \`${locale}.po\` - ${locale.toUpperCase()} translations`).join('\n')}
+
 ## How to translate:
 
+### For existing languages:
 1. Open the PO file for your language (e.g., tr.po for Turkish)
 2. Translate the empty \`msgstr ""\` entries
 3. Keep the \`msgid\` entries unchanged
 4. Save the file
 5. Send the translated file back
 
-## Languages:
-${SUPPORTED_LOCALES.map(locale => `- ${locale}.po`).join('\n')}
+### For new languages:
+1. Copy \`brisker.pot\` to \`[language-code].po\` (e.g., \`fr.po\` for French)
+2. Update the header with your language information
+3. Translate all \`msgstr ""\` entries
+4. Send the completed file back
 
 ## Tools:
 - [Poedit](https://poedit.net/) - GUI editor for PO files
@@ -71,11 +96,13 @@ ${SUPPORTED_LOCALES.map(locale => `- ${locale}.po`).join('\n')}
 - Keep HTML tags and placeholders unchanged
 - Maintain the same number of placeholders
 - Test your translations before submitting
+- The POT file is a template - don't translate it directly
 `;
 
   fs.writeFileSync(path.join(exportDir, 'README.md'), readmeContent);
   console.log('✅ Created README.md for translators');
   console.log(`\n📁 Files exported to: ${exportDir}`);
+  console.log('💡 The brisker.pot file can be used as a template for new language translations');
 }
 
 /**

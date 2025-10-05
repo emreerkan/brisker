@@ -13,7 +13,7 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
-#: src/components/Brisker.tsx:384
+#: src/components/Brisker.tsx:412
 msgid "ahead"
 msgstr "ahead"
 
@@ -21,11 +21,11 @@ msgstr "ahead"
 msgid "App information"
 msgstr "App information"
 
-#: src/components/modals/SettingsModal.tsx:347
+#: src/components/modals/SettingsModal.tsx:404
 msgid "Audio"
 msgstr "Audio"
 
-#: src/components/Brisker.tsx:386
+#: src/components/Brisker.tsx:414
 msgid "behind"
 msgstr "behind"
 
@@ -34,8 +34,8 @@ msgid "Brisk"
 msgstr "Brisk"
 
 #: src/components/modals/InfoModal.tsx:41
-msgid "Brisk calculation (brisk × 20)"
-msgstr "Brisk calculation (brisk × 20)"
+msgid "Brisk calculation (brisk x 20)"
+msgstr "Brisk calculation (brisk x 20)"
 
 #: src/components/modals/InfoModal.tsx:21
 #: src/components/modals/InfoModal.tsx:29
@@ -50,12 +50,16 @@ msgstr "Build Date: September 2025"
 msgid "Cancel"
 msgstr "Cancel"
 
+#: src/components/modals/SettingsModal.tsx:52
+msgid "Classic Bezique"
+msgstr "Classic Bezique"
+
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
-#: src/components/modals/HistoryModal.tsx:66
+#: src/components/modals/HistoryModal.tsx:69
 #: src/components/modals/InfoModal.tsx:51
 #: src/components/modals/PlayerSearchModal.tsx:158
-#: src/components/modals/SettingsModal.tsx:364
+#: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
 msgstr "Close"
 
@@ -63,7 +67,7 @@ msgstr "Close"
 msgid "Congratulations!"
 msgstr "Congratulations!"
 
-#: src/components/modals/SettingsModal.tsx:234
+#: src/components/modals/SettingsModal.tsx:265
 msgid "Copy Player ID"
 msgstr "Copy Player ID"
 
@@ -71,12 +75,16 @@ msgstr "Copy Player ID"
 msgid "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
 msgstr "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
 
-#: src/components/Brisker.tsx:413
+#: src/components/modals/SettingsModal.tsx:55
+msgid "Disabled while connected to an opponent"
+msgstr "Disabled while connected to an opponent"
+
+#: src/components/Brisker.tsx:435
 msgid "Disconnect opponent"
 msgstr "Disconnect opponent"
 
-#: src/components/modals/SettingsModal.tsx:288
-#: src/components/modals/SettingsModal.tsx:338
+#: src/components/modals/SettingsModal.tsx:319
+#: src/components/modals/SettingsModal.tsx:393
 msgid "Edit Name"
 msgstr "Edit Name"
 
@@ -84,7 +92,7 @@ msgstr "Edit Name"
 msgid "Enter Player ID or Name..."
 msgstr "Enter Player ID or Name..."
 
-#: src/components/modals/SettingsModal.tsx:277
+#: src/components/modals/SettingsModal.tsx:308
 msgid "Enter your player name"
 msgstr "Enter your player name"
 
@@ -101,7 +109,7 @@ msgid "Features"
 msgstr "Features"
 
 #: src/components/modals/GeolocationSearchModal.tsx:101
-#: src/components/modals/SettingsModal.tsx:258
+#: src/components/modals/SettingsModal.tsx:289
 msgid "Find Nearby Players"
 msgstr "Find Nearby Players"
 
@@ -113,7 +121,7 @@ msgstr "Find players near your location"
 msgid "Getting your location and searching for nearby players..."
 msgstr "Getting your location and searching for nearby players..."
 
-#: src/components/modals/SettingsModal.tsx:120
+#: src/components/modals/SettingsModal.tsx:131
 msgid "Join me in Bezique!"
 msgstr "Join me in Bezique!"
 
@@ -121,12 +129,12 @@ msgstr "Join me in Bezique!"
 msgid "km away"
 msgstr "km away"
 
-#: src/components/modals/SettingsModal.tsx:297
-#: src/components/modals/SettingsModal.tsx:299
+#: src/components/modals/SettingsModal.tsx:328
+#: src/components/modals/SettingsModal.tsx:330
 msgid "Language"
 msgstr "Language"
 
-#: src/components/Brisker.tsx:394
+#: src/components/Brisker.tsx:422
 msgid "Loading..."
 msgstr "Loading..."
 
@@ -158,11 +166,11 @@ msgstr "No nearby players found"
 msgid "No players found"
 msgstr "No players found"
 
-#: src/components/modals/HistoryModal.tsx:41
+#: src/components/modals/HistoryModal.tsx:43
 msgid "No scores recorded yet"
 msgstr "No scores recorded yet"
 
-#: src/components/Brisker.tsx:417
+#: src/components/Brisker.tsx:439
 msgid "Opponent"
 msgstr "Opponent"
 
@@ -175,11 +183,11 @@ msgstr "Play"
 msgid "player found"
 msgstr "player found"
 
-#: src/components/modals/SettingsModal.tsx:221
+#: src/components/modals/SettingsModal.tsx:252
 msgid "Player ID"
 msgstr "Player ID"
 
-#: src/components/modals/SettingsModal.tsx:268
+#: src/components/modals/SettingsModal.tsx:299
 msgid "Player Name"
 msgstr "Player Name"
 
@@ -199,12 +207,12 @@ msgstr "Reset game"
 msgid "Reset score"
 msgstr "Reset score"
 
-#: src/components/modals/SettingsModal.tsx:288
-#: src/components/modals/SettingsModal.tsx:338
+#: src/components/modals/SettingsModal.tsx:319
+#: src/components/modals/SettingsModal.tsx:393
 msgid "Save Name"
 msgstr "Save Name"
 
-#: src/components/modals/HistoryModal.tsx:28
+#: src/components/modals/HistoryModal.tsx:30
 msgid "Score History"
 msgstr "Score History"
 
@@ -225,7 +233,7 @@ msgid "Search Nearby Players"
 msgstr "Search Nearby Players"
 
 #: src/components/modals/PlayerSearchModal.tsx:83
-#: src/components/modals/SettingsModal.tsx:250
+#: src/components/modals/SettingsModal.tsx:281
 msgid "Search Players"
 msgstr "Search Players"
 
@@ -238,19 +246,19 @@ msgid "Select Brisk"
 msgstr "Select Brisk"
 
 #: src/components/ui/ActionButtons.tsx:31
-msgid "Select brisk number (adds brisk × 20 points)"
-msgstr "Select brisk number (adds brisk × 20 points)"
+msgid "Select brisk number (adds brisk x 20 points)"
+msgstr "Select brisk number (adds brisk x 20 points)"
 
-#: src/components/modals/SettingsModal.tsx:212
+#: src/components/modals/SettingsModal.tsx:243
 #: src/components/ui/ActionButtons.tsx:49
 msgid "Settings"
 msgstr "Settings"
 
-#: src/components/modals/SettingsModal.tsx:242
+#: src/components/modals/SettingsModal.tsx:273
 msgid "Share Player ID"
 msgstr "Share Player ID"
 
-#: src/components/ui/ScoreDisplay.tsx:51
+#: src/components/ui/ScoreDisplay.tsx:57
 msgid "Show score history"
 msgstr "Show score history"
 
@@ -258,11 +266,11 @@ msgstr "Show score history"
 msgid "Sound effects"
 msgstr "Sound effects"
 
-#: src/components/modals/SettingsModal.tsx:349
+#: src/components/modals/SettingsModal.tsx:406
 msgid "Sound Effects"
 msgstr "Sound Effects"
 
-#: src/components/modals/SettingsModal.tsx:316
+#: src/components/modals/SettingsModal.tsx:368
 msgid "Target Score"
 msgstr "Target Score"
 
@@ -274,11 +282,11 @@ msgstr "This will delete all scores and cannot be undone."
 msgid "This will request access to your location to find nearby players"
 msgstr "This will request access to your location to find nearby players"
 
-#: src/components/Brisker.tsx:388
+#: src/components/Brisker.tsx:416
 msgid "tied"
 msgstr "tied"
 
-#: src/components/modals/HistoryModal.tsx:36
+#: src/components/modals/HistoryModal.tsx:38
 msgid "Total Score"
 msgstr "Total Score"
 
@@ -286,10 +294,19 @@ msgstr "Total Score"
 msgid "Try Again"
 msgstr "Try Again"
 
+#: src/components/modals/SettingsModal.tsx:53
+msgid "Turkish Bezique"
+msgstr "Turkish Bezique"
+
 #: src/components/modals/InfoModal.tsx:39
-#: src/components/ui/ScoreDisplay.tsx:42
+#: src/components/ui/ScoreDisplay.tsx:48
 msgid "Undo last score"
 msgstr "Undo last score"
+
+#: src/components/modals/SettingsModal.tsx:347
+#: src/components/modals/SettingsModal.tsx:349
+msgid "Variant"
+msgstr "Variant"
 
 #: src/components/modals/InfoModal.tsx:30
 msgid "Version"
@@ -303,6 +320,6 @@ msgstr "View score history"
 msgid "You've reached the target score! Fantastic game!"
 msgstr "You've reached the target score! Fantastic game!"
 
-#: src/components/modals/SettingsModal.tsx:225
+#: src/components/modals/SettingsModal.tsx:256
 msgid "Your Player ID"
 msgstr "Your Player ID"

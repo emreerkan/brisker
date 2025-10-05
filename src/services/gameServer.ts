@@ -1,4 +1,4 @@
-import type { Player, GeolocationData } from '@/types';
+import type { Player, GeolocationData, BeziqueVariantId } from '@/types';
 import { updatePlayerIDFromServer } from '@/utils/localStorage';
 import { DEFAULT_WIN_THRESHOLD } from '@/utils/constants';
 import { getGeolocation } from '@/utils/deviceUtils';
@@ -599,7 +599,7 @@ export class GameServerAPI {
   }
 
   // Start game with opponent
-  static startGameWith(opponentID: string, winThreshold: number): void {
+  static startGameWith(opponentID: string, winThreshold: number, variant?: BeziqueVariantId): void {
     // Prevent starting a game with ourselves
     if (!opponentID || opponentID === this.currentPlayerID) {
       console.warn('Ignoring attempt to start a game with self');
@@ -610,7 +610,11 @@ export class GameServerAPI {
       ? Math.round(winThreshold)
       : DEFAULT_WIN_THRESHOLD;
 
-    this.sendMessage({ type: 'game:start', payload: { opponentID, winThreshold: targetScore } });
+    const payload: Record<string, unknown> = { opponentID, winThreshold: targetScore };
+    if (variant) {
+      payload.variant = variant;
+    }
+    this.sendMessage({ type: 'game:start', payload });
   }
 
   static disconnectGame(opponentID?: string): void {
@@ -644,13 +648,13 @@ export class GameServerAPI {
   }
 
   // Instruct opponent to add remaining brisk points (used for brisk complement)
-  static applyBrisksToOpponent(opponentID: string, briskCount: number): void {
-    const payload = { opponentID, briskCount };
+  static applyBrisksToOpponent(opponentID: string, briskCount: number, briskPointValue: number): void {
+    const payload = { opponentID, briskCount, briskPointValue };
     this.sendMessage({ type: 'game:apply_brisks', payload });
   }
 
   // Send current player state to server for in-memory storage and resume handling
-  static updatePlayerState(state: { playerID?: string; name?: string; history?: any[]; total?: number; opponentID?: string; location?: { latitude: number; longitude: number }; winThreshold?: number }) {
+  static updatePlayerState(state: { playerID?: string; name?: string; history?: any[]; total?: number; opponentID?: string; location?: { latitude: number; longitude: number }; winThreshold?: number; variant?: BeziqueVariantId }) {
     const payload: typeof state = { ...state };
     if (!payload.location && this.lastKnownLocation) {
       payload.location = this.lastKnownLocation;

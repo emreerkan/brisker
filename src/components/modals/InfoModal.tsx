@@ -38,7 +38,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
                 <li>{t`Score tracking and addition`}</li>
                 <li>{t`Undo last score`}</li>
                 <li>{t`View score history`}</li>
-                <li>{t`Brisk calculation (brisk × 20)`}</li>
+                <li>{t`Brisk calculation (brisk x 20)`}</li>
                 <li>{t`Sound effects`}</li>
                 <li>{t`Reset game`}</li>
               </ul>

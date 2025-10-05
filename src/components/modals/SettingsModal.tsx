@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, Copy, Share, Search, MapPin, Edit, Save, Check } from 'lucide-react';
 import { Trans, useLingui } from '@lingui/react/macro';
-import type { ModalProps, Player } from '@/types';
+import type { ModalProps, Player, BeziqueVariantId } from '@/types';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { availableLanguages } from '@/i18n/config';
 import { ICON_SIZE } from '@/utils/constants';
@@ -9,6 +9,7 @@ import { getPlayerSettings, updatePlayerSetting } from '@/utils/localStorage';
 import { GameServerAPI } from '@/services/gameServer';
 import { copyToClipboard, shareContent } from '@/utils/deviceUtils';
 import styles from '@/components/Brisker.module.css';
+import { DEFAULT_VARIANT, isSupportedVariant } from '@/config/variants';
 
 interface SettingsModalProps extends ModalProps {
   soundEnabled: boolean;
@@ -18,6 +19,8 @@ interface SettingsModalProps extends ModalProps {
   onPlayWith: (player: Player) => void;
   winThreshold: number;
   onWinThresholdChange: (threshold: number) => void;
+  onVariantChange: (variant: BeziqueVariantId) => void;
+  isOpponentConnected: boolean;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -28,7 +31,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   onPlayerSearchOpen,
   onGeolocationSearchOpen,
   winThreshold,
-  onWinThresholdChange
+  onWinThresholdChange,
+  onVariantChange,
+  isOpponentConnected
 }) => {
   const { t } = useLingui();
   const { language, setLanguage, formatNumber } = useLanguage();
@@ -42,6 +47,12 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
   const MIN_WIN_THRESHOLD = 100;
   const MAX_WIN_THRESHOLD = 100000;
+  const selectedVariant = isSupportedVariant(playerSettings.variant) ? playerSettings.variant : DEFAULT_VARIANT;
+  const variantOptions: Array<{ id: BeziqueVariantId; label: string }> = [
+    { id: 'classic', label: t`Classic Bezique` },
+    { id: 'turkish', label: t`Turkish Bezique` },
+  ];
+  const disabledWhileConnectedTooltip = t`Disabled while connected to an opponent`;
 
   // Update player settings when modal opens
   useEffect(() => {
@@ -195,6 +206,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   };
 
   const toggleWinThresholdEdit = () => {
+    if (isOpponentConnected) {
+      return;
+    }
     if (isEditingWinThreshold) {
       commitWinThreshold();
     } else {
@@ -202,6 +216,23 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       setWinThresholdInput(playerSettings.winThreshold.toString());
     }
   };
+
+  const handleVariantChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    if (isOpponentConnected) return;
+    const nextVariant = event.target.value;
+    if (!isSupportedVariant(nextVariant)) return;
+    if (nextVariant === selectedVariant) return;
+    updatePlayerSetting('variant', nextVariant);
+    setPlayerSettings(prev => ({ ...prev, variant: nextVariant }));
+    onVariantChange(nextVariant);
+  };
+
+  useEffect(() => {
+    if (isOpponentConnected && isEditingWinThreshold) {
+      setIsEditingWinThreshold(false);
+      setWinThresholdInput(playerSettings.winThreshold.toString());
+    }
+  }, [isOpponentConnected, isEditingWinThreshold, playerSettings.winThreshold]);
 
   if (!isOpen) return null;
 
@@ -311,6 +342,27 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             </div>
           </div>
 
+          {/* Variant Section */}
+          <div className={styles.settingsSection}>
+            <h4 className={styles.settingsTitle}><Trans>Variant</Trans></h4>
+            <div className={styles.settingsOption}>
+              <span className={styles.settingsLabel}><Trans>Variant</Trans></span>
+              <select
+                className={styles.languageSelect}
+                value={selectedVariant}
+                onChange={handleVariantChange}
+                disabled={isOpponentConnected}
+                title={isOpponentConnected ? disabledWhileConnectedTooltip : undefined}
+              >
+                {variantOptions.map(option => (
+                  <option key={option.id} value={option.id}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+
           {/* Win Threshold Section */}
           <div className={styles.settingsSection}>
             <h4 className={styles.settingsTitle}><Trans>Target Score</Trans></h4>
@@ -335,7 +387,12 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
               <button
                 className={styles.playerNameEditButton}
                 onClick={toggleWinThresholdEdit}
-                title={isEditingWinThreshold ? t`Save Name` : t`Edit Name`}
+                title={
+                  isOpponentConnected
+                    ? disabledWhileConnectedTooltip
+                    : isEditingWinThreshold ? t`Save Name` : t`Edit Name`
+                }
+                disabled={isOpponentConnected}
               >
                 {isEditingWinThreshold ? <Save size={18} /> : <Edit size={18} />}
               </button>
