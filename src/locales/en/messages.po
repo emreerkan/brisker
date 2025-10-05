@@ -13,9 +13,25 @@ msgstr ""
 "Language-Team: \n"
 "Plural-Forms: \n"
 
+#. placeholder {0}: formatNumber(difference)
 #: src/components/Brisker.tsx:412
-msgid "ahead"
-msgstr "ahead"
+msgid "{0} ahead"
+msgstr "{0} ahead"
+
+#. placeholder {0}: formatNumber(Math.abs(difference))
+#: src/components/Brisker.tsx:414
+msgid "{0} behind"
+msgstr "{0} behind"
+
+#. placeholder {0}: nearbyPlayers.length
+#: src/components/modals/GeolocationSearchModal.tsx:156
+msgid "{0} nearby player(s) found:"
+msgstr "{0} nearby player(s) found:"
+
+#. placeholder {0}: searchResults.length
+#: src/components/modals/PlayerSearchModal.tsx:122
+msgid "{0} player(s) found:"
+msgstr "{0} player(s) found:"
 
 #: src/components/ui/ActionButtons.tsx:58
 msgid "App information"
@@ -24,10 +40,6 @@ msgstr "App information"
 #: src/components/modals/SettingsModal.tsx:404
 msgid "Audio"
 msgstr "Audio"
-
-#: src/components/Brisker.tsx:414
-msgid "behind"
-msgstr "behind"
 
 #: src/components/ui/ActionButtons.tsx:33
 msgid "Brisk"
@@ -57,8 +69,8 @@ msgstr "Classic Bezique"
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
 #: src/components/modals/HistoryModal.tsx:69
-#: src/components/modals/InfoModal.tsx:66
-#: src/components/modals/PlayerSearchModal.tsx:158
+#: src/components/modals/InfoModal.tsx:68
+#: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
 msgstr "Close"
@@ -79,6 +91,10 @@ msgstr "Cross-platform compatibility"
 msgid "Dealer tracking with visual indicators"
 msgstr "Dealer tracking with visual indicators"
 
+#: src/components/modals/InfoModal.tsx:60
+msgid "Deutsch (DE)"
+msgstr "Deutsch (DE)"
+
 #: src/components/modals/InfoModal.tsx:33
 msgid "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
 msgstr "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
@@ -94,10 +110,6 @@ msgstr "Disabled while connected to an opponent"
 #: src/components/Brisker.tsx:435
 msgid "Disconnect opponent"
 msgstr "Disconnect opponent"
-
-#: src/components/modals/InfoModal.tsx:58
-msgid "Dutch (NL)"
-msgstr "Dutch (NL)"
 
 #: src/components/modals/SettingsModal.tsx:319
 #: src/components/modals/SettingsModal.tsx:393
@@ -174,9 +186,9 @@ msgstr "Location request timed out. Please try again."
 msgid "Multilingual support"
 msgstr "Multilingual support"
 
-#: src/components/modals/GeolocationSearchModal.tsx:156
-msgid "nearby players found"
-msgstr "nearby players found"
+#: src/components/modals/InfoModal.tsx:58
+msgid "Nederlands (NL)"
+msgstr "Nederlands (NL)"
 
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
@@ -190,7 +202,7 @@ msgstr "New Game"
 msgid "No nearby players found"
 msgstr "No nearby players found"
 
-#: src/components/modals/PlayerSearchModal.tsx:146
+#: src/components/modals/PlayerSearchModal.tsx:143
 msgid "No players found"
 msgstr "No players found"
 
@@ -211,13 +223,9 @@ msgid "Persistent storage with auto-save"
 msgstr "Persistent storage with auto-save"
 
 #: src/components/modals/GeolocationSearchModal.tsx:174
-#: src/components/modals/PlayerSearchModal.tsx:138
+#: src/components/modals/PlayerSearchModal.tsx:135
 msgid "Play"
 msgstr "Play"
-
-#: src/components/modals/PlayerSearchModal.tsx:124
-msgid "player found"
-msgstr "player found"
 
 #: src/components/modals/SettingsModal.tsx:252
 msgid "Player ID"
@@ -226,10 +234,6 @@ msgstr "Player ID"
 #: src/components/modals/SettingsModal.tsx:299
 msgid "Player Name"
 msgstr "Player Name"
-
-#: src/components/modals/PlayerSearchModal.tsx:125
-msgid "players found"
-msgstr "players found"
 
 #: src/components/modals/InfoModal.tsx:44
 msgid "Progressive Web App - install on any device"
@@ -309,6 +313,10 @@ msgstr "Sound effects"
 #: src/components/modals/SettingsModal.tsx:406
 msgid "Sound Effects"
 msgstr "Sound Effects"
+
+#: src/components/modals/InfoModal.tsx:59
+msgid "Svenska (SV)"
+msgstr "Svenska (SV)"
 
 #: src/components/modals/SettingsModal.tsx:368
 msgid "Target Score"

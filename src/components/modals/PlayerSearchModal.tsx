@@ -118,11 +118,8 @@ export const PlayerSearchModal: React.FC<PlayerSearchModalProps> = ({
               {searchResults.length > 0 ? (
                 <>
                   <h4 className={styles.searchResultsTitle}>
-                    <Users size={18} />
-                    {' '}
-                    {searchResults.length === 1
-                      ? t`player found`
-                      : t`players found`} ({searchResults.length}):
+                    <Users size={18} />{' '}
+                    {t`${searchResults.length} player(s) found:`}
                   </h4>
                   <div className={styles.playerList}>
                     {searchResults.map((player) => (

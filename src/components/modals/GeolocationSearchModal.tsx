@@ -152,8 +152,8 @@ export const GeolocationSearchModal: React.FC<GeolocationSearchModalProps> = ({
               {nearbyPlayers.length > 0 ? (
                 <>
                   <h4 className={styles.searchResultsTitle}>
-                    <Users size={18} />
-                    {t`nearby players found`} ({nearbyPlayers.length}):
+                    <Users size={18} />{' '}
+                    {t`${nearbyPlayers.length} nearby player(s) found:`}
                   </h4>
                   <div className={styles.playerList}>
                     {nearbyPlayers.map((player) => (

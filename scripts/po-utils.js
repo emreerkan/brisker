@@ -19,7 +19,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const LOCALES_DIR = path.join(__dirname, '../src/locales');
-const SUPPORTED_LOCALES = ['en', 'tr', 'nl'];
+const SUPPORTED_LOCALES = ['en', 'tr', 'nl', 'sv', 'de'];
 
 /**
  * Copy PO files to a translator-friendly directory structure

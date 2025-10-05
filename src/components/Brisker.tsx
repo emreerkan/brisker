@@ -409,9 +409,9 @@ export const Brisker: React.FC = () => {
     const difference = playerScore - opponentScore;
     
     if (difference > 0) {
-      return `${formatNumber(difference)} ${t`ahead`}`;
+      return t`${formatNumber(difference)} ahead`;
     } else if (difference < 0) {
-      return `${formatNumber(Math.abs(difference))} ${t`behind`}`;
+      return t`${formatNumber(Math.abs(difference))} behind`;
     } else {
       return t`tied`;
     }

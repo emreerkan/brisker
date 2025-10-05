@@ -1,8 +1,24 @@
 msgid ""
 msgstr ""
 
+#. placeholder {0}: formatNumber(difference)
 #: src/components/Brisker.tsx:412
-msgid "ahead"
+msgid "{0} ahead"
+msgstr ""
+
+#. placeholder {0}: formatNumber(Math.abs(difference))
+#: src/components/Brisker.tsx:414
+msgid "{0} behind"
+msgstr ""
+
+#. placeholder {0}: nearbyPlayers.length
+#: src/components/modals/GeolocationSearchModal.tsx:156
+msgid "{0} nearby player(s) found:"
+msgstr ""
+
+#. placeholder {0}: searchResults.length
+#: src/components/modals/PlayerSearchModal.tsx:122
+msgid "{0} player(s) found:"
 msgstr ""
 
 #: src/components/ui/ActionButtons.tsx:58
@@ -11,10 +27,6 @@ msgstr ""
 
 #: src/components/modals/SettingsModal.tsx:404
 msgid "Audio"
-msgstr ""
-
-#: src/components/Brisker.tsx:414
-msgid "behind"
 msgstr ""
 
 #: src/components/ui/ActionButtons.tsx:33
@@ -46,7 +58,7 @@ msgstr ""
 #: src/components/modals/GeolocationSearchModal.tsx:201
 #: src/components/modals/HistoryModal.tsx:69
 #: src/components/modals/InfoModal.tsx:66
-#: src/components/modals/PlayerSearchModal.tsx:158
+#: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
 msgstr ""
@@ -162,10 +174,6 @@ msgstr ""
 msgid "Multilingual support"
 msgstr ""
 
-#: src/components/modals/GeolocationSearchModal.tsx:156
-msgid "nearby players found"
-msgstr ""
-
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
 msgstr ""
@@ -178,7 +186,7 @@ msgstr ""
 msgid "No nearby players found"
 msgstr ""
 
-#: src/components/modals/PlayerSearchModal.tsx:146
+#: src/components/modals/PlayerSearchModal.tsx:143
 msgid "No players found"
 msgstr ""
 
@@ -199,12 +207,8 @@ msgid "Persistent storage with auto-save"
 msgstr ""
 
 #: src/components/modals/GeolocationSearchModal.tsx:174
-#: src/components/modals/PlayerSearchModal.tsx:138
+#: src/components/modals/PlayerSearchModal.tsx:135
 msgid "Play"
-msgstr ""
-
-#: src/components/modals/PlayerSearchModal.tsx:124
-msgid "player found"
 msgstr ""
 
 #: src/components/modals/SettingsModal.tsx:252
@@ -213,10 +217,6 @@ msgstr ""
 
 #: src/components/modals/SettingsModal.tsx:299
 msgid "Player Name"
-msgstr ""
-
-#: src/components/modals/PlayerSearchModal.tsx:125
-msgid "players found"
 msgstr ""
 
 #: src/components/modals/InfoModal.tsx:44

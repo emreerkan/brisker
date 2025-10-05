@@ -13,9 +13,25 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Generator: Poedit 3.7\n"
 
+#. placeholder {0}: formatNumber(difference)
 #: src/components/Brisker.tsx:412
-msgid "ahead"
-msgstr "önde"
+msgid "{0} ahead"
+msgstr "{0} önde"
+
+#. placeholder {0}: formatNumber(Math.abs(difference))
+#: src/components/Brisker.tsx:414
+msgid "{0} behind"
+msgstr "{0} geride"
+
+#. placeholder {0}: nearbyPlayers.length
+#: src/components/modals/GeolocationSearchModal.tsx:156
+msgid "{0} nearby player(s) found:"
+msgstr "Yakında {0} oyuncu bulundu:"
+
+#. placeholder {0}: searchResults.length
+#: src/components/modals/PlayerSearchModal.tsx:122
+msgid "{0} player(s) found:"
+msgstr "{0} oyuncu bulundu:"
 
 #: src/components/ui/ActionButtons.tsx:58
 msgid "App information"
@@ -24,10 +40,6 @@ msgstr "Uygulama bilgileri"
 #: src/components/modals/SettingsModal.tsx:404
 msgid "Audio"
 msgstr "Ses"
-
-#: src/components/Brisker.tsx:414
-msgid "behind"
-msgstr "geride"
 
 #: src/components/ui/ActionButtons.tsx:33
 msgid "Brisk"
@@ -58,7 +70,7 @@ msgstr "Klasik Bezik"
 #: src/components/modals/GeolocationSearchModal.tsx:201
 #: src/components/modals/HistoryModal.tsx:69
 #: src/components/modals/InfoModal.tsx:66
-#: src/components/modals/PlayerSearchModal.tsx:158
+#: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
 msgstr "Kapat"
@@ -174,10 +186,6 @@ msgstr "Konum isteği zaman aşımına uğradı. Lütfen tekrar deneyin."
 msgid "Multilingual support"
 msgstr "Çok dil desteği"
 
-#: src/components/modals/GeolocationSearchModal.tsx:156
-msgid "nearby players found"
-msgstr "yakındaki oyuncu bulundu"
-
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
 msgstr "Konum ile yakındaki oyuncuları arama"
@@ -190,7 +198,7 @@ msgstr "Yeni Oyun"
 msgid "No nearby players found"
 msgstr "Yakında oyuncu bulunamadı"
 
-#: src/components/modals/PlayerSearchModal.tsx:146
+#: src/components/modals/PlayerSearchModal.tsx:143
 msgid "No players found"
 msgstr "Oyuncu bulunamadı"
 
@@ -211,13 +219,9 @@ msgid "Persistent storage with auto-save"
 msgstr "Otomatik kaydetme ile kalıcı depolama"
 
 #: src/components/modals/GeolocationSearchModal.tsx:174
-#: src/components/modals/PlayerSearchModal.tsx:138
+#: src/components/modals/PlayerSearchModal.tsx:135
 msgid "Play"
 msgstr "Oyna"
-
-#: src/components/modals/PlayerSearchModal.tsx:124
-msgid "player found"
-msgstr "oyuncu bulundu"
 
 #: src/components/modals/SettingsModal.tsx:252
 msgid "Player ID"
@@ -226,10 +230,6 @@ msgstr "Oyuncu ID"
 #: src/components/modals/SettingsModal.tsx:299
 msgid "Player Name"
 msgstr "Oyuncu Adı"
-
-#: src/components/modals/PlayerSearchModal.tsx:125
-msgid "players found"
-msgstr "oyuncu bulundu"
 
 #: src/components/modals/InfoModal.tsx:44
 msgid "Progressive Web App - install on any device"

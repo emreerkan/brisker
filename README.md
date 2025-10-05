@@ -108,7 +108,9 @@ For setup and usage instructions, refer to the server's README.
 
 Special thanks to the following contributors for their translation work:
 
-- **Dutch (nl)** - Peter Smits
+- **Nederlands (nl)** - Peter Smits
+- **Svenska (sv)** - [Tor-Björn Fjellner](https://fjellner.com/)
+- **Deutsch (de)** - [Christian Herrmann](https://presskopp.com/)
 
 ## 📄 License
 

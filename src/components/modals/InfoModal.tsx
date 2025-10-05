@@ -1,5 +1,5 @@
 import React from 'react';
-import { X } from 'lucide-react';
+import { ExternalLink, X } from 'lucide-react';
 import { useLingui } from '@lingui/react/macro';
 import { ICON_SIZE } from '@/utils/constants';
 import packageJson from '../../../package.json';
@@ -55,7 +55,9 @@ export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
               <h4>{t`Translators`}:</h4>
               <ul className={styles.featuresList}>
                 <li>{t`English (EN), Turkish (TR)`} - Emre Erkan</li>
-                <li>{t`Dutch (NL)`} - Peter Smits</li>
+                <li>{t`Nederlands (NL)`} - Peter Smits</li>
+                <li>{t`Svenska (SV)`} - Tor-Björn Fjellner <a href="https://fjellner.com/" target="_blank" rel="noopener noreferrer"><ExternalLink size={ICON_SIZE/1.5} /></a></li>
+                <li>{t`Deutsch (DE)`} - Christian Herrmann <a href="https://presskopp.com/" target="_blank" rel="noopener noreferrer"><ExternalLink size={ICON_SIZE/1.5} /></a></li>
               </ul>
             </div>
           </div>

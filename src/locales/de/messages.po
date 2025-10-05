@@ -2,13 +2,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-09-27 15:29+0300\n"
+"POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: Emre Erkan <kara@karalamalar.net>\n"
 "Language-Team: \n"
-"Language: tr\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
 "X-Generator: Poedit 3.7\n"
@@ -16,30 +16,30 @@ msgstr ""
 #. placeholder {0}: formatNumber(difference)
 #: src/components/Brisker.tsx:412
 msgid "{0} ahead"
-msgstr "{0} önde"
+msgstr "{0} voraus"
 
 #. placeholder {0}: formatNumber(Math.abs(difference))
 #: src/components/Brisker.tsx:414
 msgid "{0} behind"
-msgstr "{0} geride"
+msgstr "{0} zurück"
 
 #. placeholder {0}: nearbyPlayers.length
 #: src/components/modals/GeolocationSearchModal.tsx:156
 msgid "{0} nearby player(s) found:"
-msgstr "Yakında {0} oyuncu bulundu:"
+msgstr "{0} Spieler in der Nähe gefunden:"
 
 #. placeholder {0}: searchResults.length
 #: src/components/modals/PlayerSearchModal.tsx:122
 msgid "{0} player(s) found:"
-msgstr "{0} oyuncu bulundu:"
+msgstr "{0} Spieler gefunden:"
 
 #: src/components/ui/ActionButtons.tsx:58
 msgid "App information"
-msgstr "Uygulama bilgileri"
+msgstr "App-Informationen"
 
 #: src/components/modals/SettingsModal.tsx:404
 msgid "Audio"
-msgstr "Ses"
+msgstr "Audio"
 
 #: src/components/ui/ActionButtons.tsx:33
 msgid "Brisk"
@@ -52,19 +52,19 @@ msgstr "Brisker"
 
 #: src/components/modals/InfoModal.tsx:49
 msgid "Brisque calculation"
-msgstr "Brisk hesaplama"
+msgstr "Brisk-Berechnung"
 
 #: src/components/modals/InfoModal.tsx:34
 msgid "Build Date: September 2025"
-msgstr "Yapım Tarihi: Eylül 2025"
+msgstr "Erstelldatum: September 2025"
 
 #: src/components/modals/ResetConfirmDialog.tsx:30
 msgid "Cancel"
-msgstr "İptal"
+msgstr "Abbrechen"
 
 #: src/components/modals/SettingsModal.tsx:52
 msgid "Classic Bezique"
-msgstr "Klasik Bezik"
+msgstr "Klassisches Bezique"
 
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
@@ -73,23 +73,23 @@ msgstr "Klasik Bezik"
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
-msgstr "Kapat"
+msgstr "Schließen"
 
 #: src/components/modals/CongratulationsModal.tsx:31
 msgid "Congratulations!"
-msgstr "Tebrikler!"
+msgstr "Glückwunsch!"
 
 #: src/components/modals/SettingsModal.tsx:265
 msgid "Copy Player ID"
-msgstr "Oyuncu ID'sini Kopyala"
+msgstr "Spieler-ID kopieren"
 
 #: src/components/modals/InfoModal.tsx:46
 msgid "Cross-platform compatibility"
-msgstr "Çapraz platform uyumluluğu"
+msgstr "Plattformübergreifende Kompatibilität"
 
 #: src/components/modals/InfoModal.tsx:43
 msgid "Dealer tracking with visual indicators"
-msgstr "Görsel göstergelerle dağıtıcı takibi"
+msgstr "Geberverfolgung mit visuellen Indikatoren"
 
 #: src/components/modals/InfoModal.tsx:60
 msgid "Deutsch (DE)"
@@ -97,94 +97,94 @@ msgstr "Deutsch (DE)"
 
 #: src/components/modals/InfoModal.tsx:33
 msgid "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
-msgstr "Emre Erkan tarafından Claude Sonnet 4 ve GitHub Copilot ile geliştirildi"
+msgstr "Entwickelt von Emre Erkan mit Claude Sonnet 4 und GitHub Copilot"
 
 #: src/components/modals/InfoModal.tsx:39
 msgid "Digital score tracking with intuitive touch interface"
-msgstr "Sezgisel dokunmatik arayüz ile dijital skor takibi"
+msgstr "Digitale Punkteverfolgung mit intuitiver Touch-Oberfläche"
 
 #: src/components/modals/SettingsModal.tsx:55
 msgid "Disabled while connected to an opponent"
-msgstr "Bir rakibe bağlıyken devre dışı"
+msgstr "Deaktiviert während der Verbindung mit einem Gegner"
 
 #: src/components/Brisker.tsx:435
 msgid "Disconnect opponent"
-msgstr "Rakibi kes"
+msgstr "Verbindung mit Gegner trennen"
 
 #: src/components/modals/SettingsModal.tsx:319
 #: src/components/modals/SettingsModal.tsx:393
 msgid "Edit Name"
-msgstr "Adı Düzenle"
+msgstr "Name bearbeiten"
 
 #: src/components/modals/InfoModal.tsx:57
 msgid "English (EN), Turkish (TR)"
-msgstr "İngilizce (EN), Türkçe (TR)"
+msgstr "Englisch (EN), Türkisch (TR)"
 
 #: src/components/modals/PlayerSearchModal.tsx:93
 msgid "Enter Player ID or Name..."
-msgstr "Oyuncu ID'si veya İsim girin..."
+msgstr "Spieler-ID oder Name eingeben ..."
 
 #: src/components/modals/SettingsModal.tsx:308
 msgid "Enter your player name"
-msgstr "Oyuncu adınızı girin"
+msgstr "Gib deinen Spielernamen ein"
 
 #: src/components/modals/GeolocationSearchModal.tsx:68
 msgid "Failed to get your location. Please try again."
-msgstr "Konumunuz alınamadı. Lütfen tekrar deneyin."
+msgstr "Dein Standort konnte nicht ermittelt werden. Bitte versuche es erneut."
 
 #: src/components/modals/GeolocationSearchModal.tsx:74
 msgid "Failed to search for nearby players. Please try again."
-msgstr "Yakındaki oyuncular aranırken hata oluştu. Lütfen tekrar deneyin."
+msgstr "Die Suche nach Spielern in der Nähe ist fehlgeschlagen. Bitte versuche es erneut."
 
 #: src/components/modals/InfoModal.tsx:37
 msgid "Features"
-msgstr "Özellikler"
+msgstr "Funktionen"
 
 #: src/components/modals/GeolocationSearchModal.tsx:101
 #: src/components/modals/SettingsModal.tsx:289
 msgid "Find Nearby Players"
-msgstr "Yakındaki Oyuncuları Bul"
+msgstr "Spieler in der Nähe finden"
 
 #: src/components/modals/GeolocationSearchModal.tsx:111
 msgid "Find players near your location"
-msgstr "Konumunuza yakın oyuncuları bulun"
+msgstr "Finde Spieler in der Nähe deines Standorts"
 
 #: src/components/modals/GeolocationSearchModal.tsx:129
 msgid "Getting your location and searching for nearby players..."
-msgstr "Konumunuz alınıyor ve yakındaki oyuncular aranıyor..."
+msgstr "Deinen Standort ermitteln und nach Spielern in der Nähe suchen ..."
 
 #: src/components/modals/SettingsModal.tsx:131
 msgid "Join me in Bezique!"
-msgstr "Benimle Bezik oyna!"
+msgstr "Komm mit mir nach Bezique!"
 
 #: src/components/modals/GeolocationSearchModal.tsx:166
 msgid "km away"
-msgstr "km uzaklıkta"
+msgstr "km entfernt"
 
 #: src/components/modals/SettingsModal.tsx:328
 #: src/components/modals/SettingsModal.tsx:330
 msgid "Language"
-msgstr "Dil"
+msgstr "Sprache"
 
 #: src/components/Brisker.tsx:422
 msgid "Loading..."
-msgstr "Yükleniyor..."
+msgstr "Wird geladen ..."
 
 #: src/components/modals/GeolocationSearchModal.tsx:59
 msgid "Location access denied. Please enable location services and try again."
-msgstr "Konum erişimi reddedildi. Lütfen konum servislerini etkinleştirin ve tekrar deneyin."
+msgstr "Der Standortzugriff wurde verweigert. Bitte aktiviere die Standortdienste und versuche es erneut."
 
 #: src/components/modals/GeolocationSearchModal.tsx:62
 msgid "Location information unavailable. Please try again."
-msgstr "Konum bilgisi kullanılamıyor. Lütfen tekrar deneyin."
+msgstr "Die Standortinformationen sind nicht verfügbar. Bitte versuche es erneut."
 
 #: src/components/modals/GeolocationSearchModal.tsx:65
 msgid "Location request timed out. Please try again."
-msgstr "Konum isteği zaman aşımına uğradı. Lütfen tekrar deneyin."
+msgstr "Die Standortabfrage wurde abgebrochen. Bitte versuche es erneut."
 
 #: src/components/modals/InfoModal.tsx:45
 msgid "Multilingual support"
-msgstr "Çok dil desteği"
+msgstr "Unterstützung von Mehrsprachigkeit"
 
 #: src/components/modals/InfoModal.tsx:58
 msgid "Nederlands (NL)"
@@ -192,127 +192,127 @@ msgstr "Nederlands (NL)"
 
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
-msgstr "Konum ile yakındaki oyuncuları arama"
+msgstr "Netzwerkerkennung für Spieler in der Nähe"
 
 #: src/components/modals/CongratulationsModal.tsx:44
 msgid "New Game"
-msgstr "Yeni Oyun"
+msgstr "Neues Spiel"
 
 #: src/components/modals/GeolocationSearchModal.tsx:183
 msgid "No nearby players found"
-msgstr "Yakında oyuncu bulunamadı"
+msgstr "Es wurden keine Spieler in der Nähe gefunden"
 
 #: src/components/modals/PlayerSearchModal.tsx:143
 msgid "No players found"
-msgstr "Oyuncu bulunamadı"
+msgstr "Es wurden keine Spieler gefunden"
 
 #: src/components/modals/HistoryModal.tsx:43
 msgid "No scores recorded yet"
-msgstr "Henüz skor kaydedilmedi"
+msgstr "Noch sind keine Punkte aufgezeichnet"
 
 #: src/components/modals/InfoModal.tsx:41
 msgid "Offline mode for network-free play"
-msgstr "Ağdan bağımsız oyun için çevrimdışı mod"
+msgstr "Offline-Modus für netzwerkfreies Spiel"
 
 #: src/components/Brisker.tsx:439
 msgid "Opponent"
-msgstr "Rakip"
+msgstr "Gegner"
 
 #: src/components/modals/InfoModal.tsx:48
 msgid "Persistent storage with auto-save"
-msgstr "Otomatik kaydetme ile kalıcı depolama"
+msgstr "Dauerhafte Speicherung mit automatischer Speicherung"
 
 #: src/components/modals/GeolocationSearchModal.tsx:174
 #: src/components/modals/PlayerSearchModal.tsx:135
 msgid "Play"
-msgstr "Oyna"
+msgstr "Spielen"
 
 #: src/components/modals/SettingsModal.tsx:252
 msgid "Player ID"
-msgstr "Oyuncu ID"
+msgstr "Spieler-ID"
 
 #: src/components/modals/SettingsModal.tsx:299
 msgid "Player Name"
-msgstr "Oyuncu Adı"
+msgstr "Spielername"
 
 #: src/components/modals/InfoModal.tsx:44
 msgid "Progressive Web App - install on any device"
-msgstr "Aşamalı Web Uygulaması - herhangi bir cihaza yükleyin"
+msgstr "Progressive Web App - auf jedem Gerät installierbar"
 
 #: src/components/modals/InfoModal.tsx:40
 msgid "Real-time multiplayer via WebSocket connection"
-msgstr "WebSocket bağlantısı üzerinden gerçek zamanlı çok oyunculu"
+msgstr "Echtzeit-Multiplayer über eine WebSocket-Verbindung"
 
 #: src/components/modals/ResetConfirmDialog.tsx:27
 msgid "Reset"
-msgstr "Sıfırla"
+msgstr "Zurücksetzen"
 
 #: src/components/ui/ActionButtons.tsx:40
 msgid "Reset score"
-msgstr "Skoru sıfırla"
+msgstr "Punktzahl zurücksetzen"
 
 #: src/components/modals/SettingsModal.tsx:319
 #: src/components/modals/SettingsModal.tsx:393
 msgid "Save Name"
-msgstr "Adı Kaydet"
+msgstr "Name speichern"
 
 #: src/components/modals/HistoryModal.tsx:30
 msgid "Score History"
-msgstr "Skor Geçmişi"
+msgstr "Punktzahl-Historie"
 
 #: src/components/modals/InfoModal.tsx:42
 msgid "Score history and undo moves"
-msgstr "Skor geçmişi ve hareketleri geri alma"
+msgstr "Punktzahl-Historie und Züge zurücknehmen"
 
 #: src/components/modals/InfoModal.tsx:32
 msgid "Score keeping application for the Bezique card game"
-msgstr "Bezik kart oyunu için skor tutma uygulaması"
+msgstr "App für die Spielstandsanzeige für das Bezique-Kartenspiel"
 
 #: src/components/modals/GeolocationSearchModal.tsx:188
 msgid "Search Again"
-msgstr "Tekrar Ara"
+msgstr "Erneut suchen"
 
 #: src/components/modals/GeolocationSearchModal.tsx:120
 msgid "Search Nearby Players"
-msgstr "Yakındaki Oyuncuları Ara"
+msgstr "Spieler in der Nähe suchen"
 
 #: src/components/modals/PlayerSearchModal.tsx:83
 #: src/components/modals/SettingsModal.tsx:281
 msgid "Search Players"
-msgstr "Oyuncu Ara"
+msgstr "Spieler suchen"
 
 #: src/components/modals/PlayerSearchModal.tsx:112
 msgid "Searching players..."
-msgstr "Oyuncular aranıyor..."
+msgstr "Spieler werden gesucht ..."
 
 #: src/components/modals/BriskSelector.tsx:25
 msgid "Select Brisk"
-msgstr "Brisk Seç"
+msgstr "Brisk auswählen"
 
 #: src/components/ui/ActionButtons.tsx:31
 msgid "Select brisk number (adds brisk x 20 points)"
-msgstr "Brisk numarası seç (brisk x 20 puan ekler)"
+msgstr "Wähle eine Brisk-Zahl (addiert Brisk x 20 Punkte)"
 
 #: src/components/modals/SettingsModal.tsx:243
 #: src/components/ui/ActionButtons.tsx:49
 msgid "Settings"
-msgstr "Ayarlar"
+msgstr "Einstellungen"
 
 #: src/components/modals/SettingsModal.tsx:273
 msgid "Share Player ID"
-msgstr "Oyuncu ID'sini Paylaş"
+msgstr "Spieler-ID teilen"
 
 #: src/components/ui/ScoreDisplay.tsx:57
 msgid "Show score history"
-msgstr "Skor geçmişini göster"
+msgstr "Punktzahl-Historie anzeigen"
 
 #: src/components/modals/InfoModal.tsx:50
 msgid "Sound effects"
-msgstr "Ses efektleri"
+msgstr "Soundeffekte"
 
 #: src/components/modals/SettingsModal.tsx:406
 msgid "Sound Effects"
-msgstr "Ses Efektleri"
+msgstr "Soundeffekte"
 
 #: src/components/modals/InfoModal.tsx:59
 msgid "Svenska (SV)"
@@ -320,53 +320,53 @@ msgstr "Svenska (SV)"
 
 #: src/components/modals/SettingsModal.tsx:368
 msgid "Target Score"
-msgstr "Hedef Skor"
+msgstr "Zielpunktzahl"
 
 #: src/components/modals/ResetConfirmDialog.tsx:23
 msgid "This will delete all scores and cannot be undone."
-msgstr "Bu tüm skorları siler ve geri alınamaz."
+msgstr "Dadurch werden alle Punkte gelöscht. Das kann nicht rückgängig gemacht werden."
 
 #: src/components/modals/GeolocationSearchModal.tsx:113
 msgid "This will request access to your location to find nearby players"
-msgstr "Bu yakındaki oyuncuları bulmak için konum erişimi isteyecek"
+msgstr "Damit wird der Zugriff auf deinen Standort angefordert, um Spieler in der Nähe zu finden"
 
 #: src/components/Brisker.tsx:416
 msgid "tied"
-msgstr "berabere"
+msgstr "unentschieden"
 
 #: src/components/modals/HistoryModal.tsx:38
 msgid "Total Score"
-msgstr "Toplam Skor"
+msgstr "Gesamtpunktzahl"
 
 #: src/components/modals/InfoModal.tsx:55
 msgid "Translators"
-msgstr "Çevirmenler"
+msgstr "Übersetzer"
 
 #: src/components/modals/GeolocationSearchModal.tsx:144
 msgid "Try Again"
-msgstr "Tekrar Dene"
+msgstr "Erneut versuchen"
 
 #: src/components/modals/SettingsModal.tsx:53
 msgid "Turkish Bezique"
-msgstr "Türk Üsulü Bezik"
+msgstr "Türkisches Bezique"
 
 #: src/components/ui/ScoreDisplay.tsx:48
 msgid "Undo last score"
-msgstr "Son skoru geri al"
+msgstr "Letzte Punktzahl rückgängig machen"
 
 #: src/components/modals/SettingsModal.tsx:347
 #: src/components/modals/SettingsModal.tsx:349
 msgid "Variant"
-msgstr "Varyant"
+msgstr "Variante"
 
 #: src/components/modals/InfoModal.tsx:31
 msgid "Version"
-msgstr "Sürüm"
+msgstr "Version"
 
 #: src/components/modals/CongratulationsModal.tsx:34
 msgid "You've reached the target score! Fantastic game!"
-msgstr "Hedef skora ulaştınız! Harika oyun!"
+msgstr "Du hast die Zielpunktzahl erreicht! Fantastisches Spiel!"
 
 #: src/components/modals/SettingsModal.tsx:256
 msgid "Your Player ID"
-msgstr "Oyuncu ID'niz"
+msgstr "Deine Spieler-ID"
