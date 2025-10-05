@@ -109,7 +109,7 @@ For setup and usage instructions, refer to the server's README.
 Special thanks to the following contributors for their translation work:
 
 - **Nederlands (nl)** - Peter Smits
-- **Svenska (sv)** - [Tor-Björn Fjellner](https://fjellner.com/)
+- **Svenska (sv)** - [Tor-Björn Fjellner](https://gsm.fjellner.com/)
 - **Deutsch (de)** - [Christian Herrmann](https://presskopp.com/)
 
 ## 📄 License

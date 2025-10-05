@@ -10,7 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.4.0] - 2025-10-05
 
 ### Added
-- Swedish (SV) translation support (Many thanks to [Tor-Björn Fjellner](https://fjellner.com/))
+- Swedish (SV) translation support (Many thanks to [Tor-Björn Fjellner](https://gsm.fjellner.com/))
 - German (DE) translation support (Many thanks to [Christian Herrmann](https://presskopp.com/))
 
 ## [1.3.1] - 2025-10-05
