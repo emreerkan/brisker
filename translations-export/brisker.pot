@@ -57,7 +57,7 @@ msgstr ""
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
 #: src/components/modals/HistoryModal.tsx:69
-#: src/components/modals/InfoModal.tsx:66
+#: src/components/modals/InfoModal.tsx:68
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
@@ -79,6 +79,10 @@ msgstr ""
 msgid "Dealer tracking with visual indicators"
 msgstr ""
 
+#: src/components/modals/InfoModal.tsx:60
+msgid "Deutsch (DE)"
+msgstr ""
+
 #: src/components/modals/InfoModal.tsx:33
 msgid "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
 msgstr ""
@@ -93,10 +97,6 @@ msgstr ""
 
 #: src/components/Brisker.tsx:435
 msgid "Disconnect opponent"
-msgstr ""
-
-#: src/components/modals/InfoModal.tsx:58
-msgid "Dutch (NL)"
 msgstr ""
 
 #: src/components/modals/SettingsModal.tsx:319
@@ -172,6 +172,10 @@ msgstr ""
 
 #: src/components/modals/InfoModal.tsx:45
 msgid "Multilingual support"
+msgstr ""
+
+#: src/components/modals/InfoModal.tsx:58
+msgid "Nederlands (NL)"
 msgstr ""
 
 #: src/components/modals/InfoModal.tsx:47
@@ -296,6 +300,10 @@ msgstr ""
 
 #: src/components/modals/SettingsModal.tsx:406
 msgid "Sound Effects"
+msgstr ""
+
+#: src/components/modals/InfoModal.tsx:59
+msgid "Svenska (SV)"
 msgstr ""
 
 #: src/components/modals/SettingsModal.tsx:368

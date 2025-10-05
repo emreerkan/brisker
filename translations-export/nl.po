@@ -26,7 +26,7 @@ msgstr "{0} achter"
 #. placeholder {0}: nearbyPlayers.length
 #: src/components/modals/GeolocationSearchModal.tsx:156
 msgid "{0} nearby player(s) found:"
-msgstr "{0} nabije speler(s) gevonden:"
+msgstr "{0} speler(s) in de buurt gevonden:"
 
 #. placeholder {0}: searchResults.length
 #: src/components/modals/PlayerSearchModal.tsx:122
@@ -69,7 +69,7 @@ msgstr "Klassiek Bezique"
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
 #: src/components/modals/HistoryModal.tsx:69
-#: src/components/modals/InfoModal.tsx:66
+#: src/components/modals/InfoModal.tsx:68
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
@@ -85,11 +85,15 @@ msgstr "Kopieer speler ID"
 
 #: src/components/modals/InfoModal.tsx:46
 msgid "Cross-platform compatibility"
-msgstr "Compatibel met meerdere platforms"
+msgstr "Platformonafhankelijke compatibiliteit"
 
 #: src/components/modals/InfoModal.tsx:43
 msgid "Dealer tracking with visual indicators"
-msgstr "Dealer traceren met visuele indicatoren"
+msgstr "Deler volging met visuele indicatoren"
+
+#: src/components/modals/InfoModal.tsx:60
+msgid "Deutsch (DE)"
+msgstr "Deutsch (DE)"
 
 #: src/components/modals/InfoModal.tsx:33
 msgid "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
@@ -97,24 +101,20 @@ msgstr "Ontwikkeld door Emre Erkan met Claude Sonnet 4 en GitHub Copilot"
 
 #: src/components/modals/InfoModal.tsx:39
 msgid "Digital score tracking with intuitive touch interface"
-msgstr "Digitale score bijhouden met intuïtieve touch-interface"
+msgstr "Digitale score volging met intuïtieve aanraakinterface"
 
 #: src/components/modals/SettingsModal.tsx:55
 msgid "Disabled while connected to an opponent"
-msgstr "Uitgeschakeld terwijl verbonden met een tegenstander"
+msgstr "Uitgeschakeld terwijl je verbonden bent met een tegenstander"
 
 #: src/components/Brisker.tsx:435
 msgid "Disconnect opponent"
-msgstr "Verbreek verbinding met tegenstander"
-
-#: src/components/modals/InfoModal.tsx:58
-msgid "Dutch (NL)"
-msgstr "Nederlands (NL)"
+msgstr "Verbreek de verbinding met de tegenstander"
 
 #: src/components/modals/SettingsModal.tsx:319
 #: src/components/modals/SettingsModal.tsx:393
 msgid "Edit Name"
-msgstr "Naam wijzigen"
+msgstr "Naam bewerken"
 
 #: src/components/modals/InfoModal.tsx:57
 msgid "English (EN), Turkish (TR)"
@@ -122,19 +122,19 @@ msgstr "Engels (EN), Turks (TR)"
 
 #: src/components/modals/PlayerSearchModal.tsx:93
 msgid "Enter Player ID or Name..."
-msgstr "Voer speler ID of naam in."
+msgstr "Voer het speler ID of naam in..."
 
 #: src/components/modals/SettingsModal.tsx:308
 msgid "Enter your player name"
-msgstr "Voer je spelernaam in"
+msgstr "Voer je spelersnaam in"
 
 #: src/components/modals/GeolocationSearchModal.tsx:68
 msgid "Failed to get your location. Please try again."
-msgstr "Kan je locatie niet ophalen. Probeer het opnieuw."
+msgstr "Kan je locatie niet krijgen. Probeer het opnieuw."
 
 #: src/components/modals/GeolocationSearchModal.tsx:74
 msgid "Failed to search for nearby players. Please try again."
-msgstr "Het zoeken naar spelers in de buurt is mislukt. Probeer het opnieuw."
+msgstr "Kan niet zoeken naar spelers in de buurt. Probeer het opnieuw."
 
 #: src/components/modals/InfoModal.tsx:37
 msgid "Features"
@@ -147,19 +147,19 @@ msgstr "Vind spelers in de buurt"
 
 #: src/components/modals/GeolocationSearchModal.tsx:111
 msgid "Find players near your location"
-msgstr "Vind spelers bij je in de buurt"
+msgstr "Vind spelers in de buurt van je locatie"
 
 #: src/components/modals/GeolocationSearchModal.tsx:129
 msgid "Getting your location and searching for nearby players..."
-msgstr "Je locatie ophalen en zoeken naar spelers in de buurt."
+msgstr "Je locatie ophalen en zoeken naar spelers in de buurt..."
 
 #: src/components/modals/SettingsModal.tsx:131
 msgid "Join me in Bezique!"
-msgstr "Doe met mij mee in Bezique!"
+msgstr "Doe met me mee in Bezique!"
 
 #: src/components/modals/GeolocationSearchModal.tsx:166
 msgid "km away"
-msgstr "km verderop"
+msgstr "km afstand"
 
 #: src/components/modals/SettingsModal.tsx:328
 #: src/components/modals/SettingsModal.tsx:330
@@ -168,27 +168,31 @@ msgstr "Taal"
 
 #: src/components/Brisker.tsx:422
 msgid "Loading..."
-msgstr "Laden."
+msgstr "Aan het laden…"
 
 #: src/components/modals/GeolocationSearchModal.tsx:59
 msgid "Location access denied. Please enable location services and try again."
-msgstr "Locatietoegang geweigerd. Schakel locatiediensten in en probeer het opnieuw."
+msgstr "Toegang tot locatie geweigerd. Schakel locatie diensten in en probeer het opnieuw."
 
 #: src/components/modals/GeolocationSearchModal.tsx:62
 msgid "Location information unavailable. Please try again."
-msgstr "Locatie informatie niet beschikbaar. Probeer het opnieuw."
+msgstr "Locatie-informatie niet beschikbaar. Probeer het opnieuw."
 
 #: src/components/modals/GeolocationSearchModal.tsx:65
 msgid "Location request timed out. Please try again."
-msgstr "Locatie aanvraag is verlopen. Probeer het opnieuw."
+msgstr "Er is een time-out opgetreden voor het aanvragen van locatie. Probeer het opnieuw."
 
 #: src/components/modals/InfoModal.tsx:45
 msgid "Multilingual support"
-msgstr "Meertalige support"
+msgstr "Meertalige ondersteuning"
+
+#: src/components/modals/InfoModal.tsx:58
+msgid "Nederlands (NL)"
+msgstr "Nederlands (NL)"
 
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
-msgstr "Je locatie ophalen en zoeken naar spelers in de buurt"
+msgstr "Netwerk ontdekking voor spelers in de buurt"
 
 #: src/components/modals/CongratulationsModal.tsx:44
 msgid "New Game"
@@ -212,11 +216,11 @@ msgstr "Offline modus voor spelen zonder netwerk"
 
 #: src/components/Brisker.tsx:439
 msgid "Opponent"
-msgstr "Tegenstander"
+msgstr "Tegenspeler"
 
 #: src/components/modals/InfoModal.tsx:48
 msgid "Persistent storage with auto-save"
-msgstr "Persistente opslag met automatisch opslaan"
+msgstr "Permanente opslag met automatisch opslaan"
 
 #: src/components/modals/GeolocationSearchModal.tsx:174
 #: src/components/modals/PlayerSearchModal.tsx:135
@@ -229,19 +233,19 @@ msgstr "Speler ID"
 
 #: src/components/modals/SettingsModal.tsx:299
 msgid "Player Name"
-msgstr "Speler naam"
+msgstr "Spelernaam"
 
 #: src/components/modals/InfoModal.tsx:44
 msgid "Progressive Web App - install on any device"
-msgstr "Progressive Web App - installeren op elk apparaat"
+msgstr "Progressive Web App - installeer op elk apparaat"
 
 #: src/components/modals/InfoModal.tsx:40
 msgid "Real-time multiplayer via WebSocket connection"
-msgstr "Real-time multiplayer via WebSocket-verbinding"
+msgstr "Real-time multiplayer via WebSocket verbinding"
 
 #: src/components/modals/ResetConfirmDialog.tsx:27
 msgid "Reset"
-msgstr "Reset"
+msgstr "Resetten"
 
 #: src/components/ui/ActionButtons.tsx:40
 msgid "Reset score"
@@ -262,24 +266,24 @@ msgstr "Scoregeschiedenis en bewegingen ongedaan maken"
 
 #: src/components/modals/InfoModal.tsx:32
 msgid "Score keeping application for the Bezique card game"
-msgstr "Score bijhouden applicatie voor het Bezique kaartspel"
+msgstr "Applicatie voor het bijhouden van scores voor het Bezique kaartspel"
 
 #: src/components/modals/GeolocationSearchModal.tsx:188
 msgid "Search Again"
-msgstr "Opnieuw zoeken"
+msgstr "Zoek nogmaals"
 
 #: src/components/modals/GeolocationSearchModal.tsx:120
 msgid "Search Nearby Players"
-msgstr "Zoek spelers in de buurt"
+msgstr "Spelers in de buurt zoeken"
 
 #: src/components/modals/PlayerSearchModal.tsx:83
 #: src/components/modals/SettingsModal.tsx:281
 msgid "Search Players"
-msgstr "Zoek spelers"
+msgstr "Spelers zoeken"
 
 #: src/components/modals/PlayerSearchModal.tsx:112
 msgid "Searching players..."
-msgstr "Spelers zoeken."
+msgstr "Spelers aan het zoeken..."
 
 #: src/components/modals/BriskSelector.tsx:25
 msgid "Select Brisk"
@@ -287,7 +291,7 @@ msgstr "Selecteer Brisk"
 
 #: src/components/ui/ActionButtons.tsx:31
 msgid "Select brisk number (adds brisk x 20 points)"
-msgstr "Selecteer brisk nummer (voegt brisk x 20 punten toe)"
+msgstr "Selecteer Brisk aantal (voegt stevig x 20 punten toe)"
 
 #: src/components/modals/SettingsModal.tsx:243
 #: src/components/ui/ActionButtons.tsx:49
@@ -296,7 +300,7 @@ msgstr "Instellingen"
 
 #: src/components/modals/SettingsModal.tsx:273
 msgid "Share Player ID"
-msgstr "Deel speler ID"
+msgstr "Speler ID delen"
 
 #: src/components/ui/ScoreDisplay.tsx:57
 msgid "Show score history"
@@ -310,17 +314,21 @@ msgstr "Geluidseffecten"
 msgid "Sound Effects"
 msgstr "Geluidseffecten"
 
+#: src/components/modals/InfoModal.tsx:59
+msgid "Svenska (SV)"
+msgstr "Svenska (SV)"
+
 #: src/components/modals/SettingsModal.tsx:368
 msgid "Target Score"
-msgstr "Doelscore"
+msgstr "Doel score"
 
 #: src/components/modals/ResetConfirmDialog.tsx:23
 msgid "This will delete all scores and cannot be undone."
-msgstr "Dit verwijdert alle scores en kan niet ongedaan worden gemaakt."
+msgstr "Hiermee worden alle scores verwijderd en kan deze niet ongedaan worden gemaakt."
 
 #: src/components/modals/GeolocationSearchModal.tsx:113
 msgid "This will request access to your location to find nearby players"
-msgstr "Dit zal toegang tot je locatie aanvragen om spelers in de buurt te vinden"
+msgstr "Hiermee wordt toegang tot je locatie gevraagd om spelers in de buurt te vinden"
 
 #: src/components/Brisker.tsx:416
 msgid "tied"
@@ -344,7 +352,7 @@ msgstr "Turkse Bezique"
 
 #: src/components/ui/ScoreDisplay.tsx:48
 msgid "Undo last score"
-msgstr "Maak laatste score ongedaan"
+msgstr "Laatste score ongedaan maken"
 
 #: src/components/modals/SettingsModal.tsx:347
 #: src/components/modals/SettingsModal.tsx:349

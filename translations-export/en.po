@@ -69,7 +69,7 @@ msgstr "Classic Bezique"
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
 #: src/components/modals/HistoryModal.tsx:69
-#: src/components/modals/InfoModal.tsx:66
+#: src/components/modals/InfoModal.tsx:68
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
@@ -91,6 +91,10 @@ msgstr "Cross-platform compatibility"
 msgid "Dealer tracking with visual indicators"
 msgstr "Dealer tracking with visual indicators"
 
+#: src/components/modals/InfoModal.tsx:60
+msgid "Deutsch (DE)"
+msgstr "Deutsch (DE)"
+
 #: src/components/modals/InfoModal.tsx:33
 msgid "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
 msgstr "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
@@ -106,10 +110,6 @@ msgstr "Disabled while connected to an opponent"
 #: src/components/Brisker.tsx:435
 msgid "Disconnect opponent"
 msgstr "Disconnect opponent"
-
-#: src/components/modals/InfoModal.tsx:58
-msgid "Dutch (NL)"
-msgstr "Dutch (NL)"
 
 #: src/components/modals/SettingsModal.tsx:319
 #: src/components/modals/SettingsModal.tsx:393
@@ -185,6 +185,10 @@ msgstr "Location request timed out. Please try again."
 #: src/components/modals/InfoModal.tsx:45
 msgid "Multilingual support"
 msgstr "Multilingual support"
+
+#: src/components/modals/InfoModal.tsx:58
+msgid "Nederlands (NL)"
+msgstr "Nederlands (NL)"
 
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
@@ -309,6 +313,10 @@ msgstr "Sound effects"
 #: src/components/modals/SettingsModal.tsx:406
 msgid "Sound Effects"
 msgstr "Sound Effects"
+
+#: src/components/modals/InfoModal.tsx:59
+msgid "Svenska (SV)"
+msgstr "Svenska (SV)"
 
 #: src/components/modals/SettingsModal.tsx:368
 msgid "Target Score"

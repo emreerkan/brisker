@@ -7,6 +7,8 @@ This directory contains PO files for translation.
 - `en.po` - EN translations
 - `tr.po` - TR translations
 - `nl.po` - NL translations
+- `sv.po` - SV translations
+- `de.po` - DE translations
 
 ## How to translate:
 

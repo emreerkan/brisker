@@ -1,14 +1,16 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: \n"
+"Last-Translator: Emre Erkan <kara@karalamalar.net>\n"
 "Language-Team: Tor-Björn Fjellner https://gsm.fjellner.com/\n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
 "X-Generator: Poedit 3.7\n"
 
 #. placeholder {0}: formatNumber(difference)
@@ -67,7 +69,7 @@ msgstr "Klassisk besick (Bézique)"
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
 #: src/components/modals/HistoryModal.tsx:69
-#: src/components/modals/InfoModal.tsx:66
+#: src/components/modals/InfoModal.tsx:68
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
@@ -89,6 +91,10 @@ msgstr "Kompatibilitet mellan flera plattformar"
 msgid "Dealer tracking with visual indicators"
 msgstr "Dealern markeras visuellt"
 
+#: src/components/modals/InfoModal.tsx:60
+msgid "Deutsch (DE)"
+msgstr "Deutsch (DE)"
+
 #: src/components/modals/InfoModal.tsx:33
 msgid "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
 msgstr "Utvecklad av Emre Erkan med hjälp av Claude Sonnet 4 och GitHub Copilot"
@@ -104,10 +110,6 @@ msgstr "Ej tillgängligt medan du är ansluten till en motspelare"
 #: src/components/Brisker.tsx:435
 msgid "Disconnect opponent"
 msgstr "Koppla bort motspelaren"
-
-#: src/components/modals/InfoModal.tsx:58
-msgid "Dutch (NL)"
-msgstr "Nederländska (NL)"
 
 #: src/components/modals/SettingsModal.tsx:319
 #: src/components/modals/SettingsModal.tsx:393
@@ -183,6 +185,10 @@ msgstr "Begäran om plats besvarades inte i tid. Försök igen."
 #: src/components/modals/InfoModal.tsx:45
 msgid "Multilingual support"
 msgstr "Stöd för flera språk"
+
+#: src/components/modals/InfoModal.tsx:58
+msgid "Nederlands (NL)"
+msgstr "Nederlands (NL)"
 
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
@@ -308,6 +314,10 @@ msgstr "Ljud"
 msgid "Sound Effects"
 msgstr "Ljud"
 
+#: src/components/modals/InfoModal.tsx:59
+msgid "Svenska (SV)"
+msgstr "Svenska (SV)"
+
 #: src/components/modals/SettingsModal.tsx:368
 msgid "Target Score"
 msgstr "Målpoäng"
@@ -360,15 +370,3 @@ msgstr "Målpoängen uppnådd! Bra spelat!"
 #: src/components/modals/SettingsModal.tsx:256
 msgid "Your Player ID"
 msgstr "Ditt spelar-ID"
-
-#~ msgid "player found"
-#~ msgstr "spelare hittad"
-
-#~ msgid "Reset game"
-#~ msgstr "Återställ spelet"
-
-#~ msgid "Score tracking and addition"
-#~ msgstr "Poängräkning och summering"
-
-#~ msgid "View score history"
-#~ msgstr "Visa poänghistorik"
