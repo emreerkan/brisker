@@ -28,7 +28,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
         className={styles.brisk}
         onClick={onBriskClick}
         disabled={isProcessing}
-        title={t`Select brisk number (adds brisk x 20 points)`}
+        title={t`Select brisk count (adds brisk points)`}
       >
         {t`Brisk`}
       </button>

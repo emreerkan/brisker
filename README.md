@@ -111,6 +111,7 @@ Special thanks to the following contributors for their translation work:
 - **Nederlands (nl)** - Peter Smits
 - **Svenska (sv)** - [Tor-Björn Fjellner](https://gsm.fjellner.com/)
 - **Deutsch (de)** - [Christian Herrmann](https://presskopp.com/)
+- **Français (fr)** - [François-Xavier Bénard](https://fxbenard.com/)
 
 ## 📄 License
 

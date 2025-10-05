@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.2] - 2025-10-05
+
+### Added
+- French (FR) translation support (Many thanks to [François-Xavier Bénard](https://fxbenard.com/))
+
 ## [1.4.1] - 2025-10-05
 
 ### Changed

@@ -69,7 +69,7 @@ msgstr "Klassisches Bezique"
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
 #: src/components/modals/HistoryModal.tsx:69
-#: src/components/modals/InfoModal.tsx:68
+#: src/components/modals/InfoModal.tsx:69
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
@@ -91,10 +91,6 @@ msgstr "Plattformübergreifende Kompatibilität"
 msgid "Dealer tracking with visual indicators"
 msgstr "Geberverfolgung mit visuellen Indikatoren"
 
-#: src/components/modals/InfoModal.tsx:60
-msgid "Deutsch (DE)"
-msgstr "Deutsch (DE)"
-
 #: src/components/modals/InfoModal.tsx:33
 msgid "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
 msgstr "Entwickelt von Emre Erkan mit Claude Sonnet 4 und GitHub Copilot"
@@ -115,10 +111,6 @@ msgstr "Verbindung mit Gegner trennen"
 #: src/components/modals/SettingsModal.tsx:393
 msgid "Edit Name"
 msgstr "Name bearbeiten"
-
-#: src/components/modals/InfoModal.tsx:57
-msgid "English (EN), Turkish (TR)"
-msgstr "Englisch (EN), Türkisch (TR)"
 
 #: src/components/modals/PlayerSearchModal.tsx:93
 msgid "Enter Player ID or Name..."
@@ -185,10 +177,6 @@ msgstr "Die Standortabfrage wurde abgebrochen. Bitte versuche es erneut."
 #: src/components/modals/InfoModal.tsx:45
 msgid "Multilingual support"
 msgstr "Unterstützung von Mehrsprachigkeit"
-
-#: src/components/modals/InfoModal.tsx:58
-msgid "Nederlands (NL)"
-msgstr "Nederlands (NL)"
 
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
@@ -290,7 +278,7 @@ msgid "Select Brisk"
 msgstr "Brisk auswählen"
 
 #: src/components/ui/ActionButtons.tsx:31
-msgid "Select brisk number (adds brisk x 20 points)"
+msgid "Select brisk count (adds brisk points)"
 msgstr "Wähle eine Brisk-Zahl (addiert Brisk x 20 Punkte)"
 
 #: src/components/modals/SettingsModal.tsx:243
@@ -313,10 +301,6 @@ msgstr "Soundeffekte"
 #: src/components/modals/SettingsModal.tsx:406
 msgid "Sound Effects"
 msgstr "Soundeffekte"
-
-#: src/components/modals/InfoModal.tsx:59
-msgid "Svenska (SV)"
-msgstr "Svenska (SV)"
 
 #: src/components/modals/SettingsModal.tsx:368
 msgid "Target Score"

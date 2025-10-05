@@ -1,58 +1,72 @@
+# Translation of WP-Translations - Brisker in French (France)
+# This file is distributed under the same license as the WP-Translations - Brisker package.
 msgid ""
 msgstr ""
+"Project-Id-Version: WP-Translations - Brisker\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2025-10-06 00:23+0300\n"
+"Last-Translator: Emre Erkan <kara@karalamalar.net>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Poedit 3.7\n"
 
 #. placeholder {0}: formatNumber(difference)
 #: src/components/Brisker.tsx:412
 msgid "{0} ahead"
-msgstr ""
+msgstr "{0} en avance"
 
 #. placeholder {0}: formatNumber(Math.abs(difference))
 #: src/components/Brisker.tsx:414
 msgid "{0} behind"
-msgstr ""
+msgstr "{0} derrière"
 
 #. placeholder {0}: nearbyPlayers.length
 #: src/components/modals/GeolocationSearchModal.tsx:156
 msgid "{0} nearby player(s) found:"
-msgstr ""
+msgstr "{0} joueur(s) à proximité trouvé(s) :"
 
 #. placeholder {0}: searchResults.length
 #: src/components/modals/PlayerSearchModal.tsx:122
 msgid "{0} player(s) found:"
-msgstr ""
+msgstr "{0} joueur(s) trouvé(s) :"
 
 #: src/components/ui/ActionButtons.tsx:58
 msgid "App information"
-msgstr ""
+msgstr "Informations sur l’application"
 
 #: src/components/modals/SettingsModal.tsx:404
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #: src/components/ui/ActionButtons.tsx:33
 msgid "Brisk"
-msgstr ""
+msgstr "Brisque"
 
 #: src/components/modals/InfoModal.tsx:22
 #: src/components/modals/InfoModal.tsx:30
 msgid "Brisker"
-msgstr ""
+msgstr "Brisker"
 
 #: src/components/modals/InfoModal.tsx:49
 msgid "Brisque calculation"
-msgstr ""
+msgstr "Calcul de Brisque"
 
 #: src/components/modals/InfoModal.tsx:34
 msgid "Build Date: September 2025"
-msgstr ""
+msgstr "Date de version : septembre 2025"
 
 #: src/components/modals/ResetConfirmDialog.tsx:30
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: src/components/modals/SettingsModal.tsx:52
 msgid "Classic Bezique"
-msgstr ""
+msgstr "Bezique classique"
 
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
@@ -61,284 +75,284 @@ msgstr ""
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/SettingsModal.tsx:421
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 
 #: src/components/modals/CongratulationsModal.tsx:31
 msgid "Congratulations!"
-msgstr ""
+msgstr "Félicitations !"
 
 #: src/components/modals/SettingsModal.tsx:265
 msgid "Copy Player ID"
-msgstr ""
+msgstr "Copier l’ID du joueur"
 
 #: src/components/modals/InfoModal.tsx:46
 msgid "Cross-platform compatibility"
-msgstr ""
+msgstr "Compatibilité multiplateforme"
 
 #: src/components/modals/InfoModal.tsx:43
 msgid "Dealer tracking with visual indicators"
-msgstr ""
+msgstr "Suivi des distributeurs de cartes avec indicateurs visuels"
 
 #: src/components/modals/InfoModal.tsx:33
 msgid "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
-msgstr ""
+msgstr "Développé par Emre Erkan avec Claude Sonnet 4 et GitHub Copilot"
 
 #: src/components/modals/InfoModal.tsx:39
 msgid "Digital score tracking with intuitive touch interface"
-msgstr ""
+msgstr "Suivi numérique des scores avec interface tactile intuitive"
 
 #: src/components/modals/SettingsModal.tsx:55
 msgid "Disabled while connected to an opponent"
-msgstr ""
+msgstr "Désactivé lors de la connexion à un adversaire"
 
 #: src/components/Brisker.tsx:435
 msgid "Disconnect opponent"
-msgstr ""
+msgstr "Déconnecter l’adversaire"
 
 #: src/components/modals/SettingsModal.tsx:319
 #: src/components/modals/SettingsModal.tsx:393
 msgid "Edit Name"
-msgstr ""
+msgstr "Modifier le nom"
 
 #: src/components/modals/PlayerSearchModal.tsx:93
 msgid "Enter Player ID or Name..."
-msgstr ""
+msgstr "Saisir l’ID ou le nom du joueur…"
 
 #: src/components/modals/SettingsModal.tsx:308
 msgid "Enter your player name"
-msgstr ""
+msgstr "Saisissez votre nom de joueur"
 
 #: src/components/modals/GeolocationSearchModal.tsx:68
 msgid "Failed to get your location. Please try again."
-msgstr ""
+msgstr "Échec de l’obtention de votre position. Veuillez réessayer."
 
 #: src/components/modals/GeolocationSearchModal.tsx:74
 msgid "Failed to search for nearby players. Please try again."
-msgstr ""
+msgstr "Échec de la recherche de joueurs à proximité. Veuillez réessayer."
 
 #: src/components/modals/InfoModal.tsx:37
 msgid "Features"
-msgstr ""
+msgstr "Fonctionnalités"
 
 #: src/components/modals/GeolocationSearchModal.tsx:101
 #: src/components/modals/SettingsModal.tsx:289
 msgid "Find Nearby Players"
-msgstr ""
+msgstr "Trouver des joueurs à proximité"
 
 #: src/components/modals/GeolocationSearchModal.tsx:111
 msgid "Find players near your location"
-msgstr ""
+msgstr "Trouver des joueurs près de chez vous"
 
 #: src/components/modals/GeolocationSearchModal.tsx:129
 msgid "Getting your location and searching for nearby players..."
-msgstr ""
+msgstr "Obtention de votre position et recherche des joueurs à proximité…"
 
 #: src/components/modals/SettingsModal.tsx:131
 msgid "Join me in Bezique!"
-msgstr ""
+msgstr "Rejoins-moi dans Bezique !"
 
 #: src/components/modals/GeolocationSearchModal.tsx:166
 msgid "km away"
-msgstr ""
+msgstr "km"
 
 #: src/components/modals/SettingsModal.tsx:328
 #: src/components/modals/SettingsModal.tsx:330
 msgid "Language"
-msgstr ""
+msgstr "Langue"
 
 #: src/components/Brisker.tsx:422
 msgid "Loading..."
-msgstr ""
+msgstr "Chargement…"
 
 #: src/components/modals/GeolocationSearchModal.tsx:59
 msgid "Location access denied. Please enable location services and try again."
-msgstr ""
+msgstr "L’accès à la localisation a été refusé. Veuillez activer les services de localisation et réessayer."
 
 #: src/components/modals/GeolocationSearchModal.tsx:62
 msgid "Location information unavailable. Please try again."
-msgstr ""
+msgstr "Les informations de localisation sont indisponibles. Veuillez réessayer."
 
 #: src/components/modals/GeolocationSearchModal.tsx:65
 msgid "Location request timed out. Please try again."
-msgstr ""
+msgstr "La demande de localisation a expiré. Veuillez réessayer."
 
 #: src/components/modals/InfoModal.tsx:45
 msgid "Multilingual support"
-msgstr ""
+msgstr "Prise en charge multilingue"
 
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
-msgstr ""
+msgstr "Découverte du réseau pour les joueurs à proximité"
 
 #: src/components/modals/CongratulationsModal.tsx:44
 msgid "New Game"
-msgstr ""
+msgstr "Nouveau jeu"
 
 #: src/components/modals/GeolocationSearchModal.tsx:183
 msgid "No nearby players found"
-msgstr ""
+msgstr "Aucun joueur à proximité n’a été trouvé"
 
 #: src/components/modals/PlayerSearchModal.tsx:143
 msgid "No players found"
-msgstr ""
+msgstr "Aucun joueur trouvé"
 
 #: src/components/modals/HistoryModal.tsx:43
 msgid "No scores recorded yet"
-msgstr ""
+msgstr "Aucun score n’a encore été enregistré"
 
 #: src/components/modals/InfoModal.tsx:41
 msgid "Offline mode for network-free play"
-msgstr ""
+msgstr "Mode hors ligne pour jouer sans réseau"
 
 #: src/components/Brisker.tsx:439
 msgid "Opponent"
-msgstr ""
+msgstr "Adversaire"
 
 #: src/components/modals/InfoModal.tsx:48
 msgid "Persistent storage with auto-save"
-msgstr ""
+msgstr "Stockage persistant avec enregistrement automatique"
 
 #: src/components/modals/GeolocationSearchModal.tsx:174
 #: src/components/modals/PlayerSearchModal.tsx:135
 msgid "Play"
-msgstr ""
+msgstr "Jouer"
 
 #: src/components/modals/SettingsModal.tsx:252
 msgid "Player ID"
-msgstr ""
+msgstr "ID du joueur"
 
 #: src/components/modals/SettingsModal.tsx:299
 msgid "Player Name"
-msgstr ""
+msgstr "Nom du joueur"
 
 #: src/components/modals/InfoModal.tsx:44
 msgid "Progressive Web App - install on any device"
-msgstr ""
+msgstr "Application web progressive - installez sur n’importe quel appareil"
 
 #: src/components/modals/InfoModal.tsx:40
 msgid "Real-time multiplayer via WebSocket connection"
-msgstr ""
+msgstr "Multijoueur en temps réel via connexion WebSocket"
 
 #: src/components/modals/ResetConfirmDialog.tsx:27
 msgid "Reset"
-msgstr ""
+msgstr "Réinitialiser"
 
 #: src/components/ui/ActionButtons.tsx:40
 msgid "Reset score"
-msgstr ""
+msgstr "Réinitialiser le score"
 
 #: src/components/modals/SettingsModal.tsx:319
 #: src/components/modals/SettingsModal.tsx:393
 msgid "Save Name"
-msgstr ""
+msgstr "Enregistrer le nom"
 
 #: src/components/modals/HistoryModal.tsx:30
 msgid "Score History"
-msgstr ""
+msgstr "Historique des scores"
 
 #: src/components/modals/InfoModal.tsx:42
 msgid "Score history and undo moves"
-msgstr ""
+msgstr "Historique des scores et annuler les mouvements"
 
 #: src/components/modals/InfoModal.tsx:32
 msgid "Score keeping application for the Bezique card game"
-msgstr ""
+msgstr "Application de suivi des scores pour le jeu de cartes Bézique"
 
 #: src/components/modals/GeolocationSearchModal.tsx:188
 msgid "Search Again"
-msgstr ""
+msgstr "Rechercher à nouveau"
 
 #: src/components/modals/GeolocationSearchModal.tsx:120
 msgid "Search Nearby Players"
-msgstr ""
+msgstr "Rechercher les joueurs à proximité"
 
 #: src/components/modals/PlayerSearchModal.tsx:83
 #: src/components/modals/SettingsModal.tsx:281
 msgid "Search Players"
-msgstr ""
+msgstr "Rechercher des joueurs"
 
 #: src/components/modals/PlayerSearchModal.tsx:112
 msgid "Searching players..."
-msgstr ""
+msgstr "Recherche des joueurs…"
 
 #: src/components/modals/BriskSelector.tsx:25
 msgid "Select Brisk"
-msgstr ""
+msgstr "Sélectionner Brisk"
 
 #: src/components/ui/ActionButtons.tsx:31
 msgid "Select brisk count (adds brisk points)"
-msgstr ""
+msgstr "Sélectionner un nombre brisque (ajoute brisque points)"
 
 #: src/components/modals/SettingsModal.tsx:243
 #: src/components/ui/ActionButtons.tsx:49
 msgid "Settings"
-msgstr ""
+msgstr "Réglages"
 
 #: src/components/modals/SettingsModal.tsx:273
 msgid "Share Player ID"
-msgstr ""
+msgstr "Partager l’ID du joueur"
 
 #: src/components/ui/ScoreDisplay.tsx:57
 msgid "Show score history"
-msgstr ""
+msgstr "Afficher l’historique des scores"
 
 #: src/components/modals/InfoModal.tsx:50
 msgid "Sound effects"
-msgstr ""
+msgstr "Effets sonores"
 
 #: src/components/modals/SettingsModal.tsx:406
 msgid "Sound Effects"
-msgstr ""
+msgstr "Effets sonores"
 
 #: src/components/modals/SettingsModal.tsx:368
 msgid "Target Score"
-msgstr ""
+msgstr "Score cible"
 
 #: src/components/modals/ResetConfirmDialog.tsx:23
 msgid "This will delete all scores and cannot be undone."
-msgstr ""
+msgstr "Cela supprimera tous les scores et ne peut pas être annulé."
 
 #: src/components/modals/GeolocationSearchModal.tsx:113
 msgid "This will request access to your location to find nearby players"
-msgstr ""
+msgstr "Cela demandera l’accès à votre position pour trouver des joueurs à proximité"
 
 #: src/components/Brisker.tsx:416
 msgid "tied"
-msgstr ""
+msgstr "égalité"
 
 #: src/components/modals/HistoryModal.tsx:38
 msgid "Total Score"
-msgstr ""
+msgstr "Score total"
 
 #: src/components/modals/InfoModal.tsx:55
 msgid "Translators"
-msgstr ""
+msgstr "Traducteurs"
 
 #: src/components/modals/GeolocationSearchModal.tsx:144
 msgid "Try Again"
-msgstr ""
+msgstr "Réessayer"
 
 #: src/components/modals/SettingsModal.tsx:53
 msgid "Turkish Bezique"
-msgstr ""
+msgstr "Bezique turc"
 
 #: src/components/ui/ScoreDisplay.tsx:48
 msgid "Undo last score"
-msgstr ""
+msgstr "Annuler le dernier score"
 
 #: src/components/modals/SettingsModal.tsx:347
 #: src/components/modals/SettingsModal.tsx:349
 msgid "Variant"
-msgstr ""
+msgstr "Variante"
 
 #: src/components/modals/InfoModal.tsx:31
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 #: src/components/modals/CongratulationsModal.tsx:34
 msgid "You've reached the target score! Fantastic game!"
-msgstr ""
+msgstr "Vous avez atteint le score cible ! Fantastique partie !"
 
 #: src/components/modals/SettingsModal.tsx:256
 msgid "Your Player ID"
-msgstr ""
+msgstr "Votre ID de joueur"

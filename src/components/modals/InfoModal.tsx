@@ -54,10 +54,11 @@ export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
             <div className={styles.featuresSection}>
               <h4>{t`Translators`}:</h4>
               <ul className={styles.featuresList}>
-                <li>{t`English (EN), Turkish (TR)`} - Emre Erkan</li>
-                <li>{t`Nederlands (NL)`} - Peter Smits</li>
-                <li>{t`Svenska (SV)`} - Tor-Björn Fjellner <a href="https://gsm.fjellner.com/" target="_blank" rel="noopener noreferrer"><ExternalLink size={ICON_SIZE/1.5} /></a></li>
-                <li>{t`Deutsch (DE)`} - Christian Herrmann <a href="https://presskopp.com/" target="_blank" rel="noopener noreferrer"><ExternalLink size={ICON_SIZE/1.5} /></a></li>
+                <li>English (EN), Türkçe (TR) - Emre Erkan <a href="https://karalamalar.net/" target="_blank" rel="noopener noreferrer"><ExternalLink size={ICON_SIZE/1.5} /></a></li>
+                <li>Nederlands (NL) - Peter Smits</li>
+                <li>Svenska (SV) - Tor-Björn Fjellner <a href="https://gsm.fjellner.com/" target="_blank" rel="noopener noreferrer"><ExternalLink size={ICON_SIZE/1.5} /></a></li>
+                <li>Deutsch (DE) - Christian Herrmann <a href="https://presskopp.com/" target="_blank" rel="noopener noreferrer"><ExternalLink size={ICON_SIZE/1.5} /></a></li>
+                <li>Français (FR) - François-Xavier Bénard <a href="https://fxbenard.com/" target="_blank" rel="noopener noreferrer"><ExternalLink size={ICON_SIZE/1.5} /></a></li>
               </ul>
             </div>
           </div>
