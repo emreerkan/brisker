@@ -4,6 +4,12 @@ import { i18n } from '@lingui/core';
 import { I18nProvider } from '@lingui/react';
 import { availableLanguages, SUPPORTED_LANGUAGE_CODES, DEFAULT_LANGUAGE } from './config';
 
+type CatalogModule = { messages: Record<string, unknown> };
+
+const catalogLoaders: Record<string, () => Promise<CatalogModule>> = import.meta.glob<CatalogModule>(
+  '../locales/*/messages.mjs',
+);
+
 interface LanguageContextType {
   language: string;
   setLanguage: (lang: string) => void;
@@ -22,14 +28,25 @@ const loadCatalog = async (locale: string) => {
     return normalized;
   }
 
-  const catalog = await import(
-    /* @vite-ignore */ `../locales/${normalized}/messages.mjs`
-  );
+  const loaderKey = `../locales/${normalized}/messages.mjs`;
+  let loader = catalogLoaders[loaderKey];
+  let targetLocale = normalized;
 
-  i18n.load(normalized, catalog.messages);
-  i18n.activate(normalized);
+  if (!loader) {
+    targetLocale = DEFAULT_LANGUAGE;
+    loader = catalogLoaders[`../locales/${DEFAULT_LANGUAGE}/messages.mjs`];
+  }
 
-  return normalized;
+  if (!loader) {
+    throw new Error('Missing compiled translation catalog for default locale.');
+  }
+
+  const catalog = await loader();
+
+  i18n.load(targetLocale, catalog.messages as Record<string, string>);
+  i18n.activate(targetLocale);
+
+  return targetLocale;
 };
 
 interface LanguageProviderProps {
