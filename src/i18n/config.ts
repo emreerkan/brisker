@@ -1,10 +1,11 @@
 export const availableLanguages = [
-  { code: 'en', name: 'English' },
-  { code: 'tr', name: 'Türkçe' },
-  { code: 'nl', name: 'Nederlands' },
-  { code: 'sv', name: 'Svenska' },
-  { code: 'de', name: 'Deutsch' },
-  { code: 'fr', name: 'Français' },
+  { code: 'en', name: 'English', rtl: false },
+  { code: 'tr', name: 'Türkçe', rtl: false },
+  { code: 'nl', name: 'Nederlands', rtl: false },
+  { code: 'sv', name: 'Svenska', rtl: false },
+  { code: 'de', name: 'Deutsch', rtl: false },
+  { code: 'fr', name: 'Français', rtl: false },
+  { code: 'fa', name: 'فارسی', rtl: true },
 ] as const;
 
 export const SUPPORTED_LANGUAGE_CODES = availableLanguages.map(lang => lang.code) as string[];

@@ -23,6 +23,52 @@
   flex-direction: column;
 }
 
+/* RTL support */
+[dir="rtl"] .container {
+  direction: rtl;
+}
+
+/* RTL Grid Layout Adjustments */
+[dir="rtl"] .gridContainer {
+  direction: rtl;
+}
+
+/* RTL Button Text Alignment */
+[dir="rtl"] button {
+  text-align: center;
+}
+
+/* RTL Input and Form Elements */
+[dir="rtl"] input,
+[dir="rtl"] select,
+[dir="rtl"] textarea {
+  text-align: right;
+}
+
+/* RTL Modal Content */
+[dir="rtl"] .modalContent {
+  direction: rtl;
+  text-align: right;
+}
+
+/* RTL Settings Items */
+[dir="rtl"] .settingItem {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .settingItem label {
+  text-align: right;
+}
+
+/* RTL Player List Items */
+[dir="rtl"] .playerItem {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .playerName {
+  text-align: right;
+}
+
 .gridContainer {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -346,6 +392,10 @@
   flex-shrink: 0;
 }
 
+[dir="rtl"] .modalHeader {
+  flex-direction: row-reverse;
+}
+
 .modalTitle {
   font-size: 20px;
   font-weight: 600;
@@ -408,6 +458,10 @@
   border-top: 1px solid #e9ecef;
   padding: 20px;
   flex-shrink: 0;
+}
+
+[dir="rtl"] .modalFooter {
+  direction: rtl;
 }
 
 .modalFooter .modalButton {
@@ -826,6 +880,16 @@
   color: #007bff;
   font-weight: bold;
   margin-right: 8px;
+}
+
+[dir="rtl"] .featuresList li {
+  text-align: right;
+  direction: rtl;
+}
+
+[dir="rtl"] .featuresList li:before {
+  margin-right: 0;
+  margin-left: 8px;
 }
 
 /* Congratulations Modal */
@@ -1398,17 +1462,21 @@
 /* Opponent Bar */
 .opponentBar {
   grid-column: 1 / 5;
-  background: #2660A4;
-  color: #ffffff;
+  background: #E8F4FD;
   border: none;
   border-radius: 0;
-  padding: 8px 15px;
-  font-size: 16px;
-  font-weight: bold;
+  padding: 10px 15px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  box-sizing: border-box;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 500;
+  color: #2563eb;
+  min-height: 50px;
+}
+
+[dir="rtl"] .opponentBar {
+  flex-direction: row-reverse;
 }
 
 .opponentName {
@@ -1416,6 +1484,10 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+[dir="rtl"] .opponentName {
+  flex-direction: row-reverse;
 }
 .disconnectButton {
   background: rgba(255, 255, 255, 0.15);

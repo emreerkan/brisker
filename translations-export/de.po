@@ -69,7 +69,7 @@ msgstr "Klassisches Bezique"
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
 #: src/components/modals/HistoryModal.tsx:69
-#: src/components/modals/InfoModal.tsx:69
+#: src/components/modals/InfoModal.tsx:70
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/SettingsModal.tsx:421
 msgid "Close"

@@ -10,6 +10,7 @@ This directory contains PO files for translation.
 - `sv.po` - SV translations
 - `de.po` - DE translations
 - `fr.po` - FR translations
+- `fa.po` - FA translations
 
 ## How to translate:
 

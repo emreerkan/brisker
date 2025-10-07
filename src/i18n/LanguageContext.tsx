@@ -10,6 +10,12 @@ const catalogLoaders: Record<string, () => Promise<CatalogModule>> = import.meta
   '../locales/*/messages.mjs',
 );
 
+// Helper function to check if a language is RTL
+const isRTLLanguage = (languageCode: string): boolean => {
+  const lang = availableLanguages.find(l => l.code === languageCode);
+  return lang?.rtl ?? false;
+};
+
 interface LanguageContextType {
   language: string;
   setLanguage: (lang: string) => void;
@@ -23,6 +29,10 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 
 const loadCatalog = async (locale: string) => {
   const normalized = SUPPORTED_LANGUAGE_CODES.includes(locale) ? locale : DEFAULT_LANGUAGE;
+
+  const isRTL = isRTLLanguage(normalized);
+  document.documentElement.dir = isRTL ? 'rtl' : 'ltr';
+  document.documentElement.lang = normalized;
 
   if (i18n.locale === normalized && Object.keys(i18n.messages).length > 0) {
     return normalized;

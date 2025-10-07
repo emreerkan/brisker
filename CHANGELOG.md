@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.3] - 2025-10-07
+
+### Added
+- Persian (FA) translation support (Many thanks to [Hassan Tafreshi](https://whitestudio.team/))
+- Comprehensive RTL layout support using CSS `[dir="rtl"]` selectors
+- RTL-friendly UI components including modals, buttons, forms, and navigation elements
+- Automatic document direction detection and switching based on language selection
+
+### Changed  
+- Enhanced language context to automatically set document direction and language attributes
+- RTL configuration in language config with `rtl: boolean` property
+
 ## [1.4.2] - 2025-10-05
 
 ### Added
