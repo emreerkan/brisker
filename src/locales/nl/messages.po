@@ -35,23 +35,23 @@ msgstr "{0} speler(s) gevonden:"
 
 #: src/components/modals/CookieConsentBanner.tsx:62
 msgid "Accept & Continue"
-msgstr ""
+msgstr "Accepteren & Doorgaan"
 
 #: src/components/modals/SettingsModal.tsx:268
 msgid "Analytics consent has been granted. Anonymous usage data will be collected to improve the app."
-msgstr ""
+msgstr "Analytische toestemming is verleend. Anonieme gebruiksgegevens worden verzameld om de app te verbeteren."
 
 #: src/components/modals/SettingsModal.tsx:258
 msgid "Analytics consent has been revoked. Tracking is now disabled."
-msgstr ""
+msgstr "Analytische toestemming is ingetrokken. Tracking is nu uitgeschakeld."
 
 #: src/components/modals/SettingsModal.tsx:279
 msgid "Analytics disabled"
-msgstr ""
+msgstr "Analytics uitgeschakeld"
 
 #: src/components/modals/SettingsModal.tsx:277
 msgid "Analytics enabled"
-msgstr ""
+msgstr "Analytics ingeschakeld"
 
 #: src/components/ui/ActionButtons.tsx:58
 msgid "App information"
@@ -102,7 +102,7 @@ msgstr "Gefeliciteerd!"
 
 #: src/components/modals/CookieConsentBanner.tsx:40
 msgid "Cookie Notice"
-msgstr ""
+msgstr "Cookiemelding"
 
 #: src/components/modals/SettingsModal.tsx:315
 msgid "Copy Player ID"
@@ -139,7 +139,7 @@ msgstr "Naam bewerken"
 
 #: src/components/modals/SettingsModal.tsx:485
 msgid "Enable Analytics"
-msgstr ""
+msgstr "Analytics inschakelen"
 
 #: src/components/modals/PlayerSearchModal.tsx:93
 msgid "Enter Player ID or Name..."
@@ -172,7 +172,7 @@ msgstr "Vind spelers in de buurt van je locatie"
 
 #: src/components/modals/PrivacyModal.tsx:34
 msgid "Games completed"
-msgstr ""
+msgstr "Voltooide spellen"
 
 #: src/components/modals/GeolocationSearchModal.tsx:129
 msgid "Getting your location and searching for nearby players..."
@@ -180,15 +180,15 @@ msgstr "Je locatie ophalen en zoeken naar spelers in de buurt..."
 
 #: src/components/modals/CookieConsentBanner.tsx:42
 msgid "Google Analytics is used to understand app usage. Tracking can be accepted or rejected."
-msgstr ""
+msgstr "Google Analytics wordt gebruikt om app-gebruik te begrijpen. Tracking kan worden geaccepteerd of afgewezen."
 
 #: src/components/modals/PrivacyModal.tsx:29
 msgid "Google Analytics is used to understand how the app is used and improve the experience. The following data is tracked:"
-msgstr ""
+msgstr "Google Analytics wordt gebruikt om te begrijpen hoe de app wordt gebruikt en de ervaring te verbeteren. De volgende gegevens worden bijgehouden:"
 
 #: src/components/modals/PrivacyModal.tsx:47
 msgid "Google's Privacy Policy"
-msgstr ""
+msgstr "Privacybeleid van Google"
 
 #: src/components/modals/SettingsModal.tsx:148
 msgid "Join me in Bezique!"
@@ -205,7 +205,7 @@ msgstr "Taal"
 
 #: src/components/modals/CookieConsentBanner.tsx:50
 msgid "Learn More"
-msgstr ""
+msgstr "Meer informatie"
 
 #: src/components/Brisker.tsx:458
 msgid "Loading..."
@@ -229,7 +229,7 @@ msgstr "Meertalige ondersteuning"
 
 #: src/components/modals/PrivacyModal.tsx:33
 msgid "Multiplayer games played"
-msgstr ""
+msgstr "Multiplayer-spellen gespeeld"
 
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
@@ -241,7 +241,7 @@ msgstr "Nieuw spel"
 
 #: src/components/modals/SettingsModal.tsx:492
 msgid "No choice has been made yet"
-msgstr ""
+msgstr "Er is nog geen keuze gemaakt"
 
 #: src/components/modals/GeolocationSearchModal.tsx:183
 msgid "No nearby players found"
@@ -257,11 +257,11 @@ msgstr "Nog geen scores geregistreerd"
 
 #: src/components/modals/SettingsModal.tsx:281
 msgid "Not set"
-msgstr ""
+msgstr "Niet ingesteld"
 
 #: src/components/modals/PrivacyModal.tsx:32
 msgid "Number of users"
-msgstr ""
+msgstr "Aantal gebruikers"
 
 #: src/components/modals/InfoModal.tsx:41
 msgid "Offline mode for network-free play"
@@ -291,11 +291,11 @@ msgstr "Spelernaam"
 #: src/components/modals/PrivacyModal.tsx:19
 #: src/components/modals/SettingsModal.tsx:454
 msgid "Privacy & Data"
-msgstr ""
+msgstr "Privacy & Gegevens"
 
 #: src/components/modals/SettingsModal.tsx:462
 msgid "Privacy Information"
-msgstr ""
+msgstr "Privacy-informatie"
 
 #: src/components/modals/InfoModal.tsx:44
 msgid "Progressive Web App - install on any device"
@@ -307,7 +307,7 @@ msgstr "Real-time multiplayer via WebSocket verbinding"
 
 #: src/components/modals/CookieConsentBanner.tsx:56
 msgid "Reject"
-msgstr ""
+msgstr "Afwijzen"
 
 #: src/components/modals/ResetConfirmDialog.tsx:27
 msgid "Reset"
@@ -319,7 +319,7 @@ msgstr "Score resetten"
 
 #: src/components/modals/SettingsModal.tsx:474
 msgid "Revoke Analytics Consent"
-msgstr ""
+msgstr "Afwijzen"
 
 #: src/components/modals/SettingsModal.tsx:369
 #: src/components/modals/SettingsModal.tsx:443
@@ -386,7 +386,7 @@ msgstr "Geluidseffecten"
 
 #: src/components/modals/SettingsModal.tsx:457
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: src/components/modals/SettingsModal.tsx:418
 msgid "Target Score"
@@ -394,7 +394,7 @@ msgstr "Doel score"
 
 #: src/components/modals/PrivacyModal.tsx:39
 msgid "This data helps improve Brisker by understanding how it is used."
-msgstr ""
+msgstr "Analytische toestemming intrekken"
 
 #: src/components/modals/ResetConfirmDialog.tsx:23
 msgid "This will delete all scores and cannot be undone."
@@ -414,7 +414,7 @@ msgstr "Totale score"
 
 #: src/components/modals/PrivacyModal.tsx:44
 msgid "Tracking can be accepted or rejected at any time. No tracking occurs if rejected."
-msgstr ""
+msgstr "Status"
 
 #: src/components/modals/InfoModal.tsx:55
 msgid "Translators"
@@ -434,7 +434,7 @@ msgstr "Laatste score ongedaan maken"
 
 #: src/components/modals/SettingsModal.tsx:283
 msgid "Unknown"
-msgstr ""
+msgstr "Onbekend"
 
 #: src/components/modals/SettingsModal.tsx:397
 #: src/components/modals/SettingsModal.tsx:399
@@ -447,15 +447,15 @@ msgstr "Versie"
 
 #: src/components/modals/PrivacyModal.tsx:55
 msgid "View Google Analytics Privacy Policy"
-msgstr ""
+msgstr "Deze gegevens helpen Brisker te verbeteren door te begrijpen hoe het wordt gebruikt."
 
 #: src/components/modals/PrivacyModal.tsx:27
 msgid "What Is Tracked"
-msgstr ""
+msgstr "Tracking kan op elk moment worden geaccepteerd of afgewezen. Er vindt geen tracking plaats bij afwijzing."
 
 #: src/components/modals/PrivacyModal.tsx:37
 msgid "Why Tracking Is Used"
-msgstr ""
+msgstr "Onbekend"
 
 #: src/components/modals/CongratulationsModal.tsx:34
 msgid "You've reached the target score! Fantastic game!"
@@ -463,7 +463,7 @@ msgstr "Je hebt de doelscore bereikt! Fantastisch spel!"
 
 #: src/components/modals/PrivacyModal.tsx:42
 msgid "Your Control"
-msgstr ""
+msgstr "Bekijk het privacybeleid van Google Analytics"
 
 #: src/components/modals/SettingsModal.tsx:306
 msgid "Your Player ID"

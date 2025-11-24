@@ -37,23 +37,23 @@ msgstr "{0} بازیکن پیدا شد:"
 
 #: src/components/modals/CookieConsentBanner.tsx:62
 msgid "Accept & Continue"
-msgstr ""
+msgstr "قبول و ادامه"
 
 #: src/components/modals/SettingsModal.tsx:268
 msgid "Analytics consent has been granted. Anonymous usage data will be collected to improve the app."
-msgstr ""
+msgstr "رضایت تحلیلی اعطا شد. داده‌های استفاده ناشناس برای بهبود برنامه جمع‌آوری خواهند شد."
 
 #: src/components/modals/SettingsModal.tsx:258
 msgid "Analytics consent has been revoked. Tracking is now disabled."
-msgstr ""
+msgstr "رضایت تحلیلی لغو شد. ردیابی اکنون غیرفعال است."
 
 #: src/components/modals/SettingsModal.tsx:279
 msgid "Analytics disabled"
-msgstr ""
+msgstr "تحلیل غیرفعال"
 
 #: src/components/modals/SettingsModal.tsx:277
 msgid "Analytics enabled"
-msgstr ""
+msgstr "تحلیل فعال"
 
 #: src/components/ui/ActionButtons.tsx:58
 msgid "App information"
@@ -104,7 +104,7 @@ msgstr "تبریک!"
 
 #: src/components/modals/CookieConsentBanner.tsx:40
 msgid "Cookie Notice"
-msgstr ""
+msgstr "اطلاعیه کوکی"
 
 #: src/components/modals/SettingsModal.tsx:315
 msgid "Copy Player ID"
@@ -141,7 +141,7 @@ msgstr "ویرایش نام"
 
 #: src/components/modals/SettingsModal.tsx:485
 msgid "Enable Analytics"
-msgstr ""
+msgstr "فعال‌سازی تحلیل"
 
 #: src/components/modals/PlayerSearchModal.tsx:93
 msgid "Enter Player ID or Name..."
@@ -174,7 +174,7 @@ msgstr "یافتن بازیکنان نزدیک به موقعیت شما"
 
 #: src/components/modals/PrivacyModal.tsx:34
 msgid "Games completed"
-msgstr ""
+msgstr "بازی‌های تکمیل شده"
 
 #: src/components/modals/GeolocationSearchModal.tsx:129
 msgid "Getting your location and searching for nearby players..."
@@ -182,15 +182,15 @@ msgstr "در حال دریافت موقعیت و جستجوی بازیکنان �
 
 #: src/components/modals/CookieConsentBanner.tsx:42
 msgid "Google Analytics is used to understand app usage. Tracking can be accepted or rejected."
-msgstr ""
+msgstr "Google Analytics برای درک استفاده از برنامه استفاده می‌شود. ردیابی قابل قبول یا رد است."
 
 #: src/components/modals/PrivacyModal.tsx:29
 msgid "Google Analytics is used to understand how the app is used and improve the experience. The following data is tracked:"
-msgstr ""
+msgstr "Google Analytics برای درک نحوه استفاده از برنامه و بهبود تجربه استفاده می‌شود. داده‌های زیر ردیابی می‌شوند:"
 
 #: src/components/modals/PrivacyModal.tsx:47
 msgid "Google's Privacy Policy"
-msgstr ""
+msgstr "سیاست حفظ حریم خصوصی Google"
 
 #: src/components/modals/SettingsModal.tsx:148
 msgid "Join me in Bezique!"
@@ -207,7 +207,7 @@ msgstr "زبان"
 
 #: src/components/modals/CookieConsentBanner.tsx:50
 msgid "Learn More"
-msgstr ""
+msgstr "بیشتر بدانید"
 
 #: src/components/Brisker.tsx:458
 msgid "Loading..."
@@ -231,7 +231,7 @@ msgstr "پشتیبانی چندزبانه"
 
 #: src/components/modals/PrivacyModal.tsx:33
 msgid "Multiplayer games played"
-msgstr ""
+msgstr "بازی‌های چند نفره انجام شده"
 
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
@@ -243,7 +243,7 @@ msgstr "بازی جدید"
 
 #: src/components/modals/SettingsModal.tsx:492
 msgid "No choice has been made yet"
-msgstr ""
+msgstr "هنوز انتخابی انجام نشده است"
 
 #: src/components/modals/GeolocationSearchModal.tsx:183
 msgid "No nearby players found"
@@ -259,11 +259,11 @@ msgstr "هنوز امتیازی ثبت نشده است"
 
 #: src/components/modals/SettingsModal.tsx:281
 msgid "Not set"
-msgstr ""
+msgstr "تنظیم نشده"
 
 #: src/components/modals/PrivacyModal.tsx:32
 msgid "Number of users"
-msgstr ""
+msgstr "تعداد کاربران"
 
 #: src/components/modals/InfoModal.tsx:41
 msgid "Offline mode for network-free play"
@@ -293,11 +293,11 @@ msgstr "نام بازیکن"
 #: src/components/modals/PrivacyModal.tsx:19
 #: src/components/modals/SettingsModal.tsx:454
 msgid "Privacy & Data"
-msgstr ""
+msgstr "حریم خصوصی و داده"
 
 #: src/components/modals/SettingsModal.tsx:462
 msgid "Privacy Information"
-msgstr ""
+msgstr "اطلاعات حریم خصوصی"
 
 #: src/components/modals/InfoModal.tsx:44
 msgid "Progressive Web App - install on any device"
@@ -309,7 +309,7 @@ msgstr "چند‌نفره‌ی هم‌زمان از طریق اتصال WebSocke
 
 #: src/components/modals/CookieConsentBanner.tsx:56
 msgid "Reject"
-msgstr ""
+msgstr "رد"
 
 #: src/components/modals/ResetConfirmDialog.tsx:27
 msgid "Reset"
@@ -321,7 +321,7 @@ msgstr "بازنشانی امتیاز"
 
 #: src/components/modals/SettingsModal.tsx:474
 msgid "Revoke Analytics Consent"
-msgstr ""
+msgstr "رد"
 
 #: src/components/modals/SettingsModal.tsx:369
 #: src/components/modals/SettingsModal.tsx:443
@@ -388,7 +388,7 @@ msgstr "افکت‌های صوتی"
 
 #: src/components/modals/SettingsModal.tsx:457
 msgid "Status"
-msgstr ""
+msgstr "وضعیت"
 
 #: src/components/modals/SettingsModal.tsx:418
 msgid "Target Score"
@@ -396,7 +396,7 @@ msgstr "امتیاز هدف"
 
 #: src/components/modals/PrivacyModal.tsx:39
 msgid "This data helps improve Brisker by understanding how it is used."
-msgstr ""
+msgstr "لغو رضایت تحلیلی"
 
 #: src/components/modals/ResetConfirmDialog.tsx:23
 msgid "This will delete all scores and cannot be undone."
@@ -416,7 +416,7 @@ msgstr "امتیاز کل"
 
 #: src/components/modals/PrivacyModal.tsx:44
 msgid "Tracking can be accepted or rejected at any time. No tracking occurs if rejected."
-msgstr ""
+msgstr "وضعیت"
 
 #: src/components/modals/InfoModal.tsx:55
 msgid "Translators"
@@ -436,7 +436,7 @@ msgstr "بازگشت امتیاز آخر"
 
 #: src/components/modals/SettingsModal.tsx:283
 msgid "Unknown"
-msgstr ""
+msgstr "نامشخص"
 
 #: src/components/modals/SettingsModal.tsx:397
 #: src/components/modals/SettingsModal.tsx:399
@@ -449,15 +449,15 @@ msgstr "نسخه"
 
 #: src/components/modals/PrivacyModal.tsx:55
 msgid "View Google Analytics Privacy Policy"
-msgstr ""
+msgstr "این داده‌ها با درک نحوه استفاده به بهبود Brisker کمک می‌کنند."
 
 #: src/components/modals/PrivacyModal.tsx:27
 msgid "What Is Tracked"
-msgstr ""
+msgstr "ردیابی در هر زمان قابل قبول یا رد است. در صورت رد، ردیابی انجام نمی‌شود."
 
 #: src/components/modals/PrivacyModal.tsx:37
 msgid "Why Tracking Is Used"
-msgstr ""
+msgstr "نامشخص"
 
 #: src/components/modals/CongratulationsModal.tsx:34
 msgid "You've reached the target score! Fantastic game!"
@@ -465,7 +465,7 @@ msgstr "به امتیاز هدف رسیدی! بازی فوق‌العاده‌ا
 
 #: src/components/modals/PrivacyModal.tsx:42
 msgid "Your Control"
-msgstr ""
+msgstr "مشاهده سیاست حفظ حریم خصوصی Google Analytics"
 
 #: src/components/modals/SettingsModal.tsx:306
 msgid "Your Player ID"

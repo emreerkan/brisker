@@ -37,23 +37,23 @@ msgstr "{0} joueur(s) trouvé(s) :"
 
 #: src/components/modals/CookieConsentBanner.tsx:62
 msgid "Accept & Continue"
-msgstr ""
+msgstr "Accepter & Continuer"
 
 #: src/components/modals/SettingsModal.tsx:268
 msgid "Analytics consent has been granted. Anonymous usage data will be collected to improve the app."
-msgstr ""
+msgstr "Accepter & Continuer"
 
 #: src/components/modals/SettingsModal.tsx:258
 msgid "Analytics consent has been revoked. Tracking is now disabled."
-msgstr ""
+msgstr "Le consentement d'analyse a été accordé. Des données d'utilisation anonymes seront collectées pour améliorer l'application."
 
 #: src/components/modals/SettingsModal.tsx:279
 msgid "Analytics disabled"
-msgstr ""
+msgstr "Analyse désactivée"
 
 #: src/components/modals/SettingsModal.tsx:277
 msgid "Analytics enabled"
-msgstr ""
+msgstr "Analyse activée"
 
 #: src/components/ui/ActionButtons.tsx:58
 msgid "App information"
@@ -104,7 +104,7 @@ msgstr "Félicitations !"
 
 #: src/components/modals/CookieConsentBanner.tsx:40
 msgid "Cookie Notice"
-msgstr ""
+msgstr "Le consentement d'analyse a été révoqué. Le suivi est maintenant désactivé."
 
 #: src/components/modals/SettingsModal.tsx:315
 msgid "Copy Player ID"
@@ -141,7 +141,7 @@ msgstr "Modifier le nom"
 
 #: src/components/modals/SettingsModal.tsx:485
 msgid "Enable Analytics"
-msgstr ""
+msgstr "Analyse désactivée"
 
 #: src/components/modals/PlayerSearchModal.tsx:93
 msgid "Enter Player ID or Name..."
@@ -174,7 +174,7 @@ msgstr "Trouver des joueurs près de chez vous"
 
 #: src/components/modals/PrivacyModal.tsx:34
 msgid "Games completed"
-msgstr ""
+msgstr "Analyse activée"
 
 #: src/components/modals/GeolocationSearchModal.tsx:129
 msgid "Getting your location and searching for nearby players..."
@@ -182,15 +182,15 @@ msgstr "Obtention de votre position et recherche des joueurs à proximité…"
 
 #: src/components/modals/CookieConsentBanner.tsx:42
 msgid "Google Analytics is used to understand app usage. Tracking can be accepted or rejected."
-msgstr ""
+msgstr "Avis sur les cookies"
 
 #: src/components/modals/PrivacyModal.tsx:29
 msgid "Google Analytics is used to understand how the app is used and improve the experience. The following data is tracked:"
-msgstr ""
+msgstr "Activer l'analyse"
 
 #: src/components/modals/PrivacyModal.tsx:47
 msgid "Google's Privacy Policy"
-msgstr ""
+msgstr "Jeux terminés"
 
 #: src/components/modals/SettingsModal.tsx:148
 msgid "Join me in Bezique!"
@@ -207,7 +207,7 @@ msgstr "Langue"
 
 #: src/components/modals/CookieConsentBanner.tsx:50
 msgid "Learn More"
-msgstr ""
+msgstr "Google Analytics est utilisé pour comprendre l'utilisation de l'application. Le suivi peut être accepté ou rejeté."
 
 #: src/components/Brisker.tsx:458
 msgid "Loading..."
@@ -231,7 +231,7 @@ msgstr "Prise en charge multilingue"
 
 #: src/components/modals/PrivacyModal.tsx:33
 msgid "Multiplayer games played"
-msgstr ""
+msgstr "Google Analytics est utilisé pour comprendre comment l'application est utilisée et améliorer l'expérience. Les données suivantes sont suivies:"
 
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
@@ -243,7 +243,7 @@ msgstr "Nouveau jeu"
 
 #: src/components/modals/SettingsModal.tsx:492
 msgid "No choice has been made yet"
-msgstr ""
+msgstr "Politique de confidentialité de Google"
 
 #: src/components/modals/GeolocationSearchModal.tsx:183
 msgid "No nearby players found"
@@ -259,11 +259,11 @@ msgstr "Aucun score n’a encore été enregistré"
 
 #: src/components/modals/SettingsModal.tsx:281
 msgid "Not set"
-msgstr ""
+msgstr "En savoir plus"
 
 #: src/components/modals/PrivacyModal.tsx:32
 msgid "Number of users"
-msgstr ""
+msgstr "Jeux multijoueurs joués"
 
 #: src/components/modals/InfoModal.tsx:41
 msgid "Offline mode for network-free play"
@@ -293,11 +293,11 @@ msgstr "Nom du joueur"
 #: src/components/modals/PrivacyModal.tsx:19
 #: src/components/modals/SettingsModal.tsx:454
 msgid "Privacy & Data"
-msgstr ""
+msgstr "Aucun choix n'a encore été fait"
 
 #: src/components/modals/SettingsModal.tsx:462
 msgid "Privacy Information"
-msgstr ""
+msgstr "Non défini"
 
 #: src/components/modals/InfoModal.tsx:44
 msgid "Progressive Web App - install on any device"
@@ -309,7 +309,7 @@ msgstr "Multijoueur en temps réel via connexion WebSocket"
 
 #: src/components/modals/CookieConsentBanner.tsx:56
 msgid "Reject"
-msgstr ""
+msgstr "Rejeter"
 
 #: src/components/modals/ResetConfirmDialog.tsx:27
 msgid "Reset"
@@ -321,7 +321,7 @@ msgstr "Réinitialiser le score"
 
 #: src/components/modals/SettingsModal.tsx:474
 msgid "Revoke Analytics Consent"
-msgstr ""
+msgstr "Nombre d'utilisateurs"
 
 #: src/components/modals/SettingsModal.tsx:369
 #: src/components/modals/SettingsModal.tsx:443
@@ -388,7 +388,7 @@ msgstr "Effets sonores"
 
 #: src/components/modals/SettingsModal.tsx:457
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 #: src/components/modals/SettingsModal.tsx:418
 msgid "Target Score"
@@ -396,7 +396,7 @@ msgstr "Score cible"
 
 #: src/components/modals/PrivacyModal.tsx:39
 msgid "This data helps improve Brisker by understanding how it is used."
-msgstr ""
+msgstr "Confidentialité & Données"
 
 #: src/components/modals/ResetConfirmDialog.tsx:23
 msgid "This will delete all scores and cannot be undone."
@@ -416,7 +416,7 @@ msgstr "Score total"
 
 #: src/components/modals/PrivacyModal.tsx:44
 msgid "Tracking can be accepted or rejected at any time. No tracking occurs if rejected."
-msgstr ""
+msgstr "Informations sur la confidentialité"
 
 #: src/components/modals/InfoModal.tsx:55
 msgid "Translators"
@@ -436,7 +436,7 @@ msgstr "Annuler le dernier score"
 
 #: src/components/modals/SettingsModal.tsx:283
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 #: src/components/modals/SettingsModal.tsx:397
 #: src/components/modals/SettingsModal.tsx:399
@@ -449,15 +449,15 @@ msgstr "Version"
 
 #: src/components/modals/PrivacyModal.tsx:55
 msgid "View Google Analytics Privacy Policy"
-msgstr ""
+msgstr "Rejeter"
 
 #: src/components/modals/PrivacyModal.tsx:27
 msgid "What Is Tracked"
-msgstr ""
+msgstr "Révoquer le consentement d'analyse"
 
 #: src/components/modals/PrivacyModal.tsx:37
 msgid "Why Tracking Is Used"
-msgstr ""
+msgstr "Statut"
 
 #: src/components/modals/CongratulationsModal.tsx:34
 msgid "You've reached the target score! Fantastic game!"
@@ -465,7 +465,7 @@ msgstr "Vous avez atteint le score cible ! Fantastique partie !"
 
 #: src/components/modals/PrivacyModal.tsx:42
 msgid "Your Control"
-msgstr ""
+msgstr "Ces données aident à améliorer Brisker en comprenant comment il est utilisé."
 
 #: src/components/modals/SettingsModal.tsx:306
 msgid "Your Player ID"
