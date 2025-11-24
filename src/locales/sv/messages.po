@@ -14,12 +14,12 @@ msgstr ""
 "X-Generator: Poedit 3.7\n"
 
 #. placeholder {0}: formatNumber(difference)
-#: src/components/Brisker.tsx:412
+#: src/components/Brisker.tsx:448
 msgid "{0} ahead"
 msgstr "leder med {0}"
 
 #. placeholder {0}: formatNumber(Math.abs(difference))
-#: src/components/Brisker.tsx:414
+#: src/components/Brisker.tsx:450
 msgid "{0} behind"
 msgstr "ligger efter med {0}"
 
@@ -33,11 +33,31 @@ msgstr "{0} spelare hittades i närheten."
 msgid "{0} player(s) found:"
 msgstr "{0} spelare hittade."
 
+#: src/components/modals/CookieConsentBanner.tsx:62
+msgid "Accept & Continue"
+msgstr ""
+
+#: src/components/modals/SettingsModal.tsx:268
+msgid "Analytics consent has been granted. Anonymous usage data will be collected to improve the app."
+msgstr ""
+
+#: src/components/modals/SettingsModal.tsx:258
+msgid "Analytics consent has been revoked. Tracking is now disabled."
+msgstr ""
+
+#: src/components/modals/SettingsModal.tsx:279
+msgid "Analytics disabled"
+msgstr ""
+
+#: src/components/modals/SettingsModal.tsx:277
+msgid "Analytics enabled"
+msgstr ""
+
 #: src/components/ui/ActionButtons.tsx:58
 msgid "App information"
 msgstr "Information om appen"
 
-#: src/components/modals/SettingsModal.tsx:404
+#: src/components/modals/SettingsModal.tsx:500
 msgid "Audio"
 msgstr "Ljud"
 
@@ -62,7 +82,7 @@ msgstr "Byggdatum: September 2025"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: src/components/modals/SettingsModal.tsx:52
+#: src/components/modals/SettingsModal.tsx:59
 msgid "Classic Bezique"
 msgstr "Klassisk besick (Bézique)"
 
@@ -71,7 +91,8 @@ msgstr "Klassisk besick (Bézique)"
 #: src/components/modals/HistoryModal.tsx:69
 #: src/components/modals/InfoModal.tsx:70
 #: src/components/modals/PlayerSearchModal.tsx:155
-#: src/components/modals/SettingsModal.tsx:421
+#: src/components/modals/PrivacyModal.tsx:63
+#: src/components/modals/SettingsModal.tsx:517
 msgid "Close"
 msgstr "Stäng"
 
@@ -79,7 +100,11 @@ msgstr "Stäng"
 msgid "Congratulations!"
 msgstr "Grattis!"
 
-#: src/components/modals/SettingsModal.tsx:265
+#: src/components/modals/CookieConsentBanner.tsx:40
+msgid "Cookie Notice"
+msgstr ""
+
+#: src/components/modals/SettingsModal.tsx:315
 msgid "Copy Player ID"
 msgstr "Kopiera spelarens ID"
 
@@ -99,24 +124,28 @@ msgstr "Utvecklad av Emre Erkan med hjälp av Claude Sonnet 4 och GitHub Copilot
 msgid "Digital score tracking with intuitive touch interface"
 msgstr "Digital poänguppföljning med intuitivt pekgränssnitt"
 
-#: src/components/modals/SettingsModal.tsx:55
+#: src/components/modals/SettingsModal.tsx:62
 msgid "Disabled while connected to an opponent"
 msgstr "Ej tillgängligt medan du är ansluten till en motspelare"
 
-#: src/components/Brisker.tsx:435
+#: src/components/Brisker.tsx:471
 msgid "Disconnect opponent"
 msgstr "Koppla bort motspelaren"
 
-#: src/components/modals/SettingsModal.tsx:319
-#: src/components/modals/SettingsModal.tsx:393
+#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:443
 msgid "Edit Name"
 msgstr "Redigera namn"
+
+#: src/components/modals/SettingsModal.tsx:485
+msgid "Enable Analytics"
+msgstr ""
 
 #: src/components/modals/PlayerSearchModal.tsx:93
 msgid "Enter Player ID or Name..."
 msgstr "Ange spelar-ID eller -namn …"
 
-#: src/components/modals/SettingsModal.tsx:308
+#: src/components/modals/SettingsModal.tsx:358
 msgid "Enter your player name"
 msgstr "Ange ditt spelarnamn"
 
@@ -133,7 +162,7 @@ msgid "Features"
 msgstr "Funktioner"
 
 #: src/components/modals/GeolocationSearchModal.tsx:101
-#: src/components/modals/SettingsModal.tsx:289
+#: src/components/modals/SettingsModal.tsx:339
 msgid "Find Nearby Players"
 msgstr "Hitta spelare i närheten"
 
@@ -141,11 +170,27 @@ msgstr "Hitta spelare i närheten"
 msgid "Find players near your location"
 msgstr "Hitta andra spelare i närheten av där du befinner dig"
 
+#: src/components/modals/PrivacyModal.tsx:34
+msgid "Games completed"
+msgstr ""
+
 #: src/components/modals/GeolocationSearchModal.tsx:129
 msgid "Getting your location and searching for nearby players..."
 msgstr "Avläser din position och söker efter spelare i närheten …"
 
-#: src/components/modals/SettingsModal.tsx:131
+#: src/components/modals/CookieConsentBanner.tsx:42
+msgid "Google Analytics is used to understand app usage. Tracking can be accepted or rejected."
+msgstr ""
+
+#: src/components/modals/PrivacyModal.tsx:29
+msgid "Google Analytics is used to understand how the app is used and improve the experience. The following data is tracked:"
+msgstr ""
+
+#: src/components/modals/PrivacyModal.tsx:47
+msgid "Google's Privacy Policy"
+msgstr ""
+
+#: src/components/modals/SettingsModal.tsx:148
 msgid "Join me in Bezique!"
 msgstr "Vill du spela Bézique?"
 
@@ -153,12 +198,16 @@ msgstr "Vill du spela Bézique?"
 msgid "km away"
 msgstr "km bort"
 
-#: src/components/modals/SettingsModal.tsx:328
-#: src/components/modals/SettingsModal.tsx:330
+#: src/components/modals/SettingsModal.tsx:378
+#: src/components/modals/SettingsModal.tsx:380
 msgid "Language"
 msgstr "Språk"
 
-#: src/components/Brisker.tsx:422
+#: src/components/modals/CookieConsentBanner.tsx:50
+msgid "Learn More"
+msgstr ""
+
+#: src/components/Brisker.tsx:458
 msgid "Loading..."
 msgstr "Läser in …"
 
@@ -178,6 +227,10 @@ msgstr "Begäran om plats besvarades inte i tid. Försök igen."
 msgid "Multilingual support"
 msgstr "Stöd för flera språk"
 
+#: src/components/modals/PrivacyModal.tsx:33
+msgid "Multiplayer games played"
+msgstr ""
+
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
 msgstr "Söker efter spelare i närheten via nätet"
@@ -185,6 +238,10 @@ msgstr "Söker efter spelare i närheten via nätet"
 #: src/components/modals/CongratulationsModal.tsx:44
 msgid "New Game"
 msgstr "Nytt spel"
+
+#: src/components/modals/SettingsModal.tsx:492
+msgid "No choice has been made yet"
+msgstr ""
 
 #: src/components/modals/GeolocationSearchModal.tsx:183
 msgid "No nearby players found"
@@ -198,11 +255,19 @@ msgstr "Inga spelare hittades"
 msgid "No scores recorded yet"
 msgstr "Inga poäng registrerade"
 
+#: src/components/modals/SettingsModal.tsx:281
+msgid "Not set"
+msgstr ""
+
+#: src/components/modals/PrivacyModal.tsx:32
+msgid "Number of users"
+msgstr ""
+
 #: src/components/modals/InfoModal.tsx:41
 msgid "Offline mode for network-free play"
 msgstr "Offline-läge för spel utan nätverksanslutning"
 
-#: src/components/Brisker.tsx:439
+#: src/components/Brisker.tsx:475
 msgid "Opponent"
 msgstr "Motspelare"
 
@@ -215,13 +280,22 @@ msgstr "Beständig lagring som sparas automatiskt"
 msgid "Play"
 msgstr "Spela"
 
-#: src/components/modals/SettingsModal.tsx:252
+#: src/components/modals/SettingsModal.tsx:302
 msgid "Player ID"
 msgstr "Spelarens ID"
 
-#: src/components/modals/SettingsModal.tsx:299
+#: src/components/modals/SettingsModal.tsx:349
 msgid "Player Name"
 msgstr "Spelarens namn"
+
+#: src/components/modals/PrivacyModal.tsx:19
+#: src/components/modals/SettingsModal.tsx:454
+msgid "Privacy & Data"
+msgstr ""
+
+#: src/components/modals/SettingsModal.tsx:462
+msgid "Privacy Information"
+msgstr ""
 
 #: src/components/modals/InfoModal.tsx:44
 msgid "Progressive Web App - install on any device"
@@ -231,6 +305,10 @@ msgstr "PWA (Progressive Web App) – kan installeras på valfri enhet"
 msgid "Real-time multiplayer via WebSocket connection"
 msgstr "Realtidsspel mellan flera spelare via WebSocket-anslutning"
 
+#: src/components/modals/CookieConsentBanner.tsx:56
+msgid "Reject"
+msgstr ""
+
 #: src/components/modals/ResetConfirmDialog.tsx:27
 msgid "Reset"
 msgstr "Återställ"
@@ -239,8 +317,12 @@ msgstr "Återställ"
 msgid "Reset score"
 msgstr "Återställ poängen"
 
-#: src/components/modals/SettingsModal.tsx:319
-#: src/components/modals/SettingsModal.tsx:393
+#: src/components/modals/SettingsModal.tsx:474
+msgid "Revoke Analytics Consent"
+msgstr ""
+
+#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:443
 msgid "Save Name"
 msgstr "Spara namn"
 
@@ -265,7 +347,7 @@ msgid "Search Nearby Players"
 msgstr "Sök spelare i närheten"
 
 #: src/components/modals/PlayerSearchModal.tsx:83
-#: src/components/modals/SettingsModal.tsx:281
+#: src/components/modals/SettingsModal.tsx:331
 msgid "Search Players"
 msgstr "Sök spelare"
 
@@ -281,12 +363,12 @@ msgstr "Välj Brisk"
 msgid "Select brisk count (adds brisk points)"
 msgstr "Välj antal brisk (lägger till brisk x 20 poäng)"
 
-#: src/components/modals/SettingsModal.tsx:243
+#: src/components/modals/SettingsModal.tsx:293
 #: src/components/ui/ActionButtons.tsx:49
 msgid "Settings"
 msgstr "Inställningar"
 
-#: src/components/modals/SettingsModal.tsx:273
+#: src/components/modals/SettingsModal.tsx:323
 msgid "Share Player ID"
 msgstr "Dela spelar-ID"
 
@@ -298,13 +380,21 @@ msgstr "Visa poänghistorik"
 msgid "Sound effects"
 msgstr "Ljud"
 
-#: src/components/modals/SettingsModal.tsx:406
+#: src/components/modals/SettingsModal.tsx:502
 msgid "Sound Effects"
 msgstr "Ljud"
 
-#: src/components/modals/SettingsModal.tsx:368
+#: src/components/modals/SettingsModal.tsx:457
+msgid "Status"
+msgstr ""
+
+#: src/components/modals/SettingsModal.tsx:418
 msgid "Target Score"
 msgstr "Målpoäng"
+
+#: src/components/modals/PrivacyModal.tsx:39
+msgid "This data helps improve Brisker by understanding how it is used."
+msgstr ""
 
 #: src/components/modals/ResetConfirmDialog.tsx:23
 msgid "This will delete all scores and cannot be undone."
@@ -314,13 +404,17 @@ msgstr "Åtgärden raderar alla poäng och kan inte ångras."
 msgid "This will request access to your location to find nearby players"
 msgstr "Detta begär åtkomst till din plats för att hitta spelare i närheten"
 
-#: src/components/Brisker.tsx:416
+#: src/components/Brisker.tsx:452
 msgid "tied"
 msgstr "lika"
 
 #: src/components/modals/HistoryModal.tsx:38
 msgid "Total Score"
 msgstr "Totalpoäng"
+
+#: src/components/modals/PrivacyModal.tsx:44
+msgid "Tracking can be accepted or rejected at any time. No tracking occurs if rejected."
+msgstr ""
 
 #: src/components/modals/InfoModal.tsx:55
 msgid "Translators"
@@ -330,7 +424,7 @@ msgstr "Översättare"
 msgid "Try Again"
 msgstr "Försök igen"
 
-#: src/components/modals/SettingsModal.tsx:53
+#: src/components/modals/SettingsModal.tsx:60
 msgid "Turkish Bezique"
 msgstr "Turkisk Bézique"
 
@@ -338,8 +432,12 @@ msgstr "Turkisk Bézique"
 msgid "Undo last score"
 msgstr "Ångra senaste poängen"
 
-#: src/components/modals/SettingsModal.tsx:347
-#: src/components/modals/SettingsModal.tsx:349
+#: src/components/modals/SettingsModal.tsx:283
+msgid "Unknown"
+msgstr ""
+
+#: src/components/modals/SettingsModal.tsx:397
+#: src/components/modals/SettingsModal.tsx:399
 msgid "Variant"
 msgstr "Variant"
 
@@ -347,10 +445,26 @@ msgstr "Variant"
 msgid "Version"
 msgstr "Version"
 
+#: src/components/modals/PrivacyModal.tsx:55
+msgid "View Google Analytics Privacy Policy"
+msgstr ""
+
+#: src/components/modals/PrivacyModal.tsx:27
+msgid "What Is Tracked"
+msgstr ""
+
+#: src/components/modals/PrivacyModal.tsx:37
+msgid "Why Tracking Is Used"
+msgstr ""
+
 #: src/components/modals/CongratulationsModal.tsx:34
 msgid "You've reached the target score! Fantastic game!"
 msgstr "Målpoängen uppnådd! Bra spelat!"
 
-#: src/components/modals/SettingsModal.tsx:256
+#: src/components/modals/PrivacyModal.tsx:42
+msgid "Your Control"
+msgstr ""
+
+#: src/components/modals/SettingsModal.tsx:306
 msgid "Your Player ID"
 msgstr "Ditt spelar-ID"

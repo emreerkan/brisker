@@ -14,12 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. placeholder {0}: formatNumber(difference)
-#: src/components/Brisker.tsx:412
+#: src/components/Brisker.tsx:448
 msgid "{0} ahead"
 msgstr "{0} ahead"
 
 #. placeholder {0}: formatNumber(Math.abs(difference))
-#: src/components/Brisker.tsx:414
+#: src/components/Brisker.tsx:450
 msgid "{0} behind"
 msgstr "{0} behind"
 
@@ -33,11 +33,31 @@ msgstr "{0} nearby player(s) found:"
 msgid "{0} player(s) found:"
 msgstr "{0} player(s) found:"
 
+#: src/components/modals/CookieConsentBanner.tsx:62
+msgid "Accept & Continue"
+msgstr "Accept & Continue"
+
+#: src/components/modals/SettingsModal.tsx:268
+msgid "Analytics consent has been granted. Anonymous usage data will be collected to improve the app."
+msgstr "Analytics consent has been granted. Anonymous usage data will be collected to improve the app."
+
+#: src/components/modals/SettingsModal.tsx:258
+msgid "Analytics consent has been revoked. Tracking is now disabled."
+msgstr "Analytics consent has been revoked. Tracking is now disabled."
+
+#: src/components/modals/SettingsModal.tsx:279
+msgid "Analytics disabled"
+msgstr "Analytics disabled"
+
+#: src/components/modals/SettingsModal.tsx:277
+msgid "Analytics enabled"
+msgstr "Analytics enabled"
+
 #: src/components/ui/ActionButtons.tsx:58
 msgid "App information"
 msgstr "App information"
 
-#: src/components/modals/SettingsModal.tsx:404
+#: src/components/modals/SettingsModal.tsx:500
 msgid "Audio"
 msgstr "Audio"
 
@@ -62,7 +82,7 @@ msgstr "Build Date: September 2025"
 msgid "Cancel"
 msgstr "Cancel"
 
-#: src/components/modals/SettingsModal.tsx:52
+#: src/components/modals/SettingsModal.tsx:59
 msgid "Classic Bezique"
 msgstr "Classic Bezique"
 
@@ -71,7 +91,8 @@ msgstr "Classic Bezique"
 #: src/components/modals/HistoryModal.tsx:69
 #: src/components/modals/InfoModal.tsx:70
 #: src/components/modals/PlayerSearchModal.tsx:155
-#: src/components/modals/SettingsModal.tsx:421
+#: src/components/modals/PrivacyModal.tsx:63
+#: src/components/modals/SettingsModal.tsx:517
 msgid "Close"
 msgstr "Close"
 
@@ -79,7 +100,11 @@ msgstr "Close"
 msgid "Congratulations!"
 msgstr "Congratulations!"
 
-#: src/components/modals/SettingsModal.tsx:265
+#: src/components/modals/CookieConsentBanner.tsx:40
+msgid "Cookie Notice"
+msgstr "Cookie Notice"
+
+#: src/components/modals/SettingsModal.tsx:315
 msgid "Copy Player ID"
 msgstr "Copy Player ID"
 
@@ -99,24 +124,28 @@ msgstr "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
 msgid "Digital score tracking with intuitive touch interface"
 msgstr "Digital score tracking with intuitive touch interface"
 
-#: src/components/modals/SettingsModal.tsx:55
+#: src/components/modals/SettingsModal.tsx:62
 msgid "Disabled while connected to an opponent"
 msgstr "Disabled while connected to an opponent"
 
-#: src/components/Brisker.tsx:435
+#: src/components/Brisker.tsx:471
 msgid "Disconnect opponent"
 msgstr "Disconnect opponent"
 
-#: src/components/modals/SettingsModal.tsx:319
-#: src/components/modals/SettingsModal.tsx:393
+#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:443
 msgid "Edit Name"
 msgstr "Edit Name"
+
+#: src/components/modals/SettingsModal.tsx:485
+msgid "Enable Analytics"
+msgstr "Enable Analytics"
 
 #: src/components/modals/PlayerSearchModal.tsx:93
 msgid "Enter Player ID or Name..."
 msgstr "Enter Player ID or Name..."
 
-#: src/components/modals/SettingsModal.tsx:308
+#: src/components/modals/SettingsModal.tsx:358
 msgid "Enter your player name"
 msgstr "Enter your player name"
 
@@ -133,7 +162,7 @@ msgid "Features"
 msgstr "Features"
 
 #: src/components/modals/GeolocationSearchModal.tsx:101
-#: src/components/modals/SettingsModal.tsx:289
+#: src/components/modals/SettingsModal.tsx:339
 msgid "Find Nearby Players"
 msgstr "Find Nearby Players"
 
@@ -141,11 +170,27 @@ msgstr "Find Nearby Players"
 msgid "Find players near your location"
 msgstr "Find players near your location"
 
+#: src/components/modals/PrivacyModal.tsx:34
+msgid "Games completed"
+msgstr "Games completed"
+
 #: src/components/modals/GeolocationSearchModal.tsx:129
 msgid "Getting your location and searching for nearby players..."
 msgstr "Getting your location and searching for nearby players..."
 
-#: src/components/modals/SettingsModal.tsx:131
+#: src/components/modals/CookieConsentBanner.tsx:42
+msgid "Google Analytics is used to understand app usage. Tracking can be accepted or rejected."
+msgstr "Google Analytics is used to understand app usage. Tracking can be accepted or rejected."
+
+#: src/components/modals/PrivacyModal.tsx:29
+msgid "Google Analytics is used to understand how the app is used and improve the experience. The following data is tracked:"
+msgstr "Google Analytics is used to understand how the app is used and improve the experience. The following data is tracked:"
+
+#: src/components/modals/PrivacyModal.tsx:47
+msgid "Google's Privacy Policy"
+msgstr "Google's Privacy Policy"
+
+#: src/components/modals/SettingsModal.tsx:148
 msgid "Join me in Bezique!"
 msgstr "Join me in Bezique!"
 
@@ -153,12 +198,16 @@ msgstr "Join me in Bezique!"
 msgid "km away"
 msgstr "km away"
 
-#: src/components/modals/SettingsModal.tsx:328
-#: src/components/modals/SettingsModal.tsx:330
+#: src/components/modals/SettingsModal.tsx:378
+#: src/components/modals/SettingsModal.tsx:380
 msgid "Language"
 msgstr "Language"
 
-#: src/components/Brisker.tsx:422
+#: src/components/modals/CookieConsentBanner.tsx:50
+msgid "Learn More"
+msgstr "Learn More"
+
+#: src/components/Brisker.tsx:458
 msgid "Loading..."
 msgstr "Loading..."
 
@@ -178,6 +227,10 @@ msgstr "Location request timed out. Please try again."
 msgid "Multilingual support"
 msgstr "Multilingual support"
 
+#: src/components/modals/PrivacyModal.tsx:33
+msgid "Multiplayer games played"
+msgstr "Multiplayer games played"
+
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
 msgstr "Network discovery for nearby players"
@@ -185,6 +238,10 @@ msgstr "Network discovery for nearby players"
 #: src/components/modals/CongratulationsModal.tsx:44
 msgid "New Game"
 msgstr "New Game"
+
+#: src/components/modals/SettingsModal.tsx:492
+msgid "No choice has been made yet"
+msgstr "No choice has been made yet"
 
 #: src/components/modals/GeolocationSearchModal.tsx:183
 msgid "No nearby players found"
@@ -198,11 +255,19 @@ msgstr "No players found"
 msgid "No scores recorded yet"
 msgstr "No scores recorded yet"
 
+#: src/components/modals/SettingsModal.tsx:281
+msgid "Not set"
+msgstr "Not set"
+
+#: src/components/modals/PrivacyModal.tsx:32
+msgid "Number of users"
+msgstr "Number of users"
+
 #: src/components/modals/InfoModal.tsx:41
 msgid "Offline mode for network-free play"
 msgstr "Offline mode for network-free play"
 
-#: src/components/Brisker.tsx:439
+#: src/components/Brisker.tsx:475
 msgid "Opponent"
 msgstr "Opponent"
 
@@ -215,13 +280,22 @@ msgstr "Persistent storage with auto-save"
 msgid "Play"
 msgstr "Play"
 
-#: src/components/modals/SettingsModal.tsx:252
+#: src/components/modals/SettingsModal.tsx:302
 msgid "Player ID"
 msgstr "Player ID"
 
-#: src/components/modals/SettingsModal.tsx:299
+#: src/components/modals/SettingsModal.tsx:349
 msgid "Player Name"
 msgstr "Player Name"
+
+#: src/components/modals/PrivacyModal.tsx:19
+#: src/components/modals/SettingsModal.tsx:454
+msgid "Privacy & Data"
+msgstr "Privacy & Data"
+
+#: src/components/modals/SettingsModal.tsx:462
+msgid "Privacy Information"
+msgstr "Privacy Information"
 
 #: src/components/modals/InfoModal.tsx:44
 msgid "Progressive Web App - install on any device"
@@ -231,6 +305,10 @@ msgstr "Progressive Web App - install on any device"
 msgid "Real-time multiplayer via WebSocket connection"
 msgstr "Real-time multiplayer via WebSocket connection"
 
+#: src/components/modals/CookieConsentBanner.tsx:56
+msgid "Reject"
+msgstr "Reject"
+
 #: src/components/modals/ResetConfirmDialog.tsx:27
 msgid "Reset"
 msgstr "Reset"
@@ -239,8 +317,12 @@ msgstr "Reset"
 msgid "Reset score"
 msgstr "Reset score"
 
-#: src/components/modals/SettingsModal.tsx:319
-#: src/components/modals/SettingsModal.tsx:393
+#: src/components/modals/SettingsModal.tsx:474
+msgid "Revoke Analytics Consent"
+msgstr "Revoke Analytics Consent"
+
+#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:443
 msgid "Save Name"
 msgstr "Save Name"
 
@@ -265,7 +347,7 @@ msgid "Search Nearby Players"
 msgstr "Search Nearby Players"
 
 #: src/components/modals/PlayerSearchModal.tsx:83
-#: src/components/modals/SettingsModal.tsx:281
+#: src/components/modals/SettingsModal.tsx:331
 msgid "Search Players"
 msgstr "Search Players"
 
@@ -281,12 +363,12 @@ msgstr "Select Brisk"
 msgid "Select brisk count (adds brisk points)"
 msgstr "Select brisk count (adds brisk points)"
 
-#: src/components/modals/SettingsModal.tsx:243
+#: src/components/modals/SettingsModal.tsx:293
 #: src/components/ui/ActionButtons.tsx:49
 msgid "Settings"
 msgstr "Settings"
 
-#: src/components/modals/SettingsModal.tsx:273
+#: src/components/modals/SettingsModal.tsx:323
 msgid "Share Player ID"
 msgstr "Share Player ID"
 
@@ -298,13 +380,21 @@ msgstr "Show score history"
 msgid "Sound effects"
 msgstr "Sound effects"
 
-#: src/components/modals/SettingsModal.tsx:406
+#: src/components/modals/SettingsModal.tsx:502
 msgid "Sound Effects"
 msgstr "Sound Effects"
 
-#: src/components/modals/SettingsModal.tsx:368
+#: src/components/modals/SettingsModal.tsx:457
+msgid "Status"
+msgstr "Status"
+
+#: src/components/modals/SettingsModal.tsx:418
 msgid "Target Score"
 msgstr "Target Score"
+
+#: src/components/modals/PrivacyModal.tsx:39
+msgid "This data helps improve Brisker by understanding how it is used."
+msgstr "This data helps improve Brisker by understanding how it is used."
 
 #: src/components/modals/ResetConfirmDialog.tsx:23
 msgid "This will delete all scores and cannot be undone."
@@ -314,13 +404,17 @@ msgstr "This will delete all scores and cannot be undone."
 msgid "This will request access to your location to find nearby players"
 msgstr "This will request access to your location to find nearby players"
 
-#: src/components/Brisker.tsx:416
+#: src/components/Brisker.tsx:452
 msgid "tied"
 msgstr "tied"
 
 #: src/components/modals/HistoryModal.tsx:38
 msgid "Total Score"
 msgstr "Total Score"
+
+#: src/components/modals/PrivacyModal.tsx:44
+msgid "Tracking can be accepted or rejected at any time. No tracking occurs if rejected."
+msgstr "Tracking can be accepted or rejected at any time. No tracking occurs if rejected."
 
 #: src/components/modals/InfoModal.tsx:55
 msgid "Translators"
@@ -330,7 +424,7 @@ msgstr "Translators"
 msgid "Try Again"
 msgstr "Try Again"
 
-#: src/components/modals/SettingsModal.tsx:53
+#: src/components/modals/SettingsModal.tsx:60
 msgid "Turkish Bezique"
 msgstr "Turkish Bezique"
 
@@ -338,8 +432,12 @@ msgstr "Turkish Bezique"
 msgid "Undo last score"
 msgstr "Undo last score"
 
-#: src/components/modals/SettingsModal.tsx:347
-#: src/components/modals/SettingsModal.tsx:349
+#: src/components/modals/SettingsModal.tsx:283
+msgid "Unknown"
+msgstr "Unknown"
+
+#: src/components/modals/SettingsModal.tsx:397
+#: src/components/modals/SettingsModal.tsx:399
 msgid "Variant"
 msgstr "Variant"
 
@@ -347,10 +445,26 @@ msgstr "Variant"
 msgid "Version"
 msgstr "Version"
 
+#: src/components/modals/PrivacyModal.tsx:55
+msgid "View Google Analytics Privacy Policy"
+msgstr "View Google Analytics Privacy Policy"
+
+#: src/components/modals/PrivacyModal.tsx:27
+msgid "What Is Tracked"
+msgstr "What Is Tracked"
+
+#: src/components/modals/PrivacyModal.tsx:37
+msgid "Why Tracking Is Used"
+msgstr "Why Tracking Is Used"
+
 #: src/components/modals/CongratulationsModal.tsx:34
 msgid "You've reached the target score! Fantastic game!"
 msgstr "You've reached the target score! Fantastic game!"
 
-#: src/components/modals/SettingsModal.tsx:256
+#: src/components/modals/PrivacyModal.tsx:42
+msgid "Your Control"
+msgstr "Your Control"
+
+#: src/components/modals/SettingsModal.tsx:306
 msgid "Your Player ID"
 msgstr "Your Player ID"

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { X, Copy, Share, Search, MapPin, Edit, Save, Check } from 'lucide-react';
+import { X, Copy, Share, Search, MapPin, Edit, Save, Check, Shield } from 'lucide-react';
 import { Trans, useLingui } from '@lingui/react/macro';
 import type { ModalProps, Player, BeziqueVariantId } from '@/types';
+import type { ToastType } from '@/components/ui/Toast';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { availableLanguages } from '@/i18n/config';
 import { ICON_SIZE } from '@/utils/constants';
 import { getPlayerSettings, updatePlayerSetting } from '@/utils/localStorage';
 import { GameServerAPI } from '@/services/gameServer';
 import { copyToClipboard, shareContent } from '@/utils/deviceUtils';
+import { getConsentStatus, setConsent } from '@/utils/consent';
 import styles from '@/components/Brisker.module.css';
 import { DEFAULT_VARIANT, isSupportedVariant } from '@/config/variants';
 
@@ -21,6 +23,8 @@ interface SettingsModalProps extends ModalProps {
   onWinThresholdChange: (threshold: number) => void;
   onVariantChange: (variant: BeziqueVariantId) => void;
   isOpponentConnected: boolean;
+  onPrivacyOpen: () => void;
+  showToast: (message: string, type: ToastType, duration?: number) => void;
 }
 
 export const SettingsModal: React.FC<SettingsModalProps> = ({
@@ -33,7 +37,9 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   winThreshold,
   onWinThresholdChange,
   onVariantChange,
-  isOpponentConnected
+  isOpponentConnected,
+  onPrivacyOpen,
+  showToast
 }) => {
   const { t } = useLingui();
   const { language, setLanguage, formatNumber } = useLanguage();
@@ -44,6 +50,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const [shareSuccess, setShareSuccess] = useState(false);
   const [winThresholdInput, setWinThresholdInput] = useState(() => playerSettings.winThreshold.toString());
   const [isEditingWinThreshold, setIsEditingWinThreshold] = useState(false);
+  const [consentStatus, setConsentStatusState] = useState(getConsentStatus());
 
   const MIN_WIN_THRESHOLD = 100;
   const MAX_WIN_THRESHOLD = 100000;
@@ -72,6 +79,16 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   useEffect(() => {
     setWinThresholdInput(winThreshold.toString());
   }, [winThreshold]);
+
+  // Listen for consent changes
+  useEffect(() => {
+    const handleConsentChange = () => {
+      setConsentStatusState(getConsentStatus());
+    };
+    
+    window.addEventListener('consent-changed', handleConsentChange);
+    return () => window.removeEventListener('consent-changed', handleConsentChange);
+  }, []);
 
   const buildShareUrl = (playerID: string): string => {
     const { origin, pathname } = window.location;
@@ -233,6 +250,39 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       setWinThresholdInput(playerSettings.winThreshold.toString());
     }
   }, [isOpponentConnected, isEditingWinThreshold, playerSettings.winThreshold]);
+
+  const handleRevokeConsent = () => {
+    setConsent(false);
+    setConsentStatusState('rejected');
+    showToast(
+      t`Analytics consent has been revoked. Tracking is now disabled.`,
+      'info',
+      4000
+    );
+  };
+
+  const handleGrantConsent = () => {
+    setConsent(true);
+    setConsentStatusState('accepted');
+    showToast(
+      t`Analytics consent has been granted. Anonymous usage data will be collected to improve the app.`,
+      'success',
+      5000
+    );
+  };
+
+  const getConsentStatusText = () => {
+    switch (consentStatus) {
+      case 'accepted':
+        return t`Analytics enabled`;
+      case 'rejected':
+        return t`Analytics disabled`;
+      case 'not-asked':
+        return t`Not set`;
+      default:
+        return t`Unknown`;
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -397,6 +447,52 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 {isEditingWinThreshold ? <Save size={18} /> : <Edit size={18} />}
               </button>
             </div>
+          </div>
+
+          {/* Privacy & Data Section */}
+          <div className={styles.settingsSection}>
+            <h4 className={styles.settingsTitle}><Trans>Privacy & Data</Trans></h4>
+            <div className={styles.settingsOption}>
+              <span className={styles.settingsLabel}>
+                <Trans>Status</Trans>: {getConsentStatusText()}
+              </span>
+              <button
+                className={styles.playerActionButton}
+                onClick={onPrivacyOpen}
+                title={t`Privacy Information`}
+              >
+                <Shield size={18} />
+              </button>
+            </div>
+            {consentStatus === 'accepted' && (
+              <div className={styles.settingsOption}>
+                <button
+                  className={`${styles.modalButton} ${styles.modalButtonCancel}`}
+                  onClick={handleRevokeConsent}
+                  style={{ width: '100%', marginTop: '8px' }}
+                >
+                  <Trans>Revoke Analytics Consent</Trans>
+                </button>
+              </div>
+            )}
+            {consentStatus === 'rejected' && (
+              <div className={styles.settingsOption}>
+                <button
+                  className={`${styles.modalButton}`}
+                  onClick={handleGrantConsent}
+                  style={{ width: '100%', marginTop: '8px' }}
+                >
+                  <Trans>Enable Analytics</Trans>
+                </button>
+              </div>
+            )}
+            {consentStatus === 'not-asked' && (
+              <div className={styles.settingsOption}>
+                <p className={styles.settingsLabel} style={{ fontSize: '0.9em', opacity: 0.8 }}>
+                  <Trans>No choice has been made yet</Trans>
+                </p>
+              </div>
+            )}
           </div>
 
           {/* Audio Section */}

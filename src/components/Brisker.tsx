@@ -3,12 +3,14 @@ import { X } from 'lucide-react';
 import { useLingui } from '@lingui/react/macro';
 import { useBeziqueGame } from '@/hooks/useBeziqueGame';
 import { useWindowSize } from '@/hooks/useWindowSize';
+import { useToast } from '@/hooks/useToast';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { DEFAULT_WIN_THRESHOLD, MAX_BRISK_VALUE } from '@/utils/constants';
 import { DEFAULT_VARIANT, getVariantConfig, isSupportedVariant } from '@/config/variants';
 
 // UI Components
 import { ScoreDisplay, PointButtons, ActionButtons } from './ui';
+import ToastContainer from './ui/ToastContainer';
 
 // Modal Components
 import {
@@ -19,17 +21,29 @@ import {
   ResetConfirmDialog,
   CongratulationsModal,
   PlayerSearchModal,
-  GeolocationSearchModal
+  GeolocationSearchModal,
+  CookieConsentBanner,
+  PrivacyModal
 } from './modals';
 
 import { getPlayerSettings, clearGameSnapshot, updatePlayerSetting } from '@/utils/localStorage';
 import { GameServerAPI } from '@/services/gameServer';
+import { initializeAnalytics, trackEvent } from '@/utils/analytics';
 import type { Player, BeziqueVariantId } from '@/types';
 import { ScoreEntryType } from '@/types';
 import styles from './Brisker.module.css';
 
 export const Brisker: React.FC = () => {
   const { t } = useLingui();
+  
+  // Toast notifications
+  const { toasts, showToast, dismissToast } = useToast();
+  
+  // Initialize analytics on component mount (only if consent already given)
+  useEffect(() => {
+    initializeAnalytics();
+  }, []);
+  
   // Initialize sound settings and win threshold preferences from localStorage
   const initialSettingsRef = useRef(getPlayerSettings());
   const [soundEnabled, setSoundEnabled] = useState(initialSettingsRef.current.soundEnabled);
@@ -60,6 +74,7 @@ export const Brisker: React.FC = () => {
   const [showCongratulations, setShowCongratulations] = useState(false);
   const [showPlayerSearch, setShowPlayerSearch] = useState(false);
   const [showGeolocationSearch, setShowGeolocationSearch] = useState(false);
+  const [showPrivacy, setShowPrivacy] = useState(false);
 
   const closeAllModals = useCallback(() => {
     setShowBriskSelector(false);
@@ -70,6 +85,7 @@ export const Brisker: React.FC = () => {
     setShowCongratulations(false);
     setShowPlayerSearch(false);
     setShowGeolocationSearch(false);
+    setShowPrivacy(false);
   }, []);
   
   // WebSocket connection status
@@ -90,7 +106,21 @@ export const Brisker: React.FC = () => {
     opponent,
     winThreshold: sessionWinThreshold,
     setWinThreshold: setSessionWinThreshold
-  } = useBeziqueGame(soundEnabled, () => setShowCongratulations(true), winThresholdSetting, variant);
+  } = useBeziqueGame(
+    soundEnabled, 
+    () => {
+      // Track game completion
+      trackEvent('game_finished', {
+        finalScore: gameState.score,
+        targetScore: sessionWinThreshold,
+        variant,
+        isMultiplayer: Boolean(opponent),
+      });
+      setShowCongratulations(true);
+    }, 
+    winThresholdSetting, 
+    variant
+  );
   useEffect(() => {
     const handleTriggerCongratulations = () => {
       const remaining = Math.max(sessionWinThreshold - gameState.score, 0);
@@ -387,6 +417,12 @@ export const Brisker: React.FC = () => {
       setSessionWinThreshold(targetScore);
       GameServerAPI.startGameWith(player.playerID, targetScore, variant);
       
+      // Track multiplayer game start
+      trackEvent('multiplayer_game_start', {
+        variant,
+        targetScore,
+      });
+      
       // Close all modals and return to main screen
       setShowPlayerSearch(false);
       setShowGeolocationSearch(false);
@@ -508,6 +544,8 @@ export const Brisker: React.FC = () => {
           setVariant(nextVariant);
         }}
         isOpponentConnected={Boolean(opponent)}
+        onPrivacyOpen={() => setShowPrivacy(true)}
+        showToast={showToast}
       />
       
       <PlayerSearchModal
@@ -539,6 +577,20 @@ export const Brisker: React.FC = () => {
         gameState={gameState}
         windowSize={windowSize}
         onNewGame={handleNewGame}
+      />
+      
+      <CookieConsentBanner
+        onLearnMore={() => setShowPrivacy(true)}
+      />
+      
+      <PrivacyModal
+        isOpen={showPrivacy}
+        onClose={() => setShowPrivacy(false)}
+      />
+      
+      <ToastContainer
+        toasts={toasts}
+        onDismiss={dismissToast}
       />
     </div>
   );

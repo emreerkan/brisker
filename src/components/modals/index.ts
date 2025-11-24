@@ -6,3 +6,5 @@ export { ResetConfirmDialog } from './ResetConfirmDialog';
 export { CongratulationsModal } from './CongratulationsModal';
 export { PlayerSearchModal } from './PlayerSearchModal';
 export { GeolocationSearchModal } from './GeolocationSearchModal';
+export { CookieConsentBanner } from './CookieConsentBanner';
+export { PrivacyModal } from './PrivacyModal';
