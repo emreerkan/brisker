@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2025-11-24
+
+### Added
+- GDPR compliance features with comprehensive consent management system
+- Privacy & Data section in Settings modal with consent controls
+- Cookie consent banner for first-time visitors
+- Privacy Information modal with detailed tracking disclosure
+- Toast notification system for user feedback on consent changes
+- Google Analytics integration with privacy-first approach
+
+### Changed
+- Settings modal layout optimized for better space utilization and accessibility
+  - Removed redundant section headings (Language, Variant, Audio, Privacy & Data)
+  - Player ID section redesigned with pill-style label and horizontal button layout
+  - Target Score and Sound Effects combined in two-column layout with centered headings
+- Complete translations for all GDPR-related strings across all 6 supported languages
+
+### Fixed
+- Eliminated duplicate labels and headings throughout Settings modal
+- Improved modal height to fit content without scrolling on standard viewports
+
 ## [1.4.3] - 2025-10-07
 
 ### Added
