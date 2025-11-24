@@ -298,51 +298,49 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         
         <div className={styles.settingsContent}>
           {/* Player ID Section */}
-          <div className={styles.settingsSection}>
-            <h4 className={styles.settingsTitle}><Trans>Player ID</Trans></h4>
             <div className={styles.playerIDSection}>
+              <span className={styles.playerIDLabel}><Trans>Player ID</Trans></span>
               <div
                 className={`${styles.playerIDDisplay} ${styles.playerIDCentered}`}
                 aria-label={t`Your Player ID`}
               >
                 <span className={styles.playerIDText}>{playerSettings.playerID}</span>
-              </div>
+                
+                <div className={styles.playerIDActions}>
+                  <button
+                    className={styles.playerActionButton}
+                    onClick={handleCopyPlayerID}
+                    title={t`Copy Player ID`}
+                  >
+                    {copySuccess ? <Check size={18} /> : <Copy size={18} />}
+                  </button>
 
-              <div className={styles.playerIDActions}>
-                <button
-                  className={styles.playerActionButton}
-                  onClick={handleCopyPlayerID}
-                  title={t`Copy Player ID`}
-                >
-                  {copySuccess ? <Check size={18} /> : <Copy size={18} />}
-                </button>
+                  <button
+                    className={styles.playerActionButton}
+                    onClick={handleSharePlayerID}
+                    title={t`Share Player ID`}
+                  >
+                    {shareSuccess ? <Check size={18} /> : <Share size={18} />}
+                  </button>
 
-                <button
-                  className={styles.playerActionButton}
-                  onClick={handleSharePlayerID}
-                  title={t`Share Player ID`}
-                >
-                  {shareSuccess ? <Check size={18} /> : <Share size={18} />}
-                </button>
+                  <button
+                    className={styles.playerActionButton}
+                    onClick={onPlayerSearchOpen}
+                    title={t`Search Players`}
+                  >
+                    <Search size={18} />
+                  </button>
 
-                <button
-                  className={styles.playerActionButton}
-                  onClick={onPlayerSearchOpen}
-                  title={t`Search Players`}
-                >
-                  <Search size={18} />
-                </button>
-
-                <button
-                  className={styles.playerActionButton}
-                  onClick={onGeolocationSearchOpen}
-                  title={t`Find Nearby Players`}
-                >
-                  <MapPin size={18} />
-                </button>
+                  <button
+                    className={styles.playerActionButton}
+                    onClick={onGeolocationSearchOpen}
+                    title={t`Find Nearby Players`}
+                  >
+                    <MapPin size={18} />
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
 
           {/* Player Name Section */}
           <div className={styles.settingsSection}>
@@ -375,7 +373,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
           {/* Language Section */}
           <div className={styles.settingsSection}>
-            <h4 className={styles.settingsTitle}><Trans>Language</Trans></h4>
             <div className={styles.settingsOption}>
               <span className={styles.settingsLabel}><Trans>Language</Trans></span>
               <select
@@ -394,7 +391,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
 
           {/* Variant Section */}
           <div className={styles.settingsSection}>
-            <h4 className={styles.settingsTitle}><Trans>Variant</Trans></h4>
             <div className={styles.settingsOption}>
               <span className={styles.settingsLabel}><Trans>Variant</Trans></span>
               <select
@@ -413,48 +409,65 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             </div>
           </div>
 
-          {/* Win Threshold Section */}
-          <div className={styles.settingsSection}>
-            <h4 className={styles.settingsTitle}><Trans>Target Score</Trans></h4>
-            <div className={styles.winThresholdSection}>
-              {isEditingWinThreshold ? (
-                <input
-                  type="number"
-                  min={MIN_WIN_THRESHOLD}
-                  max={MAX_WIN_THRESHOLD}
-                  step={10}
-                  value={winThresholdInput}
-                  onChange={handleWinThresholdInputChange}
-                  onKeyDown={handleWinThresholdKeyDown}
-                  className={styles.winThresholdInput}
-                  inputMode="numeric"
-                  autoFocus
-                />
-              ) : (
-                <span className={styles.winThresholdDisplay}>{formatNumber(playerSettings.winThreshold)}</span>
-              )}
+          {/* Win Threshold and Audio Section - Two Column Layout */}
+          <div className={styles.settingsTwoColumn}>
+            {/* Target Score */}
+            <div className={styles.settingsSection}>
+              <h4 className={styles.settingsTitle}><Trans>Target Score</Trans></h4>
+              <div className={styles.winThresholdSection}>
+                {isEditingWinThreshold ? (
+                  <input
+                    type="number"
+                    min={MIN_WIN_THRESHOLD}
+                    max={MAX_WIN_THRESHOLD}
+                    step={10}
+                    value={winThresholdInput}
+                    onChange={handleWinThresholdInputChange}
+                    onKeyDown={handleWinThresholdKeyDown}
+                    className={styles.winThresholdInput}
+                    inputMode="numeric"
+                    autoFocus
+                  />
+                ) : (
+                  <span className={styles.winThresholdDisplay}>{formatNumber(playerSettings.winThreshold)}</span>
+                )}
 
-              <button
-                className={styles.playerNameEditButton}
-                onClick={toggleWinThresholdEdit}
-                title={
-                  isOpponentConnected
-                    ? disabledWhileConnectedTooltip
-                    : isEditingWinThreshold ? t`Save Name` : t`Edit Name`
-                }
-                disabled={isOpponentConnected}
-              >
-                {isEditingWinThreshold ? <Save size={18} /> : <Edit size={18} />}
-              </button>
+                <button
+                  className={styles.playerNameEditButton}
+                  onClick={toggleWinThresholdEdit}
+                  title={
+                    isOpponentConnected
+                      ? disabledWhileConnectedTooltip
+                      : isEditingWinThreshold ? t`Save Name` : t`Edit Name`
+                  }
+                  disabled={isOpponentConnected}
+                >
+                  {isEditingWinThreshold ? <Save size={18} /> : <Edit size={18} />}
+                </button>
+              </div>
+            </div>
+
+            {/* Sound Effects */}
+            <div className={styles.settingsSection}>
+              <h4 className={styles.settingsTitle}><Trans>Sound Effects</Trans></h4>
+              <div className={styles.settingsOption} style={{ justifyContent: 'center' }}>
+                <label className={styles.switch}>
+                  <input
+                    type="checkbox"
+                    checked={soundEnabled}
+                    onChange={(e) => handleSoundChange(e.target.checked)}
+                  />
+                  <span className={styles.slider}></span>
+                </label>
+              </div>
             </div>
           </div>
 
           {/* Privacy & Data Section */}
           <div className={styles.settingsSection}>
-            <h4 className={styles.settingsTitle}><Trans>Privacy & Data</Trans></h4>
             <div className={styles.settingsOption}>
               <span className={styles.settingsLabel}>
-                <Trans>Status</Trans>: {getConsentStatusText()}
+                <Trans>Privacy & Data</Trans>: {getConsentStatusText()}
               </span>
               <button
                 className={styles.playerActionButton}
@@ -493,22 +506,6 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 </p>
               </div>
             )}
-          </div>
-
-          {/* Audio Section */}
-          <div className={styles.settingsSection}>
-            <h4 className={styles.settingsTitle}><Trans>Audio</Trans></h4>
-            <div className={styles.settingsOption}>
-              <span className={styles.settingsLabel}><Trans>Sound Effects</Trans></span>
-              <label className={styles.switch}>
-                <input
-                  type="checkbox"
-                  checked={soundEnabled}
-                  onChange={(e) => handleSoundChange(e.target.checked)}
-                />
-                <span className={styles.slider}></span>
-              </label>
-            </div>
           </div>
         </div>
 

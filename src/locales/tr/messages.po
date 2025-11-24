@@ -57,10 +57,6 @@ msgstr "Analitik etkin"
 msgid "App information"
 msgstr "Uygulama bilgileri"
 
-#: src/components/modals/SettingsModal.tsx:500
-msgid "Audio"
-msgstr "Ses"
-
 #: src/components/ui/ActionButtons.tsx:33
 msgid "Brisk"
 msgstr "Brisk"
@@ -92,7 +88,7 @@ msgstr "Klasik Bezik"
 #: src/components/modals/InfoModal.tsx:70
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/PrivacyModal.tsx:63
-#: src/components/modals/SettingsModal.tsx:517
+#: src/components/modals/SettingsModal.tsx:513
 msgid "Close"
 msgstr "Kapat"
 
@@ -133,11 +129,11 @@ msgid "Disconnect opponent"
 msgstr "Rakibi kes"
 
 #: src/components/modals/SettingsModal.tsx:369
-#: src/components/modals/SettingsModal.tsx:443
+#: src/components/modals/SettingsModal.tsx:441
 msgid "Edit Name"
 msgstr "Adı Düzenle"
 
-#: src/components/modals/SettingsModal.tsx:485
+#: src/components/modals/SettingsModal.tsx:482
 msgid "Enable Analytics"
 msgstr "Analitiği Etkinleştir"
 
@@ -198,8 +194,7 @@ msgstr "Benimle Bezik oyna!"
 msgid "km away"
 msgstr "km uzaklıkta"
 
-#: src/components/modals/SettingsModal.tsx:378
-#: src/components/modals/SettingsModal.tsx:380
+#: src/components/modals/SettingsModal.tsx:379
 msgid "Language"
 msgstr "Dil"
 
@@ -239,7 +234,7 @@ msgstr "Konum ile yakındaki oyuncuları arama"
 msgid "New Game"
 msgstr "Yeni Oyun"
 
-#: src/components/modals/SettingsModal.tsx:492
+#: src/components/modals/SettingsModal.tsx:489
 msgid "No choice has been made yet"
 msgstr "Henüz seçim yapılmadı"
 
@@ -293,7 +288,7 @@ msgstr "Oyuncu Adı"
 msgid "Privacy & Data"
 msgstr "Gizlilik & Veri"
 
-#: src/components/modals/SettingsModal.tsx:462
+#: src/components/modals/SettingsModal.tsx:459
 msgid "Privacy Information"
 msgstr "Gizlilik Bilgisi"
 
@@ -317,12 +312,12 @@ msgstr "Sıfırla"
 msgid "Reset score"
 msgstr "Skoru sıfırla"
 
-#: src/components/modals/SettingsModal.tsx:474
+#: src/components/modals/SettingsModal.tsx:471
 msgid "Revoke Analytics Consent"
 msgstr "Analitik İznini İptal Et"
 
 #: src/components/modals/SettingsModal.tsx:369
-#: src/components/modals/SettingsModal.tsx:443
+#: src/components/modals/SettingsModal.tsx:441
 msgid "Save Name"
 msgstr "Adı Kaydet"
 
@@ -380,15 +375,11 @@ msgstr "Skor geçmişini göster"
 msgid "Sound effects"
 msgstr "Ses efektleri"
 
-#: src/components/modals/SettingsModal.tsx:502
+#: src/components/modals/SettingsModal.tsx:498
 msgid "Sound Effects"
 msgstr "Ses Efektleri"
 
-#: src/components/modals/SettingsModal.tsx:457
-msgid "Status"
-msgstr "Durum"
-
-#: src/components/modals/SettingsModal.tsx:418
+#: src/components/modals/SettingsModal.tsx:416
 msgid "Target Score"
 msgstr "Hedef Skor"
 
@@ -437,7 +428,6 @@ msgid "Unknown"
 msgstr "Bilinmiyor"
 
 #: src/components/modals/SettingsModal.tsx:397
-#: src/components/modals/SettingsModal.tsx:399
 msgid "Variant"
 msgstr "Varyant"
 

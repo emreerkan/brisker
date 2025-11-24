@@ -57,10 +57,6 @@ msgstr "Analytics ingeschakeld"
 msgid "App information"
 msgstr "App informatie"
 
-#: src/components/modals/SettingsModal.tsx:500
-msgid "Audio"
-msgstr "Audio"
-
 #: src/components/ui/ActionButtons.tsx:33
 msgid "Brisk"
 msgstr "Brisk"
@@ -92,7 +88,7 @@ msgstr "Klassiek Bezique"
 #: src/components/modals/InfoModal.tsx:70
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/PrivacyModal.tsx:63
-#: src/components/modals/SettingsModal.tsx:517
+#: src/components/modals/SettingsModal.tsx:513
 msgid "Close"
 msgstr "Sluiten"
 
@@ -133,11 +129,11 @@ msgid "Disconnect opponent"
 msgstr "Verbreek de verbinding met de tegenstander"
 
 #: src/components/modals/SettingsModal.tsx:369
-#: src/components/modals/SettingsModal.tsx:443
+#: src/components/modals/SettingsModal.tsx:441
 msgid "Edit Name"
 msgstr "Naam bewerken"
 
-#: src/components/modals/SettingsModal.tsx:485
+#: src/components/modals/SettingsModal.tsx:482
 msgid "Enable Analytics"
 msgstr "Analytics inschakelen"
 
@@ -198,8 +194,7 @@ msgstr "Doe met me mee in Bezique!"
 msgid "km away"
 msgstr "km afstand"
 
-#: src/components/modals/SettingsModal.tsx:378
-#: src/components/modals/SettingsModal.tsx:380
+#: src/components/modals/SettingsModal.tsx:379
 msgid "Language"
 msgstr "Taal"
 
@@ -239,7 +234,7 @@ msgstr "Netwerk ontdekking voor spelers in de buurt"
 msgid "New Game"
 msgstr "Nieuw spel"
 
-#: src/components/modals/SettingsModal.tsx:492
+#: src/components/modals/SettingsModal.tsx:489
 msgid "No choice has been made yet"
 msgstr "Er is nog geen keuze gemaakt"
 
@@ -293,7 +288,7 @@ msgstr "Spelernaam"
 msgid "Privacy & Data"
 msgstr "Privacy & Gegevens"
 
-#: src/components/modals/SettingsModal.tsx:462
+#: src/components/modals/SettingsModal.tsx:459
 msgid "Privacy Information"
 msgstr "Privacy-informatie"
 
@@ -317,12 +312,12 @@ msgstr "Resetten"
 msgid "Reset score"
 msgstr "Score resetten"
 
-#: src/components/modals/SettingsModal.tsx:474
+#: src/components/modals/SettingsModal.tsx:471
 msgid "Revoke Analytics Consent"
 msgstr "Afwijzen"
 
 #: src/components/modals/SettingsModal.tsx:369
-#: src/components/modals/SettingsModal.tsx:443
+#: src/components/modals/SettingsModal.tsx:441
 msgid "Save Name"
 msgstr "Naam opslaan"
 
@@ -380,15 +375,11 @@ msgstr "Toon scoregeschiedenis"
 msgid "Sound effects"
 msgstr "Geluidseffecten"
 
-#: src/components/modals/SettingsModal.tsx:502
+#: src/components/modals/SettingsModal.tsx:498
 msgid "Sound Effects"
 msgstr "Geluidseffecten"
 
-#: src/components/modals/SettingsModal.tsx:457
-msgid "Status"
-msgstr "Status"
-
-#: src/components/modals/SettingsModal.tsx:418
+#: src/components/modals/SettingsModal.tsx:416
 msgid "Target Score"
 msgstr "Doel score"
 
@@ -437,7 +428,6 @@ msgid "Unknown"
 msgstr "Onbekend"
 
 #: src/components/modals/SettingsModal.tsx:397
-#: src/components/modals/SettingsModal.tsx:399
 msgid "Variant"
 msgstr "Variant"
 

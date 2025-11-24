@@ -57,10 +57,6 @@ msgstr "Analytics aktiverad"
 msgid "App information"
 msgstr "Information om appen"
 
-#: src/components/modals/SettingsModal.tsx:500
-msgid "Audio"
-msgstr "Ljud"
-
 #: src/components/ui/ActionButtons.tsx:33
 msgid "Brisk"
 msgstr "Brisk"
@@ -92,7 +88,7 @@ msgstr "Klassisk besick (Bézique)"
 #: src/components/modals/InfoModal.tsx:70
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/PrivacyModal.tsx:63
-#: src/components/modals/SettingsModal.tsx:517
+#: src/components/modals/SettingsModal.tsx:513
 msgid "Close"
 msgstr "Stäng"
 
@@ -133,11 +129,11 @@ msgid "Disconnect opponent"
 msgstr "Koppla bort motspelaren"
 
 #: src/components/modals/SettingsModal.tsx:369
-#: src/components/modals/SettingsModal.tsx:443
+#: src/components/modals/SettingsModal.tsx:441
 msgid "Edit Name"
 msgstr "Redigera namn"
 
-#: src/components/modals/SettingsModal.tsx:485
+#: src/components/modals/SettingsModal.tsx:482
 msgid "Enable Analytics"
 msgstr "Aktivera Analytics"
 
@@ -198,8 +194,7 @@ msgstr "Vill du spela Bézique?"
 msgid "km away"
 msgstr "km bort"
 
-#: src/components/modals/SettingsModal.tsx:378
-#: src/components/modals/SettingsModal.tsx:380
+#: src/components/modals/SettingsModal.tsx:379
 msgid "Language"
 msgstr "Språk"
 
@@ -239,7 +234,7 @@ msgstr "Söker efter spelare i närheten via nätet"
 msgid "New Game"
 msgstr "Nytt spel"
 
-#: src/components/modals/SettingsModal.tsx:492
+#: src/components/modals/SettingsModal.tsx:489
 msgid "No choice has been made yet"
 msgstr "Inget val har gjorts än"
 
@@ -293,7 +288,7 @@ msgstr "Spelarens namn"
 msgid "Privacy & Data"
 msgstr "Integritet & Data"
 
-#: src/components/modals/SettingsModal.tsx:462
+#: src/components/modals/SettingsModal.tsx:459
 msgid "Privacy Information"
 msgstr "Integritetsinformation"
 
@@ -317,12 +312,12 @@ msgstr "Återställ"
 msgid "Reset score"
 msgstr "Återställ poängen"
 
-#: src/components/modals/SettingsModal.tsx:474
+#: src/components/modals/SettingsModal.tsx:471
 msgid "Revoke Analytics Consent"
 msgstr "Avvisa"
 
 #: src/components/modals/SettingsModal.tsx:369
-#: src/components/modals/SettingsModal.tsx:443
+#: src/components/modals/SettingsModal.tsx:441
 msgid "Save Name"
 msgstr "Spara namn"
 
@@ -380,15 +375,11 @@ msgstr "Visa poänghistorik"
 msgid "Sound effects"
 msgstr "Ljud"
 
-#: src/components/modals/SettingsModal.tsx:502
+#: src/components/modals/SettingsModal.tsx:498
 msgid "Sound Effects"
 msgstr "Ljud"
 
-#: src/components/modals/SettingsModal.tsx:457
-msgid "Status"
-msgstr "Status"
-
-#: src/components/modals/SettingsModal.tsx:418
+#: src/components/modals/SettingsModal.tsx:416
 msgid "Target Score"
 msgstr "Målpoäng"
 
@@ -437,7 +428,6 @@ msgid "Unknown"
 msgstr "Okänd"
 
 #: src/components/modals/SettingsModal.tsx:397
-#: src/components/modals/SettingsModal.tsx:399
 msgid "Variant"
 msgstr "Variant"
 

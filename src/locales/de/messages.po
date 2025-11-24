@@ -57,10 +57,6 @@ msgstr "Analyse aktiviert"
 msgid "App information"
 msgstr "App-Informationen"
 
-#: src/components/modals/SettingsModal.tsx:500
-msgid "Audio"
-msgstr "Audio"
-
 #: src/components/ui/ActionButtons.tsx:33
 msgid "Brisk"
 msgstr "Brisk"
@@ -92,7 +88,7 @@ msgstr "Klassisches Bezique"
 #: src/components/modals/InfoModal.tsx:70
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/PrivacyModal.tsx:63
-#: src/components/modals/SettingsModal.tsx:517
+#: src/components/modals/SettingsModal.tsx:513
 msgid "Close"
 msgstr "Schließen"
 
@@ -133,11 +129,11 @@ msgid "Disconnect opponent"
 msgstr "Verbindung mit Gegner trennen"
 
 #: src/components/modals/SettingsModal.tsx:369
-#: src/components/modals/SettingsModal.tsx:443
+#: src/components/modals/SettingsModal.tsx:441
 msgid "Edit Name"
 msgstr "Name bearbeiten"
 
-#: src/components/modals/SettingsModal.tsx:485
+#: src/components/modals/SettingsModal.tsx:482
 msgid "Enable Analytics"
 msgstr "Analyse aktivieren"
 
@@ -198,8 +194,7 @@ msgstr "Komm mit mir nach Bezique!"
 msgid "km away"
 msgstr "km entfernt"
 
-#: src/components/modals/SettingsModal.tsx:378
-#: src/components/modals/SettingsModal.tsx:380
+#: src/components/modals/SettingsModal.tsx:379
 msgid "Language"
 msgstr "Sprache"
 
@@ -239,7 +234,7 @@ msgstr "Netzwerkerkennung für Spieler in der Nähe"
 msgid "New Game"
 msgstr "Neues Spiel"
 
-#: src/components/modals/SettingsModal.tsx:492
+#: src/components/modals/SettingsModal.tsx:489
 msgid "No choice has been made yet"
 msgstr "Noch keine Auswahl getroffen"
 
@@ -293,7 +288,7 @@ msgstr "Spielername"
 msgid "Privacy & Data"
 msgstr "Datenschutz & Daten"
 
-#: src/components/modals/SettingsModal.tsx:462
+#: src/components/modals/SettingsModal.tsx:459
 msgid "Privacy Information"
 msgstr "Datenschutzinformationen"
 
@@ -317,12 +312,12 @@ msgstr "Zurücksetzen"
 msgid "Reset score"
 msgstr "Punktzahl zurücksetzen"
 
-#: src/components/modals/SettingsModal.tsx:474
+#: src/components/modals/SettingsModal.tsx:471
 msgid "Revoke Analytics Consent"
 msgstr "Analyse-Zustimmung widerrufen"
 
 #: src/components/modals/SettingsModal.tsx:369
-#: src/components/modals/SettingsModal.tsx:443
+#: src/components/modals/SettingsModal.tsx:441
 msgid "Save Name"
 msgstr "Name speichern"
 
@@ -380,15 +375,11 @@ msgstr "Punktzahl-Historie anzeigen"
 msgid "Sound effects"
 msgstr "Soundeffekte"
 
-#: src/components/modals/SettingsModal.tsx:502
+#: src/components/modals/SettingsModal.tsx:498
 msgid "Sound Effects"
 msgstr "Soundeffekte"
 
-#: src/components/modals/SettingsModal.tsx:457
-msgid "Status"
-msgstr "Status"
-
-#: src/components/modals/SettingsModal.tsx:418
+#: src/components/modals/SettingsModal.tsx:416
 msgid "Target Score"
 msgstr "Zielpunktzahl"
 
@@ -437,7 +428,6 @@ msgid "Unknown"
 msgstr "Unbekannt"
 
 #: src/components/modals/SettingsModal.tsx:397
-#: src/components/modals/SettingsModal.tsx:399
 msgid "Variant"
 msgstr "Variante"
 

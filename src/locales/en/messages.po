@@ -57,10 +57,6 @@ msgstr "Analytics enabled"
 msgid "App information"
 msgstr "App information"
 
-#: src/components/modals/SettingsModal.tsx:500
-msgid "Audio"
-msgstr "Audio"
-
 #: src/components/ui/ActionButtons.tsx:33
 msgid "Brisk"
 msgstr "Brisk"
@@ -92,7 +88,7 @@ msgstr "Classic Bezique"
 #: src/components/modals/InfoModal.tsx:70
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/PrivacyModal.tsx:63
-#: src/components/modals/SettingsModal.tsx:517
+#: src/components/modals/SettingsModal.tsx:513
 msgid "Close"
 msgstr "Close"
 
@@ -133,11 +129,11 @@ msgid "Disconnect opponent"
 msgstr "Disconnect opponent"
 
 #: src/components/modals/SettingsModal.tsx:369
-#: src/components/modals/SettingsModal.tsx:443
+#: src/components/modals/SettingsModal.tsx:441
 msgid "Edit Name"
 msgstr "Edit Name"
 
-#: src/components/modals/SettingsModal.tsx:485
+#: src/components/modals/SettingsModal.tsx:482
 msgid "Enable Analytics"
 msgstr "Enable Analytics"
 
@@ -198,8 +194,7 @@ msgstr "Join me in Bezique!"
 msgid "km away"
 msgstr "km away"
 
-#: src/components/modals/SettingsModal.tsx:378
-#: src/components/modals/SettingsModal.tsx:380
+#: src/components/modals/SettingsModal.tsx:379
 msgid "Language"
 msgstr "Language"
 
@@ -239,7 +234,7 @@ msgstr "Network discovery for nearby players"
 msgid "New Game"
 msgstr "New Game"
 
-#: src/components/modals/SettingsModal.tsx:492
+#: src/components/modals/SettingsModal.tsx:489
 msgid "No choice has been made yet"
 msgstr "No choice has been made yet"
 
@@ -293,7 +288,7 @@ msgstr "Player Name"
 msgid "Privacy & Data"
 msgstr "Privacy & Data"
 
-#: src/components/modals/SettingsModal.tsx:462
+#: src/components/modals/SettingsModal.tsx:459
 msgid "Privacy Information"
 msgstr "Privacy Information"
 
@@ -317,12 +312,12 @@ msgstr "Reset"
 msgid "Reset score"
 msgstr "Reset score"
 
-#: src/components/modals/SettingsModal.tsx:474
+#: src/components/modals/SettingsModal.tsx:471
 msgid "Revoke Analytics Consent"
 msgstr "Revoke Analytics Consent"
 
 #: src/components/modals/SettingsModal.tsx:369
-#: src/components/modals/SettingsModal.tsx:443
+#: src/components/modals/SettingsModal.tsx:441
 msgid "Save Name"
 msgstr "Save Name"
 
@@ -380,15 +375,11 @@ msgstr "Show score history"
 msgid "Sound effects"
 msgstr "Sound effects"
 
-#: src/components/modals/SettingsModal.tsx:502
+#: src/components/modals/SettingsModal.tsx:498
 msgid "Sound Effects"
 msgstr "Sound Effects"
 
-#: src/components/modals/SettingsModal.tsx:457
-msgid "Status"
-msgstr "Status"
-
-#: src/components/modals/SettingsModal.tsx:418
+#: src/components/modals/SettingsModal.tsx:416
 msgid "Target Score"
 msgstr "Target Score"
 
@@ -437,7 +428,6 @@ msgid "Unknown"
 msgstr "Unknown"
 
 #: src/components/modals/SettingsModal.tsx:397
-#: src/components/modals/SettingsModal.tsx:399
 msgid "Variant"
 msgstr "Variant"
 
