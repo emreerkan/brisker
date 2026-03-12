@@ -26,7 +26,7 @@ import {
   PrivacyModal
 } from './modals';
 
-import { getPlayerSettings, clearGameSnapshot, updatePlayerSetting } from '@/utils/localStorage';
+import { getPlayerSettings, clearGameSnapshot } from '@/utils/localStorage';
 import { GameServerAPI } from '@/services/gameServer';
 import { initializeAnalytics, trackEvent } from '@/utils/analytics';
 import type { Player, BeziqueVariantId } from '@/types';
@@ -54,6 +54,8 @@ export const Brisker: React.FC = () => {
     initialSettingsRef.current.variant ?? DEFAULT_VARIANT
   );
   const variantConfig = useMemo(() => getVariantConfig(variant), [variant]);
+  // Tracks the variant the player had before joining a connected game so it can be restored on disconnect
+  const preConnectionVariantRef = useRef<BeziqueVariantId | null>(null);
   const inviteLinkHandled = useRef(false);
   
   // Language hook
@@ -189,9 +191,11 @@ export const Brisker: React.FC = () => {
       if (isSupportedVariant(payload?.variant)) {
         const nextVariant = payload.variant as BeziqueVariantId;
         if (nextVariant !== variant) {
+          // Save the player's own variant before temporarily switching to the host's variant
+          if (preConnectionVariantRef.current === null) {
+            preConnectionVariantRef.current = variant;
+          }
           setVariant(nextVariant);
-          initialSettingsRef.current = { ...initialSettingsRef.current, variant: nextVariant };
-          updatePlayerSetting('variant', nextVariant);
         }
       }
     };
@@ -217,9 +221,11 @@ export const Brisker: React.FC = () => {
       if (isSupportedVariant(payload?.variant)) {
         const nextVariant = payload.variant as BeziqueVariantId;
         if (nextVariant !== variant) {
+          // Save the player's own variant before temporarily switching to the host's variant
+          if (preConnectionVariantRef.current === null) {
+            preConnectionVariantRef.current = variant;
+          }
           setVariant(nextVariant);
-          initialSettingsRef.current = { ...initialSettingsRef.current, variant: nextVariant };
-          updatePlayerSetting('variant', nextVariant);
         }
       }
     };
@@ -259,6 +265,11 @@ export const Brisker: React.FC = () => {
       console.log('Received remote disconnect instruction:', payload);
       closeAllModals();
       setCurrentOpponent(undefined);
+      // Restore the player's own variant if it was temporarily overridden by the host's variant
+      if (preConnectionVariantRef.current !== null) {
+        setVariant(preConnectionVariantRef.current);
+        preConnectionVariantRef.current = null;
+      }
       try {
         GameServerAPI.disconnectWebSocket();
       } catch (error) {
@@ -359,6 +370,12 @@ export const Brisker: React.FC = () => {
   };
 
   const handleDisconnect = useCallback(async () => {
+    // Restore the player's own variant if it was temporarily overridden by the host's variant
+    if (preConnectionVariantRef.current !== null) {
+      setVariant(preConnectionVariantRef.current);
+      preConnectionVariantRef.current = null;
+    }
+
     try {
       if (opponent && opponent.playerID) {
         GameServerAPI.disconnectGame(opponent.playerID);
