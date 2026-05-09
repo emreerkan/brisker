@@ -6,6 +6,7 @@ export const availableLanguages = [
   { code: 'de', name: 'Deutsch', rtl: false },
   { code: 'fr', name: 'Français', rtl: false },
   { code: 'fa', name: 'فارسی', rtl: true },
+  { code: 'ar', name: 'العربية', rtl: true },
 ] as const;
 
 export const SUPPORTED_LANGUAGE_CODES = availableLanguages.map(lang => lang.code) as string[];

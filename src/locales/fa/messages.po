@@ -16,12 +16,12 @@ msgstr ""
 "X-Generator: Poedit 3.7\n"
 
 #. placeholder {0}: formatNumber(difference)
-#: src/components/Brisker.tsx:448
+#: src/components/Brisker.tsx:465
 msgid "{0} ahead"
 msgstr "{0} امتیاز جلو"
 
 #. placeholder {0}: formatNumber(Math.abs(difference))
-#: src/components/Brisker.tsx:450
+#: src/components/Brisker.tsx:467
 msgid "{0} behind"
 msgstr "{0} امتیاز عقب"
 
@@ -90,7 +90,7 @@ msgstr "بزیک کلاسیک"
 #: src/components/modals/InfoModal.tsx:70
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/PrivacyModal.tsx:63
-#: src/components/modals/SettingsModal.tsx:513
+#: src/components/modals/SettingsModal.tsx:514
 msgid "Close"
 msgstr "بستن"
 
@@ -102,7 +102,7 @@ msgstr "تبریک!"
 msgid "Cookie Notice"
 msgstr "اطلاعیه کوکی"
 
-#: src/components/modals/SettingsModal.tsx:315
+#: src/components/modals/SettingsModal.tsx:313
 msgid "Copy Player ID"
 msgstr "کپی شناسه بازیکن"
 
@@ -126,16 +126,16 @@ msgstr "ردیابی امتیاز دیجیتال با رابط لمسی روان
 msgid "Disabled while connected to an opponent"
 msgstr "در هنگام اتصال به حریف غیرفعال است"
 
-#: src/components/Brisker.tsx:471
+#: src/components/Brisker.tsx:488
 msgid "Disconnect opponent"
 msgstr "قطع ارتباط با حریف"
 
-#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:367
 #: src/components/modals/SettingsModal.tsx:441
 msgid "Edit Name"
 msgstr "ویرایش نام"
 
-#: src/components/modals/SettingsModal.tsx:482
+#: src/components/modals/SettingsModal.tsx:498
 msgid "Enable Analytics"
 msgstr "فعال‌سازی تحلیل"
 
@@ -143,7 +143,7 @@ msgstr "فعال‌سازی تحلیل"
 msgid "Enter Player ID or Name..."
 msgstr "شناسه یا نام بازیکن را وارد کنید..."
 
-#: src/components/modals/SettingsModal.tsx:358
+#: src/components/modals/SettingsModal.tsx:356
 msgid "Enter your player name"
 msgstr "شناسه یا نام بازیکن را وارد کنید..."
 
@@ -160,7 +160,7 @@ msgid "Features"
 msgstr "ویژگی‌ها"
 
 #: src/components/modals/GeolocationSearchModal.tsx:101
-#: src/components/modals/SettingsModal.tsx:339
+#: src/components/modals/SettingsModal.tsx:337
 msgid "Find Nearby Players"
 msgstr "پیدا کردن بازیکنان نزدیک"
 
@@ -196,7 +196,7 @@ msgstr "به من در بازی بزیک بپیوند!"
 msgid "km away"
 msgstr "کیلومتر فاصله"
 
-#: src/components/modals/SettingsModal.tsx:379
+#: src/components/modals/SettingsModal.tsx:377
 msgid "Language"
 msgstr "زبان"
 
@@ -204,7 +204,7 @@ msgstr "زبان"
 msgid "Learn More"
 msgstr "بیشتر بدانید"
 
-#: src/components/Brisker.tsx:458
+#: src/components/Brisker.tsx:475
 msgid "Loading..."
 msgstr "در حال بارگذاری..."
 
@@ -236,7 +236,7 @@ msgstr "شناسایی شبکه برای بازیکنای"
 msgid "New Game"
 msgstr "بازی جدید"
 
-#: src/components/modals/SettingsModal.tsx:489
+#: src/components/modals/SettingsModal.tsx:505
 msgid "No choice has been made yet"
 msgstr "هنوز انتخابی انجام نشده است"
 
@@ -264,7 +264,7 @@ msgstr "تعداد کاربران"
 msgid "Offline mode for network-free play"
 msgstr "حالت آفلاین برای بازی بدون اینترنت"
 
-#: src/components/Brisker.tsx:475
+#: src/components/Brisker.tsx:492
 msgid "Opponent"
 msgstr "حریف"
 
@@ -281,16 +281,16 @@ msgstr "بازی"
 msgid "Player ID"
 msgstr "شناسه بازیکن"
 
-#: src/components/modals/SettingsModal.tsx:349
+#: src/components/modals/SettingsModal.tsx:347
 msgid "Player Name"
 msgstr "نام بازیکن"
 
 #: src/components/modals/PrivacyModal.tsx:19
-#: src/components/modals/SettingsModal.tsx:454
+#: src/components/modals/SettingsModal.tsx:470
 msgid "Privacy & Data"
 msgstr "حریم خصوصی و داده"
 
-#: src/components/modals/SettingsModal.tsx:459
+#: src/components/modals/SettingsModal.tsx:475
 msgid "Privacy Information"
 msgstr "اطلاعات حریم خصوصی"
 
@@ -314,11 +314,11 @@ msgstr "بازنشانی"
 msgid "Reset score"
 msgstr "بازنشانی امتیاز"
 
-#: src/components/modals/SettingsModal.tsx:471
+#: src/components/modals/SettingsModal.tsx:487
 msgid "Revoke Analytics Consent"
 msgstr "رد"
 
-#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:367
 #: src/components/modals/SettingsModal.tsx:441
 msgid "Save Name"
 msgstr "ذخیره نام"
@@ -344,7 +344,7 @@ msgid "Search Nearby Players"
 msgstr "جستجوی بازیکنان نزدیک"
 
 #: src/components/modals/PlayerSearchModal.tsx:83
-#: src/components/modals/SettingsModal.tsx:331
+#: src/components/modals/SettingsModal.tsx:329
 msgid "Search Players"
 msgstr "جستجوی بازیکنان"
 
@@ -365,7 +365,7 @@ msgstr "انتخاب تعداد بریک (افزایش امتیاز بریک)"
 msgid "Settings"
 msgstr "تنظیمات"
 
-#: src/components/modals/SettingsModal.tsx:323
+#: src/components/modals/SettingsModal.tsx:321
 msgid "Share Player ID"
 msgstr "اشتراک‌گذاری شناسه بازیکن"
 
@@ -377,7 +377,7 @@ msgstr "نمایش تاریخچه امتیازها"
 msgid "Sound effects"
 msgstr "افکت‌های صوتی"
 
-#: src/components/modals/SettingsModal.tsx:498
+#: src/components/modals/SettingsModal.tsx:452
 msgid "Sound Effects"
 msgstr "افکت‌های صوتی"
 
@@ -397,7 +397,7 @@ msgstr "این کار تمام امتیازها را حذف می‌کند و ق�
 msgid "This will request access to your location to find nearby players"
 msgstr "این کار برای یافتن بازیکنان نزدیک به موقعیت شما نیاز به دسترسی مکانی دارد"
 
-#: src/components/Brisker.tsx:452
+#: src/components/Brisker.tsx:469
 msgid "tied"
 msgstr "مساوی"
 
@@ -429,7 +429,7 @@ msgstr "بازگشت امتیاز آخر"
 msgid "Unknown"
 msgstr "نامشخص"
 
-#: src/components/modals/SettingsModal.tsx:397
+#: src/components/modals/SettingsModal.tsx:395
 msgid "Variant"
 msgstr "نوع بازی"
 
@@ -457,6 +457,6 @@ msgstr "به امتیاز هدف رسیدی! بازی فوق‌العاده‌ا
 msgid "Your Control"
 msgstr "مشاهده سیاست حفظ حریم خصوصی Google Analytics"
 
-#: src/components/modals/SettingsModal.tsx:306
+#: src/components/modals/SettingsModal.tsx:305
 msgid "Your Player ID"
 msgstr "شناسه بازیکن شما"

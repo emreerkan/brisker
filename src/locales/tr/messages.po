@@ -14,12 +14,12 @@ msgstr ""
 "X-Generator: Poedit 3.7\n"
 
 #. placeholder {0}: formatNumber(difference)
-#: src/components/Brisker.tsx:448
+#: src/components/Brisker.tsx:465
 msgid "{0} ahead"
 msgstr "{0} önde"
 
 #. placeholder {0}: formatNumber(Math.abs(difference))
-#: src/components/Brisker.tsx:450
+#: src/components/Brisker.tsx:467
 msgid "{0} behind"
 msgstr "{0} geride"
 
@@ -88,7 +88,7 @@ msgstr "Klasik Bezik"
 #: src/components/modals/InfoModal.tsx:70
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/PrivacyModal.tsx:63
-#: src/components/modals/SettingsModal.tsx:513
+#: src/components/modals/SettingsModal.tsx:514
 msgid "Close"
 msgstr "Kapat"
 
@@ -100,7 +100,7 @@ msgstr "Tebrikler!"
 msgid "Cookie Notice"
 msgstr "Çerez Bildirimi"
 
-#: src/components/modals/SettingsModal.tsx:315
+#: src/components/modals/SettingsModal.tsx:313
 msgid "Copy Player ID"
 msgstr "Oyuncu ID'sini Kopyala"
 
@@ -124,16 +124,16 @@ msgstr "Sezgisel dokunmatik arayüz ile dijital skor takibi"
 msgid "Disabled while connected to an opponent"
 msgstr "Bir rakibe bağlıyken devre dışı"
 
-#: src/components/Brisker.tsx:471
+#: src/components/Brisker.tsx:488
 msgid "Disconnect opponent"
 msgstr "Rakibi kes"
 
-#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:367
 #: src/components/modals/SettingsModal.tsx:441
 msgid "Edit Name"
 msgstr "Adı Düzenle"
 
-#: src/components/modals/SettingsModal.tsx:482
+#: src/components/modals/SettingsModal.tsx:498
 msgid "Enable Analytics"
 msgstr "Analitiği Etkinleştir"
 
@@ -141,7 +141,7 @@ msgstr "Analitiği Etkinleştir"
 msgid "Enter Player ID or Name..."
 msgstr "Oyuncu ID'si veya İsim girin..."
 
-#: src/components/modals/SettingsModal.tsx:358
+#: src/components/modals/SettingsModal.tsx:356
 msgid "Enter your player name"
 msgstr "Oyuncu adınızı girin"
 
@@ -158,7 +158,7 @@ msgid "Features"
 msgstr "Özellikler"
 
 #: src/components/modals/GeolocationSearchModal.tsx:101
-#: src/components/modals/SettingsModal.tsx:339
+#: src/components/modals/SettingsModal.tsx:337
 msgid "Find Nearby Players"
 msgstr "Yakındaki Oyuncuları Bul"
 
@@ -194,7 +194,7 @@ msgstr "Benimle Bezik oyna!"
 msgid "km away"
 msgstr "km uzaklıkta"
 
-#: src/components/modals/SettingsModal.tsx:379
+#: src/components/modals/SettingsModal.tsx:377
 msgid "Language"
 msgstr "Dil"
 
@@ -202,7 +202,7 @@ msgstr "Dil"
 msgid "Learn More"
 msgstr "Daha Fazla Bilgi"
 
-#: src/components/Brisker.tsx:458
+#: src/components/Brisker.tsx:475
 msgid "Loading..."
 msgstr "Yükleniyor..."
 
@@ -234,7 +234,7 @@ msgstr "Konum ile yakındaki oyuncuları arama"
 msgid "New Game"
 msgstr "Yeni Oyun"
 
-#: src/components/modals/SettingsModal.tsx:489
+#: src/components/modals/SettingsModal.tsx:505
 msgid "No choice has been made yet"
 msgstr "Henüz seçim yapılmadı"
 
@@ -262,7 +262,7 @@ msgstr "Kullanıcı sayısı"
 msgid "Offline mode for network-free play"
 msgstr "Ağdan bağımsız oyun için çevrimdışı mod"
 
-#: src/components/Brisker.tsx:475
+#: src/components/Brisker.tsx:492
 msgid "Opponent"
 msgstr "Rakip"
 
@@ -279,16 +279,16 @@ msgstr "Oyna"
 msgid "Player ID"
 msgstr "Oyuncu ID"
 
-#: src/components/modals/SettingsModal.tsx:349
+#: src/components/modals/SettingsModal.tsx:347
 msgid "Player Name"
 msgstr "Oyuncu Adı"
 
 #: src/components/modals/PrivacyModal.tsx:19
-#: src/components/modals/SettingsModal.tsx:454
+#: src/components/modals/SettingsModal.tsx:470
 msgid "Privacy & Data"
 msgstr "Gizlilik & Veri"
 
-#: src/components/modals/SettingsModal.tsx:459
+#: src/components/modals/SettingsModal.tsx:475
 msgid "Privacy Information"
 msgstr "Gizlilik Bilgisi"
 
@@ -312,11 +312,11 @@ msgstr "Sıfırla"
 msgid "Reset score"
 msgstr "Skoru sıfırla"
 
-#: src/components/modals/SettingsModal.tsx:471
+#: src/components/modals/SettingsModal.tsx:487
 msgid "Revoke Analytics Consent"
 msgstr "Analitik İznini İptal Et"
 
-#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:367
 #: src/components/modals/SettingsModal.tsx:441
 msgid "Save Name"
 msgstr "Adı Kaydet"
@@ -342,7 +342,7 @@ msgid "Search Nearby Players"
 msgstr "Yakındaki Oyuncuları Ara"
 
 #: src/components/modals/PlayerSearchModal.tsx:83
-#: src/components/modals/SettingsModal.tsx:331
+#: src/components/modals/SettingsModal.tsx:329
 msgid "Search Players"
 msgstr "Oyuncu Ara"
 
@@ -363,7 +363,7 @@ msgstr "Brisk adedi seç (brisk puanı ekler)"
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: src/components/modals/SettingsModal.tsx:323
+#: src/components/modals/SettingsModal.tsx:321
 msgid "Share Player ID"
 msgstr "Oyuncu ID'sini Paylaş"
 
@@ -375,7 +375,7 @@ msgstr "Skor geçmişini göster"
 msgid "Sound effects"
 msgstr "Ses efektleri"
 
-#: src/components/modals/SettingsModal.tsx:498
+#: src/components/modals/SettingsModal.tsx:452
 msgid "Sound Effects"
 msgstr "Ses Efektleri"
 
@@ -395,7 +395,7 @@ msgstr "Bu tüm skorları siler ve geri alınamaz."
 msgid "This will request access to your location to find nearby players"
 msgstr "Bu yakındaki oyuncuları bulmak için konum erişimi isteyecek"
 
-#: src/components/Brisker.tsx:452
+#: src/components/Brisker.tsx:469
 msgid "tied"
 msgstr "berabere"
 
@@ -427,7 +427,7 @@ msgstr "Son skoru geri al"
 msgid "Unknown"
 msgstr "Bilinmiyor"
 
-#: src/components/modals/SettingsModal.tsx:397
+#: src/components/modals/SettingsModal.tsx:395
 msgid "Variant"
 msgstr "Varyant"
 
@@ -455,6 +455,6 @@ msgstr "Hedef skora ulaştınız! Harika oyun!"
 msgid "Your Control"
 msgstr "Kontrolünüz"
 
-#: src/components/modals/SettingsModal.tsx:306
+#: src/components/modals/SettingsModal.tsx:305
 msgid "Your Player ID"
 msgstr "Oyuncu ID'niz"

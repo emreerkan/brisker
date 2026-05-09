@@ -60,6 +60,7 @@ export const InfoModal: React.FC<InfoModalProps> = ({ isOpen, onClose }) => {
                 <li>Deutsch (DE) - Christian Herrmann <a href="https://presskopp.com/" target="_blank" rel="noopener noreferrer"><ExternalLink size={ICON_SIZE/1.5} /></a></li>
                 <li>Français (FR) - François-Xavier Bénard <a href="https://fxbenard.com/" target="_blank" rel="noopener noreferrer"><ExternalLink size={ICON_SIZE/1.5} /></a></li>
                 <li>فارسی (FA) - Hassan Tafreshi <a href="https://whitestudio.team/" target="_blank" rel="noopener noreferrer"><ExternalLink size={ICON_SIZE/1.5} /></a></li>
+                <li>العربية (AR) - Fakhri Azzouz <a href="https://www.fakhriazzouz.com/" target="_blank" rel="noopener noreferrer"><ExternalLink size={ICON_SIZE/1.5} /></a></li>
               </ul>
             </div>
           </div>

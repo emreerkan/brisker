@@ -14,12 +14,12 @@ msgstr ""
 "X-Generator: Poedit 3.7\n"
 
 #. placeholder {0}: formatNumber(difference)
-#: src/components/Brisker.tsx:448
+#: src/components/Brisker.tsx:465
 msgid "{0} ahead"
 msgstr "{0} voraus"
 
 #. placeholder {0}: formatNumber(Math.abs(difference))
-#: src/components/Brisker.tsx:450
+#: src/components/Brisker.tsx:467
 msgid "{0} behind"
 msgstr "{0} zurück"
 
@@ -88,7 +88,7 @@ msgstr "Klassisches Bezique"
 #: src/components/modals/InfoModal.tsx:70
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/PrivacyModal.tsx:63
-#: src/components/modals/SettingsModal.tsx:513
+#: src/components/modals/SettingsModal.tsx:514
 msgid "Close"
 msgstr "Schließen"
 
@@ -100,7 +100,7 @@ msgstr "Glückwunsch!"
 msgid "Cookie Notice"
 msgstr "Cookie-Hinweis"
 
-#: src/components/modals/SettingsModal.tsx:315
+#: src/components/modals/SettingsModal.tsx:313
 msgid "Copy Player ID"
 msgstr "Spieler-ID kopieren"
 
@@ -124,16 +124,16 @@ msgstr "Digitale Punkteverfolgung mit intuitiver Touch-Oberfläche"
 msgid "Disabled while connected to an opponent"
 msgstr "Deaktiviert während der Verbindung mit einem Gegner"
 
-#: src/components/Brisker.tsx:471
+#: src/components/Brisker.tsx:488
 msgid "Disconnect opponent"
 msgstr "Verbindung mit Gegner trennen"
 
-#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:367
 #: src/components/modals/SettingsModal.tsx:441
 msgid "Edit Name"
 msgstr "Name bearbeiten"
 
-#: src/components/modals/SettingsModal.tsx:482
+#: src/components/modals/SettingsModal.tsx:498
 msgid "Enable Analytics"
 msgstr "Analyse aktivieren"
 
@@ -141,7 +141,7 @@ msgstr "Analyse aktivieren"
 msgid "Enter Player ID or Name..."
 msgstr "Spieler-ID oder Name eingeben ..."
 
-#: src/components/modals/SettingsModal.tsx:358
+#: src/components/modals/SettingsModal.tsx:356
 msgid "Enter your player name"
 msgstr "Gib deinen Spielernamen ein"
 
@@ -158,7 +158,7 @@ msgid "Features"
 msgstr "Funktionen"
 
 #: src/components/modals/GeolocationSearchModal.tsx:101
-#: src/components/modals/SettingsModal.tsx:339
+#: src/components/modals/SettingsModal.tsx:337
 msgid "Find Nearby Players"
 msgstr "Spieler in der Nähe finden"
 
@@ -194,7 +194,7 @@ msgstr "Komm mit mir nach Bezique!"
 msgid "km away"
 msgstr "km entfernt"
 
-#: src/components/modals/SettingsModal.tsx:379
+#: src/components/modals/SettingsModal.tsx:377
 msgid "Language"
 msgstr "Sprache"
 
@@ -202,7 +202,7 @@ msgstr "Sprache"
 msgid "Learn More"
 msgstr "Mehr erfahren"
 
-#: src/components/Brisker.tsx:458
+#: src/components/Brisker.tsx:475
 msgid "Loading..."
 msgstr "Wird geladen ..."
 
@@ -234,7 +234,7 @@ msgstr "Netzwerkerkennung für Spieler in der Nähe"
 msgid "New Game"
 msgstr "Neues Spiel"
 
-#: src/components/modals/SettingsModal.tsx:489
+#: src/components/modals/SettingsModal.tsx:505
 msgid "No choice has been made yet"
 msgstr "Noch keine Auswahl getroffen"
 
@@ -262,7 +262,7 @@ msgstr "Anzahl der Benutzer"
 msgid "Offline mode for network-free play"
 msgstr "Offline-Modus für netzwerkfreies Spiel"
 
-#: src/components/Brisker.tsx:475
+#: src/components/Brisker.tsx:492
 msgid "Opponent"
 msgstr "Gegner"
 
@@ -279,16 +279,16 @@ msgstr "Spielen"
 msgid "Player ID"
 msgstr "Spieler-ID"
 
-#: src/components/modals/SettingsModal.tsx:349
+#: src/components/modals/SettingsModal.tsx:347
 msgid "Player Name"
 msgstr "Spielername"
 
 #: src/components/modals/PrivacyModal.tsx:19
-#: src/components/modals/SettingsModal.tsx:454
+#: src/components/modals/SettingsModal.tsx:470
 msgid "Privacy & Data"
 msgstr "Datenschutz & Daten"
 
-#: src/components/modals/SettingsModal.tsx:459
+#: src/components/modals/SettingsModal.tsx:475
 msgid "Privacy Information"
 msgstr "Datenschutzinformationen"
 
@@ -312,11 +312,11 @@ msgstr "Zurücksetzen"
 msgid "Reset score"
 msgstr "Punktzahl zurücksetzen"
 
-#: src/components/modals/SettingsModal.tsx:471
+#: src/components/modals/SettingsModal.tsx:487
 msgid "Revoke Analytics Consent"
 msgstr "Analyse-Zustimmung widerrufen"
 
-#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:367
 #: src/components/modals/SettingsModal.tsx:441
 msgid "Save Name"
 msgstr "Name speichern"
@@ -342,7 +342,7 @@ msgid "Search Nearby Players"
 msgstr "Spieler in der Nähe suchen"
 
 #: src/components/modals/PlayerSearchModal.tsx:83
-#: src/components/modals/SettingsModal.tsx:331
+#: src/components/modals/SettingsModal.tsx:329
 msgid "Search Players"
 msgstr "Spieler suchen"
 
@@ -363,7 +363,7 @@ msgstr "Wähle eine Brisk-Zahl (addiert Brisk x 20 Punkte)"
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: src/components/modals/SettingsModal.tsx:323
+#: src/components/modals/SettingsModal.tsx:321
 msgid "Share Player ID"
 msgstr "Spieler-ID teilen"
 
@@ -375,7 +375,7 @@ msgstr "Punktzahl-Historie anzeigen"
 msgid "Sound effects"
 msgstr "Soundeffekte"
 
-#: src/components/modals/SettingsModal.tsx:498
+#: src/components/modals/SettingsModal.tsx:452
 msgid "Sound Effects"
 msgstr "Soundeffekte"
 
@@ -395,7 +395,7 @@ msgstr "Dadurch werden alle Punkte gelöscht. Das kann nicht rückgängig gemach
 msgid "This will request access to your location to find nearby players"
 msgstr "Damit wird der Zugriff auf deinen Standort angefordert, um Spieler in der Nähe zu finden"
 
-#: src/components/Brisker.tsx:452
+#: src/components/Brisker.tsx:469
 msgid "tied"
 msgstr "unentschieden"
 
@@ -427,7 +427,7 @@ msgstr "Letzte Punktzahl rückgängig machen"
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: src/components/modals/SettingsModal.tsx:397
+#: src/components/modals/SettingsModal.tsx:395
 msgid "Variant"
 msgstr "Variante"
 
@@ -455,6 +455,6 @@ msgstr "Du hast die Zielpunktzahl erreicht! Fantastisches Spiel!"
 msgid "Your Control"
 msgstr "Ihre Kontrolle"
 
-#: src/components/modals/SettingsModal.tsx:306
+#: src/components/modals/SettingsModal.tsx:305
 msgid "Your Player ID"
 msgstr "Deine Spieler-ID"

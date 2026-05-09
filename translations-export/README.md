@@ -11,6 +11,7 @@ This directory contains PO files for translation.
 - `de.po` - DE translations
 - `fr.po` - FR translations
 - `fa.po` - FA translations
+- `ar.po` - AR translations
 
 ## How to translate:
 

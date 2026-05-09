@@ -16,12 +16,12 @@ msgstr ""
 "X-Generator: Poedit 3.7\n"
 
 #. placeholder {0}: formatNumber(difference)
-#: src/components/Brisker.tsx:448
+#: src/components/Brisker.tsx:465
 msgid "{0} ahead"
 msgstr "{0} en avance"
 
 #. placeholder {0}: formatNumber(Math.abs(difference))
-#: src/components/Brisker.tsx:450
+#: src/components/Brisker.tsx:467
 msgid "{0} behind"
 msgstr "{0} derrière"
 
@@ -90,7 +90,7 @@ msgstr "Bezique classique"
 #: src/components/modals/InfoModal.tsx:70
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/PrivacyModal.tsx:63
-#: src/components/modals/SettingsModal.tsx:513
+#: src/components/modals/SettingsModal.tsx:514
 msgid "Close"
 msgstr "Fermer"
 
@@ -102,7 +102,7 @@ msgstr "Félicitations !"
 msgid "Cookie Notice"
 msgstr "Le consentement d'analyse a été révoqué. Le suivi est maintenant désactivé."
 
-#: src/components/modals/SettingsModal.tsx:315
+#: src/components/modals/SettingsModal.tsx:313
 msgid "Copy Player ID"
 msgstr "Copier l’ID du joueur"
 
@@ -126,16 +126,16 @@ msgstr "Suivi numérique des scores avec interface tactile intuitive"
 msgid "Disabled while connected to an opponent"
 msgstr "Désactivé lors de la connexion à un adversaire"
 
-#: src/components/Brisker.tsx:471
+#: src/components/Brisker.tsx:488
 msgid "Disconnect opponent"
 msgstr "Déconnecter l’adversaire"
 
-#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:367
 #: src/components/modals/SettingsModal.tsx:441
 msgid "Edit Name"
 msgstr "Modifier le nom"
 
-#: src/components/modals/SettingsModal.tsx:482
+#: src/components/modals/SettingsModal.tsx:498
 msgid "Enable Analytics"
 msgstr "Analyse désactivée"
 
@@ -143,7 +143,7 @@ msgstr "Analyse désactivée"
 msgid "Enter Player ID or Name..."
 msgstr "Saisir l’ID ou le nom du joueur…"
 
-#: src/components/modals/SettingsModal.tsx:358
+#: src/components/modals/SettingsModal.tsx:356
 msgid "Enter your player name"
 msgstr "Saisissez votre nom de joueur"
 
@@ -160,7 +160,7 @@ msgid "Features"
 msgstr "Fonctionnalités"
 
 #: src/components/modals/GeolocationSearchModal.tsx:101
-#: src/components/modals/SettingsModal.tsx:339
+#: src/components/modals/SettingsModal.tsx:337
 msgid "Find Nearby Players"
 msgstr "Trouver des joueurs à proximité"
 
@@ -196,7 +196,7 @@ msgstr "Rejoins-moi dans Bezique !"
 msgid "km away"
 msgstr "km"
 
-#: src/components/modals/SettingsModal.tsx:379
+#: src/components/modals/SettingsModal.tsx:377
 msgid "Language"
 msgstr "Langue"
 
@@ -204,7 +204,7 @@ msgstr "Langue"
 msgid "Learn More"
 msgstr "Google Analytics est utilisé pour comprendre l'utilisation de l'application. Le suivi peut être accepté ou rejeté."
 
-#: src/components/Brisker.tsx:458
+#: src/components/Brisker.tsx:475
 msgid "Loading..."
 msgstr "Chargement…"
 
@@ -236,7 +236,7 @@ msgstr "Découverte du réseau pour les joueurs à proximité"
 msgid "New Game"
 msgstr "Nouveau jeu"
 
-#: src/components/modals/SettingsModal.tsx:489
+#: src/components/modals/SettingsModal.tsx:505
 msgid "No choice has been made yet"
 msgstr "Politique de confidentialité de Google"
 
@@ -264,7 +264,7 @@ msgstr "Jeux multijoueurs joués"
 msgid "Offline mode for network-free play"
 msgstr "Mode hors ligne pour jouer sans réseau"
 
-#: src/components/Brisker.tsx:475
+#: src/components/Brisker.tsx:492
 msgid "Opponent"
 msgstr "Adversaire"
 
@@ -281,16 +281,16 @@ msgstr "Jouer"
 msgid "Player ID"
 msgstr "ID du joueur"
 
-#: src/components/modals/SettingsModal.tsx:349
+#: src/components/modals/SettingsModal.tsx:347
 msgid "Player Name"
 msgstr "Nom du joueur"
 
 #: src/components/modals/PrivacyModal.tsx:19
-#: src/components/modals/SettingsModal.tsx:454
+#: src/components/modals/SettingsModal.tsx:470
 msgid "Privacy & Data"
 msgstr "Aucun choix n'a encore été fait"
 
-#: src/components/modals/SettingsModal.tsx:459
+#: src/components/modals/SettingsModal.tsx:475
 msgid "Privacy Information"
 msgstr "Non défini"
 
@@ -314,11 +314,11 @@ msgstr "Réinitialiser"
 msgid "Reset score"
 msgstr "Réinitialiser le score"
 
-#: src/components/modals/SettingsModal.tsx:471
+#: src/components/modals/SettingsModal.tsx:487
 msgid "Revoke Analytics Consent"
 msgstr "Nombre d'utilisateurs"
 
-#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:367
 #: src/components/modals/SettingsModal.tsx:441
 msgid "Save Name"
 msgstr "Enregistrer le nom"
@@ -344,7 +344,7 @@ msgid "Search Nearby Players"
 msgstr "Rechercher les joueurs à proximité"
 
 #: src/components/modals/PlayerSearchModal.tsx:83
-#: src/components/modals/SettingsModal.tsx:331
+#: src/components/modals/SettingsModal.tsx:329
 msgid "Search Players"
 msgstr "Rechercher des joueurs"
 
@@ -365,7 +365,7 @@ msgstr "Sélectionner un nombre brisque (ajoute brisque points)"
 msgid "Settings"
 msgstr "Réglages"
 
-#: src/components/modals/SettingsModal.tsx:323
+#: src/components/modals/SettingsModal.tsx:321
 msgid "Share Player ID"
 msgstr "Partager l’ID du joueur"
 
@@ -377,7 +377,7 @@ msgstr "Afficher l’historique des scores"
 msgid "Sound effects"
 msgstr "Effets sonores"
 
-#: src/components/modals/SettingsModal.tsx:498
+#: src/components/modals/SettingsModal.tsx:452
 msgid "Sound Effects"
 msgstr "Effets sonores"
 
@@ -397,7 +397,7 @@ msgstr "Cela supprimera tous les scores et ne peut pas être annulé."
 msgid "This will request access to your location to find nearby players"
 msgstr "Cela demandera l’accès à votre position pour trouver des joueurs à proximité"
 
-#: src/components/Brisker.tsx:452
+#: src/components/Brisker.tsx:469
 msgid "tied"
 msgstr "égalité"
 
@@ -429,7 +429,7 @@ msgstr "Annuler le dernier score"
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: src/components/modals/SettingsModal.tsx:397
+#: src/components/modals/SettingsModal.tsx:395
 msgid "Variant"
 msgstr "Variante"
 
@@ -457,6 +457,6 @@ msgstr "Vous avez atteint le score cible ! Fantastique partie !"
 msgid "Your Control"
 msgstr "Ces données aident à améliorer Brisker en comprenant comment il est utilisé."
 
-#: src/components/modals/SettingsModal.tsx:306
+#: src/components/modals/SettingsModal.tsx:305
 msgid "Your Player ID"
 msgstr "Votre ID de joueur"

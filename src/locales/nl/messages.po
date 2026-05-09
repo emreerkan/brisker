@@ -14,12 +14,12 @@ msgstr ""
 "X-Generator: Poedit 3.7\n"
 
 #. placeholder {0}: formatNumber(difference)
-#: src/components/Brisker.tsx:448
+#: src/components/Brisker.tsx:465
 msgid "{0} ahead"
 msgstr "{0} vooruit"
 
 #. placeholder {0}: formatNumber(Math.abs(difference))
-#: src/components/Brisker.tsx:450
+#: src/components/Brisker.tsx:467
 msgid "{0} behind"
 msgstr "{0} achter"
 
@@ -88,7 +88,7 @@ msgstr "Klassiek Bezique"
 #: src/components/modals/InfoModal.tsx:70
 #: src/components/modals/PlayerSearchModal.tsx:155
 #: src/components/modals/PrivacyModal.tsx:63
-#: src/components/modals/SettingsModal.tsx:513
+#: src/components/modals/SettingsModal.tsx:514
 msgid "Close"
 msgstr "Sluiten"
 
@@ -100,7 +100,7 @@ msgstr "Gefeliciteerd!"
 msgid "Cookie Notice"
 msgstr "Cookiemelding"
 
-#: src/components/modals/SettingsModal.tsx:315
+#: src/components/modals/SettingsModal.tsx:313
 msgid "Copy Player ID"
 msgstr "Kopieer speler ID"
 
@@ -124,16 +124,16 @@ msgstr "Digitale score volging met intuïtieve aanraakinterface"
 msgid "Disabled while connected to an opponent"
 msgstr "Uitgeschakeld terwijl je verbonden bent met een tegenstander"
 
-#: src/components/Brisker.tsx:471
+#: src/components/Brisker.tsx:488
 msgid "Disconnect opponent"
 msgstr "Verbreek de verbinding met de tegenstander"
 
-#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:367
 #: src/components/modals/SettingsModal.tsx:441
 msgid "Edit Name"
 msgstr "Naam bewerken"
 
-#: src/components/modals/SettingsModal.tsx:482
+#: src/components/modals/SettingsModal.tsx:498
 msgid "Enable Analytics"
 msgstr "Analytics inschakelen"
 
@@ -141,7 +141,7 @@ msgstr "Analytics inschakelen"
 msgid "Enter Player ID or Name..."
 msgstr "Voer het speler ID of naam in..."
 
-#: src/components/modals/SettingsModal.tsx:358
+#: src/components/modals/SettingsModal.tsx:356
 msgid "Enter your player name"
 msgstr "Voer je spelersnaam in"
 
@@ -158,7 +158,7 @@ msgid "Features"
 msgstr "Functies"
 
 #: src/components/modals/GeolocationSearchModal.tsx:101
-#: src/components/modals/SettingsModal.tsx:339
+#: src/components/modals/SettingsModal.tsx:337
 msgid "Find Nearby Players"
 msgstr "Vind spelers in de buurt"
 
@@ -194,7 +194,7 @@ msgstr "Doe met me mee in Bezique!"
 msgid "km away"
 msgstr "km afstand"
 
-#: src/components/modals/SettingsModal.tsx:379
+#: src/components/modals/SettingsModal.tsx:377
 msgid "Language"
 msgstr "Taal"
 
@@ -202,7 +202,7 @@ msgstr "Taal"
 msgid "Learn More"
 msgstr "Meer informatie"
 
-#: src/components/Brisker.tsx:458
+#: src/components/Brisker.tsx:475
 msgid "Loading..."
 msgstr "Aan het laden…"
 
@@ -234,7 +234,7 @@ msgstr "Netwerk ontdekking voor spelers in de buurt"
 msgid "New Game"
 msgstr "Nieuw spel"
 
-#: src/components/modals/SettingsModal.tsx:489
+#: src/components/modals/SettingsModal.tsx:505
 msgid "No choice has been made yet"
 msgstr "Er is nog geen keuze gemaakt"
 
@@ -262,7 +262,7 @@ msgstr "Aantal gebruikers"
 msgid "Offline mode for network-free play"
 msgstr "Offline modus voor spelen zonder netwerk"
 
-#: src/components/Brisker.tsx:475
+#: src/components/Brisker.tsx:492
 msgid "Opponent"
 msgstr "Tegenspeler"
 
@@ -279,16 +279,16 @@ msgstr "Afspelen"
 msgid "Player ID"
 msgstr "Speler ID"
 
-#: src/components/modals/SettingsModal.tsx:349
+#: src/components/modals/SettingsModal.tsx:347
 msgid "Player Name"
 msgstr "Spelernaam"
 
 #: src/components/modals/PrivacyModal.tsx:19
-#: src/components/modals/SettingsModal.tsx:454
+#: src/components/modals/SettingsModal.tsx:470
 msgid "Privacy & Data"
 msgstr "Privacy & Gegevens"
 
-#: src/components/modals/SettingsModal.tsx:459
+#: src/components/modals/SettingsModal.tsx:475
 msgid "Privacy Information"
 msgstr "Privacy-informatie"
 
@@ -312,11 +312,11 @@ msgstr "Resetten"
 msgid "Reset score"
 msgstr "Score resetten"
 
-#: src/components/modals/SettingsModal.tsx:471
+#: src/components/modals/SettingsModal.tsx:487
 msgid "Revoke Analytics Consent"
 msgstr "Afwijzen"
 
-#: src/components/modals/SettingsModal.tsx:369
+#: src/components/modals/SettingsModal.tsx:367
 #: src/components/modals/SettingsModal.tsx:441
 msgid "Save Name"
 msgstr "Naam opslaan"
@@ -342,7 +342,7 @@ msgid "Search Nearby Players"
 msgstr "Spelers in de buurt zoeken"
 
 #: src/components/modals/PlayerSearchModal.tsx:83
-#: src/components/modals/SettingsModal.tsx:331
+#: src/components/modals/SettingsModal.tsx:329
 msgid "Search Players"
 msgstr "Spelers zoeken"
 
@@ -363,7 +363,7 @@ msgstr "Selecteer Brisk aantal (voegt stevig x 20 punten toe)"
 msgid "Settings"
 msgstr "Instellingen"
 
-#: src/components/modals/SettingsModal.tsx:323
+#: src/components/modals/SettingsModal.tsx:321
 msgid "Share Player ID"
 msgstr "Speler ID delen"
 
@@ -375,7 +375,7 @@ msgstr "Toon scoregeschiedenis"
 msgid "Sound effects"
 msgstr "Geluidseffecten"
 
-#: src/components/modals/SettingsModal.tsx:498
+#: src/components/modals/SettingsModal.tsx:452
 msgid "Sound Effects"
 msgstr "Geluidseffecten"
 
@@ -395,7 +395,7 @@ msgstr "Hiermee worden alle scores verwijderd en kan deze niet ongedaan worden g
 msgid "This will request access to your location to find nearby players"
 msgstr "Hiermee wordt toegang tot je locatie gevraagd om spelers in de buurt te vinden"
 
-#: src/components/Brisker.tsx:452
+#: src/components/Brisker.tsx:469
 msgid "tied"
 msgstr "gebonden"
 
@@ -427,7 +427,7 @@ msgstr "Laatste score ongedaan maken"
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: src/components/modals/SettingsModal.tsx:397
+#: src/components/modals/SettingsModal.tsx:395
 msgid "Variant"
 msgstr "Variant"
 
@@ -455,6 +455,6 @@ msgstr "Je hebt de doelscore bereikt! Fantastisch spel!"
 msgid "Your Control"
 msgstr "Bekijk het privacybeleid van Google Analytics"
 
-#: src/components/modals/SettingsModal.tsx:306
+#: src/components/modals/SettingsModal.tsx:305
 msgid "Your Player ID"
 msgstr "Je speler ID"

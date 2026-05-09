@@ -1,61 +1,63 @@
+# Translation of WP-Translations - Brisker in Arabic
+# This file is distributed under the same license as the WP-Translations - Brisker package.
 msgid ""
 msgstr ""
-"POT-Creation-Date: 2025-09-27 15:29+0300\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"X-Generator: @lingui/cli\n"
-"Language: en\n"
-"Project-Id-Version: \n"
+"Project-Id-Version: WP-Translations - Brisker\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2026-05-09 19:35+0300\n"
+"Last-Translator: Emre Erkan <kara@karalamalar.net>\n"
 "Language-Team: \n"
-"Plural-Forms: \n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Poedit 3.9\n"
 
 #. placeholder {0}: formatNumber(difference)
 #: src/components/Brisker.tsx:465
 msgid "{0} ahead"
-msgstr "{0} ahead"
+msgstr "متقدم بـ {0}"
 
 #. placeholder {0}: formatNumber(Math.abs(difference))
 #: src/components/Brisker.tsx:467
 msgid "{0} behind"
-msgstr "{0} behind"
+msgstr "متأخر بـ {0}"
 
 #. placeholder {0}: nearbyPlayers.length
 #: src/components/modals/GeolocationSearchModal.tsx:156
 msgid "{0} nearby player(s) found:"
-msgstr "{0} nearby player(s) found:"
+msgstr "تم العثور على {0} لاعب(ين) قريب(ين):"
 
 #. placeholder {0}: searchResults.length
 #: src/components/modals/PlayerSearchModal.tsx:122
 msgid "{0} player(s) found:"
-msgstr "{0} player(s) found:"
+msgstr "تم العثور على {0} لاعب(ين):"
 
 #: src/components/modals/CookieConsentBanner.tsx:62
 msgid "Accept & Continue"
-msgstr "Accept & Continue"
+msgstr "قبول ومتابعة"
 
 #: src/components/modals/SettingsModal.tsx:268
 msgid "Analytics consent has been granted. Anonymous usage data will be collected to improve the app."
-msgstr "Analytics consent has been granted. Anonymous usage data will be collected to improve the app."
+msgstr "تم منح الموافقة على استخدام أدوات التحليل. سيتم جمع بيانات الاستخدام المجهولة الهوية بهدف تحسين التطبيق."
 
 #: src/components/modals/SettingsModal.tsx:258
 msgid "Analytics consent has been revoked. Tracking is now disabled."
-msgstr "Analytics consent has been revoked. Tracking is now disabled."
+msgstr "تم إلغاء الموافقة على استخدام أدوات التحليل. تم تعطيل ميزة التتبع الآن."
 
 #: src/components/modals/SettingsModal.tsx:279
 msgid "Analytics disabled"
-msgstr "Analytics disabled"
+msgstr "تم تعطيل التحليلات"
 
 #: src/components/modals/SettingsModal.tsx:277
 msgid "Analytics enabled"
-msgstr "Analytics enabled"
+msgstr "تم تمكين التحليلات"
 
 #: src/components/ui/ActionButtons.tsx:58
 msgid "App information"
-msgstr "App information"
+msgstr "معلومات التطبيق"
 
 #: src/components/ui/ActionButtons.tsx:33
 msgid "Brisk"
@@ -68,19 +70,19 @@ msgstr "Brisker"
 
 #: src/components/modals/InfoModal.tsx:49
 msgid "Brisque calculation"
-msgstr "Brisque calculation"
+msgstr "حساب Brisque"
 
 #: src/components/modals/InfoModal.tsx:34
 msgid "Build Date: September 2025"
-msgstr "Build Date: September 2025"
+msgstr "تاريخ البناء: سبتمبر 2025"
 
 #: src/components/modals/ResetConfirmDialog.tsx:30
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "إلغاء"
 
 #: src/components/modals/SettingsModal.tsx:59
 msgid "Classic Bezique"
-msgstr "Classic Bezique"
+msgstr "بازيك الكلاسيكية"
 
 #: src/components/modals/CongratulationsModal.tsx:50
 #: src/components/modals/GeolocationSearchModal.tsx:201
@@ -90,371 +92,371 @@ msgstr "Classic Bezique"
 #: src/components/modals/PrivacyModal.tsx:63
 #: src/components/modals/SettingsModal.tsx:514
 msgid "Close"
-msgstr "Close"
+msgstr "إغلاق"
 
 #: src/components/modals/CongratulationsModal.tsx:31
 msgid "Congratulations!"
-msgstr "Congratulations!"
+msgstr "مبروك!"
 
 #: src/components/modals/CookieConsentBanner.tsx:40
 msgid "Cookie Notice"
-msgstr "Cookie Notice"
+msgstr "إشعار ملفات تعريف الارتباط"
 
 #: src/components/modals/SettingsModal.tsx:313
 msgid "Copy Player ID"
-msgstr "Copy Player ID"
+msgstr "نسخ مُعرّف اللاعب"
 
 #: src/components/modals/InfoModal.tsx:46
 msgid "Cross-platform compatibility"
-msgstr "Cross-platform compatibility"
+msgstr "التوافق عبر المنصات"
 
 #: src/components/modals/InfoModal.tsx:43
 msgid "Dealer tracking with visual indicators"
-msgstr "Dealer tracking with visual indicators"
+msgstr "تتبع الموزع مع مؤشرات بصرية"
 
 #: src/components/modals/InfoModal.tsx:33
 msgid "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
-msgstr "Developed by Emre Erkan with Claude Sonnet 4 and GitHub Copilot"
+msgstr "طوّره إمره إركان باستخدام Claude Sonnet 4 و GitHub Copilot"
 
 #: src/components/modals/InfoModal.tsx:39
 msgid "Digital score tracking with intuitive touch interface"
-msgstr "Digital score tracking with intuitive touch interface"
+msgstr "تتبع النتائج الرقمية مع واجهة لمس بديهية"
 
 #: src/components/modals/SettingsModal.tsx:62
 msgid "Disabled while connected to an opponent"
-msgstr "Disabled while connected to an opponent"
+msgstr "معطّل أثناء الاتصال بخصم"
 
 #: src/components/Brisker.tsx:488
 msgid "Disconnect opponent"
-msgstr "Disconnect opponent"
+msgstr "قطع الاتصال بالخصم"
 
 #: src/components/modals/SettingsModal.tsx:367
 #: src/components/modals/SettingsModal.tsx:441
 msgid "Edit Name"
-msgstr "Edit Name"
+msgstr "تعديل الاسم"
 
 #: src/components/modals/SettingsModal.tsx:498
 msgid "Enable Analytics"
-msgstr "Enable Analytics"
+msgstr "تمكين التحليلات"
 
 #: src/components/modals/PlayerSearchModal.tsx:93
 msgid "Enter Player ID or Name..."
-msgstr "Enter Player ID or Name..."
+msgstr "أدخل مُعرّف اللاعب أو الاسم..."
 
 #: src/components/modals/SettingsModal.tsx:356
 msgid "Enter your player name"
-msgstr "Enter your player name"
+msgstr "أدخل اسم لاعبك"
 
 #: src/components/modals/GeolocationSearchModal.tsx:68
 msgid "Failed to get your location. Please try again."
-msgstr "Failed to get your location. Please try again."
+msgstr "فشل الحصول على موقعك. يُرجى المحاولة مرة أخرى."
 
 #: src/components/modals/GeolocationSearchModal.tsx:74
 msgid "Failed to search for nearby players. Please try again."
-msgstr "Failed to search for nearby players. Please try again."
+msgstr "فشل البحث عن لاعبين قريبين. يُرجى المحاولة مرة أخرى."
 
 #: src/components/modals/InfoModal.tsx:37
 msgid "Features"
-msgstr "Features"
+msgstr "المميزات"
 
 #: src/components/modals/GeolocationSearchModal.tsx:101
 #: src/components/modals/SettingsModal.tsx:337
 msgid "Find Nearby Players"
-msgstr "Find Nearby Players"
+msgstr "ابحث عن لاعبين قريبين"
 
 #: src/components/modals/GeolocationSearchModal.tsx:111
 msgid "Find players near your location"
-msgstr "Find players near your location"
+msgstr "ابحث عن لاعبين بالقرب من موقعك"
 
 #: src/components/modals/PrivacyModal.tsx:34
 msgid "Games completed"
-msgstr "Games completed"
+msgstr "الألعاب التي تم إكمالها"
 
 #: src/components/modals/GeolocationSearchModal.tsx:129
 msgid "Getting your location and searching for nearby players..."
-msgstr "Getting your location and searching for nearby players..."
+msgstr "جاري الحصول على موقعك والبحث عن لاعبين قريبين..."
 
 #: src/components/modals/CookieConsentBanner.tsx:42
 msgid "Google Analytics is used to understand app usage. Tracking can be accepted or rejected."
-msgstr "Google Analytics is used to understand app usage. Tracking can be accepted or rejected."
+msgstr "يُستخدم Google Analytics لفهم كيفية استخدام التطبيق. يمكن قبول التتبع أو رفضه."
 
 #: src/components/modals/PrivacyModal.tsx:29
 msgid "Google Analytics is used to understand how the app is used and improve the experience. The following data is tracked:"
-msgstr "Google Analytics is used to understand how the app is used and improve the experience. The following data is tracked:"
+msgstr "يُستخدم «Google Analytics» لفهم كيفية استخدام التطبيق وتحسين تجربة المستخدم. ويتم تتبع البيانات التالية:"
 
 #: src/components/modals/PrivacyModal.tsx:47
 msgid "Google's Privacy Policy"
-msgstr "Google's Privacy Policy"
+msgstr "سياسة خصوصية Google"
 
 #: src/components/modals/SettingsModal.tsx:148
 msgid "Join me in Bezique!"
-msgstr "Join me in Bezique!"
+msgstr "انضم إليّ في لعبة بازيك!"
 
 #: src/components/modals/GeolocationSearchModal.tsx:166
 msgid "km away"
-msgstr "km away"
+msgstr "كم بعيدًا"
 
 #: src/components/modals/SettingsModal.tsx:377
 msgid "Language"
-msgstr "Language"
+msgstr "اللغة"
 
 #: src/components/modals/CookieConsentBanner.tsx:50
 msgid "Learn More"
-msgstr "Learn More"
+msgstr "تعلم المزيد"
 
 #: src/components/Brisker.tsx:475
 msgid "Loading..."
-msgstr "Loading..."
+msgstr "جاري التحميل..."
 
 #: src/components/modals/GeolocationSearchModal.tsx:59
 msgid "Location access denied. Please enable location services and try again."
-msgstr "Location access denied. Please enable location services and try again."
+msgstr "تم رفض الوصول إلى الموقع. يُرجى تمكين خدمات الموقع والمحاولة مرة أخرى."
 
 #: src/components/modals/GeolocationSearchModal.tsx:62
 msgid "Location information unavailable. Please try again."
-msgstr "Location information unavailable. Please try again."
+msgstr "معلومات الموقع غير متاحة. يُرجى المحاولة مرة أخرى."
 
 #: src/components/modals/GeolocationSearchModal.tsx:65
 msgid "Location request timed out. Please try again."
-msgstr "Location request timed out. Please try again."
+msgstr "انتهت مهلة طلب الموقع. يُرجى المحاولة مرة أخرى."
 
 #: src/components/modals/InfoModal.tsx:45
 msgid "Multilingual support"
-msgstr "Multilingual support"
+msgstr "دعم متعدد اللغات"
 
 #: src/components/modals/PrivacyModal.tsx:33
 msgid "Multiplayer games played"
-msgstr "Multiplayer games played"
+msgstr "الألعاب الجماعية التي تم لعبها"
 
 #: src/components/modals/InfoModal.tsx:47
 msgid "Network discovery for nearby players"
-msgstr "Network discovery for nearby players"
+msgstr "اكتشاف الشبكة للاعبين القريبين"
 
 #: src/components/modals/CongratulationsModal.tsx:44
 msgid "New Game"
-msgstr "New Game"
+msgstr "لعبة جديدة"
 
 #: src/components/modals/SettingsModal.tsx:505
 msgid "No choice has been made yet"
-msgstr "No choice has been made yet"
+msgstr "لم يتم اتخاذ أي قرار بعد"
 
 #: src/components/modals/GeolocationSearchModal.tsx:183
 msgid "No nearby players found"
-msgstr "No nearby players found"
+msgstr "لم يتم العثور على لاعبين قريبين"
 
 #: src/components/modals/PlayerSearchModal.tsx:143
 msgid "No players found"
-msgstr "No players found"
+msgstr "لم يتم العثور على لاعبين"
 
 #: src/components/modals/HistoryModal.tsx:43
 msgid "No scores recorded yet"
-msgstr "No scores recorded yet"
+msgstr "لم يتم تسجيل أي نتائج بعد"
 
 #: src/components/modals/SettingsModal.tsx:281
 msgid "Not set"
-msgstr "Not set"
+msgstr "غير محدد"
 
 #: src/components/modals/PrivacyModal.tsx:32
 msgid "Number of users"
-msgstr "Number of users"
+msgstr "عدد المستخدمين"
 
 #: src/components/modals/InfoModal.tsx:41
 msgid "Offline mode for network-free play"
-msgstr "Offline mode for network-free play"
+msgstr "وضع عدم الاتصال للّعب بدون شبكة"
 
 #: src/components/Brisker.tsx:492
 msgid "Opponent"
-msgstr "Opponent"
+msgstr "الخصم"
 
 #: src/components/modals/InfoModal.tsx:48
 msgid "Persistent storage with auto-save"
-msgstr "Persistent storage with auto-save"
+msgstr "تخزين مستمر مع الحفظ التلقائي"
 
 #: src/components/modals/GeolocationSearchModal.tsx:174
 #: src/components/modals/PlayerSearchModal.tsx:135
 msgid "Play"
-msgstr "Play"
+msgstr "لعب"
 
 #: src/components/modals/SettingsModal.tsx:302
 msgid "Player ID"
-msgstr "Player ID"
+msgstr "مُعرّف اللاعب"
 
 #: src/components/modals/SettingsModal.tsx:347
 msgid "Player Name"
-msgstr "Player Name"
+msgstr "اسم اللاعب"
 
 #: src/components/modals/PrivacyModal.tsx:19
 #: src/components/modals/SettingsModal.tsx:470
 msgid "Privacy & Data"
-msgstr "Privacy & Data"
+msgstr "الخصوصية والبيانات"
 
 #: src/components/modals/SettingsModal.tsx:475
 msgid "Privacy Information"
-msgstr "Privacy Information"
+msgstr "معلومات الخصوصية"
 
 #: src/components/modals/InfoModal.tsx:44
 msgid "Progressive Web App - install on any device"
-msgstr "Progressive Web App - install on any device"
+msgstr "تطبيق ويب تقدمي - ثبّته على أي جهاز"
 
 #: src/components/modals/InfoModal.tsx:40
 msgid "Real-time multiplayer via WebSocket connection"
-msgstr "Real-time multiplayer via WebSocket connection"
+msgstr "لاعبون متعددون في الوقت الفعلي عبر اتصال WebSocket"
 
 #: src/components/modals/CookieConsentBanner.tsx:56
 msgid "Reject"
-msgstr "Reject"
+msgstr "رفض"
 
 #: src/components/modals/ResetConfirmDialog.tsx:27
 msgid "Reset"
-msgstr "Reset"
+msgstr "إعادة تعيين"
 
 #: src/components/ui/ActionButtons.tsx:40
 msgid "Reset score"
-msgstr "Reset score"
+msgstr "إعادة تعيين النتيجة"
 
 #: src/components/modals/SettingsModal.tsx:487
 msgid "Revoke Analytics Consent"
-msgstr "Revoke Analytics Consent"
+msgstr "إلغاء الموافقة على استخدام \"Revoke Analytics\""
 
 #: src/components/modals/SettingsModal.tsx:367
 #: src/components/modals/SettingsModal.tsx:441
 msgid "Save Name"
-msgstr "Save Name"
+msgstr "حفظ الاسم"
 
 #: src/components/modals/HistoryModal.tsx:30
 msgid "Score History"
-msgstr "Score History"
+msgstr "سجل النتائج"
 
 #: src/components/modals/InfoModal.tsx:42
 msgid "Score history and undo moves"
-msgstr "Score history and undo moves"
+msgstr "سجل النتائج والتراجع عن الحركات"
 
 #: src/components/modals/InfoModal.tsx:32
 msgid "Score keeping application for the Bezique card game"
-msgstr "Score keeping application for the Bezique card game"
+msgstr "تطبيق تسجيل النقاط للعبة الورق بازيك"
 
 #: src/components/modals/GeolocationSearchModal.tsx:188
 msgid "Search Again"
-msgstr "Search Again"
+msgstr "ابحث مرة أخرى"
 
 #: src/components/modals/GeolocationSearchModal.tsx:120
 msgid "Search Nearby Players"
-msgstr "Search Nearby Players"
+msgstr "البحث عن لاعبين قريبين"
 
 #: src/components/modals/PlayerSearchModal.tsx:83
 #: src/components/modals/SettingsModal.tsx:329
 msgid "Search Players"
-msgstr "Search Players"
+msgstr "بحث عن لاعبين"
 
 #: src/components/modals/PlayerSearchModal.tsx:112
 msgid "Searching players..."
-msgstr "Searching players..."
+msgstr "جاري البحث عن لاعبين..."
 
 #: src/components/modals/BriskSelector.tsx:25
 msgid "Select Brisk"
-msgstr "Select Brisk"
+msgstr "اختيار Brisk"
 
 #: src/components/ui/ActionButtons.tsx:31
 msgid "Select brisk count (adds brisk points)"
-msgstr "Select brisk count (adds brisk points)"
+msgstr "اختيار عدد brisk (يضيف نقاط brisk)"
 
 #: src/components/modals/SettingsModal.tsx:293
 #: src/components/ui/ActionButtons.tsx:49
 msgid "Settings"
-msgstr "Settings"
+msgstr "الإعدادات"
 
 #: src/components/modals/SettingsModal.tsx:321
 msgid "Share Player ID"
-msgstr "Share Player ID"
+msgstr "مشاركة مُعرّف اللاعب"
 
 #: src/components/ui/ScoreDisplay.tsx:57
 msgid "Show score history"
-msgstr "Show score history"
+msgstr "عرض سجل النتائج"
 
 #: src/components/modals/InfoModal.tsx:50
 msgid "Sound effects"
-msgstr "Sound effects"
+msgstr "المؤثرات الصوتية"
 
 #: src/components/modals/SettingsModal.tsx:452
 msgid "Sound Effects"
-msgstr "Sound Effects"
+msgstr "المؤثرات الصوتية"
 
 #: src/components/modals/SettingsModal.tsx:416
 msgid "Target Score"
-msgstr "Target Score"
+msgstr "النتيجة المستهدفة"
 
 #: src/components/modals/PrivacyModal.tsx:39
 msgid "This data helps improve Brisker by understanding how it is used."
-msgstr "This data helps improve Brisker by understanding how it is used."
+msgstr "تساعد هذه البيانات في تحسين تطبيق Brisker من خلال فهم كيفية استخدامه."
 
 #: src/components/modals/ResetConfirmDialog.tsx:23
 msgid "This will delete all scores and cannot be undone."
-msgstr "This will delete all scores and cannot be undone."
+msgstr "سيؤدي هذا إلى حذف جميع النتائج ولا يمكن التراجع عنه."
 
 #: src/components/modals/GeolocationSearchModal.tsx:113
 msgid "This will request access to your location to find nearby players"
-msgstr "This will request access to your location to find nearby players"
+msgstr "سيؤدي هذا إلى طلب الوصول إلى موقعك للعثور على لاعبين قريبين"
 
 #: src/components/Brisker.tsx:469
 msgid "tied"
-msgstr "tied"
+msgstr "تعادل"
 
 #: src/components/modals/HistoryModal.tsx:38
 msgid "Total Score"
-msgstr "Total Score"
+msgstr "النتيجة الإجمالية"
 
 #: src/components/modals/PrivacyModal.tsx:44
 msgid "Tracking can be accepted or rejected at any time. No tracking occurs if rejected."
-msgstr "Tracking can be accepted or rejected at any time. No tracking occurs if rejected."
+msgstr "يمكن قبول التتبع أو رفضه في أي وقت. وفي حالة الرفض، لا يتم إجراء أي تتبع."
 
 #: src/components/modals/InfoModal.tsx:55
 msgid "Translators"
-msgstr "Translators"
+msgstr "المترجمون"
 
 #: src/components/modals/GeolocationSearchModal.tsx:144
 msgid "Try Again"
-msgstr "Try Again"
+msgstr "حاول مرة أخرى"
 
 #: src/components/modals/SettingsModal.tsx:60
 msgid "Turkish Bezique"
-msgstr "Turkish Bezique"
+msgstr "بازيك التركية"
 
 #: src/components/ui/ScoreDisplay.tsx:48
 msgid "Undo last score"
-msgstr "Undo last score"
+msgstr "التراجع عن النتيجة الأخيرة"
 
 #: src/components/modals/SettingsModal.tsx:283
 msgid "Unknown"
-msgstr "Unknown"
+msgstr "غير معروف"
 
 #: src/components/modals/SettingsModal.tsx:395
 msgid "Variant"
-msgstr "Variant"
+msgstr "المتغير"
 
 #: src/components/modals/InfoModal.tsx:31
 msgid "Version"
-msgstr "Version"
+msgstr "النسخة"
 
 #: src/components/modals/PrivacyModal.tsx:55
 msgid "View Google Analytics Privacy Policy"
-msgstr "View Google Analytics Privacy Policy"
+msgstr "اطلع على سياسة خصوصية Google Analytics"
 
 #: src/components/modals/PrivacyModal.tsx:27
 msgid "What Is Tracked"
-msgstr "What Is Tracked"
+msgstr "ما الذي يتم تتبعه"
 
 #: src/components/modals/PrivacyModal.tsx:37
 msgid "Why Tracking Is Used"
-msgstr "Why Tracking Is Used"
+msgstr "لماذا يُستخدم التتبع"
 
 #: src/components/modals/CongratulationsModal.tsx:34
 msgid "You've reached the target score! Fantastic game!"
-msgstr "You've reached the target score! Fantastic game!"
+msgstr "لقد وصلتَ إلى النتيجة المطلوبة! لعبة رائعة!"
 
 #: src/components/modals/PrivacyModal.tsx:42
 msgid "Your Control"
-msgstr "Your Control"
+msgstr "التحكم الخاص بك"
 
 #: src/components/modals/SettingsModal.tsx:305
 msgid "Your Player ID"
-msgstr "Your Player ID"
+msgstr "مُعرّف اللاعب الخاص بك"
