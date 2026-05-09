@@ -108,11 +108,12 @@ For setup and usage instructions, refer to the server's README.
 
 Special thanks to the following contributors for their translation work:
 
-- **Nederlands (nl)** - Peter Smits
-- **Svenska (sv)** - [Tor-Björn Fjellner](https://gsm.fjellner.com/)
-- **Deutsch (de)** - [Christian Herrmann](https://presskopp.com/)
-- **Français (fr)** - [François-Xavier Bénard](https://fxbenard.com/)
-- **فارسی (fa)** - [Hassan Tafreshi](https://whitestudio.team/)
+- **Dutch (nl)** - Peter Smits
+- **Swedish (sv)** - [Tor-Björn Fjellner](https://gsm.fjellner.com/)
+- **German (de)** - [Christian Herrmann](https://presskopp.com/)
+- **French (fr)** - [François-Xavier Bénard](https://fxbenard.com/)
+- **Farsi (fa)**- [Hassan Tafreshi](https://whitestudio.team/)
+- **Arabic (ar)** - [Fakhri Azzouz](https://www.fakhriazzouz.com/)
 
 ## 📄 License
 

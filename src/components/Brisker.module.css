@@ -1503,7 +1503,7 @@
 /* Opponent Bar */
 .opponentBar {
   grid-column: 1 / 5;
-  background: #E8F4FD;
+  background: #2660A4;
   border: none;
   border-radius: 0;
   padding: 10px 15px;
@@ -1512,7 +1512,7 @@
   align-items: center;
   font-size: 18px;
   font-weight: 500;
-  color: #2563eb;
+  color: #ffffff;
   min-height: 50px;
 }
 
